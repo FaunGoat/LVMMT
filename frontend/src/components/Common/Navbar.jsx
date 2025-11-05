@@ -1,0 +1,43 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+function Navbar() {
+  return (
+    <nav className="bg-sky-500 text-white p-4">
+      <div className="container mx-auto flex justify-between items-center">
+        <Link to="/" className="text-3xl font-bold">
+          Shaddock
+        </Link>
+        <ul className="flex space-x-6">
+          <li>
+            <Link to="/" className="hover:text-sky-200">
+              Trang chủ
+            </Link>
+          </li>
+          <li>
+            <Link to="/sustainable-methods" className="hover:text-sky-200">
+              Biện pháp Sinh học
+            </Link>
+          </li>
+          <li>
+            <Link to="/chatbot" className="hover:text-sky-200">
+              Chatbot
+            </Link>
+          </li>
+          <li>
+            <Link to="/weather-forecast" className="hover:text-sky-200">
+              Dự báo Thời tiết
+            </Link>
+          </li>
+          <li>
+            <Link to="/forum" className="hover:text-sky-200">
+              Diễn đàn
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  );
+}
+
+export default Navbar;
