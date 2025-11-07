@@ -13,7 +13,7 @@ function Footer() {
           <ul className="space-y-2">
             <li>
               <Link to="#" className="hover:text-red-600 transition-colors">
-                Biện Pháp Bảo Vệ
+                Thông Tin Bệnh Lúa
               </Link>
             </li>
             <li>
@@ -24,11 +24,6 @@ function Footer() {
             <li>
               <Link to="#" className="hover:text-red-600 transition-colors">
                 Dự Báo Thời Tiết
-              </Link>
-            </li>
-            <li>
-              <Link to="#" className="hover:text-red-600 transition-colors">
-                Diễn Đàn
               </Link>
             </li>
           </ul>

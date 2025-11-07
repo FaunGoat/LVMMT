@@ -16,7 +16,7 @@ function Navbar() {
           </li>
           <li>
             <Link to="/sustainable-methods" className="hover:text-sky-200">
-              Biện pháp Sinh học
+              Thông tin Bệnh Lúa
             </Link>
           </li>
           <li>
@@ -27,11 +27,6 @@ function Navbar() {
           <li>
             <Link to="/weather-forecast" className="hover:text-sky-200">
               Dự báo Thời tiết
-            </Link>
-          </li>
-          <li>
-            <Link to="/forum" className="hover:text-sky-200">
-              Diễn đàn
             </Link>
           </li>
         </ul>
