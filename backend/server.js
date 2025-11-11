@@ -20,6 +20,7 @@ connectDB();
 
 // Routes
 app.use("/api/chat", require("./routes/chatbot"));
+app.use("/webhook", require("./routes/webhook"));
 // app.use("/api/weather", require("./routes/weather"));
 // app.use("/api/chat", require("./routes/chat"));
 

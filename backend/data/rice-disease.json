@@ -1,0 +1,243 @@
+{
+  "diseases": [
+    {
+      "name": "Bệnh đạo ôn",
+      "scientificName": "Pyricularia oryzae",
+      "commonName": "Blast",
+      "symptoms": [
+        "Đốm hình thoi, viền nâu, tâm xám trắng trên lá.",
+        "Lá khô cháy, cây còi cọc, giảm quang hợp.",
+        "Nặng: đốm lan sang thân, bông trắng, lép hạt.",
+        "Thường xuất hiện giai đoạn đẻ nhánh – trổ bông."
+      ],
+      "causes": "Nấm Pyricularia oryzae, lây qua gió, nước mưa.",
+      "treatments": [
+        {
+          "type": "Hóa học",
+          "drugs": ["Beam 75WP", "Anvil 5SC", "Fuji-One 40WP"],
+          "dosage": "20g/10 lít nước, phun 2 lần cách 7 ngày",
+          "notes": "Phun khi thấy đốm đầu tiên, tránh phun trưa nắng."
+        },
+        {
+          "type": "Sinh học",
+          "drugs": ["Trichoderma spp.", "Bacillus subtilis"],
+          "dosage": "1kg/ha, phun định kỳ 7-10 ngày",
+          "notes": "Tăng sức đề kháng, an toàn môi trường."
+        },
+        {
+          "type": "Canh tác",
+          "methods": [
+            "Dùng giống kháng: IR64, OM5451, Jasmine 85.",
+            "Vệ sinh đồng ruộng, đốt rơm rạ.",
+            "Bón phân cân đối, tránh thừa đạm."
+          ]
+        }
+      ],
+      "weatherTriggers": [
+        "Độ ẩm cao (>85%), mưa phùn kéo dài.",
+        "Nhiệt độ 25-30°C, đặc biệt ban đêm.",
+        "Mây mù, ít nắng, gió nhẹ."
+      ],
+      "weatherPrevention": "Theo dõi mưa >3 ngày → phun phòng. Giảm nước khi trời âm u.",
+      "severityRisk": "Cao",
+      "economicLoss": "20-50% năng suất nếu nặng"
+    },
+    {
+      "name": "Rầy nâu",
+      "scientificName": "Nilaparvata lugens",
+      "commonName": "Brown Planthopper",
+      "symptoms": [
+        "Rầy tụ tập ở gốc lúa, hút nhựa → cây vàng úa.",
+        "Lá xoăn, khô cháy từ ngọn xuống.",
+        "Truyền virus gây bệnh vàng lùn, lùn xoắn lá.",
+        "Nặng: hiện tượng 'cháy rầy', chết hàng loạt."
+      ],
+      "causes": "Di trú theo gió mùa, phát triển nhanh ở nhiệt độ cao.",
+      "treatments": [
+        {
+          "type": "Hóa học",
+          "drugs": ["Actara 25WG", "Virtako 40WG", "Chess 50WG"],
+          "dosage": "15g/10 lít nước, phun khi rầy tuổi 1-2",
+          "notes": "Phun đều gốc, tránh phun trưa."
+        },
+        {
+          "type": "Sinh học",
+          "drugs": ["Ong ký sinh Anagrus", "Bọ rùa", "Nhện bắt mồi"],
+          "dosage": "Thả 500 ong/ha",
+          "notes": "Tạo môi trường sống bằng bờ cỏ, hoa dại."
+        },
+        {
+          "type": "Canh tác",
+          "methods": [
+            "Dùng giống kháng: OM18, OM5451.",
+            "Bẫy dính vàng, bẫy đèn.",
+            "Đồng loạt gieo sạ, né rầy di trú."
+          ]
+        }
+      ],
+      "weatherTriggers": [
+        "Nhiệt độ >30°C, khô hạn.",
+        "Gió mùa Tây Nam (tháng 6-8).",
+        "Thiếu nước → rầy tập trung."
+      ],
+      "weatherPrevention": "Tưới nước đều, theo dõi gió mùa, đặt bẫy sớm.",
+      "severityRisk": "Rất cao",
+      "economicLoss": "30-100% nếu có virus"
+    },
+    {
+      "name": "Bệnh lem lép hạt",
+      "scientificName": "Ustilaginoidea virens",
+      "commonName": "False Smut",
+      "symptoms": [
+        "Hạt lúa phình to, trấu nứt, bên trong bột đen.",
+        "Bông trắng xanh, hạt lép, giảm trọng lượng.",
+        "Nấm độc hại cho người và gia súc.",
+        "Xuất hiện giai đoạn lúa sữa – chín."
+      ],
+      "causes": "Nấm lây qua gió, nước, tồn tại trong đất.",
+      "treatments": [
+        {
+          "type": "Hóa học",
+          "drugs": ["Validamycin 5L", "Kasumin 2L"],
+          "dosage": "20ml/10 lít nước, phun trước trổ 5-7 ngày",
+          "notes": "Phun đều bông, tránh mưa ngay sau phun."
+        },
+        {
+          "type": "Sinh học",
+          "drugs": ["Trichoderma viride"],
+          "dosage": "Phun 1-2 lần/tuần",
+          "notes": "Ức chế nấm, an toàn."
+        },
+        {
+          "type": "Canh tác",
+          "methods": [
+            "Thu dọn bông bệnh, đốt bỏ.",
+            "Luân canh với lúa nếp, lúa cao sản.",
+            "Tránh bón thừa đạm cuối vụ."
+          ]
+        }
+      ],
+      "weatherTriggers": [
+        "Mưa lớn, độ ẩm cao, gió mạnh.",
+        "Nhiệt độ 25-32°C, trời âm u."
+      ],
+      "weatherPrevention": "Phun phòng trước mưa lớn. Thoát nước nhanh sau mưa.",
+      "severityRisk": "Cao",
+      "economicLoss": "10-40% chất lượng gạo"
+    },
+    {
+      "name": "Bệnh cháy bìa lá",
+      "scientificName": "Xanthomonas oryzae pv. oryzae",
+      "commonName": "Bacterial Leaf Blight",
+      "symptoms": [
+        "Vết cháy từ mép lá vào trong, màu vàng cam.",
+        "Lá khô, dính nhau, cây còi cọc.",
+        "Nặng: lá chết hàng loạt, giảm năng suất.",
+        "Thường xuất hiện sau mưa bão."
+      ],
+      "causes": "Vi khuẩn lây qua nước, gió, dụng cụ.",
+      "treatments": [
+        {
+          "type": "Hóa học",
+          "drugs": ["Kasumin 2L", "Copper Hydroxide"],
+          "dosage": "20ml/10 lít nước, phun 2-3 lần",
+          "notes": "Phun khi thấy vết đầu tiên."
+        },
+        {
+          "type": "Sinh học",
+          "drugs": ["Streptomyces spp."],
+          "dosage": "Phun định kỳ",
+          "notes": "Tăng sức đề kháng."
+        },
+        {
+          "type": "Canh tác",
+          "methods": [
+            "Dùng giống kháng: OM2517, OM18.",
+            "Vệ sinh dụng cụ, tránh làm vết thương.",
+            "Thoát nước tốt, tránh ngập."
+          ]
+        }
+      ],
+      "weatherTriggers": [
+        "Mưa bão, gió mạnh, nhiệt độ 25-35°C.",
+        "Ngập úng kéo dài."
+      ],
+      "weatherPrevention": "Thoát nước sau bão. Theo dõi mưa lớn.",
+      "severityRisk": "Cao",
+      "economicLoss": "20-50% năng suất"
+    },
+    {
+      "name": "Bệnh vàng lùn & lùn xoắn lá",
+      "scientificName": "Rice Ragged Stunt Virus (RRSV) / Rice Dwarf Virus (RDV)",
+      "commonName": "Viral Diseases",
+      "symptoms": [
+        "Cây lùn bất thường, lá xoăn, vàng từ ngọn.",
+        "Không trổ bông hoặc bông lép.",
+        "Lây qua rầy nâu, không chữa được.",
+        "Phát sinh từ giai đoạn mạ đến đẻ nhánh."
+      ],
+      "causes": "Virus lây qua rầy nâu vector.",
+      "treatments": [
+        {
+          "type": "Canh tác",
+          "drugs": ["Actara 25WG", "Virtako 40WG"],
+          "dosage": "Phun khi rầy xuất hiện",
+          "notes": "Phun sớm, đồng loạt."
+        },
+        {
+          "type": "Canh tác",
+          "methods": [
+            "Dùng giống kháng: OM5451, Jasmine 85.",
+            "Tiêu hủy cây bệnh, vệ sinh ruộng.",
+            "Gieo sạ đồng loạt, né rầy."
+          ]
+        }
+      ],
+      "weatherTriggers": [
+        "Mùa khô, nhiệt độ cao, rầy nâu di trú.",
+        "Gió mùa mang rầy từ Campuchia."
+      ],
+      "weatherPrevention": "Theo dõi gió mùa, kiểm soát rầy sớm.",
+      "severityRisk": "Rất cao",
+      "economicLoss": "50-100% nếu nhiễm nặng"
+    }
+  ],
+  "weatherForecast": [
+    {
+      "date": "2025-11-11",
+      "location": "Đồng bằng sông Cửu Long",
+      "temperature": "27-32°C",
+      "humidity": "82%",
+      "condition": "Mưa rào, độ ẩm cao",
+      "diseaseAlerts": [
+        "Cảnh báo ĐỎ: Nguy cơ ĐẠO ÔN cao do mưa + độ ẩm >80%.",
+        "Cảnh báo VÀNG: LEM LÉP HẠT có thể bùng phát.",
+        "Khuyến cáo: Phun phòng đạo ôn, thoát nước nhanh."
+      ]
+    },
+    {
+      "date": "2025-11-12",
+      "location": "Đồng bằng sông Cửu Long",
+      "temperature": "26-30°C",
+      "humidity": "88%",
+      "condition": "Mưa lớn, gió giật",
+      "diseaseAlerts": [
+        "Cảnh báo ĐỎ: CHÁY BÌA LÁ do mưa bão.",
+        "Cảnh báo VÀNG: RẦY NÂU tăng do ngập úng.",
+        "Khuyến cáo: Thoát nước, kiểm tra ruộng."
+      ]
+    },
+    {
+      "date": "2025-11-13",
+      "location": "Đồng bằng sông Cửu Long",
+      "temperature": "29-34°C",
+      "humidity": "65%",
+      "condition": "Nắng nóng, khô hạn",
+      "diseaseAlerts": [
+        "Cảnh báo VÀNG: RẦY NÂU bùng phát do nhiệt độ cao.",
+        "Cảnh báo XANH: Đạo ôn giảm.",
+        "Khuyến cáo: Tưới nước đều, đặt bẫy dính vàng."
+      ]
+    }
+  ]
+}
