@@ -25,7 +25,7 @@ app.use("/webhook", require("./routes/webhook"));
 // app.use("/api/chat", require("./routes/chat"));
 
 app.get("/", (req, res) => {
-  res.send("WELCOME TO SHADOCK. API!");
+  res.send("WELCOME TO LÚA VIỆT. API!");
 });
 
 app.listen(PORT, () => {

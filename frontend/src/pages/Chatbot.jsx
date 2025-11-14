@@ -1,26 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import pic from "./../assets/logo.png";
+import argibot from "./../assets/argibot.png";
 
 function Chatbot() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const chatContainerRef = useRef(null);
 
-  // Load lịch sử từ localStorage khi component mount
+  // Load lịch sử từ localStorage
   useEffect(() => {
-    const savedMessages = localStorage.getItem("chatHistory");
-    if (savedMessages) {
-      setMessages(JSON.parse(savedMessages));
-    }
+    const saved = localStorage.getItem("chatHistory");
+    if (saved) setMessages(JSON.parse(saved));
   }, []);
 
-  // Lưu lịch sử vào localStorage khi messages thay đổi
+  // Lưu lịch sử
   useEffect(() => {
     localStorage.setItem("chatHistory", JSON.stringify(messages));
   }, [messages]);
 
-  // Cuộn xuống tin nhắn mới nhất trong container chat
+  // Cuộn xuống dưới
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =
@@ -28,44 +27,59 @@ function Chatbot() {
     }
   }, [messages]);
 
-  // Xử lý gửi tin nhắn
-  const handleSend = (e) => {
-    e.preventDefault();
-    if (input.trim()) {
-      // Thêm tin nhắn của người dùng
-      const userMessage = {
-        text: input,
-        sender: "user",
-        timestamp: new Date().toLocaleTimeString(),
-      };
-      setMessages((prev) => [...prev, userMessage]);
+  // GỌI WEBHOOK THẬT (DIALOGFLOW → BACKEND → MONGODB)
+  const callWebhook = async (userInput) => {
+    try {
+      const response = await fetch("http://localhost:5000/webhook", {
+        // Nếu bạn dùng ngrok hoặc Render → đổi thành URL công khai
+        // Ví dụ: "https://your-app.onrender.com/webhook"
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          queryResult: {
+            queryText: userInput,
+            intent: { displayName: "Ask_Disease" }, // sẽ được Dialogflow xử lý thật
+            parameters: {
+              disease: userInput.includes("đạo ôn") ? "đạo ôn" : "",
+            },
+          },
+        }),
+      });
 
-      // Mô phỏng phản hồi từ chatbot
-      setTimeout(() => {
-        const botResponse = {
-          text: getBotResponse(input),
-          sender: "bot",
-          timestamp: new Date().toLocaleTimeString(),
-        };
-        setMessages((prev) => [...prev, botResponse]);
-      }, 500); // Delay 0.5s để mô phỏng
-
-      setInput("");
+      const data = await response.json();
+      return data.fulfillmentText || "Xin lỗi, tôi chưa hiểu câu hỏi của bạn.";
+    } catch (error) {
+      console.error("Lỗi gọi webhook:", error);
+      return "Hệ thống đang bận. Vui lòng thử lại sau!";
     }
   };
 
-  // Logic trả lời cơ bản từ chatbot
-  const getBotResponse = (message) => {
-    const lowerMessage = message.toLowerCase();
-    if (lowerMessage.includes("đạo ôn")) {
-      return "Bệnh đạo ôn thường xuất hiện với đốm xám trắng trên lá. Hãy kiểm tra ruộng sau mưa và dùng biện pháp sinh học!";
-    } else if (lowerMessage.includes("thời tiết")) {
-      return "Hiện tại, miền Tây có mưa lớn. Hãy bảo vệ ruộng lúa khỏi ngập úng!";
-    } else if (lowerMessage.includes("thuốc")) {
-      return "Hãy sử dụng thuốc bảo vệ thực vật theo liều lượng khuyến cáo để đảm bảo an toàn.";
-    } else {
-      return "Xin lỗi, mình chưa hiểu. Bạn có thể hỏi về bệnh lúa, thời tiết, hoặc thuốc bảo vệ thực vật.";
-    }
+  // XỬ LÝ GỬI TIN NHẮN
+  const handleSend = async (e) => {
+    e.preventDefault();
+    if (!input.trim() || isLoading) return;
+
+    const userMessage = {
+      text: input,
+      sender: "user",
+      timestamp: new Date().toLocaleTimeString("vi-VN"),
+    };
+    setMessages((prev) => [...prev, userMessage]);
+    setIsLoading(true);
+    setInput("");
+
+    // GỌI WEBHOOK THẬT → NHẬN TRẢ LỜI TỪ MONGODB
+    const botReply = await callWebhook(input);
+
+    const botMessage = {
+      text: botReply,
+      sender: "bot",
+      timestamp: new Date().toLocaleTimeString("vi-VN"),
+    };
+    setMessages((prev) => [...prev, botMessage]);
+    setIsLoading(false);
   };
 
   return (
@@ -83,82 +97,74 @@ function Chatbot() {
           className="bg-white p-4 rounded-lg shadow-md min-h-[60vh] max-h-[60vh] overflow-y-auto mb-4"
         >
           {messages.length === 0 ? (
-            <p className="text-gray-500 text-center">
-              Chưa có tin nhắn. Hãy bắt đầu hỏi!
-            </p>
+            <div className="text-center text-gray-500">
+              <p>Chào mừng bạn đến với Chatbot AI bảo vệ cây lúa!</p>
+            </div>
           ) : (
-            messages.map((msg, index) => (
+            messages.map((msg, i) => (
               <div
-                key={index}
-                className={`mb-2 ${
+                key={i}
+                className={`mb-4 ${
                   msg.sender === "user" ? "text-right" : "text-left"
                 }`}
               >
-                {msg.sender === "bot" && (
-                  <div className="flex items-start">
+                {msg.sender === "bot" ? (
+                  <div className="flex items-start gap-3">
                     <img
-                      src={pic}
-                      alt="Chatbot Logo"
-                      className="w-12 h-12 rounded-full mr-2 mt-1"
+                      src={argibot}
+                      alt="Bot"
+                      className="w-15 h-15 rounded-full"
                     />
-                    <div
-                      className={`inline-block p-2 rounded-lg bg-gray-200 text-gray-800`}
-                    >
-                      <p>{msg.text}</p>
-                      <span className="text-xs opacity-70">
+                    <div className="bg-gray-100 p-3 rounded-lg max-w-3xl whitespace-pre-wrap">
+                      <p className="text-gray-800">{msg.text}</p>
+                      <span className="text-xs text-gray-500">
                         {msg.timestamp}
                       </span>
                     </div>
                   </div>
-                )}
-                {msg.sender === "user" && (
-                  <div
-                    className={`inline-block p-2 rounded-lg bg-sky-500 text-white`}
-                  >
+                ) : (
+                  <div className="inline-block bg-sky-500 text-white p-3 rounded-lg max-w-xs">
                     <p>{msg.text}</p>
-                    <span className="text-xs opacity-70">{msg.timestamp}</span>
+                    <span className="text-xs opacity-80">{msg.timestamp}</span>
                   </div>
                 )}
               </div>
             ))
           )}
+          {isLoading && (
+            <div className="text-left">
+              <div className="flex items-center gap-3">
+                <img src={argibot} alt="Bot" className="w-15 h-15 rounded-full" />
+                <div className="bg-gray-100 p-3 rounded-lg">
+                  <div className="flex gap-1">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Input Area */}
+        {/* Input */}
         <form onSubmit={handleSend} className="flex gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Nhập câu hỏi của bạn..."
-            className="flex-1 p-2 bg-white rounded-lg border border-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-500"
+            className="flex-1 p-3 bg-white rounded-lg border border-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-500"
+            disabled={isLoading}
           />
           <button
             type="submit"
-            className="bg-sky-500 text-white p-2 rounded-lg hover:bg-sky-600 transition"
+            disabled={isLoading}
+            className="bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition disabled:opacity-50"
           >
-            Gửi
+            {isLoading ? "Đang trả lời..." : "Gửi"}
           </button>
         </form>
-
-        {/* Quick Links */}
-        {/* <div className="mt-4 text-center">
-          <p className="text-gray-600 mb-2">Khám phá thêm:</p>
-          <div className="flex justify-center gap-4">
-            <Link
-              to="/sustainable-methods"
-              className="bg-sky-500 text-white py-1 px-3 rounded-lg hover:bg-sky-600 transition"
-            >
-              Biện pháp Sinh học
-            </Link>
-            <Link
-              to="/weather-forecast"
-              className="bg-sky-500 text-white py-1 px-3 rounded-lg hover:bg-sky-600 transition"
-            >
-              Dự báo Thời tiết
-            </Link>
-          </div>
-        </div> */}
       </div>
     </div>
   );

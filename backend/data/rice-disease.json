@@ -14,13 +14,20 @@
       "treatments": [
         {
           "type": "Hóa học",
-          "drugs": ["Beam 75WP", "Anvil 5SC", "Fuji-One 40WP"],
+          "drugs": [
+            "Beam 75WP",
+            "Anvil 5SC",
+            "Fuji-One 40WP"
+          ],
           "dosage": "20g/10 lít nước, phun 2 lần cách 7 ngày",
           "notes": "Phun khi thấy đốm đầu tiên, tránh phun trưa nắng."
         },
         {
           "type": "Sinh học",
-          "drugs": ["Trichoderma spp.", "Bacillus subtilis"],
+          "drugs": [
+            "Trichoderma spp.",
+            "Bacillus subtilis"
+          ],
           "dosage": "1kg/ha, phun định kỳ 7-10 ngày",
           "notes": "Tăng sức đề kháng, an toàn môi trường."
         },
@@ -56,13 +63,21 @@
       "treatments": [
         {
           "type": "Hóa học",
-          "drugs": ["Actara 25WG", "Virtako 40WG", "Chess 50WG"],
+          "drugs": [
+            "Actara 25WG",
+            "Virtako 40WG",
+            "Chess 50WG"
+          ],
           "dosage": "15g/10 lít nước, phun khi rầy tuổi 1-2",
           "notes": "Phun đều gốc, tránh phun trưa."
         },
         {
           "type": "Sinh học",
-          "drugs": ["Ong ký sinh Anagrus", "Bọ rùa", "Nhện bắt mồi"],
+          "drugs": [
+            "Ong ký sinh Anagrus",
+            "Bọ rùa",
+            "Nhện bắt mồi"
+          ],
           "dosage": "Thả 500 ong/ha",
           "notes": "Tạo môi trường sống bằng bờ cỏ, hoa dại."
         },
@@ -98,13 +113,18 @@
       "treatments": [
         {
           "type": "Hóa học",
-          "drugs": ["Validamycin 5L", "Kasumin 2L"],
+          "drugs": [
+            "Validamycin 5L",
+            "Kasumin 2L"
+          ],
           "dosage": "20ml/10 lít nước, phun trước trổ 5-7 ngày",
           "notes": "Phun đều bông, tránh mưa ngay sau phun."
         },
         {
           "type": "Sinh học",
-          "drugs": ["Trichoderma viride"],
+          "drugs": [
+            "Trichoderma viride"
+          ],
           "dosage": "Phun 1-2 lần/tuần",
           "notes": "Ức chế nấm, an toàn."
         },
@@ -139,13 +159,18 @@
       "treatments": [
         {
           "type": "Hóa học",
-          "drugs": ["Kasumin 2L", "Copper Hydroxide"],
+          "drugs": [
+            "Kasumin 2L",
+            "Copper Hydroxide"
+          ],
           "dosage": "20ml/10 lít nước, phun 2-3 lần",
           "notes": "Phun khi thấy vết đầu tiên."
         },
         {
           "type": "Sinh học",
-          "drugs": ["Streptomyces spp."],
+          "drugs": [
+            "Streptomyces spp."
+          ],
           "dosage": "Phun định kỳ",
           "notes": "Tăng sức đề kháng."
         },
@@ -167,39 +192,51 @@
       "economicLoss": "20-50% năng suất"
     },
     {
-      "name": "Bệnh vàng lùn & lùn xoắn lá",
-      "scientificName": "Rice Ragged Stunt Virus (RRSV) / Rice Dwarf Virus (RDV)",
-      "commonName": "Viral Diseases",
+      "name": "Sâu cuốn lá",
+      "scientificName": "Cnaphalocrocis medinalis",
+      "commonName": "Rice leaf roller",
       "symptoms": [
-        "Cây lùn bất thường, lá xoăn, vàng từ ngọn.",
-        "Không trổ bông hoặc bông lép.",
-        "Lây qua rầy nâu, không chữa được.",
-        "Phát sinh từ giai đoạn mạ đến đẻ nhánh."
+        "Ấu trùng ăn biểu bì lá, kéo mép lá cuốn lại thành ống, bên trong có phân và tơ.",
+        "Lá bị cuốn trắng, khô cháy từ ngọn xuống, giảm diện tích quang hợp.",
+        "Nặng: lá cuốn dày đặc, cây còi cọc, giảm năng suất 20-40%."
       ],
-      "causes": "Virus lây qua rầy nâu vector.",
+      "causes": "Sâu non ăn lá, trưởng thành đẻ trứng trên mặt lá. Phát triển mạnh ở nhiệt độ 25-32°C, độ ẩm cao.",
       "treatments": [
         {
-          "type": "Canh tác",
-          "drugs": ["Actara 25WG", "Virtako 40WG"],
-          "dosage": "Phun khi rầy xuất hiện",
-          "notes": "Phun sớm, đồng loạt."
+          "type": "Hóa học",
+          "drugs": [
+            "Virtako 40WG",
+            "Padan 95SP",
+            "Regent 800WG"
+          ],
+          "dosage": "15g/10 lít nước, phun khi sâu tuổi 1-2",
+          "notes": "Phun đều mặt lá, tránh phun trưa nắng."
+        },
+        {
+          "type": "Sinh học",
+          "drugs": [
+            "Beauveria bassiana",
+            "Bt (Bacillus thuringiensis)"
+          ],
+          "dosage": "Phun 1-2 lần/tuần khi sâu mới nở",
+          "notes": "An toàn cho thiên địch, không gây kháng thuốc."
         },
         {
           "type": "Canh tác",
           "methods": [
-            "Dùng giống kháng: OM5451, Jasmine 85.",
-            "Tiêu hủy cây bệnh, vệ sinh ruộng.",
-            "Gieo sạ đồng loạt, né rầy."
+            "Thu dọn tàn dư, đốt lá cuốn sau thu hoạch.",
+            "Thả vịt vào ruộng sau gặt để ăn sâu non.",
+            "Trồng giống kháng: OM5451, Jasmine 85."
           ]
         }
       ],
       "weatherTriggers": [
-        "Mùa khô, nhiệt độ cao, rầy nâu di trú.",
-        "Gió mùa mang rầy từ Campuchia."
+        "Nhiệt độ 25-32°C, độ ẩm cao (>80%).",
+        "Mùa mưa, trời âm u, ít gió."
       ],
-      "weatherPrevention": "Theo dõi gió mùa, kiểm soát rầy sớm.",
-      "severityRisk": "Rất cao",
-      "economicLoss": "50-100% nếu nhiễm nặng"
+      "weatherPrevention": "Theo dõi sâu non khi trời mưa kéo dài. Phun sinh học sớm khi mật độ >5 con/m².",
+      "severityRisk": "Cao",
+      "economicLoss": "20-40% năng suất nếu không kiểm soát kịp thời"
     }
   ],
   "weatherForecast": [

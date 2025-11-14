@@ -56,7 +56,7 @@ function Footer() {
         </div>
         {/* Follow us */}
         <div>
-          <h3 className="text-lg mb-4">Follow Shaddock</h3>
+          <h3 className="text-lg mb-4">Theo dõi chúng tôi</h3>
           <div className="flex justify-center space-x-4 mb-6">
             <a
               href="https://www.facebook.com/loi.nguyenminh.6595"
@@ -88,7 +88,7 @@ function Footer() {
       {/* Footer Bottom */}
       <div className="container mx-auto mt-6 px-4 lg:px-0 border-t border-emerald-900 pt-6">
         <p className="text-sm tracking-tighter text-center">
-          © 2025, Shaddock - Ứng dụng Bảo Vệ Cây Lúa | Hotline: 12345678
+          © 2025, Lúa Việt - Ứng dụng hỗ trợ tư vấn bảo vệ cây lúa | Hotline: 12345678
         </p>
       </div>
       {/* <p>© 2025, Shaddock - Ứng dụng Bảo Vệ Cây Lúa | Hotline: 12345678</p> */}

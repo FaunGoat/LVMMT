@@ -6,7 +6,7 @@ function Navbar() {
     <nav className="bg-sky-500 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-3xl font-bold">
-          Shaddock
+          Lúa Việt
         </Link>
         <ul className="flex space-x-6">
           <li>
