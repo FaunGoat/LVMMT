@@ -21,8 +21,7 @@ connectDB();
 // Routes
 app.use("/api/chat", require("./routes/chatbot"));
 app.use("/webhook", require("./routes/webhook"));
-// app.use("/api/weather", require("./routes/weather"));
-// app.use("/api/chat", require("./routes/chat"));
+app.use("/api/diseases", require("./routes/disease"));
 
 app.get("/", (req, res) => {
   res.send("WELCOME TO LÚA VIỆT. API!");
