@@ -7,10 +7,10 @@ const treatmentSchema = new mongoose.Schema(
       enum: ["Hóa học", "Sinh học", "Canh tác"],
       required: true,
     },
-    drugs: [String], // Chỉ dùng cho Hóa học & Sinh học
-    dosage: String, // Chỉ dùng cho Hóa học & Sinh học
-    notes: String, // Chỉ dùng cho Hóa học & Sinh học
-    methods: [String], // Chỉ dùng cho Canh tác
+    drugs: [String],
+    dosage: String,
+    notes: String,
+    methods: [String],
   },
   { _id: false }
 );
@@ -31,6 +31,15 @@ const diseaseSchema = new mongoose.Schema(
       required: true,
     },
     economicLoss: { type: String, required: true },
+    // THÊM TRƯỜNG MỚI
+    images: [
+      {
+        url: { type: String, required: true },
+        caption: { type: String },
+        alt: { type: String },
+      },
+    ],
+    description: { type: String }, // Mô tả chi tiết thêm
   },
   { timestamps: true }
 );

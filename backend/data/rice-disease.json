@@ -4,276 +4,388 @@
       "name": "Bệnh đạo ôn",
       "scientificName": "Pyricularia oryzae",
       "commonName": "Blast",
+      "description": "Bệnh đạo ôn là một trong những bệnh nguy hiểm nhất đối với cây lúa, gây thiệt hại lớn về năng suất và chất lượng. Bệnh có thể tấn công ở mọi giai đoạn sinh trưởng của cây lúa.",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800",
+          "caption": "Triệu chứng đạo ôn trên lá lúa",
+          "alt": "Lá lúa bị đạo ôn"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800",
+          "caption": "Đốm bệnh hình thoi đặc trưng",
+          "alt": "Đốm đạo ôn hình thoi"
+        }
+      ],
       "symptoms": [
         "Đốm hình thoi, viền nâu, tâm xám trắng trên lá.",
         "Lá khô cháy, cây còi cọc, giảm quang hợp.",
         "Nặng: đốm lan sang thân, bông trắng, lép hạt.",
         "Thường xuất hiện giai đoạn đẻ nhánh – trổ bông."
       ],
-      "causes": "Nấm Pyricularia oryzae, lây qua gió, nước mưa.",
+      "causes": "Nấm Pyricularia oryzae, lây qua gió, nước mưa, phát triển mạnh trong điều kiện ẩm ướt.",
       "treatments": [
         {
           "type": "Hóa học",
           "drugs": [
             "Beam 75WP",
             "Anvil 5SC",
-            "Fuji-One 40WP"
+            "Fuji-One 40WP",
+            "Tricyclazole 75% WP"
           ],
           "dosage": "20g/10 lít nước, phun 2 lần cách 7 ngày",
-          "notes": "Phun khi thấy đốm đầu tiên, tránh phun trưa nắng."
+          "notes": "Phun khi thấy đốm đầu tiên, tránh phun trưa nắng. Luân phiên các loại thuốc để tránh kháng thuốc."
         },
         {
           "type": "Sinh học",
           "drugs": [
             "Trichoderma spp.",
-            "Bacillus subtilis"
+            "Bacillus subtilis",
+            "Pseudomonas fluorescens"
           ],
           "dosage": "1kg/ha, phun định kỳ 7-10 ngày",
-          "notes": "Tăng sức đề kháng, an toàn môi trường."
+          "notes": "Tăng sức đề kháng, an toàn môi trường. Kết hợp với phân hữu cơ để tăng hiệu quả."
         },
         {
           "type": "Canh tác",
           "methods": [
-            "Dùng giống kháng: IR64, OM5451, Jasmine 85.",
-            "Vệ sinh đồng ruộng, đốt rơm rạ.",
-            "Bón phân cân đối, tránh thừa đạm."
+            "Dùng giống kháng: IR64, OM5451, Jasmine 85, ST25.",
+            "Vệ sinh đồng ruộng, đốt rơm rạ sau thu hoạch.",
+            "Bón phân cân đối, tránh thừa đạm (giảm 20-30% lượng đạm).",
+            "Gieo sạ đồng loạt để tránh nguồn bệnh.",
+            "Thoát nước tốt, tránh ngập úng kéo dài."
           ]
         }
       ],
       "weatherTriggers": [
-        "Độ ẩm cao (>85%), mưa phùn kéo dài.",
+        "Độ ẩm cao (>85%), mưa phùn kéo dài 3-5 ngày.",
         "Nhiệt độ 25-30°C, đặc biệt ban đêm.",
-        "Mây mù, ít nắng, gió nhẹ."
+        "Mây mù, ít nắng, gió nhẹ tạo điều kiện phát bệnh."
       ],
-      "weatherPrevention": "Theo dõi mưa >3 ngày → phun phòng. Giảm nước khi trời âm u.",
+      "weatherPrevention": "Theo dõi mưa >3 ngày liên tục → phun phòng ngay. Giảm mực nước khi trời âm u. Kiểm tra ruộng hàng ngày vào buổi sáng sớm.",
       "severityRisk": "Cao",
-      "economicLoss": "20-50% năng suất nếu nặng"
+      "economicLoss": "20-50% năng suất nếu nặng, có thể mất trắng cả ruộng"
     },
     {
       "name": "Rầy nâu",
       "scientificName": "Nilaparvata lugens",
       "commonName": "Brown Planthopper",
-      "symptoms": [
-        "Rầy tụ tập ở gốc lúa, hút nhựa → cây vàng úa.",
-        "Lá xoăn, khô cháy từ ngọn xuống.",
-        "Truyền virus gây bệnh vàng lùn, lùn xoắn lá.",
-        "Nặng: hiện tượng 'cháy rầy', chết hàng loạt."
+      "description": "Rầy nâu là loại sâu hại nguy hiểm nhất trên lúa ở Việt Nam. Ngoài hút nhựa làm lúa chết, rầy nâu còn truyền virus gây bệnh vàng lùn và lùn xoắn lá, gây thiệt hại rất lớn.",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?w=800",
+          "caption": "Rầy nâu tập trung ở gốc lúa",
+          "alt": "Rầy nâu trên cây lúa"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?w=800",
+          "caption": "Hiện tượng cháy rầy",
+          "alt": "Ruộng lúa bị cháy rầy"
+        }
       ],
-      "causes": "Di trú theo gió mùa, phát triển nhanh ở nhiệt độ cao.",
+      "symptoms": [
+        "Rầy tụ tập ở gốc lúa, hút nhựa → cây vàng úa nhanh chóng.",
+        "Lá xoăn, khô cháy từ ngọn xuống gốc.",
+        "Truyền virus gây bệnh vàng lùn, lùn xoắn lá - rất nguy hiểm.",
+        "Nặng: hiện tượng 'cháy rầy', cả ruộng chết hàng loạt trong 5-7 ngày.",
+        "Xuất hiện vệt mật ong (honeydew) trên lá."
+      ],
+      "causes": "Di trú theo gió mùa Tây Nam, phát triển nhanh ở nhiệt độ cao và độ ẩm thấp. Một con rầy cái đẻ 300-600 trứng.",
       "treatments": [
         {
           "type": "Hóa học",
           "drugs": [
-            "Actara 25WG",
+            "Actara 25WG (Thiamethoxam)",
             "Virtako 40WG",
-            "Chess 50WG"
+            "Chess 50WG (Pymetrozine)",
+            "Admire 200SC"
           ],
-          "dosage": "15g/10 lít nước, phun khi rầy tuổi 1-2",
-          "notes": "Phun đều gốc, tránh phun trưa."
+          "dosage": "15g/10 lít nước, phun khi rầy tuổi 1-2 (nên phun khi mật độ >500 con/m²)",
+          "notes": "Phun đều gốc cây, tránh phun trưa. QUAN TRỌNG: Luân phiên thuốc khác nhóm để tránh kháng thuốc."
         },
         {
           "type": "Sinh học",
           "drugs": [
-            "Ong ký sinh Anagrus",
-            "Bọ rùa",
-            "Nhện bắt mồi"
+            "Ong ký sinh Anagrus nilaparvatae",
+            "Bọ rùa Cyrtorhinus lividipennis",
+            "Nhện bắt mồi Lycosa pseudoannulata",
+            "Nấm Metarhizium anisopliae"
           ],
-          "dosage": "Thả 500 ong/ha",
-          "notes": "Tạo môi trường sống bằng bờ cỏ, hoa dại."
+          "dosage": "Thả 500-1000 ong/ha khi rầy mới xuất hiện",
+          "notes": "Tạo môi trường sống cho thiên địch bằng bờ cỏ, hoa dại. Không phun thuốc hóa học trong 2 tuần sau thả thiên địch."
         },
         {
           "type": "Canh tác",
           "methods": [
-            "Dùng giống kháng: OM18, OM5451.",
-            "Bẫy dính vàng, bẫy đèn.",
-            "Đồng loạt gieo sạ, né rầy di trú."
+            "Dùng giống kháng: OM18, OM5451, OM6976, TBR1.",
+            "Bẫy dính vàng (40-50 bẫy/ha), bẫy đèn (1 đèn/5ha).",
+            "Đồng loạt gieo sạ trong 7-10 ngày để né rầy di trú.",
+            "Bón phân cân đối, tránh thừa đạm (giảm 30% đạm).",
+            "Vệ sinh ruộng, loại bỏ rơm rạ sau thu hoạch.",
+            "Tưới nước ngập sâu 5-7cm khi phát hiện rầy (rầy sẽ chết đuối)."
           ]
         }
       ],
       "weatherTriggers": [
-        "Nhiệt độ >30°C, khô hạn.",
-        "Gió mùa Tây Nam (tháng 6-8).",
-        "Thiếu nước → rầy tập trung."
+        "Nhiệt độ >30°C, khô hạn kéo dài.",
+        "Gió mùa Tây Nam (tháng 6-8) mang rầy từ vùng khác đến.",
+        "Thiếu nước, ruộng khô → rầy tập trung cao.",
+        "Ít mưa, độ ẩm thấp <70%."
       ],
-      "weatherPrevention": "Tưới nước đều, theo dõi gió mùa, đặt bẫy sớm.",
+      "weatherPrevention": "Tưới nước đều đặn, theo dõi dự báo gió mùa Tây Nam. Đặt bẫy dính vàng sớm trước gió mùa 2-3 tuần. Kiểm tra ruộng 2 lần/tuần.",
       "severityRisk": "Rất cao",
-      "economicLoss": "30-100% nếu có virus"
+      "economicLoss": "30-100% nếu có virus, mất trắng trong 5-7 ngày nếu cháy rầy"
     },
     {
       "name": "Bệnh lem lép hạt",
       "scientificName": "Ustilaginoidea virens",
       "commonName": "False Smut",
-      "symptoms": [
-        "Hạt lúa phình to, trấu nứt, bên trong bột đen.",
-        "Bông trắng xanh, hạt lép, giảm trọng lượng.",
-        "Nấm độc hại cho người và gia súc.",
-        "Xuất hiện giai đoạn lúa sữa – chín."
+      "description": "Bệnh lem lép hạt làm giảm năng suất và chất lượng gạo nghiêm trọng. Đặc biệt nguy hiểm là nấm bệnh tiết ra độc tố gây hại cho người và gia súc.",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800",
+          "caption": "Hạt lúa bị lem lép",
+          "alt": "Bệnh lem lép trên bông lúa"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800",
+          "caption": "Bông lúa nhiễm nấm",
+          "alt": "Bông lúa lem lép"
+        }
       ],
-      "causes": "Nấm lây qua gió, nước, tồn tại trong đất.",
+      "symptoms": [
+        "Hạt lúa phình to gấp 2-3 lần, trấu nứt, bên trong chứa bột đen hoặc xanh lục.",
+        "Bông trắng xanh bao phủ, hạt lép hoàn toàn, không có gạo.",
+        "Hạt bệnh rơi xuống đất tạo nguồn bệnh cho vụ sau.",
+        "Nấm độc hại (mycotoxin) gây hại cho người và gia súc khi ăn phải.",
+        "Xuất hiện nhiều nhất ở giai đoạn lúa sữa – chín sữa.",
+        "Hạt bệnh có mùi hôi đặc trưng."
+      ],
+      "causes": "Nấm Ustilaginoidea virens lây qua gió, nước, côn trùng. Bào tử tồn tại trong đất và rơm rạ 2-3 năm.",
       "treatments": [
         {
           "type": "Hóa học",
           "drugs": [
             "Validamycin 5L",
-            "Kasumin 2L"
+            "Kasumin 2L (Kasugamycin)",
+            "Propiconazole 25EC",
+            "Tebuconazole 250EC"
           ],
-          "dosage": "20ml/10 lít nước, phun trước trổ 5-7 ngày",
-          "notes": "Phun đều bông, tránh mưa ngay sau phun."
+          "dosage": "20ml/10 lít nước, phun trước trổ 5-7 ngày và lúc lúa trổ 10-20%",
+          "notes": "Phun đều bông lúa, tránh mưa ngay sau phun. Phun 2 lần: lần 1 trước trổ 5-7 ngày, lần 2 khi trổ 10-20%."
         },
         {
           "type": "Sinh học",
           "drugs": [
-            "Trichoderma viride"
+            "Trichoderma viride",
+            "Bacillus subtilis",
+            "Streptomyces spp."
           ],
-          "dosage": "Phun 1-2 lần/tuần",
-          "notes": "Ức chế nấm, an toàn."
+          "dosage": "Phun 1-2 lần/tuần từ trước trổ 10 ngày",
+          "notes": "Ức chế nấm bệnh, an toàn cho môi trường. Kết hợp với phân hữu cơ."
         },
         {
           "type": "Canh tác",
           "methods": [
-            "Thu dọn bông bệnh, đốt bỏ.",
-            "Luân canh với lúa nếp, lúa cao sản.",
-            "Tránh bón thừa đạm cuối vụ."
+            "Thu dọn bông bệnh, đốt bỏ hoặc chôn sâu (không để rơi xuống ruộng).",
+            "Luân canh với cây họ đậu, ngô hoặc rau màu.",
+            "Tránh bón thừa đạm giai đoạn cuối (giảm 30-40% đạm).",
+            "Vệ sinh ruộng, loại bỏ rơm rạ bệnh.",
+            "Gieo sạ đồng loạt, tránh trổ không đều.",
+            "Chọn giống kháng: OM5451, ST24, Đài thơm 8.",
+            "Thoát nước tốt, tránh ngập úng khi trổ bông."
           ]
         }
       ],
       "weatherTriggers": [
-        "Mưa lớn, độ ẩm cao, gió mạnh.",
-        "Nhiệt độ 25-32°C, trời âm u."
+        "Mưa lớn, độ ẩm cao >90% khi lúa trổ bông.",
+        "Nhiệt độ 25-32°C, trời âm u, mây mù.",
+        "Gió mạnh làm rụng phấn, tạo điều kiện nấm xâm nhập.",
+        "Mưa rào liên tục 5-7 ngày khi lúa trổ."
       ],
-      "weatherPrevention": "Phun phòng trước mưa lớn. Thoát nước nhanh sau mưa.",
+      "weatherPrevention": "Phun phòng trước mưa lớn 1-2 ngày. Thoát nước nhanh sau mưa. Theo dõi dự báo thời tiết khi lúa sắp trổ.",
       "severityRisk": "Cao",
-      "economicLoss": "10-40% chất lượng gạo"
+      "economicLoss": "10-40% chất lượng gạo, giảm giá 30-50%"
     },
     {
       "name": "Bệnh cháy bìa lá",
       "scientificName": "Xanthomonas oryzae pv. oryzae",
       "commonName": "Bacterial Leaf Blight",
-      "symptoms": [
-        "Vết cháy từ mép lá vào trong, màu vàng cam.",
-        "Lá khô, dính nhau, cây còi cọc.",
-        "Nặng: lá chết hàng loạt, giảm năng suất.",
-        "Thường xuất hiện sau mưa bão."
+      "description": "Bệnh cháy bìa lá là bệnh vi khuẩn nguy hiểm, lây lan nhanh qua nước và gió. Bệnh gây thiệt hại nặng nề trong điều kiện mưa bão.",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800",
+          "caption": "Triệu chứng cháy bìa lá",
+          "alt": "Lá lúa bị cháy bìa"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800",
+          "caption": "Lá khô dính nhau",
+          "alt": "Bệnh cháy bìa lá nặng"
+        }
       ],
-      "causes": "Vi khuẩn lây qua nước, gió, dụng cụ.",
+      "symptoms": [
+        "Vết cháy từ mép lá vào trong, màu vàng cam đặc trưng.",
+        "Lá khô, dính nhau như bị thiêu, cây còi cọc.",
+        "Xuất hiện giọt nhựa vàng (bacterial ooze) vào buổi sáng sớm.",
+        "Nặng: lá chết hàng loạt, giảm năng suất 30-50%.",
+        "Thường xuất hiện sau mưa bão, gió mạnh.",
+        "Lá có mùi hôi khi bệnh nặng."
+      ],
+      "causes": "Vi khuẩn Xanthomonas oryzae lây qua nước, gió, dụng cụ nông cụ, côn trùng. Xâm nhập qua vết thương.",
       "treatments": [
         {
           "type": "Hóa học",
           "drugs": [
-            "Kasumin 2L",
-            "Copper Hydroxide"
+            "Kasumin 2L (Kasugamycin)",
+            "Copper Hydroxide 77WP",
+            "Kocide 101",
+            "Starner 20WP"
           ],
-          "dosage": "20ml/10 lít nước, phun 2-3 lần",
-          "notes": "Phun khi thấy vết đầu tiên."
+          "dosage": "20ml/10 lít nước, phun 2-3 lần cách 7 ngày",
+          "notes": "Phun khi thấy vết đầu tiên hoặc sau bão. Phun kỹ cả mặt dưới lá. Không phun khi có nắng gắt."
         },
         {
           "type": "Sinh học",
           "drugs": [
-            "Streptomyces spp."
+            "Streptomyces spp.",
+            "Bacillus subtilis",
+            "Pseudomonas fluorescens"
           ],
-          "dosage": "Phun định kỳ",
-          "notes": "Tăng sức đề kháng."
+          "dosage": "Phun định kỳ mỗi tuần",
+          "notes": "Tăng sức đề kháng cho cây. Bắt đầu phun từ giai đoạn đẻ nhánh."
         },
         {
           "type": "Canh tác",
           "methods": [
-            "Dùng giống kháng: OM2517, OM18.",
-            "Vệ sinh dụng cụ, tránh làm vết thương.",
-            "Thoát nước tốt, tránh ngập."
+            "Dùng giống kháng: OM2517, OM18, IR64, IRBB7.",
+            "Vệ sinh dụng cụ nông cụ bằng nước Javel, tránh làm vết thương.",
+            "Thoát nước tốt, tránh ngập úng kéo dài >3 ngày.",
+            "Bón phân cân đối, tăng kali (K) để tăng sức đề kháng.",
+            "Vệ sinh ruộng, đốt rơm rạ bệnh.",
+            "Không làm việc khi lá ướt (sáng sớm, sau mưa).",
+            "Cách ly ruộng bệnh, không dùng nước từ ruộng bệnh."
           ]
         }
       ],
       "weatherTriggers": [
-        "Mưa bão, gió mạnh, nhiệt độ 25-35°C.",
-        "Ngập úng kéo dài."
+        "Mưa bão, gió mạnh làm lá bị thương, nhiệt độ 25-35°C.",
+        "Ngập úng kéo dài 3-5 ngày.",
+        "Độ ẩm cao >85% sau bão.",
+        "Gió lớn làm lá cọ sát nhau tạo vết thương."
       ],
-      "weatherPrevention": "Thoát nước sau bão. Theo dõi mưa lớn.",
+      "weatherPrevention": "Thoát nước ngay sau bão trong 24h. Theo dõi dự báo mưa lớn, phun phòng trước bão 1-2 ngày. Kiểm tra ruộng sau bão.",
       "severityRisk": "Cao",
-      "economicLoss": "20-50% năng suất"
+      "economicLoss": "20-50% năng suất, có thể lên 70% nếu bệnh nặng"
     },
     {
       "name": "Sâu cuốn lá",
       "scientificName": "Cnaphalocrocis medinalis",
       "commonName": "Rice leaf roller",
+      "description": "Sâu cuốn lá là loại sâu hại phổ biến, gây thiệt hại bằng cách ăn biểu bì lá và cuốn lá lại. Tuy không nguy hiểm như rầy nâu nhưng nếu không kiểm soát kịp thời sẽ gây mất mát đáng kể.",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?w=800",
+          "caption": "Lá lúa bị cuốn",
+          "alt": "Sâu cuốn lá trên lúa"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?w=800",
+          "caption": "Thiệt hại do sâu cuốn lá",
+          "alt": "Lá lúa bị cuốn trắng"
+        }
+      ],
       "symptoms": [
         "Ấu trùng ăn biểu bì lá, kéo mép lá cuốn lại thành ống, bên trong có phân và tơ.",
-        "Lá bị cuốn trắng, khô cháy từ ngọn xuống, giảm diện tích quang hợp.",
-        "Nặng: lá cuốn dày đặc, cây còi cọc, giảm năng suất 20-40%."
+        "Lá bị cuốn trắng, khô cháy từ ngọn xuống, giảm diện tích quang hợp 30-40%.",
+        "Nặng: lá cuốn dày đặc, cây còi cọc, giảm năng suất 20-40%.",
+        "Ảnh hưởng nặng nhất ở giai đoạn đẻ nhánh và làm đòng.",
+        "Thường xuất hiện vào mùa mưa, độ ẩm cao."
       ],
-      "causes": "Sâu non ăn lá, trưởng thành đẻ trứng trên mặt lá. Phát triển mạnh ở nhiệt độ 25-32°C, độ ẩm cao.",
+      "causes": "Sâu non ăn lá, trưởng thành đẻ trứng trên mặt lá. Phát triển mạnh ở nhiệt độ 25-32°C, độ ẩm cao >80%. Một vòng đời 25-30 ngày.",
       "treatments": [
         {
           "type": "Hóa học",
           "drugs": [
-            "Virtako 40WG",
-            "Padan 95SP",
-            "Regent 800WG"
+            "Virtako 40WG (Thiamethoxam + Chlorantraniliprole)",
+            "Padan 95SP (Cartap)",
+            "Regent 800WG (Fipronil)",
+            "Coragen 20SC"
           ],
-          "dosage": "15g/10 lít nước, phun khi sâu tuổi 1-2",
-          "notes": "Phun đều mặt lá, tránh phun trưa nắng."
+          "dosage": "15g/10 lít nước, phun khi sâu tuổi 1-2 (khi >10 lá cuốn/m²)",
+          "notes": "Phun đều mặt lá, tránh phun trưa nắng. Phun khi sâu còn nhỏ (tuổi 1-2) hiệu quả cao nhất. Luân phiên thuốc."
         },
         {
           "type": "Sinh học",
           "drugs": [
-            "Beauveria bassiana",
-            "Bt (Bacillus thuringiensis)"
+            "Beauveria bassiana (nấm)",
+            "Bt (Bacillus thuringiensis)",
+            "NPV (Nuclear Polyhedrosis Virus)",
+            "Trichogramma spp. (ong ký sinh trứng)"
           ],
-          "dosage": "Phun 1-2 lần/tuần khi sâu mới nở",
-          "notes": "An toàn cho thiên địch, không gây kháng thuốc."
+          "dosage": "Phun 1-2 lần/tuần khi sâu mới nở, hoặc thả 100.000 ong/ha",
+          "notes": "An toàn cho thiên địch, không gây kháng thuốc. Phun vào buổi chiều mát để tăng hiệu quả."
         },
         {
           "type": "Canh tác",
           "methods": [
-            "Thu dọn tàn dư, đốt lá cuốn sau thu hoạch.",
-            "Thả vịt vào ruộng sau gặt để ăn sâu non.",
-            "Trồng giống kháng: OM5451, Jasmine 85."
+            "Thu dọn tàn dư, đốt lá cuốn sau thu hoạch (tiêu diệt nhộng).",
+            "Thả vịt vào ruộng sau gặt 10-15 ngày để ăn sâu non và nhộng.",
+            "Trồng giống kháng: OM5451, Jasmine 85, IR64.",
+            "Bón phân cân đối, tránh thừa đạm (giảm 20%).",
+            "Đặt bẫy đèn để bắt bướm (1 đèn/5ha).",
+            "Gieo sạ đồng loạt trong 7-10 ngày.",
+            "Vệ sinh bờ ruộng, cắt cỏ dại (nơi ẩn náu của sâu)."
           ]
         }
       ],
       "weatherTriggers": [
         "Nhiệt độ 25-32°C, độ ẩm cao (>80%).",
-        "Mùa mưa, trời âm u, ít gió."
+        "Mùa mưa, trời âm u, ít gió.",
+        "Mưa rào vặt liên tục 3-5 ngày.",
+        "Độ ẩm tương đối cao vào ban đêm."
       ],
-      "weatherPrevention": "Theo dõi sâu non khi trời mưa kéo dài. Phun sinh học sớm khi mật độ >5 con/m².",
+      "weatherPrevention": "Theo dõi sâu non khi trời mưa kéo dài. Phun sinh học sớm khi mật độ >5 lá cuốn/m². Kiểm tra ruộng 2 lần/tuần vào buổi sáng sớm.",
       "severityRisk": "Cao",
       "economicLoss": "20-40% năng suất nếu không kiểm soát kịp thời"
     }
   ],
   "weatherForecast": [
     {
-      "date": "2025-11-11",
+      "date": "2025-11-18",
       "location": "Đồng bằng sông Cửu Long",
       "temperature": "27-32°C",
       "humidity": "82%",
       "condition": "Mưa rào, độ ẩm cao",
       "diseaseAlerts": [
         "Cảnh báo ĐỎ: Nguy cơ ĐẠO ÔN cao do mưa + độ ẩm >80%.",
-        "Cảnh báo VÀNG: LEM LÉP HẠT có thể bùng phát.",
-        "Khuyến cáo: Phun phòng đạo ôn, thoát nước nhanh."
+        "Cảnh báo VÀNG: LEM LÉP HẠT có thể bùng phát trong 5-7 ngày.",
+        "Cảnh báo CAM: SÂU CUỐN LÁ phát triển mạnh.",
+        "Khuyến cáo: Phun phòng đạo ôn, kiểm tra lá cuốn, thoát nước nhanh."
       ]
     },
     {
-      "date": "2025-11-12",
+      "date": "2025-11-19",
       "location": "Đồng bằng sông Cửu Long",
       "temperature": "26-30°C",
       "humidity": "88%",
-      "condition": "Mưa lớn, gió giật",
+      "condition": "Mưa lớn, gió giật cấp 6-7",
       "diseaseAlerts": [
-        "Cảnh báo ĐỎ: CHÁY BÌA LÁ do mưa bão.",
+        "Cảnh báo ĐỎ: CHÁY BÌA LÁ do mưa bão + gió mạnh.",
         "Cảnh báo VÀNG: RẦY NÂU tăng do ngập úng.",
-        "Khuyến cáo: Thoát nước, kiểm tra ruộng."
+        "Khuyến cáo: Thoát nước trong 24h, vệ sinh dụng cụ, kiểm tra ruộng sau bão."
       ]
     },
     {
-      "date": "2025-11-13",
+      "date": "2025-11-20",
       "location": "Đồng bằng sông Cửu Long",
       "temperature": "29-34°C",
       "humidity": "65%",
       "condition": "Nắng nóng, khô hạn",
       "diseaseAlerts": [
-        "Cảnh báo VÀNG: RẦY NÂU bùng phát do nhiệt độ cao.",
-        "Cảnh báo XANH: Đạo ôn giảm.",
-        "Khuyến cáo: Tưới nước đều, đặt bẫy dính vàng."
+        "Cảnh báo ĐỎ: RẦY NÂU bùng phát do nhiệt độ cao + khô.",
+        "Cảnh báo XANH: Đạo ôn giảm dần.",
+        "Khuyến cáo: Tưới nước đều 5-7cm, đặt bẫy dính vàng, kiểm tra rầy 2 lần/ngày."
       ]
     }
   ]

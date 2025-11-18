@@ -21,7 +21,7 @@ exports.handleWebhook = async (req, res) => {
   const symptomEntity = extractEntity(parameters, "symptom");
   const locationEntity = extractEntity(parameters, "location");
 
-  console.log("🎯 Entities extracted:");
+  console.log("Entities extracted:");
   console.log("  - Disease:", diseaseEntity);
   console.log("  - Treatment:", treatmentEntity);
   console.log("  - Symptom:", symptomEntity);
@@ -80,8 +80,8 @@ exports.handleWebhook = async (req, res) => {
             .slice(0, 3)
             .map((s) => `• ${s}`)
             .join("\n") +
-          `\n\n⚠️ Mức độ: **${disease.severityRisk}**` +
-          `\n💡 Bạn muốn biết cách chữa trị không?`;
+          `\n\nMức độ: **${disease.severityRisk}**` +
+          `\nBạn muốn biết cách chữa trị không?`;
       }
     }
 
@@ -120,12 +120,12 @@ exports.handleWebhook = async (req, res) => {
         responseText = `Hiện chưa có dự báo thời tiết cho khu vực ${location}.`;
       } else {
         responseText =
-          `🌦️ **DỰ BÁO THỜI TIẾT - ${weather.date}**\n` +
-          `📍 ${weather.location}\n\n` +
-          `🌡️ Nhiệt độ: ${weather.temperature}\n` +
-          `💧 Độ ẩm: ${weather.humidity}\n` +
-          `☁️ Tình hình: ${weather.condition}\n\n` +
-          `⚠️ **CẢNH BÁO BỆNH HẠI:**\n` +
+          `**DỰ BÁO THỜI TIẾT - ${weather.date}**\n` +
+          `${weather.location}\n\n` +
+          `Nhiệt độ: ${weather.temperature}\n` +
+          `Độ ẩm: ${weather.humidity}\n` +
+          `Tình hình: ${weather.condition}\n\n` +
+          `**CẢNH BÁO BỆNH HẠI:**\n` +
           weather.diseaseAlerts.map((a) => `• ${a}`).join("\n");
       }
     }
@@ -196,15 +196,15 @@ function generateSmartResponse(disease, questionType, searchTerm) {
       response =
         `**${disease.name}** (${disease.commonName || "Hại lúa"})\n\n` +
         `${disease.causes}\n\n` +
-        `💡 Bạn muốn biết thêm về triệu chứng hay cách chữa trị?`;
+        `Bạn muốn biết thêm về triệu chứng hay cách chữa trị?`;
       break;
 
     case "symptoms":
       response =
         `**Triệu chứng của ${disease.name}:**\n\n` +
         disease.symptoms.map((s, i) => `${i + 1}. ${s}`).join("\n") +
-        `\n\n⚠️ Mức độ: **${disease.severityRisk}**` +
-        `\n📉 Thiệt hại: ${disease.economicLoss}`;
+        `\n\nMức độ: **${disease.severityRisk}**` +
+        `\nThiệt hại: ${disease.economicLoss}`;
       break;
 
     case "treatment":
@@ -217,20 +217,20 @@ function generateSmartResponse(disease, questionType, searchTerm) {
         `${disease.causes}\n\n` +
         `**Điều kiện thuận lợi cho bệnh:**\n` +
         disease.weatherTriggers.map((w) => `• ${w}`).join("\n") +
-        `\n\n💡 Muốn biết cách phòng ngừa?`;
+        `\n\nMuốn biết cách phòng ngừa?`;
       break;
 
     case "impact":
       response =
         `**Mức độ nguy hiểm của ${disease.name}:**\n\n` +
-        `⚠️ Độ nghiêm trọng: **${disease.severityRisk}**\n` +
-        `📉 Thiệt hại kinh tế: ${disease.economicLoss}\n\n` +
+        `Độ nghiêm trọng: **${disease.severityRisk}**\n` +
+        `Thiệt hại kinh tế: ${disease.economicLoss}\n\n` +
         `**Triệu chứng nặng:**\n` +
         disease.symptoms
           .slice(-2)
           .map((s) => `• ${s}`)
           .join("\n") +
-        `\n\n🛡️ Cần chữa trị ngay để tránh lây lan!`;
+        `\n\nCần chữa trị ngay để tránh lây lan!`;
       break;
 
     case "weather":
@@ -244,14 +244,14 @@ function generateSmartResponse(disease, questionType, searchTerm) {
     default: // general
       response =
         `**${disease.name}** (${disease.commonName || "Hại lúa"})\n\n` +
-        `📋 **Nguyên nhân:** ${disease.causes}\n\n` +
-        `🔍 **Triệu chứng phổ biến:**\n` +
+        `**Nguyên nhân:** ${disease.causes}\n\n` +
+        `**Triệu chứng phổ biến:**\n` +
         disease.symptoms
           .slice(0, 2)
           .map((s) => `• ${s}`)
           .join("\n") +
-        `\n\n⚠️ **Mức độ:** ${disease.severityRisk} - Thiệt hại ${disease.economicLoss}\n\n` +
-        `💡 Bạn muốn biết thêm về:\n` +
+        `\n\n**Mức độ:** ${disease.severityRisk} - Thiệt hại ${disease.economicLoss}\n\n` +
+        `Bạn muốn biết thêm về:\n` +
         `• Cách chữa trị?\n` +
         `• Phòng ngừa theo thời tiết?`;
   }
@@ -266,31 +266,31 @@ function generateTreatmentResponse(disease) {
   // Hóa học
   const chemical = disease.treatments.find((t) => t.type === "Hóa học");
   if (chemical && chemical.drugs?.length > 0) {
-    response += `💊 **Thuốc hóa học:**\n`;
+    response += `**Thuốc hóa học:**\n`;
     chemical.drugs.slice(0, 3).forEach((drug) => {
       response += `• ${drug}`;
       if (chemical.dosage) response += ` - ${chemical.dosage}`;
       response += "\n";
     });
-    if (chemical.notes) response += `⚠️ ${chemical.notes}\n`;
+    if (chemical.notes) response += `${chemical.notes}\n`;
     response += "\n";
   }
 
   // Sinh học
   const bio = disease.treatments.find((t) => t.type === "Sinh học");
   if (bio) {
-    response += `🌱 **Phương pháp sinh học:**\n`;
+    response += `**Phương pháp sinh học:**\n`;
     if (bio.drugs && bio.drugs.length > 0) {
       bio.drugs.forEach((drug) => (response += `• ${drug}\n`));
     }
-    if (bio.notes) response += `✅ ${bio.notes}\n`;
+    if (bio.notes) response += `${bio.notes}\n`;
     response += "\n";
   }
 
   // Canh tác
   const cultural = disease.treatments.find((t) => t.type === "Canh tác");
   if (cultural && cultural.methods?.length > 0) {
-    response += `🚜 **Biện pháp canh tác:**\n`;
+    response += `**Biện pháp canh tác:**\n`;
     cultural.methods.slice(0, 3).forEach((method) => {
       response += `• ${method}\n`;
     });
@@ -298,7 +298,7 @@ function generateTreatmentResponse(disease) {
   }
 
   // Phòng ngừa theo thời tiết
-  response += `🌦️ **Phòng ngừa theo thời tiết:**\n${disease.weatherPrevention}`;
+  response += `**Phòng ngừa theo thời tiết:**\n${disease.weatherPrevention}`;
 
   return response;
 }
@@ -310,7 +310,7 @@ function generateTreatmentByType(disease, treatmentType) {
   const treatment = disease.treatments.find((t) => t.type === treatmentType);
 
   if (!treatment) {
-    return `Hiện chưa có thông tin về phương pháp ${treatmentType} cho ${disease.name}.\n\n💡 Bạn muốn xem các phương pháp khác?`;
+    return `Hiện chưa có thông tin về phương pháp ${treatmentType} cho ${disease.name}.\n\nBạn muốn xem các phương pháp khác?`;
   }
 
   if (treatment.drugs && treatment.drugs.length > 0) {
@@ -331,7 +331,7 @@ function generateTreatmentByType(disease, treatmentType) {
   }
 
   if (treatment.notes) {
-    response += `\n⚠️ **Lưu ý:** ${treatment.notes}`;
+    response += `\n**Lưu ý:** ${treatment.notes}`;
   }
 
   return response;
