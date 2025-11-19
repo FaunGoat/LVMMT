@@ -28,7 +28,6 @@ const App = () => {
           <Route path="/sustainable-methods" element={<SustainableMethods />} />
           <Route path="/chatbot" element={<Chatbot />} />
           <Route path="/weather-forecast" element={<WeatherForecast />} />
-          {/* <Route path="/forum" element={<Forum />} /> */}
         </Routes>
       </MainLayout>
     </BrowserRouter>

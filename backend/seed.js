@@ -21,11 +21,11 @@ const seed = async () => {
 
     // CHÈN DỮ LIỆU MỚI
     const insertedDiseases = await Disease.insertMany(seedData.diseases);
-    const insertedWeather = await Weather.insertMany(seedData.weatherForecast);
+    // const insertedWeather = await Weather.insertMany(seedData.weatherForecast);
 
     console.log("\n✨ SEED HOÀN TẤT:");
     console.log(`   • ${insertedDiseases.length} bệnh hại lúa`);
-    console.log(`   • ${insertedWeather.length} ngày dự báo thời tiết`);
+    // console.log(`   • ${insertedWeather.length} ngày dự báo thời tiết`);
 
     console.log("\n📋 Danh sách bệnh đã thêm:");
     insertedDiseases.forEach((disease, idx) => {
@@ -35,10 +35,10 @@ const seed = async () => {
       console.log(`      - Số hình ảnh: ${disease.images?.length || 0}`);
     });
 
-    console.log("\n🌦️  Dự báo thời tiết:");
-    insertedWeather.forEach((w) => {
-      console.log(`   ${w.date}: ${w.condition} (${w.temperature})`);
-    });
+    // console.log("\n🌦️  Dự báo thời tiết:");
+    // insertedWeather.forEach((w) => {
+    //   console.log(`   ${w.date}: ${w.condition} (${w.temperature})`);
+    // });
 
     console.log("\n✅ Hoàn tất! Server có thể sử dụng database mới.");
     process.exit(0);

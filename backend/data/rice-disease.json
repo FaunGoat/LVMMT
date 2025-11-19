@@ -349,44 +349,5 @@
       "severityRisk": "Cao",
       "economicLoss": "20-40% năng suất nếu không kiểm soát kịp thời"
     }
-  ],
-  "weatherForecast": [
-    {
-      "date": "2025-11-18",
-      "location": "Đồng bằng sông Cửu Long",
-      "temperature": "27-32°C",
-      "humidity": "82%",
-      "condition": "Mưa rào, độ ẩm cao",
-      "diseaseAlerts": [
-        "Cảnh báo ĐỎ: Nguy cơ ĐẠO ÔN cao do mưa + độ ẩm >80%.",
-        "Cảnh báo VÀNG: LEM LÉP HẠT có thể bùng phát trong 5-7 ngày.",
-        "Cảnh báo CAM: SÂU CUỐN LÁ phát triển mạnh.",
-        "Khuyến cáo: Phun phòng đạo ôn, kiểm tra lá cuốn, thoát nước nhanh."
-      ]
-    },
-    {
-      "date": "2025-11-19",
-      "location": "Đồng bằng sông Cửu Long",
-      "temperature": "26-30°C",
-      "humidity": "88%",
-      "condition": "Mưa lớn, gió giật cấp 6-7",
-      "diseaseAlerts": [
-        "Cảnh báo ĐỎ: CHÁY BÌA LÁ do mưa bão + gió mạnh.",
-        "Cảnh báo VÀNG: RẦY NÂU tăng do ngập úng.",
-        "Khuyến cáo: Thoát nước trong 24h, vệ sinh dụng cụ, kiểm tra ruộng sau bão."
-      ]
-    },
-    {
-      "date": "2025-11-20",
-      "location": "Đồng bằng sông Cửu Long",
-      "temperature": "29-34°C",
-      "humidity": "65%",
-      "condition": "Nắng nóng, khô hạn",
-      "diseaseAlerts": [
-        "Cảnh báo ĐỎ: RẦY NÂU bùng phát do nhiệt độ cao + khô.",
-        "Cảnh báo XANH: Đạo ôn giảm dần.",
-        "Khuyến cáo: Tưới nước đều 5-7cm, đặt bẫy dính vàng, kiểm tra rầy 2 lần/ngày."
-      ]
-    }
   ]
 }

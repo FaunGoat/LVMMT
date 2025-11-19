@@ -1,6 +1,7 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const cors = require("cors");
+const { setupWeatherCron } = require("./config/cron");
 require("dotenv").config();
 
 const app = express();
@@ -18,10 +19,14 @@ app.use(express.json());
 //Connect to MongoDB
 connectDB();
 
+// Setup Cron Job cho weather
+setupWeatherCron();
+
 // Routes
 app.use("/api/chat", require("./routes/chatbot"));
 app.use("/webhook", require("./routes/webhook"));
 app.use("/api/diseases", require("./routes/disease"));
+app.use("/api/weather", require("./routes/weather"));
 
 app.get("/", (req, res) => {
   res.send("WELCOME TO LÚA VIỆT. API!");
@@ -29,4 +34,5 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server chạy tại http://localhost:${PORT}`);
+  console.log(`⏰ Cron job sẽ tự động cập nhật thời tiết mỗi 6 giờ`);
 });
