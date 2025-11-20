@@ -94,13 +94,13 @@ function WeatherForecast() {
     }
   };
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const dayNames = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
-    return `${dayNames[date.getDay()]}, ${date.getDate()}/${
-      date.getMonth() + 1
-    }`;
-  };
+  // const formatDate = (dateString) => {
+  //   const date = new Date(dateString);
+  //   const dayNames = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
+  //   return `${dayNames[date.getDay()]}, ${date.getDate()}/${
+  //     date.getMonth() + 1
+  //   }`;
+  // };
 
   const formatFullDate = (dateString) => {
     const date = new Date(dateString);
@@ -303,7 +303,7 @@ function WeatherForecast() {
                       <div className="flex items-center justify-between mb-4">
                         <div>
                           <p className="text-sm text-gray-600 font-medium">
-                            {formatDate(day.date)}
+                            {formatFullDate(day.date)}
                           </p>
                           <p className="text-xs text-gray-500">
                             {day.location}
