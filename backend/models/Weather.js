@@ -1,5 +1,19 @@
 const mongoose = require("mongoose");
 
+const diseaseAlertSchema = new mongoose.Schema(
+  {
+    level: {
+      type: String,
+      enum: ["success", "info", "warning", "danger"],
+      default: "info",
+    },
+    disease: { type: String, required: true },
+    message: { type: String, required: true },
+    action: { type: String, required: true },
+  },
+  { _id: false }
+);
+
 const weatherSchema = new mongoose.Schema(
   {
     date: { type: String, required: true }, // YYYY-MM-DD
@@ -7,7 +21,9 @@ const weatherSchema = new mongoose.Schema(
     temperature: { type: String, required: true },
     humidity: { type: String, required: true },
     condition: { type: String, required: true },
-    diseaseAlerts: [{ type: String, required: true }],
+    windSpeed: { type: String },
+    rainfall: { type: String },
+    diseaseAlerts: [diseaseAlertSchema], // Structured alerts
   },
   { timestamps: true }
 );
