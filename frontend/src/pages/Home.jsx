@@ -239,7 +239,7 @@ function Home() {
       )}
 
       {/* Quick Links Section */}
-      <div className="container mx-auto text-center py-10 bg-white rounded-lg shadow-lg mx-4 mb-8">
+      <div className="container mx-auto text-center py-10 bg-white rounded-lg shadow-lg mb-8">
         <h3 className="text-2xl font-semibold mb-6 text-sky-800">
           Khám Phá Thêm
         </h3>
