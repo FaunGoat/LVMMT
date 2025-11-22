@@ -9,7 +9,7 @@ import { getImageUrls } from "../utils/imageHelper";
 function Home() {
   const [featuredItems, setFeaturedItems] = useState([]);
   const [weatherAlert, setWeatherAlert] = useState(null);
-  const [setStats] = useState(null);
+  const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
