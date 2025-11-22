@@ -23,6 +23,7 @@ connectDB();
 setupWeatherCron();
 
 // Routes
+app.use("/api/home", require("./routes/home"));
 app.use("/api/chat", require("./routes/chatbot"));
 app.use("/webhook", require("./routes/webhook"));
 app.use("/api/diseases", require("./routes/disease"));

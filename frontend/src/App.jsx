@@ -4,8 +4,7 @@ import SustainableMethods from "./pages/SustainableMethods";
 import Chatbot from "./pages/Chatbot";
 import WeatherForecast from "./pages/WeatherForecast";
 import MainLayout from "./components/Layout/MainLayout";
-// import Forum from "./pages/Forum";
-// import { Toaster } from "sonner";
+import { WeatherProvider } from "./contexts/WeatherContext";
 import { useEffect } from "react";
 
 const ScrollToTop = () => {
@@ -13,7 +12,7 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
-  }, [location.key]); // Chạy mỗi khi pathname thay đổi (tức là khi chuyển route)
+  }, [location.key]);
 
   return null;
 };
@@ -21,15 +20,20 @@ const ScrollToTop = () => {
 const App = () => {
   return (
     <BrowserRouter>
-    <ScrollToTop />
-      <MainLayout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/sustainable-methods" element={<SustainableMethods />} />
-          <Route path="/chatbot" element={<Chatbot />} />
-          <Route path="/weather-forecast" element={<WeatherForecast />} />
-        </Routes>
-      </MainLayout>
+      <WeatherProvider>
+        <ScrollToTop />
+        <MainLayout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/sustainable-methods"
+              element={<SustainableMethods />}
+            />
+            <Route path="/chatbot" element={<Chatbot />} />
+            <Route path="/weather-forecast" element={<WeatherForecast />} />
+          </Routes>
+        </MainLayout>
+      </WeatherProvider>
     </BrowserRouter>
   );
 };

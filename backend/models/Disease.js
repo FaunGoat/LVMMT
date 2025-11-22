@@ -31,15 +31,15 @@ const diseaseSchema = new mongoose.Schema(
       required: true,
     },
     economicLoss: { type: String, required: true },
-    // THÊM TRƯỜNG MỚI
+    // CẬP NHẬT: Dùng path local thay vì URL
     images: [
       {
-        url: { type: String, required: true },
+        path: { type: String, required: true }, // Local path: "dao-on-1.jpg"
         caption: { type: String },
         alt: { type: String },
       },
     ],
-    description: { type: String }, // Mô tả chi tiết thêm
+    description: { type: String },
   },
   { timestamps: true }
 );

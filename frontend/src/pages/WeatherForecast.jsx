@@ -520,7 +520,7 @@ function WeatherForecast() {
                         </span>
                       </p>
                       <p className="text-gray-700">
-                        • Nguy cơ:{" "}
+                        • Nguy cơ có mưa:{" "}
                         <span
                           className={`font-semibold ${
                             weatherStats.highRiskDays > 3

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaBars } from "@react-icons/all-files/fa/FaBars";
 import { FaTimes as FaTimesIcon } from "@react-icons/all-files/fa/FaTimes";
+import WeatherPopup from "../components/Common/WeatherPopup";
+import { getImageUrls } from "../utils/imageHelper";
 
 function SustainableMethods() {
   const [selectedDisease, setSelectedDisease] = useState(null);
@@ -71,9 +73,15 @@ function SustainableMethods() {
       const data = await response.json();
 
       if (data.success) {
-        setDiseases(data.data);
-        if (data.data.length > 0) {
-          setSelectedDisease(data.data[0]);
+        // Convert image paths to URLs
+        const diseasesWithImages = data.data.map((disease) => ({
+          ...disease,
+          images: getImageUrls(disease.images),
+        }));
+
+        setDiseases(diseasesWithImages);
+        if (diseasesWithImages.length > 0) {
+          setSelectedDisease(diseasesWithImages[0]);
         }
       } else {
         throw new Error(data.error || "Lỗi không xác định");
@@ -109,9 +117,15 @@ function SustainableMethods() {
       const data = await response.json();
 
       if (data.success) {
-        setDiseases(data.data);
-        if (data.data.length > 0) {
-          setSelectedDisease(data.data[0]);
+        // Convert image paths to URLs
+        const diseasesWithImages = data.data.map((disease) => ({
+          ...disease,
+          images: getImageUrls(disease.images),
+        }));
+
+        setDiseases(diseasesWithImages);
+        if (diseasesWithImages.length > 0) {
+          setSelectedDisease(diseasesWithImages[0]);
         } else {
           setSelectedDisease(null);
         }
@@ -142,9 +156,6 @@ function SustainableMethods() {
         className="mb-6 p-5 bg-gradient-to-br from-sky-50 to-blue-50 rounded-xl shadow-sm border border-sky-100"
       >
         <h4 className="font-bold text-lg text-sky-700 mb-3 flex items-center gap-2">
-          {treatment.type === "Hóa học"}
-          {treatment.type === "Sinh học"}
-          {treatment.type === "Canh tác"}
           <span>Phương pháp {treatment.type}</span>
         </h4>
 
@@ -200,7 +211,7 @@ function SustainableMethods() {
         {treatment.notes && (
           <div className="p-3 bg-amber-50 border-l-4 border-amber-400 rounded">
             <p className="text-sm text-amber-800">
-              <span className="font-semibold"> Lưu ý:</span> {treatment.notes}
+              <span className="font-semibold">Lưu ý:</span> {treatment.notes}
             </p>
           </div>
         )}
@@ -222,6 +233,9 @@ function SustainableMethods() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-100 to-blue-100">
+      {/* Weather Popup */}
+      <WeatherPopup />
+
       {/* Header */}
       <div className="bg-gradient-to-r from-sky-500 to-blue-600 text-white p-6 shadow-lg relative">
         <button
@@ -278,9 +292,15 @@ function SustainableMethods() {
                   <p className="text-gray-500 mt-3">Đang tải...</p>
                 </div>
               ) : error ? (
-                <p className="text-center text-red-500 p-4 bg-red-50 rounded-lg">
-                  {error}
-                </p>
+                <div className="text-center p-4 bg-red-50 rounded-lg">
+                  <p className="text-red-500 mb-2">{error}</p>
+                  <button
+                    onClick={fetchDiseases}
+                    className="text-sm text-red-600 underline hover:text-red-800"
+                  >
+                    Thử lại
+                  </button>
+                </div>
               ) : diseases.length === 0 ? (
                 <p className="text-center text-gray-500 p-4">
                   Không tìm thấy bệnh nào
@@ -590,12 +610,6 @@ function SustainableMethods() {
                   >
                     ⬆️ Lên đầu trang
                   </button>
-                  {/* <button
-                    onClick={() => window.print()}
-                    className="w-full bg-green-100 text-green-700 py-2 px-3 rounded-lg hover:bg-green-200 transition text-sm font-medium"
-                  >
-                    In trang
-                  </button> */}
                 </div>
               </div>
             </div>

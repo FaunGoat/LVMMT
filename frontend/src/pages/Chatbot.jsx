@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import argibot from "./../assets/argibot.png";
+import WeatherPopup from "../components/Common/WeatherPopup";
 
 function Chatbot() {
   const [messages, setMessages] = useState([]);
@@ -52,7 +53,7 @@ function Chatbot() {
         },
         body: JSON.stringify({
           message: userInput,
-          sessionId: "user-session-123", // Có thể dùng userId thật nếu có đăng nhập
+          sessionId: "user-session-123",
         }),
       });
 
@@ -113,6 +114,9 @@ function Chatbot() {
 
   return (
     <div className="min-h-fit bg-sky-200">
+      {/* Weather Popup */}
+      <WeatherPopup />
+
       <div className="container mx-auto py-6 px-4">
         {/* Header */}
         <div className="bg-sky-500 text-white p-2 rounded-lg mb-4 text-center relative">
@@ -148,16 +152,6 @@ function Chatbot() {
               <p className="text-lg font-semibold mb-2">
                 Chào mừng bạn đến với ArgiBot! 🌾
               </p>
-              {/* <p className="text-sm">Tôi có thể giúp bạn tư vấn về:</p>
-              <ul className="text-sm mt-2 space-y-1">
-                <li>• Bệnh hại trên cây lúa</li>
-                <li>• Cách phòng trừ và điều trị</li>
-                <li>• Dự báo thời tiết ảnh hưởng đến lúa</li>
-                <li>• Biện pháp canh tác bền vững</li>
-              </ul> */}
-              {/* <p className="text-xs mt-4 text-gray-400">
-                Hãy bắt đầu bằng cách hỏi tôi một câu hỏi!
-              </p> */}
             </div>
           ) : (
             messages.map((msg, i) => (
