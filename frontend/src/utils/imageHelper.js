@@ -6,7 +6,7 @@ import rayNau2 from "../assets/images/diseases/ray-nau-2.jpg";
 import lemLep1 from "../assets/images/diseases/lem-lep-1.jpg";
 import lemLep2 from "../assets/images/diseases/lem-lep-2.jpg";
 import chayBia1 from "../assets/images/diseases/chay-bia-1.jpg";
-import chayBia2 from "../assets/images/diseases/chay-bia-2.jpg";
+import chayBia2 from "../assets/images/diseases/chay-bia-2.png";
 import sauCuon1 from "../assets/images/diseases/sau-cuon-1.jpg";
 import sauCuon2 from "../assets/images/diseases/sau-cuon-2.jpg";
 import placeholder from "../assets/images/placeholder.jpg";

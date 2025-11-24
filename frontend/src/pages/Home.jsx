@@ -148,8 +148,12 @@ function Home() {
                   </div>
                 )}
                 <p className="text-gray-600 mb-4">{item.description}</p>
+
+                {/* THAY ĐỔI CHÍNH Ở ĐÂY - Thêm diseaseId để navigate đến đúng bệnh */}
                 <Link
-                  to={item.link}
+                  to={`${item.link}${
+                    item.diseaseId ? `?id=${item.diseaseId}` : ""
+                  }`}
                   className="text-sky-500 hover:text-sky-700 underline font-medium inline-flex items-center gap-2"
                 >
                   Xem thêm

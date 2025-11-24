@@ -1,3 +1,6 @@
+// backend/controllers/homeController.js
+// THAY THẾ TOÀN BỘ FILE NÀY
+
 const Disease = require("../models/Disease");
 const Weather = require("../models/Weather");
 
@@ -8,7 +11,7 @@ exports.getFeaturedItems = async (req, res) => {
     const featuredDiseases = await Disease.find({})
       .sort({ severityRisk: -1 }) // Sắp xếp theo độ nguy hiểm
       .limit(3)
-      .select("name description images");
+      .select("_id name description images"); // ✅ THÊM _id vào select
 
     // Format data cho frontend
     const featuredItems = featuredDiseases.map((disease) => ({
@@ -16,6 +19,7 @@ exports.getFeaturedItems = async (req, res) => {
       description:
         disease.description || "Học cách nhận biết và phòng trừ hiệu quả.",
       link: "/sustainable-methods",
+      diseaseId: disease._id.toString(), // ✅ THÊM diseaseId để frontend navigate đúng bệnh
       images: disease.images || [],
     }));
 

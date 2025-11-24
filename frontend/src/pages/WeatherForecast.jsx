@@ -177,7 +177,7 @@ function WeatherForecast() {
             <span>Dự báo Thời tiết</span>
           </h1>
           <p className="text-cyan-100 text-lg">
-            Cập nhật thời tiết và cảnh báo bệnh hại - Ưu tiên Cần Thơ
+            Cập nhật thời tiết và cảnh báo bệnh hại
           </p>
         </div>
       </div>
@@ -291,73 +291,108 @@ function WeatherForecast() {
             </div>
           ) : (
             <>
-              {/* Forecast Tab - GIỮ NGUYÊN */}
+              {/* Forecast Tab */}
               {activeTab === "forecast" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {weatherData.map((day, index) => (
-                    <div
-                      key={index}
-                      className="bg-gradient-to-br from-sky-50 to-blue-50 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border-2 border-sky-200"
-                    >
-                      {/* Header */}
-                      <div className="flex items-center justify-between mb-4">
-                        <div>
-                          <p className="text-sm text-gray-600 font-medium">
-                            {formatFullDate(day.date)}
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            {day.location}
-                          </p>
-                        </div>
-                        <div className="text-5xl">
-                          {getWeatherIcon(day.condition)}
-                        </div>
-                      </div>
+                  {weatherData.map((day, index) => {
+                    // Kiểm tra xem có cảnh báo thực sự không (không phải success)
+                    const hasRealAlerts =
+                      day.diseaseAlerts &&
+                      day.diseaseAlerts.length > 0 &&
+                      day.diseaseAlerts.some(
+                        (alert) =>
+                          alert.level !== "success" && alert.level !== "info"
+                      );
 
-                      {/* Weather Info */}
-                      <div className="space-y-3 mb-4">
-                        <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-                          <span className="text-gray-600 font-medium">
-                            🌡️ Nhiệt độ
-                          </span>
-                          <span className="text-sky-700 font-bold text-lg">
-                            {day.temperature}
-                          </span>
+                    return (
+                      <div
+                        key={index}
+                        className="bg-gradient-to-br from-sky-50 to-blue-50 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border-2 border-sky-200"
+                      >
+                        {/* Header */}
+                        <div className="flex items-center justify-between mb-4">
+                          <div>
+                            <p className="text-sm text-gray-600 font-medium">
+                              {formatFullDate(day.date)}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              {day.location}
+                            </p>
+                          </div>
+                          <div className="text-5xl">
+                            {getWeatherIcon(day.condition)}
+                          </div>
                         </div>
-                        <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-                          <span className="text-gray-600 font-medium">
-                            💧 Độ ẩm
-                          </span>
-                          <span className="text-sky-700 font-bold text-lg">
-                            {day.humidity}
-                          </span>
-                        </div>
-                        <div className="p-3 bg-white rounded-lg">
-                          <span className="text-gray-600 font-medium">
-                            ☁️ Tình hình
-                          </span>
-                          <p className="text-sky-700 font-semibold mt-1">
-                            {day.condition}
-                          </p>
-                        </div>
-                      </div>
 
-                      {/* Disease Alerts Preview */}
-                      {day.diseaseAlerts && day.diseaseAlerts.length > 0 && (
-                        <div className="mt-4 pt-4 border-t border-sky-200">
-                          <p className="text-sm font-semibold text-red-600 mb-2">
-                            ⚠️ Có {day.diseaseAlerts.length} cảnh báo
-                          </p>
-                          <button
-                            onClick={() => openPopup(day)}
-                            className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white py-2 px-4 rounded-lg hover:shadow-lg transition text-sm font-medium"
-                          >
-                            Xem chi tiết →
-                          </button>
+                        {/* Weather Info */}
+                        <div className="space-y-3 mb-4">
+                          <div className="flex items-center justify-between p-3 bg-white rounded-lg">
+                            <span className="text-gray-600 font-medium">
+                              🌡️ Nhiệt độ
+                            </span>
+                            <span className="text-sky-700 font-bold text-lg">
+                              {day.temperature}
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-white rounded-lg">
+                            <span className="text-gray-600 font-medium">
+                              💧 Độ ẩm
+                            </span>
+                            <span className="text-sky-700 font-bold text-lg">
+                              {day.humidity}
+                            </span>
+                          </div>
+                          <div className="p-3 bg-white rounded-lg">
+                            <span className="text-gray-600 font-medium">
+                              ☁️ Tình hình
+                            </span>
+                            <p className="text-sky-700 font-semibold mt-1">
+                              {day.condition}
+                            </p>
+                          </div>
                         </div>
-                      )}
-                    </div>
-                  ))}
+
+                        {/* Disease Alerts Preview - CHỈ HIỆN KHI CÓ CẢNH BÁO THỰC SỰ */}
+                        {hasRealAlerts && (
+                          <div className="mt-4 pt-4 border-t border-sky-200">
+                            <p className="text-sm font-semibold text-red-600 mb-2">
+                              ⚠️ Có{" "}
+                              {
+                                day.diseaseAlerts.filter(
+                                  (a) => a.level !== "success"
+                                ).length
+                              }{" "}
+                              cảnh báo
+                            </p>
+                            <button
+                              onClick={() => openPopup(day)}
+                              className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white py-2 px-4 rounded-lg hover:shadow-lg transition text-sm font-medium"
+                            >
+                              Xem chi tiết →
+                            </button>
+                          </div>
+                        )}
+
+                        {/* Success Status - Hiện khi không có cảnh báo nguy hiểm */}
+                        {!hasRealAlerts &&
+                          day.diseaseAlerts &&
+                          day.diseaseAlerts.length > 0 && (
+                            <div className="mt-4 pt-4 border-t border-green-200">
+                              <p className="text-sm font-semibold text-green-600 flex items-center gap-2">
+                                <span>✅</span>
+                                <span>Thời tiết thuận lợi</span>
+                              </p>
+                              <button
+                                onClick={() => openPopup(day)}
+                                className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white py-2 px-4 rounded-lg hover:shadow-lg transition text-sm font-medium"
+                              >
+                                Xem chi tiết →
+                              </button>
+                            </div>
+                          )}
+                      </div>
+                    );
+                  })}
                 </div>
               )}
 

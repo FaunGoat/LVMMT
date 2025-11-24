@@ -50,11 +50,12 @@ const WeatherPopupV2 = () => {
   };
 
   const getAlertLevel = (alerts) => {
-    if (!alerts || alerts.length === 0) return "success";
-
+    // if (!alerts || alerts.length === 0) return "success";
+    const hasSuccess = alerts.some((a) => a.level === "success");
     const hasDanger = alerts.some((a) => a.level === "danger");
     const hasWarning = alerts.some((a) => a.level === "warning");
 
+    if (hasSuccess) return "success";
     if (hasDanger) return "danger";
     if (hasWarning) return "warning";
     return "info";
@@ -127,9 +128,7 @@ const WeatherPopupV2 = () => {
                 <div className="text-5xl">🌤️</div>
                 <div>
                   <h2 className="text-3xl font-bold">Dự báo Thời tiết</h2>
-                  <p className="text-sky-100">
-                    3 ngày tới
-                  </p>
+                  <p className="text-sky-100">3 ngày tới</p>
                 </div>
               </div>
               <button
@@ -221,9 +220,7 @@ const WeatherPopupV2 = () => {
                               className={`${badge.color} text-white px-3 py-2 rounded-lg text-center text-sm font-bold flex items-center justify-center gap-2`}
                             >
                               <span>{badge.icon}</span>
-                              <span>
-                                {badge.text} ({day.diseaseAlerts.length})
-                              </span>
+                              <span>{badge.text}</span>
                             </div>
                           </div>
                         )}

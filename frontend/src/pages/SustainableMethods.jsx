@@ -4,6 +4,7 @@ import { FaBars } from "@react-icons/all-files/fa/FaBars";
 import { FaTimes as FaTimesIcon } from "@react-icons/all-files/fa/FaTimes";
 import WeatherPopup from "../components/Common/WeatherPopup";
 import { getImageUrls } from "../utils/imageHelper";
+import { useLocation } from "react-router-dom";
 
 function SustainableMethods() {
   const [selectedDisease, setSelectedDisease] = useState(null);
@@ -14,6 +15,7 @@ function SustainableMethods() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [activeSection, setActiveSection] = useState("images");
+  const location = useLocation();
 
   // Refs cho các section
   const imagesRef = useRef(null);
@@ -60,6 +62,22 @@ function SustainableMethods() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [selectedDisease]);
+
+  useEffect(() => {
+    // Parse query parameter từ URL
+    const params = new URLSearchParams(location.search);
+    const diseaseId = params.get("id");
+
+    if (diseaseId && diseases.length > 0) {
+      // Tìm bệnh theo ID
+      const disease = diseases.find((d) => d._id === diseaseId);
+      if (disease) {
+        setSelectedDisease(disease);
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  }, [location.search, diseases]);
 
   const fetchDiseases = async () => {
     try {
