@@ -240,7 +240,7 @@ function WeatherForecast() {
                   : "bg-white text-gray-600 hover:bg-sky-50"
               }`}
             >
-              🌤️ Dự báo thời tiết
+              Dự báo thời tiết
             </button>
             {/* <button
               onClick={() => setActiveTab("alerts")}
@@ -260,7 +260,7 @@ function WeatherForecast() {
                   : "bg-white text-gray-600 hover:bg-sky-50"
               }`}
             >
-              📊 Thống kê
+              Thống kê
             </button>
           </div>
         </div>

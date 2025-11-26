@@ -24,11 +24,35 @@ const treatmentTypeMap = {
  * Map symptom keywords sang Vietnamese
  */
 const symptomKeywordMap = {
-  dom_la: ["đốm", "lá", "thoi"],
-  la_vang: ["vàng", "úa", "héo"],
-  la_kho: ["khô", "cháy"],
-  hat_lep: ["lép", "hạt"],
-  cay_coi: ["còi", "thấp"],
+  // Đạo ôn
+  dao_on_symptoms: {
+    keywords: ["đốm", "thoi", "viền nâu", "tâm xám"],
+    disease: "Bệnh đạo ôn",
+  },
+
+  // Cháy bìa lá
+  chay_bia_la_symptoms: {
+    keywords: ["cháy bìa", "cháy mép", "mép lá", "bìa lá"],
+    disease: "Bệnh cháy bìa lá",
+  },
+
+  // Rầy nâu
+  ray_nau_symptoms: {
+    keywords: ["vàng úa", "héo", "cháy rầy", "gốc vàng", "chết hàng loạt"],
+    disease: "Rầy nâu",
+  },
+
+  // Lem lép hạt
+  lem_lep_hat_symptoms: {
+    keywords: ["hạt lép", "hạt trắng", "bông trắng", "trấu nứt"],
+    disease: "Bệnh lem lép hạt",
+  },
+
+  // Sâu cuốn lá
+  sau_cuon_la_symptoms: {
+    keywords: ["lá cuốn", "cuốn lá", "lá cuộn", "cuốn thành ống"],
+    disease: "Sâu cuốn lá",
+  },
 };
 
 /**
@@ -65,7 +89,12 @@ function getTreatmentType(entityValue) {
  */
 function getSymptomKeywords(entityValue) {
   if (!entityValue) return [];
-  return symptomKeywordMap[entityValue] || [entityValue];
+
+  if (symptomKeywordMap[entityValue]) {
+    return symptomKeywordMap[entityValue].keywords;
+  }
+
+  return [entityValue];
 }
 
 /**
@@ -138,14 +167,41 @@ function cleanText(text) {
 function extractEntity(parameters, entityName) {
   if (!parameters || !entityName) return null;
 
-  // Dialogflow có thể trả về dạng object hoặc string
   const value = parameters[entityName];
 
-  if (typeof value === "string") return value;
-  if (typeof value === "object" && value !== null) {
-    return value.value || value.name || null;
+  // Debug log
+  // console.log(`🔍 Extracting "${entityName}":`, typeof value, value);
+
+  // Case 1: String trực tiếp
+  if (typeof value === "string" && value.trim() !== "") {
+    // console.log(`✅ String value: "${value}"`);
+    return value.trim();
   }
 
+  // Case 2: Object có nested value
+  if (typeof value === "object" && value !== null) {
+    // Thử các field phổ biến
+    const extracted =
+      value.value || value.name || value.stringValue || value[0];
+    // console.log(`🔎 Object extraction:`, extracted);
+    if (extracted && typeof extracted === "string") {
+      return extracted.trim();
+    }
+  }
+
+  // Case 3: Array (Dialogflow đôi khi trả về array)
+  if (Array.isArray(value) && value.length > 0) {
+    const firstItem = value[0];
+    // console.log(`📦 Array extraction:`, firstItem);
+    if (typeof firstItem === "string") {
+      return firstItem.trim();
+    }
+    if (typeof firstItem === "object" && firstItem !== null) {
+      return firstItem.value || firstItem.name || null;
+    }
+  }
+
+  // console.log(`❌ Could not extract "${entityName}"`);
   return null;
 }
 
@@ -184,7 +240,7 @@ function buildSearchQuery(diseaseName = null, symptoms = []) {
  * @returns {string} - Formatted location
  */
 function formatLocation(location) {
-  if (!location) return "Đồng bằng sông Cửu Long";
+  if (!location) return "Cần Thơ";
 
   const locationMap = {
     dong_bang_song_cuu_long: "Đồng bằng sông Cửu Long",

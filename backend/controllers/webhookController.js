@@ -17,8 +17,8 @@ exports.handleWebhook = async (req, res) => {
 
   // Extract entities
   const diseaseEntity = extractEntity(parameters, "disease");
-  const treatmentEntity = extractEntity(parameters, "treatment-type");
-  const symptomEntity = extractEntity(parameters, "symptom");
+  const treatmentEntity = extractEntity(parameters, "treatment_type");
+  const symptomEntity = extractEntity(parameters, "symptom-keyword");
   const locationEntity = extractEntity(parameters, "location");
 
   console.log("Entities extracted:");
@@ -74,19 +74,22 @@ exports.handleWebhook = async (req, res) => {
           }".\n\n` + `Hãy mô tả chi tiết hơn hoặc hỏi về bệnh cụ thể nhé!`;
       } else {
         responseText =
-          `Triệu chứng bạn mô tả có thể là **${disease.name}**.\n\n` +
-          `**Các triệu chứng đặc trưng:**\n` +
+          `Triệu chứng bạn mô tả có thể là ${disease.name}.\n\n` +
+          `Các triệu chứng đặc trưng:\n` +
           disease.symptoms
             .slice(0, 3)
             .map((s) => `• ${s}`)
             .join("\n") +
-          `\n\nMức độ: **${disease.severityRisk}**` +
+          `\n\nMức độ: ${disease.severityRisk}` +
           `\nBạn muốn biết cách chữa trị không?`;
       }
     }
 
     // 3. HỎI VỀ CÁCH CHỮA TRỊ CỤ THỂ
-    else if (intent === "Ask_Disease_Treatment") {
+    else if (
+      intent === "Ask_Disease_Treatment" ||
+      intent === "Ask_Disease_Treatment_Specific"
+    ) {
       const diseaseName = getDiseaseName(diseaseEntity) || cleanText(queryText);
       const treatmentType = getTreatmentType(treatmentEntity);
 
@@ -107,8 +110,7 @@ exports.handleWebhook = async (req, res) => {
 
     // 4. DỰ BÁO THỜI TIẾT
     else if (intent === "Ask_Weather" || intent === "Ask_Weather_Forecast") {
-      const location =
-        formatLocation(locationEntity) || "Đồng bằng sông Cửu Long";
+      const location = formatLocation(locationEntity) || "Cần Thơ";
       const today = new Date().toISOString().split("T")[0];
 
       const weather = await Weather.findOne({
@@ -120,13 +122,13 @@ exports.handleWebhook = async (req, res) => {
         responseText = `Hiện chưa có dự báo thời tiết cho khu vực ${location}.`;
       } else {
         responseText =
-          `**DỰ BÁO THỜI TIẾT - ${weather.date}**\n` +
+          `DỰ BÁO THỜI TIẾT - ${weather.date}\n` +
           `${weather.location}\n\n` +
           `Nhiệt độ: ${weather.temperature}\n` +
           `Độ ẩm: ${weather.humidity}\n` +
-          `Tình hình: ${weather.condition}\n\n` +
-          `**CẢNH BÁO BỆNH HẠI:**\n` +
-          weather.diseaseAlerts.map((a) => `• ${a}`).join("\n");
+          `Tình hình: ${weather.condition}\n\n`;
+        // `CẢNH BÁO BỆNH HẠI:\n` +
+        // weather.diseaseAlerts.map((a) => `• ${a}`).join("\n");
       }
     }
 
@@ -146,12 +148,12 @@ exports.handleWebhook = async (req, res) => {
 
     // 6. CẢM ƠN
     else if (intent === "Thanks" || queryText.match(/cảm ơn|cám ơn|thank/i)) {
-      responseText = `Rất vui được giúp bạn! 🌾\n\nNếu còn thắc mắc gì, cứ hỏi tôi nhé!`;
+      responseText = `Rất vui được giúp bạn! \nNếu còn thắc mắc gì, cứ hỏi tôi nhé!`;
     }
 
     // 7. TẠM BIỆT
     else if (intent === "Goodbye" || queryText.match(/tạm biệt|bye|chào/i)) {
-      responseText = `Chúc bạn một mùa màng bội thu! 🌾✨\n\nHẹn gặp lại!`;
+      responseText = `Chúc bạn một mùa màng bội thu! \nHẹn gặp lại!`;
     }
   } catch (error) {
     console.error("❌ Webhook Error:", error);
@@ -194,16 +196,16 @@ function generateSmartResponse(disease, questionType, searchTerm) {
   switch (questionType) {
     case "definition":
       response =
-        `**${disease.name}** (${disease.commonName || "Hại lúa"})\n\n` +
+        `${disease.name} (${disease.commonName || "Hại lúa"})\n\n` +
         `${disease.causes}\n\n` +
         `Bạn muốn biết thêm về triệu chứng hay cách chữa trị?`;
       break;
 
     case "symptoms":
       response =
-        `**Triệu chứng của ${disease.name}:**\n\n` +
+        `Triệu chứng của ${disease.name}:\n\n` +
         disease.symptoms.map((s, i) => `${i + 1}. ${s}`).join("\n") +
-        `\n\nMức độ: **${disease.severityRisk}**` +
+        `\n\nMức độ: ${disease.severityRisk}` +
         `\nThiệt hại: ${disease.economicLoss}`;
       break;
 
@@ -213,19 +215,19 @@ function generateSmartResponse(disease, questionType, searchTerm) {
 
     case "causes":
       response =
-        `**Nguyên nhân gây ${disease.name}:**\n\n` +
+        `Nguyên nhân gây ${disease.name}:\n\n` +
         `${disease.causes}\n\n` +
-        `**Điều kiện thuận lợi cho bệnh:**\n` +
+        `Điều kiện thuận lợi cho bệnh:\n` +
         disease.weatherTriggers.map((w) => `• ${w}`).join("\n") +
         `\n\nMuốn biết cách phòng ngừa?`;
       break;
 
     case "impact":
       response =
-        `**Mức độ nguy hiểm của ${disease.name}:**\n\n` +
-        `Độ nghiêm trọng: **${disease.severityRisk}**\n` +
+        `Mức độ nguy hiểm của ${disease.name}:\n\n` +
+        `Độ nghiêm trọng: ${disease.severityRisk}\n` +
         `Thiệt hại kinh tế: ${disease.economicLoss}\n\n` +
-        `**Triệu chứng nặng:**\n` +
+        `Triệu chứng nặng:\n` +
         disease.symptoms
           .slice(-2)
           .map((s) => `• ${s}`)
@@ -235,22 +237,22 @@ function generateSmartResponse(disease, questionType, searchTerm) {
 
     case "weather":
       response =
-        `**${disease.name} và thời tiết:**\n\n` +
-        `**Điều kiện phát bệnh:**\n` +
+        `${disease.name} và thời tiết:\n\n` +
+        `Điều kiện phát bệnh:\n` +
         disease.weatherTriggers.map((w) => `• ${w}`).join("\n") +
-        `\n\n**Cách phòng ngừa:**\n${disease.weatherPrevention}`;
+        `\n\nCách phòng ngừa:\n${disease.weatherPrevention}`;
       break;
 
     default: // general
       response =
-        `**${disease.name}** (${disease.commonName || "Hại lúa"})\n\n` +
-        `**Nguyên nhân:** ${disease.causes}\n\n` +
-        `**Triệu chứng phổ biến:**\n` +
+        `${disease.name} (${disease.commonName || "Hại lúa"})\n\n` +
+        `Nguyên nhân: ${disease.causes}\n\n` +
+        `Triệu chứng phổ biến:\n` +
         disease.symptoms
           .slice(0, 2)
           .map((s) => `• ${s}`)
           .join("\n") +
-        `\n\n**Mức độ:** ${disease.severityRisk} - Thiệt hại ${disease.economicLoss}\n\n` +
+        `\n\nMức độ: ${disease.severityRisk} - Thiệt hại ${disease.economicLoss}\n\n` +
         `Bạn muốn biết thêm về:\n` +
         `• Cách chữa trị?\n` +
         `• Phòng ngừa theo thời tiết?`;
@@ -261,12 +263,12 @@ function generateSmartResponse(disease, questionType, searchTerm) {
 
 // HÀM TẠO CÂU TRẢ LỜI VỀ CÁCH CHỮA TRỊ
 function generateTreatmentResponse(disease) {
-  let response = `**Cách chữa trị ${disease.name}:**\n\n`;
+  let response = `Cách chữa trị ${disease.name}:\n\n`;
 
   // Hóa học
   const chemical = disease.treatments.find((t) => t.type === "Hóa học");
   if (chemical && chemical.drugs?.length > 0) {
-    response += `**Thuốc hóa học:**\n`;
+    response += `Thuốc hóa học:\n`;
     chemical.drugs.slice(0, 3).forEach((drug) => {
       response += `• ${drug}`;
       if (chemical.dosage) response += ` - ${chemical.dosage}`;
@@ -279,7 +281,7 @@ function generateTreatmentResponse(disease) {
   // Sinh học
   const bio = disease.treatments.find((t) => t.type === "Sinh học");
   if (bio) {
-    response += `**Phương pháp sinh học:**\n`;
+    response += `Phương pháp sinh học:\n`;
     if (bio.drugs && bio.drugs.length > 0) {
       bio.drugs.forEach((drug) => (response += `• ${drug}\n`));
     }
@@ -290,7 +292,7 @@ function generateTreatmentResponse(disease) {
   // Canh tác
   const cultural = disease.treatments.find((t) => t.type === "Canh tác");
   if (cultural && cultural.methods?.length > 0) {
-    response += `**Biện pháp canh tác:**\n`;
+    response += `Biện pháp canh tác:\n`;
     cultural.methods.slice(0, 3).forEach((method) => {
       response += `• ${method}\n`;
     });
@@ -298,14 +300,14 @@ function generateTreatmentResponse(disease) {
   }
 
   // Phòng ngừa theo thời tiết
-  response += `**Phòng ngừa theo thời tiết:**\n${disease.weatherPrevention}`;
+  response += `Phòng ngừa theo thời tiết:\n${disease.weatherPrevention}`;
 
   return response;
 }
 
 // HÀM TẠO CÂU TRẢ LỜI CHO PHƯƠNG PHÁP ĐIỀU TRỊ CỤ THỂ
 function generateTreatmentByType(disease, treatmentType) {
-  let response = `**Cách chữa ${disease.name} bằng phương pháp ${treatmentType}:**\n\n`;
+  let response = `Cách chữa ${disease.name} bằng phương pháp ${treatmentType}:\n\n`;
 
   const treatment = disease.treatments.find((t) => t.type === treatmentType);
 
@@ -314,24 +316,24 @@ function generateTreatmentByType(disease, treatmentType) {
   }
 
   if (treatment.drugs && treatment.drugs.length > 0) {
-    response += `**Thuốc/Biện pháp:**\n`;
+    response += `Thuốc/Biện pháp:\n`;
     treatment.drugs.forEach((drug) => {
       response += `• ${drug}\n`;
     });
     if (treatment.dosage) {
-      response += `\n**Liều lượng:** ${treatment.dosage}\n`;
+      response += `\nLiều lượng: ${treatment.dosage}\n`;
     }
   }
 
   if (treatment.methods && treatment.methods.length > 0) {
-    response += `\n**Cách thực hiện:**\n`;
+    response += `\nCách thực hiện:\n`;
     treatment.methods.forEach((method) => {
       response += `• ${method}\n`;
     });
   }
 
   if (treatment.notes) {
-    response += `\n**Lưu ý:** ${treatment.notes}`;
+    response += `\nLưu ý: ${treatment.notes}`;
   }
 
   return response;

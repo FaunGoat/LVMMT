@@ -252,7 +252,7 @@ function Home() {
             to="/sustainable-methods"
             className="bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 px-6 rounded-lg hover:shadow-lg transition font-medium transform hover:scale-105"
           >
-            Biện pháp Bảo vệ
+            Thông tin bệnh lúa
           </Link>
           <Link
             to="/weather-forecast"
