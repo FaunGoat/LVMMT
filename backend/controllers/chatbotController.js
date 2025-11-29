@@ -21,9 +21,39 @@ exports.sendMessage = async (req, res) => {
     const [response] = await sessionClient.detectIntent(request);
     const reply = response.queryResult.fulfillmentText || "Tôi chưa hiểu.";
 
-    res.json({ reply });
+    // Lấy payload từ webhook response (nếu có)
+    const payload =
+      response.queryResult.webhookPayload?.fields?.data?.structValue;
+
+    res.json({
+      reply,
+      payload: payload ? convertStructToJSON(payload) : null,
+    });
   } catch (error) {
     console.error("Dialogflow Error:", error);
     res.status(500).json({ error: "Lỗi chatbot" });
   }
 };
+
+// Helper function để convert Struct sang JSON
+function convertStructToJSON(struct) {
+  if (!struct || !struct.fields) return null;
+
+  const result = {};
+  for (const [key, value] of Object.entries(struct.fields)) {
+    result[key] = convertValueToJSON(value);
+  }
+  return result;
+}
+
+function convertValueToJSON(value) {
+  if (value.nullValue !== undefined) return null;
+  if (value.numberValue !== undefined) return value.numberValue;
+  if (value.stringValue !== undefined) return value.stringValue;
+  if (value.boolValue !== undefined) return value.boolValue;
+  if (value.structValue) return convertStructToJSON(value.structValue);
+  if (value.listValue) {
+    return value.listValue.values.map((v) => convertValueToJSON(v));
+  }
+  return null;
+}

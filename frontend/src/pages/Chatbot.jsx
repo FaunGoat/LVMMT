@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import argibot from "./../assets/argibot.png";
+import placeholderImage from "../assets/images/placeholder.jpg";
 import WeatherPopup from "../components/Common/WeatherPopup";
+import { getImageUrls } from "../utils/imageHelper";
 
 function Chatbot() {
   const [messages, setMessages] = useState([]);
@@ -62,10 +64,16 @@ function Chatbot() {
       }
 
       const data = await response.json();
-      return data.reply || "Xin lỗi, tôi chưa hiểu câu hỏi của bạn.";
+      return {
+        text: data.reply || "Xin lỗi, tôi chưa hiểu câu hỏi của bạn.",
+        data: data.payload || null,
+      };
     } catch (error) {
       console.error("Lỗi kết nối backend:", error);
-      return "Không thể kết nối với server. Vui lòng kiểm tra:\n• Server đã chạy chưa?\n• URL có đúng không?\n• CORS đã được cấu hình chưa?";
+      return {
+        text: "Không thể kết nối với server. Vui lòng kiểm tra:\n• Server đã chạy chưa?\n• URL có đúng không?\n• CORS đã được cấu hình chưa?",
+        data: null,
+      };
     }
   };
 
@@ -89,15 +97,16 @@ function Chatbot() {
     setInput("");
 
     // GỌI API BACKEND
-    const botReply = await sendMessageToBot(currentInput);
+    const botResponse = await sendMessageToBot(currentInput);
 
     const botMessage = {
-      text: botReply,
+      text: botResponse.text,
       sender: "bot",
       timestamp: new Date().toLocaleTimeString("vi-VN", {
         hour: "2-digit",
         minute: "2-digit",
       }),
+      data: botResponse.data, // Lưu data kèm theo
     };
 
     setMessages((prev) => [...prev, botMessage]);
@@ -110,6 +119,102 @@ function Chatbot() {
       e.preventDefault();
       handleSend(e);
     }
+  };
+
+  // RENDER MESSAGE VỚI HÌNH ẢNH VÀ LINK
+  const renderMessage = (msg, i) => {
+    if (msg.sender === "user") {
+      return (
+        <div key={i} className="mb-4 text-right">
+          <div className="inline-block bg-sky-500 text-white p-3 rounded-lg max-w-md">
+            <p>{msg.text}</p>
+            <span className="text-xs opacity-80 mt-1 inline-block">
+              {msg.timestamp}
+            </span>
+          </div>
+        </div>
+      );
+    }
+
+    // Bot message
+    const hasDisease = msg.data?.type === "disease" && msg.data?.disease;
+    const hasWeather = msg.data?.type === "weather";
+
+    return (
+      <div key={i} className="mb-4 text-left">
+        <div className="flex items-start gap-3">
+          <img
+            src={argibot}
+            alt="Bot"
+            className="w-10 h-10 rounded-full flex-shrink-0"
+          />
+          <div className="max-w-3xl">
+            {/* Text response */}
+            <div className="bg-gray-100 p-3 rounded-lg whitespace-pre-wrap">
+              <p className="text-gray-800">{msg.text}</p>
+              <span className="text-xs text-gray-500 mt-1 inline-block">
+                {msg.timestamp}
+              </span>
+            </div>
+
+            {/* Disease images và link */}
+            {hasDisease && (
+              <div className="mt-3 bg-white rounded-lg shadow-md overflow-hidden border-2 border-sky-200">
+                {/* Images */}
+                {msg.data.disease.images &&
+                  msg.data.disease.images.length > 0 && (
+                    <div className="grid grid-cols-2 gap-2 p-3">
+                      {getImageUrls(msg.data.disease.images)
+                        .slice(0, 2)
+                        .map((image, idx) => (
+                          <div key={idx} className="relative group">
+                            <img
+                              src={image.url}
+                              alt={image.alt || msg.data.disease.name}
+                              className="w-full h-32 object-cover rounded-lg"
+                              onError={(e) => {
+                                e.target.src = placeholderImage;
+                              }}
+                            />
+                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition rounded-lg"></div>
+                          </div>
+                        ))}
+                    </div>
+                  )}
+
+                {/* Link to detail */}
+                <div className="p-3 bg-sky-50 border-t border-sky-200">
+                  <Link
+                    to={msg.data.disease.link}
+                    className="flex items-center justify-between text-sky-700 hover:text-sky-900 font-medium"
+                  >
+                    <span>
+                      📖 Xem thông tin chi tiết về {msg.data.disease.name}
+                    </span>
+                    <span>→</span>
+                  </Link>
+                </div>
+              </div>
+            )}
+
+            {/* Weather link */}
+            {hasWeather && (
+              <div className="mt-3 bg-white rounded-lg shadow-md overflow-hidden border-2 border-cyan-200">
+                <div className="p-3 bg-cyan-50">
+                  <Link
+                    to={msg.data.link}
+                    className="flex items-center justify-between text-cyan-700 hover:text-cyan-900 font-medium"
+                  >
+                    <span>🌤️ Xem dự báo thời tiết chi tiết</span>
+                    <span>→</span>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -154,37 +259,7 @@ function Chatbot() {
               </p>
             </div>
           ) : (
-            messages.map((msg, i) => (
-              <div
-                key={i}
-                className={`mb-4 ${
-                  msg.sender === "user" ? "text-right" : "text-left"
-                }`}
-              >
-                {msg.sender === "bot" ? (
-                  <div className="flex items-start gap-3">
-                    <img
-                      src={argibot}
-                      alt="Bot"
-                      className="w-10 h-10 rounded-full flex-shrink-0"
-                    />
-                    <div className="bg-gray-100 p-3 rounded-lg max-w-3xl whitespace-pre-wrap text-left">
-                      <p className="text-gray-800">{msg.text}</p>
-                      <span className="text-xs text-gray-500 mt-1 inline-block">
-                        {msg.timestamp}
-                      </span>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="inline-block bg-sky-500 text-white p-3 rounded-lg max-w-md">
-                    <p>{msg.text}</p>
-                    <span className="text-xs opacity-80 mt-1 inline-block">
-                      {msg.timestamp}
-                    </span>
-                  </div>
-                )}
-              </div>
-            ))
+            messages.map((msg, i) => renderMessage(msg, i))
           )}
 
           {/* Loading indicator */}
@@ -244,7 +319,7 @@ function Chatbot() {
                 "Bệnh đạo ôn là gì?",
                 "Cách chữa rầy nâu",
                 "Thời tiết hôm nay",
-                "Thuốc trừ sâu nào tốt?",
+                "Triệu chứng lem lép hạt",
               ].map((suggestion, i) => (
                 <button
                   key={i}

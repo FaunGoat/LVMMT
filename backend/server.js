@@ -1,6 +1,7 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const cors = require("cors");
+const path = require("path");
 const { setupWeatherCron } = require("./config/cron");
 require("dotenv").config();
 
@@ -15,6 +16,14 @@ app.use(
   })
 );
 app.use(express.json());
+
+// 1. Giả sử ảnh của bạn nằm trong thư mục có tên là 'uploads'
+const UPLOADS_DIR = path.join(__dirname, "uploads");
+
+// 2. Cấu hình Express để phục vụ file từ thư mục này.
+// Tất cả các request đến URL bắt đầu bằng /uploads sẽ được ánh xạ
+// đến thư mục UPLOADS_DIR trên máy local của bạn.
+app.use("/uploads", express.static(UPLOADS_DIR));
 
 //Connect to MongoDB
 connectDB();

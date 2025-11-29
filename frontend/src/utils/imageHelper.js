@@ -31,7 +31,7 @@ const imageMap = {
  * @returns {string} - Import URL của ảnh
  */
 export const getImageUrl = (path) => {
-  if (!path) return placeholder;
+  // Đã kiểm tra null/undefined và không tìm thấy trong map
   return imageMap[path] || placeholder;
 };
 
