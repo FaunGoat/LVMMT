@@ -144,7 +144,7 @@ function Chatbot() {
       return (
         <div key={i} className="mb-4 text-right">
           <div className="inline-block bg-sky-500 text-white p-3 rounded-lg max-w-md">
-            <p>{msg.text}</p>
+            <p className="text-xl">{msg.text}</p>
             <span className="text-xs opacity-80 mt-1 inline-block">
               {msg.timestamp}
             </span>
@@ -168,7 +168,7 @@ function Chatbot() {
           <div className="max-w-3xl">
             {/* Text response */}
             <div className="bg-gray-100 p-3 rounded-lg whitespace-pre-wrap">
-              <p className="text-gray-800">{msg.text}</p>
+              <p className="text-gray-800 text-xl">{msg.text}</p>
               <span className="text-xs text-gray-500 mt-1 inline-block">
                 {msg.timestamp}
               </span>
@@ -254,7 +254,7 @@ function Chatbot() {
         {/* Header */}
         <div className="bg-sky-500 text-white p-2 rounded-lg mb-4 text-center relative">
           <h1 className="text-2xl font-bold">Chatbot Tư vấn</h1>
-          <p className="text-base">Hỗ trợ nông dân 24/7</p>
+          <p className="text-base">Hỗ trợ nông dân</p>
 
           {/* Nút xóa lịch sử */}
           {messages.length > 0 && (

@@ -27,16 +27,13 @@ exports.handleWebhook = async (req, res) => {
   console.log("  - Symptom:", symptomEntity);
   console.log("  - Location:", locationEntity);
 
-  let responseText = "Xin lỗi, tôi chưa hiểu câu hỏi của bạn.";
+  let responseText =
+    "Xin lỗi, tôi chưa có đủ thông tin để trả lời câu hỏi của bạn.";
   let responseData = null; // Thêm data để gửi kèm
 
   try {
     // 1. HỎI VỀ BỆNH LÚA
-    if (
-      intent === "Ask_Disease" ||
-      intent === "Ask_Disease_Symptom" ||
-      intent === "Ask_Disease_Treatment"
-    ) {
+    if (intent === "Ask_Disease" || intent === "Ask_Disease_Symptom") {
       const diseaseName = getDiseaseName(diseaseEntity) || cleanText(queryText);
       const searchQuery = buildSearchQuery(diseaseName);
       const disease = await Disease.findOne(searchQuery);
@@ -124,7 +121,6 @@ exports.handleWebhook = async (req, res) => {
           disease: {
             _id: disease._id,
             name: disease.name,
-            images: disease.images || [],
             link: `/sustainable-methods?id=${disease._id}`,
           },
         };
@@ -230,8 +226,7 @@ function generateSmartResponse(disease, questionType, searchTerm) {
     case "definition":
       response =
         `${disease.name} (${disease.commonName || "Hại lúa"})\n\n` +
-        `${disease.causes}\n\n` +
-        `📸 Xem hình ảnh minh họa và thông tin chi tiết bên dưới.`;
+        `${disease.causes}\n`;
       break;
 
     case "symptoms":
