@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import argibot from "./../assets/argibot.png";
 import placeholderImage from "../assets/images/placeholder.jpg";
 import WeatherPopup from "../components/Common/WeatherPopup";
-import { getImageUrls } from "../utils/imageHelper";
 
 function Chatbot() {
   const [messages, setMessages] = useState([]);
@@ -121,6 +120,24 @@ function Chatbot() {
     }
   };
 
+  // ✅ HÀM LẤY URL ẢNH TỪ DATABASE
+  const getImageUrl = (image) => {
+    if (!image) return placeholderImage;
+
+    // ✅ Ưu tiên lấy từ trường 'url' (URL trực tiếp từ Cloudinary)
+    if (image.url) {
+      return image.url;
+    }
+
+    // Fallback: nếu là đường dẫn local, tạo URL từ backend
+    if (image.path) {
+      return `http://localhost:5000${image.path}`;
+    }
+
+    // Cuối cùng: dùng placeholder
+    return placeholderImage;
+  };
+
   // RENDER MESSAGE VỚI HÌNH ẢNH VÀ LINK
   const renderMessage = (msg, i) => {
     if (msg.sender === "user") {
@@ -160,25 +177,36 @@ function Chatbot() {
             {/* Disease images và link */}
             {hasDisease && (
               <div className="mt-3 bg-white rounded-lg shadow-md overflow-hidden border-2 border-sky-200">
-                {/* Images */}
+                {/* Images Gallery */}
                 {msg.data.disease.images &&
                   msg.data.disease.images.length > 0 && (
                     <div className="grid grid-cols-2 gap-2 p-3">
-                      {getImageUrls(msg.data.disease.images)
-                        .slice(0, 2)
-                        .map((image, idx) => (
+                      {msg.data.disease.images.slice(0, 2).map((image, idx) => {
+                        const imageUrl = getImageUrl(image);
+
+                        return (
                           <div key={idx} className="relative group">
                             <img
-                              src={image.url}
-                              alt={image.alt || msg.data.disease.name}
-                              className="w-full h-32 object-cover rounded-lg"
+                              src={imageUrl}
+                              alt={
+                                image.alt ||
+                                image.caption ||
+                                msg.data.disease.name
+                              }
+                              className="w-full h-64 object-cover rounded-lg"
                               onError={(e) => {
                                 e.target.src = placeholderImage;
                               }}
                             />
-                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition rounded-lg"></div>
+                            <div className="absolute inset-0 bg-opacity-0 group-hover:bg-opacity-30 transition rounded-lg"></div>
+                            {image.caption && (
+                              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white text-xs p-1 opacity-0 group-hover:opacity-100 transition">
+                                <p className="truncate">{image.caption}</p>
+                              </div>
+                            )}
                           </div>
-                        ))}
+                        );
+                      })}
                     </div>
                   )}
 
