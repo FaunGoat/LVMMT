@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { FaBars } from "@react-icons/all-files/fa/FaBars";
 import { FaTimes as FaTimesIcon } from "@react-icons/all-files/fa/FaTimes";
 import WeatherPopup from "../components/Common/WeatherPopup";
-import { getImageUrls } from "../utils/imageHelper";
 import { useLocation } from "react-router-dom";
 import placeholderImage from "../assets/images/placeholder.jpg";
 
@@ -92,10 +91,18 @@ function SustainableMethods() {
       const data = await response.json();
 
       if (data.success) {
-        // Convert image paths to URLs
+        // ✅ KHÔNG CẦN getImageUrls - Lấy URL trực tiếp từ database
+        // Database đã có sẵn URL từ Cloudinary
         const diseasesWithImages = data.data.map((disease) => ({
           ...disease,
-          images: getImageUrls(disease.images),
+          // Nếu images có path cũ (local), chuyển sang url
+          // Nếu images đã có url (Cloudinary), giữ nguyên
+          images:
+            disease.images?.map((img) => ({
+              url: img.url || img.path || placeholderImage,
+              caption: img.caption || "",
+              alt: img.alt || disease.name,
+            })) || [],
         }));
 
         setDiseases(diseasesWithImages);
@@ -136,10 +143,15 @@ function SustainableMethods() {
       const data = await response.json();
 
       if (data.success) {
-        // Convert image paths to URLs
+        // ✅ Lấy URL trực tiếp từ database
         const diseasesWithImages = data.data.map((disease) => ({
           ...disease,
-          images: getImageUrls(disease.images),
+          images:
+            disease.images?.map((img) => ({
+              url: img.url || img.path || placeholderImage,
+              caption: img.caption || "",
+              alt: img.alt || disease.name,
+            })) || [],
         }));
 
         setDiseases(diseasesWithImages);
@@ -252,7 +264,6 @@ function SustainableMethods() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-100 to-blue-100">
-      {/* Weather Popup */}
       <WeatherPopup />
 
       {/* Header */}
@@ -405,7 +416,7 @@ function SustainableMethods() {
                         selectedDisease.images.length > 0 && (
                           <>
                             <h3 className="text-2xl font-bold text-sky-700 mb-4 flex items-center gap-2">
-                              <span>Hình ảnh minh họa</span>
+                              <span>📸 Hình ảnh minh họa</span>
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                               {selectedDisease.images.map((image, idx) => (
@@ -440,7 +451,7 @@ function SustainableMethods() {
                       className="mb-8 p-6 bg-gradient-to-r from-red-50 to-orange-50 border-l-4 border-red-500 rounded-xl shadow-md scroll-mt-24"
                     >
                       <h3 className="text-2xl font-bold text-red-700 mb-3 flex items-center gap-2">
-                        <span>Mức độ nguy hiểm</span>
+                        <span>⚠️ Mức độ nguy hiểm</span>
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
@@ -481,7 +492,7 @@ function SustainableMethods() {
                         className="mb-8 p-6 bg-gradient-to-r from-blue-50 to-sky-50 rounded-xl border-l-4 border-sky-500 scroll-mt-24"
                       >
                         <h3 className="text-2xl font-bold text-sky-700 mb-3 flex items-center gap-2">
-                          <span>Mô tả</span>
+                          <span>📝 Mô tả</span>
                         </h3>
                         <p className="text-gray-700 leading-relaxed">
                           {selectedDisease.description}
@@ -495,7 +506,7 @@ function SustainableMethods() {
                       className="mb-8 bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl shadow-md scroll-mt-24"
                     >
                       <h3 className="text-2xl font-bold text-purple-700 mb-3 flex items-center gap-2">
-                        <span>Nguyên nhân</span>
+                        <span>🔬 Nguyên nhân</span>
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
                         {selectedDisease.causes}
@@ -508,7 +519,7 @@ function SustainableMethods() {
                       className="mb-8 bg-gradient-to-br from-yellow-50 to-amber-50 p-6 rounded-xl shadow-md scroll-mt-24"
                     >
                       <h3 className="text-2xl font-bold text-amber-700 mb-3 flex items-center gap-2">
-                        <span>Triệu chứng</span>
+                        <span>🩺 Triệu chứng</span>
                       </h3>
                       <ul className="space-y-2">
                         {selectedDisease.symptoms.map((symptom, idx) => (
@@ -531,7 +542,7 @@ function SustainableMethods() {
                       className="mb-8 bg-gradient-to-br from-cyan-50 to-blue-50 p-6 rounded-xl shadow-md scroll-mt-24"
                     >
                       <h3 className="text-2xl font-bold text-cyan-700 mb-3 flex items-center gap-2">
-                        <span>Điều kiện thời tiết</span>
+                        <span>🌤️ Điều kiện thời tiết</span>
                       </h3>
                       <ul className="space-y-2">
                         {selectedDisease.weatherTriggers.map((trigger, idx) => (
@@ -554,7 +565,7 @@ function SustainableMethods() {
                       className="mb-8 bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl shadow-md scroll-mt-24"
                     >
                       <h3 className="text-2xl font-bold text-green-700 mb-3 flex items-center gap-2">
-                        <span>Phòng ngừa theo thời tiết</span>
+                        <span>🛡️ Phòng ngừa theo thời tiết</span>
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
                         {selectedDisease.weatherPrevention}
@@ -564,7 +575,7 @@ function SustainableMethods() {
                     {/* Treatments */}
                     <div ref={treatmentsRef} className="scroll-mt-24">
                       <h3 className="text-2xl font-bold text-sky-700 mb-6 flex items-center gap-2">
-                        <span>Phương pháp điều trị</span>
+                        <span>💊 Phương pháp điều trị</span>
                       </h3>
                       <div className="space-y-6">
                         {selectedDisease.treatments.map((treatment) =>
@@ -596,7 +607,7 @@ function SustainableMethods() {
               }}
             >
               <h3 className="text-lg font-bold text-sky-700 mb-4 flex items-center gap-2">
-                <span>Mục lục</span>
+                <span>📑 Mục lục</span>
               </h3>
               <nav className="space-y-2">
                 {tocItems.map((item) => (
@@ -665,19 +676,19 @@ function SustainableMethods() {
               to="/chatbot"
               className="bg-gradient-to-r from-sky-500 to-blue-600 text-white py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-300 font-medium flex items-center gap-2"
             >
-              <span>Chatbot Tư vấn</span>
+              <span>💬 Chatbot Tư vấn</span>
             </Link>
             <Link
               to="/weather-forecast"
               className="bg-gradient-to-r from-cyan-500 to-teal-600 text-white py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-300 font-medium flex items-center gap-2"
             >
-              <span>Dự báo Thời tiết</span>
+              <span>🌤️ Dự báo Thời tiết</span>
             </Link>
             <Link
               to="/"
               className="bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-300 font-medium flex items-center gap-2"
             >
-              <span>Trang chủ</span>
+              <span>🏠 Trang chủ</span>
             </Link>
           </div>
         </div>
