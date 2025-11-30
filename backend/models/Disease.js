@@ -27,7 +27,7 @@ const oldDiseaseSchema = new mongoose.Schema(
     economicLoss: { type: String, required: true },
     images: [
       {
-        path: { type: String, required: true },
+        url: { type: String, required: true },
         caption: { type: String },
         alt: { type: String },
       },

@@ -40,7 +40,7 @@ const newDiseaseSchema = new mongoose.Schema(
     },
     images: [
       {
-        path: { type: String, required: true },
+        url: { type: String, required: true },
         caption: String,
         alt: String,
       },
