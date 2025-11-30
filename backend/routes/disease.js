@@ -8,6 +8,7 @@ const {
   getDiseasesBySeason,
   getDiseasesByCropStage,
   getDiseasesByWeather,
+  getDiseaseFullDetails,
 } = require("../controllers/diseaseController");
 
 // ============================================
@@ -22,6 +23,9 @@ router.get("/search", searchDiseases);
 
 // GET /api/diseases/:id - Lấy chi tiết 1 bệnh (TẤT CẢ thông tin)
 router.get("/:id", getDiseaseById);
+
+// GET /api/diseases/:id/full - Lấy toàn bộ thông tin chi tiết
+router.get("/:id/full", getDiseaseFullDetails);
 
 // ============================================
 // ADVANCED ROUTES

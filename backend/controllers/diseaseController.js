@@ -1,8 +1,16 @@
-const Disease = require("../models/Disease");
+const Disease = require("../models/new/Disease");
+const DiseaseStage = require("../models/new/DiseaseStage");
+const DiseaseSeason = require("../models/new/DiseaseSeason");
+const DiseaseCause = require("../models/new/DiseaseCause");
+const DiseaseSymptom = require("../models/new/DiseaseSymptom");
+const DiseaseTreatment = require("../models/new/DiseaseTreatment");
+const DiseasePrevention = require("../models/new/DiseasePrevention");
+const WeatherDiseaseCorrelation = require("../models/new/WeatherDiseaseCorrelation");
 
 // Lấy tất cả bệnh (chỉ thông tin cơ bản)
 exports.getAllDiseases = async (req, res) => {
   try {
+    // Bây giờ hàm này sẽ lấy ID từ models/new/Disease
     const diseases = await Disease.find({}).sort({ name: 1 });
     res.json({
       success: true,
@@ -46,6 +54,64 @@ exports.getDiseaseById = async (req, res) => {
     res.status(500).json({
       success: false,
       error: "Không thể lấy thông tin bệnh lúa",
+    });
+  }
+};
+
+// GET /api/diseases/:id/full - Lấy TOÀN BỘ thông tin chi tiết của 1 bệnh
+exports.getDiseaseFullDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Không cần require lại ở đây nữa vì đã import ở đầu file
+
+    // 1. Tìm bệnh trong collection MỚI
+    const disease = await Disease.findById(id);
+
+    if (!disease) {
+      return res.status(404).json({
+        success: false,
+        error: "Không tìm thấy bệnh lúa trong database mới",
+      });
+    }
+
+    // 2. Lấy chi tiết từ các collection MỚI
+    const [
+      stages,
+      seasons,
+      causes,
+      symptoms,
+      treatments,
+      prevention,
+      weatherCorrelation,
+    ] = await Promise.all([
+      DiseaseStage.findOne({ diseaseId: id }),
+      DiseaseSeason.findOne({ diseaseId: id }),
+      DiseaseCause.findOne({ diseaseId: id }),
+      DiseaseSymptom.findOne({ diseaseId: id }),
+      DiseaseTreatment.findOne({ diseaseId: id }),
+      DiseasePrevention.findOne({ diseaseId: id }),
+      WeatherDiseaseCorrelation.findOne({ diseaseId: id }),
+    ]);
+
+    res.json({
+      success: true,
+      data: {
+        basic: disease,
+        stages,
+        seasons,
+        causes,
+        symptoms,
+        treatments,
+        prevention,
+        weatherCorrelation,
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching full details:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi server khi lấy chi tiết",
     });
   }
 };
