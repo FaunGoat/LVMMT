@@ -1,7 +1,7 @@
 // backend/controllers/homeController.js
 // THAY THẾ TOÀN BỘ FILE NÀY
 
-const Disease = require("../models/Disease");
+const Disease = require("../models/new/Disease");
 const Weather = require("../models/Weather");
 
 // Lấy featured items cho trang Home
@@ -9,7 +9,7 @@ exports.getFeaturedItems = async (req, res) => {
   try {
     // Lấy 3 bệnh nguy hiểm nhất
     const featuredDiseases = await Disease.find({})
-      .sort({ severityRisk: -1 }) // Sắp xếp theo độ nguy hiểm
+      .sort({ severityRisk: 1 }) // Sắp xếp theo độ nguy hiểm
       .limit(3)
       .select("_id name description images"); // ✅ THÊM _id vào select
 

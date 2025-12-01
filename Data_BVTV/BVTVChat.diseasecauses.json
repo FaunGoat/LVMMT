@@ -1,0 +1,253 @@
+[{
+  "_id": {
+    "$oid": "692c6df62ef6ee9bd8d70ffe"
+  },
+  "diseaseId": {
+    "$oid": "692c6df62ef6ee9bd8d70ff2"
+  },
+  "pathogen": {
+    "type": "Côn trùng",
+    "scientificName": "Nilaparvata lugens",
+    "spreadMethod": [
+      "Di cư theo gió",
+      "Nhân mật số tại chỗ"
+    ],
+    "optimumConditions": "Lúa rậm rạp, ẩm độ gốc cao, bón thừa đạm."
+  },
+  "environmentalFactors": [],
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-11-30T16:16:54.928Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T17:50:38.726Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df72ef6ee9bd8d71030"
+  },
+  "diseaseId": {
+    "$oid": "692c6df72ef6ee9bd8d71024"
+  },
+  "pathogen": {
+    "type": "Nấm",
+    "scientificName": "Đa tác nhân",
+    "optimumConditions": "Độ ẩm không khí cao khi trổ."
+  },
+  "environmentalFactors": [],
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-11-30T16:16:55.402Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T17:50:38.593Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df72ef6ee9bd8d71062"
+  },
+  "diseaseId": {
+    "$oid": "692c6df72ef6ee9bd8d71056"
+  },
+  "pathogen": {
+    "type": "Vi khuẩn",
+    "scientificName": "Xanthomonas oryzae",
+    "spreadMethod": [
+      "Nước tưới",
+      "Mưa gió"
+    ],
+    "optimumConditions": "Nhiệt độ 26-30°C, độ ẩm cao, mưa to gió lớn."
+  },
+  "environmentalFactors": [],
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-11-30T16:16:55.926Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T17:50:38.458Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df82ef6ee9bd8d71094"
+  },
+  "diseaseId": {
+    "$oid": "692c6df82ef6ee9bd8d71088"
+  },
+  "pathogen": {
+    "type": "Nấm",
+    "scientificName": "Pyricularia oryzae",
+    "commonName": "Nấm đạo ôn",
+    "spreadMethod": [
+      "Gió",
+      "Hạt giống",
+      "Tàn dư cây trồng"
+    ],
+    "optimumConditions": "Nhiệt độ 20-28°C, độ ẩm >90%, trời âm u."
+  },
+  "environmentalFactors": [],
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "cropFactors": [
+    {
+      "factor": "Tình trạng dinh dưỡng",
+      "description": "Bón thừa đạm (N) làm lá mềm yếu, bệnh phát triển mạnh.",
+      "impact": "Rất cao",
+      "preventionTips": [],
+      "_id": {
+        "$oid": "692c83ee33038592e46b1bb7"
+      }
+    }
+  ],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-11-30T16:16:56.421Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T17:50:38.210Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df82ef6ee9bd8d710c2"
+  },
+  "diseaseId": {
+    "$oid": "692c6df82ef6ee9bd8d710b6"
+  },
+  "pathogen": {
+    "type": "Côn trùng",
+    "scientificName": "Cnaphalocrocis medinalis",
+    "optimumConditions": "Ruộng bón thừa đạm, lá xanh tốt."
+  },
+  "environmentalFactors": [],
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-11-30T16:16:56.872Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T17:50:38.915Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c805925883501d4f799fe"
+  },
+  "diseaseId": {
+    "$oid": "692c805925883501d4f799fd"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-11-30T17:35:20.371Z"
+  },
+  "cropFactors": [
+    {
+      "factor": "Tình trạng dinh dưỡng",
+      "description": "Bón thừa đạm (N) làm lá mềm yếu, bệnh phát triển mạnh.",
+      "impact": "Rất cao",
+      "preventionTips": [],
+      "_id": {
+        "$oid": "692c805884da167b1f3e5403"
+      }
+    }
+  ],
+  "environmentalFactors": [],
+  "interactionWithOtherDiseases": [],
+  "managementFactors": [],
+  "pathogen": {
+    "commonName": "Nấm đạo ôn",
+    "spreadMethod": [
+      "Gió",
+      "Hạt giống",
+      "Tàn dư cây trồng"
+    ],
+    "optimumConditions": "Nhiệt độ 20-28°C, độ ẩm >90%, trời âm u."
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "soilFactors": [],
+  "updatedAt": {
+    "$date": "2025-11-30T17:35:20.371Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692c805925883501d4f79a01"
+  },
+  "diseaseId": {
+    "$oid": "692c805925883501d4f79a00"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-11-30T17:35:20.725Z"
+  },
+  "cropFactors": [],
+  "environmentalFactors": [],
+  "interactionWithOtherDiseases": [],
+  "managementFactors": [],
+  "pathogen": {
+    "type": "Nấm",
+    "scientificName": "Đa tác nhân",
+    "optimumConditions": "Độ ẩm không khí cao khi trổ."
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "soilFactors": [],
+  "updatedAt": {
+    "$date": "2025-11-30T17:35:20.725Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692c805a25883501d4f79a04"
+  },
+  "diseaseId": {
+    "$oid": "692c805a25883501d4f79a03"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-11-30T17:35:21.116Z"
+  },
+  "cropFactors": [],
+  "environmentalFactors": [],
+  "interactionWithOtherDiseases": [],
+  "managementFactors": [],
+  "pathogen": {
+    "type": "Côn trùng",
+    "optimumConditions": "Ruộng bón thừa đạm, lá xanh tốt."
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "soilFactors": [],
+  "updatedAt": {
+    "$date": "2025-11-30T17:35:21.116Z"
+  }
+}]

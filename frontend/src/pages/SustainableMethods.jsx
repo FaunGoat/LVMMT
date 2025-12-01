@@ -6,8 +6,18 @@ import WeatherPopup from "../components/Common/WeatherPopup";
 import { useLocation } from "react-router-dom";
 import placeholderImage from "../assets/images/placeholder.jpg";
 
+import DiseaseStages from "../components/Disease/DiseaseStages";
+import DiseaseSeasons from "../components/Disease/DiseaseSeasons";
+import DiseaseCauses from "../components/Disease/DiseaseCauses";
+import DiseaseSymptomsDetail from "../components/Disease/DiseaseSymptomsDetail";
+import DiseaseTreatments from "../components/Disease/DiseaseTreatments";
+import DiseasePrevention from "../components/Disease/DiseasePrevention";
+import DiseaseWeatherCorrelation from "../components/Disease/DiseaseWeatherCorrelation";
+
 function SustainableMethods() {
   const [selectedDisease, setSelectedDisease] = useState(null);
+  const [diseaseDetails, setDiseaseDetails] = useState(null); // ✅ THÊM STATE MỚI
+  const [loadingDetails, setLoadingDetails] = useState(false); // ✅ THÊM STATE MỚI
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [diseases, setDiseases] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,6 +31,8 @@ function SustainableMethods() {
   const imagesRef = useRef(null);
   const riskRef = useRef(null);
   const descriptionRef = useRef(null);
+  const stagesRef = useRef(null); // ✅ THAY ĐỔI
+  const seasonsRef = useRef(null); // ✅ THAY ĐỔI
   const causesRef = useRef(null);
   const symptomsRef = useRef(null);
   const weatherRef = useRef(null);
@@ -33,34 +45,10 @@ function SustainableMethods() {
 
   // Theo dõi scroll để highlight section hiện tại
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = [
-        { id: "images", ref: imagesRef },
-        { id: "risk", ref: riskRef },
-        { id: "description", ref: descriptionRef },
-        { id: "causes", ref: causesRef },
-        { id: "symptoms", ref: symptomsRef },
-        { id: "weather", ref: weatherRef },
-        { id: "prevention", ref: preventionRef },
-        { id: "treatments", ref: treatmentsRef },
-      ];
-
-      const scrollPosition = window.scrollY + 150;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section.ref.current) {
-          const top = section.ref.current.offsetTop;
-          if (scrollPosition >= top) {
-            setActiveSection(section.id);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    if (selectedDisease?._id) {
+      fetchDiseaseDetails(selectedDisease._id);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }, [selectedDisease]);
 
   useEffect(() => {
@@ -78,6 +66,30 @@ function SustainableMethods() {
       }
     }
   }, [location.search, diseases]);
+
+  const fetchDiseaseDetails = async (diseaseId) => {
+    try {
+      setLoadingDetails(true);
+      const response = await fetch(
+        `http://localhost:5000/api/diseases/${diseaseId}/full`
+      );
+
+      if (!response.ok) {
+        throw new Error("Không thể tải chi tiết bệnh");
+      }
+
+      const data = await response.json();
+
+      if (data.success) {
+        setDiseaseDetails(data.data);
+      }
+    } catch (err) {
+      console.error("Error fetching disease details:", err);
+      // Không set error để không ảnh hưởng UX, chỉ log
+    } finally {
+      setLoadingDetails(false);
+    }
+  };
 
   const fetchDiseases = async () => {
     try {
@@ -180,87 +192,52 @@ function SustainableMethods() {
     }
   };
 
-  const renderTreatment = (treatment) => {
-    return (
-      <div
-        key={treatment.type}
-        className="mb-6 p-5 bg-gradient-to-br from-sky-50 to-blue-50 rounded-xl shadow-sm border border-sky-100"
-      >
-        <h4 className="font-bold text-lg text-sky-700 mb-3 flex items-center gap-2">
-          <span>Phương pháp {treatment.type}</span>
-        </h4>
-
-        {treatment.drugs && treatment.drugs.length > 0 && (
-          <div className="mb-3">
-            <p className="text-sm font-semibold text-gray-700 mb-2">
-              {treatment.type === "Canh tác" ? "Biện pháp:" : "Thuốc sử dụng:"}
-            </p>
-            <ul className="space-y-1">
-              {treatment.drugs.map((drug, idx) => (
-                <li
-                  key={idx}
-                  className="text-sm text-gray-700 flex items-start gap-2"
-                >
-                  <span className="text-sky-500 mt-1">▸</span>
-                  <span>{drug}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {treatment.methods && treatment.methods.length > 0 && (
-          <div className="mb-3">
-            <p className="text-sm font-semibold text-gray-700 mb-2">
-              Các bước thực hiện:
-            </p>
-            <ul className="space-y-2">
-              {treatment.methods.map((method, idx) => (
-                <li
-                  key={idx}
-                  className="text-sm text-gray-700 flex items-start gap-2"
-                >
-                  <span className="text-sky-500 font-bold mt-0.5">
-                    {idx + 1}.
-                  </span>
-                  <span>{method}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {treatment.dosage && (
-          <div className="mb-3 p-3 bg-white rounded-lg">
-            <p className="text-sm">
-              <span className="font-semibold text-gray-700">Liều lượng:</span>{" "}
-              <span className="text-gray-600">{treatment.dosage}</span>
-            </p>
-          </div>
-        )}
-
-        {treatment.notes && (
-          <div className="p-3 bg-amber-50 border-l-4 border-amber-400 rounded">
-            <p className="text-sm text-amber-800">
-              <span className="font-semibold">Lưu ý:</span> {treatment.notes}
-            </p>
-          </div>
-        )}
-      </div>
-    );
-  };
-
   // Table of Contents items
   const tocItems = [
     { id: "images", label: "Hình ảnh minh họa", ref: imagesRef },
     { id: "risk", label: "Mức độ nguy hiểm", ref: riskRef },
     { id: "description", label: "Mô tả", ref: descriptionRef },
+    { id: "stages", label: "Giai đoạn phát triển", ref: stagesRef },
+    { id: "seasons", label: "Mùa vụ", ref: seasonsRef },
     { id: "causes", label: "Nguyên nhân", ref: causesRef },
     { id: "symptoms", label: "Triệu chứng", ref: symptomsRef },
-    { id: "weather", label: "Điều kiện thời tiết", ref: weatherRef },
+    { id: "weather", label: "Yếu tố môi trường", ref: weatherRef },
     { id: "prevention", label: "Phòng ngừa", ref: preventionRef },
     { id: "treatments", label: "Phương pháp điều trị", ref: treatmentsRef },
   ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const tocItems = [
+        { id: "images", label: "Hình ảnh minh họa", ref: imagesRef },
+        { id: "risk", label: "Mức độ nguy hiểm", ref: riskRef },
+        { id: "description", label: "Mô tả", ref: descriptionRef },
+        { id: "stages", label: "Giai đoạn phát triển", ref: stagesRef },
+        { id: "seasons", label: "Mùa vụ", ref: seasonsRef },
+        { id: "causes", label: "Nguyên nhân", ref: causesRef },
+        { id: "symptoms", label: "Triệu chứng", ref: symptomsRef },
+        { id: "weather", label: "Yếu tố môi trường", ref: weatherRef },
+        { id: "prevention", label: "Phòng ngừa", ref: preventionRef },
+        { id: "treatments", label: "Phương pháp điều trị", ref: treatmentsRef },
+      ];
+
+      const scrollPosition = window.scrollY + 150;
+
+      for (let i = tocItems.length - 1; i >= 0; i--) {
+        const section = tocItems[i];
+        if (section.ref.current) {
+          const top = section.ref.current.offsetTop;
+          if (scrollPosition >= top) {
+            setActiveSection(section.id);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [selectedDisease]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-100 to-blue-100">
@@ -403,7 +380,7 @@ function SustainableMethods() {
                     </p>
                     {selectedDisease.commonName && (
                       <p className="text-sky-100">
-                        <span className="font-medium">Tên tiếng Anh:</span>{" "}
+                        <span className="font-medium">Tên gọi khác:</span>{" "}
                         {selectedDisease.commonName}
                       </p>
                     )}
@@ -416,7 +393,7 @@ function SustainableMethods() {
                         selectedDisease.images.length > 0 && (
                           <>
                             <h3 className="text-2xl font-bold text-sky-700 mb-4 flex items-center gap-2">
-                              <span>📸 Hình ảnh minh họa</span>
+                              <span>Hình ảnh minh họa</span>
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                               {selectedDisease.images.map((image, idx) => (
@@ -451,7 +428,7 @@ function SustainableMethods() {
                       className="mb-8 p-6 bg-gradient-to-r from-red-50 to-orange-50 border-l-4 border-red-500 rounded-xl shadow-md scroll-mt-24"
                     >
                       <h3 className="text-2xl font-bold text-red-700 mb-3 flex items-center gap-2">
-                        <span>⚠️ Mức độ nguy hiểm</span>
+                        <span>Mức độ nguy hiểm</span>
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
@@ -492,7 +469,7 @@ function SustainableMethods() {
                         className="mb-8 p-6 bg-gradient-to-r from-blue-50 to-sky-50 rounded-xl border-l-4 border-sky-500 scroll-mt-24"
                       >
                         <h3 className="text-2xl font-bold text-sky-700 mb-3 flex items-center gap-2">
-                          <span>📝 Mô tả</span>
+                          <span>Mô tả</span>
                         </h3>
                         <p className="text-gray-700 leading-relaxed">
                           {selectedDisease.description}
@@ -500,89 +477,67 @@ function SustainableMethods() {
                       </div>
                     )}
 
-                    {/* Causes */}
-                    <div
-                      ref={causesRef}
-                      className="mb-8 bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl shadow-md scroll-mt-24"
-                    >
-                      <h3 className="text-2xl font-bold text-purple-700 mb-3 flex items-center gap-2">
-                        <span>🔬 Nguyên nhân</span>
-                      </h3>
-                      <p className="text-gray-700 leading-relaxed">
-                        {selectedDisease.causes}
-                      </p>
-                    </div>
-
-                    {/* Symptoms */}
-                    <div
-                      ref={symptomsRef}
-                      className="mb-8 bg-gradient-to-br from-yellow-50 to-amber-50 p-6 rounded-xl shadow-md scroll-mt-24"
-                    >
-                      <h3 className="text-2xl font-bold text-amber-700 mb-3 flex items-center gap-2">
-                        <span>🩺 Triệu chứng</span>
-                      </h3>
-                      <ul className="space-y-2">
-                        {selectedDisease.symptoms.map((symptom, idx) => (
-                          <li
-                            key={idx}
-                            className="text-gray-700 flex items-start gap-2"
-                          >
-                            <span className="text-amber-500 font-bold mt-1">
-                              •
-                            </span>
-                            <span>{symptom}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Weather Triggers */}
-                    <div
-                      ref={weatherRef}
-                      className="mb-8 bg-gradient-to-br from-cyan-50 to-blue-50 p-6 rounded-xl shadow-md scroll-mt-24"
-                    >
-                      <h3 className="text-2xl font-bold text-cyan-700 mb-3 flex items-center gap-2">
-                        <span>🌤️ Điều kiện thời tiết</span>
-                      </h3>
-                      <ul className="space-y-2">
-                        {selectedDisease.weatherTriggers.map((trigger, idx) => (
-                          <li
-                            key={idx}
-                            className="text-gray-700 flex items-start gap-2"
-                          >
-                            <span className="text-cyan-500 font-bold mt-1">
-                              ▸
-                            </span>
-                            <span>{trigger}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Weather Prevention */}
-                    <div
-                      ref={preventionRef}
-                      className="mb-8 bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl shadow-md scroll-mt-24"
-                    >
-                      <h3 className="text-2xl font-bold text-green-700 mb-3 flex items-center gap-2">
-                        <span>🛡️ Phòng ngừa theo thời tiết</span>
-                      </h3>
-                      <p className="text-gray-700 leading-relaxed">
-                        {selectedDisease.weatherPrevention}
-                      </p>
-                    </div>
-
-                    {/* Treatments */}
-                    <div ref={treatmentsRef} className="scroll-mt-24">
-                      <h3 className="text-2xl font-bold text-sky-700 mb-6 flex items-center gap-2">
-                        <span>💊 Phương pháp điều trị</span>
-                      </h3>
-                      <div className="space-y-6">
-                        {selectedDisease.treatments.map((treatment) =>
-                          renderTreatment(treatment)
-                        )}
+                    {loadingDetails ? (
+                      <div className="text-center py-10">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sky-500 mx-auto"></div>
+                        <p className="text-gray-500 mt-3">
+                          Đang tải chi tiết...
+                        </p>
                       </div>
-                    </div>
+                    ) : diseaseDetails ? (
+                      <>
+                        {/* Stages */}
+                        <div ref={stagesRef} className="scroll-mt-24">
+                          <DiseaseStages stages={diseaseDetails.stages} />
+                        </div>
+
+                        {/* Seasons */}
+                        <div ref={seasonsRef} className="scroll-mt-24">
+                          <DiseaseSeasons seasons={diseaseDetails.seasons} />
+                        </div>
+
+                        {/* Causes */}
+                        <div ref={causesRef} className="scroll-mt-24">
+                          <DiseaseCauses causes={diseaseDetails.causes} />
+                        </div>
+
+                        {/* Symptoms Detail */}
+                        <div ref={symptomsRef} className="scroll-mt-24">
+                          <DiseaseSymptomsDetail
+                            symptoms={diseaseDetails.symptoms}
+                          />
+                        </div>
+
+                        {/* Weather Correlation */}
+                        <div ref={weatherRef} className="scroll-mt-24">
+                          <DiseaseWeatherCorrelation
+                            weatherCorrelation={
+                              diseaseDetails.weatherCorrelation
+                            }
+                          />
+                        </div>
+
+                        {/* Prevention */}
+                        <div ref={preventionRef} className="scroll-mt-24">
+                          <DiseasePrevention
+                            prevention={diseaseDetails.prevention}
+                          />
+                        </div>
+
+                        {/* Treatments */}
+                        <div ref={treatmentsRef} className="scroll-mt-24">
+                          <DiseaseTreatments
+                            treatments={diseaseDetails.treatments}
+                          />
+                        </div>
+                      </>
+                    ) : (
+                      <div className="text-center py-10">
+                        <p className="text-gray-500">
+                          Không có thông tin chi tiết cho bệnh này
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               ) : (
@@ -607,7 +562,7 @@ function SustainableMethods() {
               }}
             >
               <h3 className="text-lg font-bold text-sky-700 mb-4 flex items-center gap-2">
-                <span>📑 Mục lục</span>
+                <span>Mục lục</span>
               </h3>
               <nav className="space-y-2">
                 {tocItems.map((item) => (
@@ -676,19 +631,19 @@ function SustainableMethods() {
               to="/chatbot"
               className="bg-gradient-to-r from-sky-500 to-blue-600 text-white py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-300 font-medium flex items-center gap-2"
             >
-              <span>💬 Chatbot Tư vấn</span>
+              <span>Chatbot Tư vấn</span>
             </Link>
             <Link
               to="/weather-forecast"
               className="bg-gradient-to-r from-cyan-500 to-teal-600 text-white py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-300 font-medium flex items-center gap-2"
             >
-              <span>🌤️ Dự báo Thời tiết</span>
+              <span>Dự báo Thời tiết</span>
             </Link>
             <Link
               to="/"
               className="bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-300 font-medium flex items-center gap-2"
             >
-              <span>🏠 Trang chủ</span>
+              <span>Trang chủ</span>
             </Link>
           </div>
         </div>

@@ -6,7 +6,7 @@ const DiseaseCauses = ({ causes }) => {
   return (
     <div className="mb-8">
       <h3 className="text-2xl font-bold text-sky-700 mb-4">
-        🔬 Nguyên nhân gây bệnh
+        Nguyên nhân gây bệnh
       </h3>
 
       {/* Thông tin mầm bệnh */}
@@ -33,28 +33,17 @@ const DiseaseCauses = ({ causes }) => {
             )}
           </div>
 
-          {causes.pathogen.lifecycle && (
-            <div className="bg-gray-50 rounded p-3 border mb-3">
-              <p className="text-sm font-semibold text-gray-700 mb-1">
-                Vòng đời:
-              </p>
-              <p className="text-sm text-gray-800">
-                {causes.pathogen.lifecycle}
-              </p>
-            </div>
-          )}
-
           {causes.pathogen.spreadMethod &&
             causes.pathogen.spreadMethod.length > 0 && (
-              <div className="bg-red-50 rounded p-3 border border-red-200">
-                <p className="text-sm font-semibold text-red-800 mb-2">
+              <div className="rounded bg-gray-50 p-3 border border-gray-200">
+                <p className="text-sm font-semibold mb-2">
                   Phương thức lây lan:
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {causes.pathogen.spreadMethod.map((method, idx) => (
                     <span
                       key={idx}
-                      className="bg-white text-red-700 text-sm px-3 py-1 rounded border border-red-300"
+                      className="bg-white text-base px-3 py-1 rounded border border-gray-300"
                     >
                       {method}
                     </span>
@@ -66,7 +55,7 @@ const DiseaseCauses = ({ causes }) => {
       )}
 
       {/* Yếu tố môi trường */}
-      {causes.environmentalFactors &&
+      {/* {causes.environmentalFactors &&
         causes.environmentalFactors.length > 0 && (
           <div className="bg-white rounded-lg shadow p-5 border mb-4">
             <h4 className="text-lg font-bold text-gray-800 mb-3">
@@ -95,10 +84,10 @@ const DiseaseCauses = ({ causes }) => {
               ))}
             </div>
           </div>
-        )}
+        )} */}
 
       {/* Yếu tố cây trồng */}
-      {causes.cropFactors && causes.cropFactors.length > 0 && (
+      {/* {causes.cropFactors && causes.cropFactors.length > 0 && (
         <div className="bg-white rounded-lg shadow p-5 border">
           <h4 className="text-lg font-bold text-gray-800 mb-3">
             Yếu tố cây trồng
@@ -133,7 +122,7 @@ const DiseaseCauses = ({ causes }) => {
             ))}
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

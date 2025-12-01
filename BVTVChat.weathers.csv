@@ -1,8 +1,0 @@
-_id,date,location,temperature,humidity,condition,windSpeed,rainfall,diseaseAlerts[0].level,diseaseAlerts[0].disease,diseaseAlerts[0].message,diseaseAlerts[0].action,__v,createdAt,updatedAt
-692734c12da90e10b855840d,2025-11-26,Cần Thơ,25-26°C,78%,Mây rải rác,4.7 m/s,0.0,success,Tình hình tốt,"Thời tiết thuận lợi, nguy cơ thấp",Chăm sóc bình thường.,0,2025-11-26T17:11:29.413Z,2025-11-26T17:11:29.413Z
-692734c12da90e10b855840e,2025-11-27,Cần Thơ,20-29°C,68%,Mây đen u ám,5.8 m/s,0.0,success,Tình hình tốt,"Thời tiết thuận lợi, nguy cơ thấp",Chăm sóc bình thường.,0,2025-11-26T17:11:29.414Z,2025-11-26T17:11:29.414Z
-692734c12da90e10b855840f,2025-11-28,Cần Thơ,19-26°C,72%,Mây đen u ám,4.1 m/s,0.0,success,Tình hình tốt,"Thời tiết thuận lợi, nguy cơ thấp",Chăm sóc bình thường.,0,2025-11-26T17:11:29.414Z,2025-11-26T17:11:29.414Z
-692734c12da90e10b8558410,2025-11-29,Cần Thơ,20-29°C,69%,Mây cụm,2.5 m/s,0.0,success,Tình hình tốt,"Thời tiết thuận lợi, nguy cơ thấp",Chăm sóc bình thường.,0,2025-11-26T17:11:29.415Z,2025-11-26T17:11:29.415Z
-692734c12da90e10b8558411,2025-11-30,Cần Thơ,22-30°C,71%,Mây đen u ám,2.4 m/s,0.0,success,Tình hình tốt,"Thời tiết thuận lợi, nguy cơ thấp",Chăm sóc bình thường.,0,2025-11-26T17:11:29.415Z,2025-11-26T17:11:29.415Z
-692734c12da90e10b8558412,2025-12-01,Cần Thơ,23-31°C,69%,Mây đen u ám,2.6 m/s,0.0,warning,Rầy Nâu,Nguy cơ tăng,"Theo dõi gốc lúa, tưới đều.",0,2025-11-26T17:11:29.415Z,2025-11-26T17:11:29.415Z
-692734c12da90e10b8558413,2025-12-02,Cần Thơ,23-31°C,69%,Mây đen u ám (ước tính),2.6 m/s,0.0,info,Dự báo mở rộng,Dữ liệu ước tính - chưa có dự báo chính thức,Vui lòng kiểm tra lại sau 24-48 giờ để có dữ liệu chính xác.,0,2025-11-26T17:11:29.415Z,2025-11-26T17:11:29.415Z

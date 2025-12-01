@@ -1,0 +1,490 @@
+[{
+  "_id": {
+    "$oid": "692c6df72ef6ee9bd8d71018"
+  },
+  "diseaseId": {
+    "$oid": "692c6df62ef6ee9bd8d70ff2"
+  },
+  "culturalPractices": [
+    {
+      "practice": "Né rầy",
+      "description": "Xuống giống tập trung, né đợt rầy di trú.",
+      "timing": "Đầu vụ",
+      "procedure": [],
+      "benefits": [],
+      "limitations": [],
+      "_id": {
+        "$oid": "692c83ee33038592e46b1bdd"
+      }
+    }
+  ],
+  "varietySelection": [
+    {
+      "varietyName": "Giống kháng",
+      "resistanceLevel": "Kháng cao",
+      "resistanceGenes": [],
+      "suitableRegions": [],
+      "suitableSeasons": [],
+      "notes": "Ưu tiên chọn giống kháng",
+      "_id": {
+        "$oid": "692c6df72ef6ee9bd8d7101b"
+      }
+    }
+  ],
+  "cropRotation": {
+    "recommendedCrops": [],
+    "benefits": [],
+    "considerations": []
+  },
+  "monitoringSchedule": [
+    {
+      "frequency": "2 lần/tuần",
+      "cropStage": "Đẻ nhánh",
+      "whatToCheck": [
+        "Đốm lá",
+        "Mật độ sâu bệnh"
+      ],
+      "tools": [],
+      "threshold": ">5 cây bệnh/100m2",
+      "_id": {
+        "$oid": "692c6df72ef6ee9bd8d7101c"
+      },
+      "actionTriggers": []
+    }
+  ],
+  "earlyWarningSystem": {
+    "indicators": [],
+    "monitoringTools": [],
+    "responseProtocol": []
+  },
+  "preventiveSchedule": {
+    "preSeasonPreparation": [
+      "Vệ sinh ruộng"
+    ],
+    "earlySeasonActions": [
+      "Xử lý hạt giống"
+    ],
+    "midSeasonActions": [],
+    "lateSeasonActions": [],
+    "postHarvestActions": []
+  },
+  "seedTreatment": [],
+  "soilManagement": [],
+  "waterManagement": [],
+  "nutritionManagement": [],
+  "sanitationPractices": [],
+  "biologicalControl": [],
+  "quarantineMeasures": [],
+  "farmHygiene": [],
+  "createdAt": {
+    "$date": "2025-11-30T16:16:55.114Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T17:50:38.815Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df72ef6ee9bd8d7104a"
+  },
+  "diseaseId": {
+    "$oid": "692c6df72ef6ee9bd8d71024"
+  },
+  "culturalPractices": [
+    {
+      "practice": "Vệ sinh ruộng",
+      "description": "Làm sạch tàn dư",
+      "timing": "Sau thu hoạch",
+      "procedure": [],
+      "effectiveness": 4,
+      "cost": "Thấp",
+      "benefits": [],
+      "limitations": [],
+      "_id": {
+        "$oid": "692c6df72ef6ee9bd8d7104b"
+      }
+    },
+    {
+      "practice": "Quản lý nước",
+      "description": "Điều chỉnh mực nước",
+      "timing": "Suốt vụ",
+      "procedure": [],
+      "effectiveness": 3,
+      "cost": "Thấp",
+      "benefits": [],
+      "limitations": [],
+      "_id": {
+        "$oid": "692c6df72ef6ee9bd8d7104c"
+      }
+    }
+  ],
+  "varietySelection": [
+    {
+      "varietyName": "Giống kháng",
+      "resistanceLevel": "Kháng cao",
+      "resistanceGenes": [],
+      "suitableRegions": [],
+      "suitableSeasons": [],
+      "notes": "Ưu tiên chọn giống kháng",
+      "_id": {
+        "$oid": "692c6df72ef6ee9bd8d7104d"
+      }
+    }
+  ],
+  "cropRotation": {
+    "recommendedCrops": [],
+    "benefits": [],
+    "considerations": []
+  },
+  "monitoringSchedule": [
+    {
+      "frequency": "2 lần/tuần",
+      "cropStage": "Đẻ nhánh",
+      "whatToCheck": [
+        "Đốm lá",
+        "Mật độ sâu bệnh"
+      ],
+      "tools": [],
+      "threshold": ">5 cây bệnh/100m2",
+      "_id": {
+        "$oid": "692c6df72ef6ee9bd8d7104e"
+      },
+      "actionTriggers": []
+    }
+  ],
+  "earlyWarningSystem": {
+    "indicators": [],
+    "monitoringTools": [],
+    "responseProtocol": []
+  },
+  "preventiveSchedule": {
+    "preSeasonPreparation": [
+      "Vệ sinh ruộng"
+    ],
+    "earlySeasonActions": [
+      "Xử lý hạt giống"
+    ],
+    "midSeasonActions": [],
+    "lateSeasonActions": [],
+    "postHarvestActions": []
+  },
+  "seedTreatment": [],
+  "soilManagement": [],
+  "waterManagement": [],
+  "nutritionManagement": [],
+  "sanitationPractices": [],
+  "biologicalControl": [],
+  "quarantineMeasures": [],
+  "farmHygiene": [],
+  "createdAt": {
+    "$date": "2025-11-30T16:16:55.580Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T16:16:55.580Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df82ef6ee9bd8d7107c"
+  },
+  "diseaseId": {
+    "$oid": "692c6df72ef6ee9bd8d71056"
+  },
+  "culturalPractices": [
+    {
+      "practice": "Vệ sinh ruộng",
+      "description": "Làm sạch tàn dư",
+      "timing": "Sau thu hoạch",
+      "procedure": [],
+      "effectiveness": 4,
+      "cost": "Thấp",
+      "benefits": [],
+      "limitations": [],
+      "_id": {
+        "$oid": "692c6df82ef6ee9bd8d7107d"
+      }
+    },
+    {
+      "practice": "Quản lý nước",
+      "description": "Điều chỉnh mực nước",
+      "timing": "Suốt vụ",
+      "procedure": [],
+      "effectiveness": 3,
+      "cost": "Thấp",
+      "benefits": [],
+      "limitations": [],
+      "_id": {
+        "$oid": "692c6df82ef6ee9bd8d7107e"
+      }
+    }
+  ],
+  "varietySelection": [
+    {
+      "varietyName": "Giống kháng",
+      "resistanceLevel": "Kháng cao",
+      "resistanceGenes": [],
+      "suitableRegions": [],
+      "suitableSeasons": [],
+      "notes": "Ưu tiên chọn giống kháng",
+      "_id": {
+        "$oid": "692c6df82ef6ee9bd8d7107f"
+      }
+    }
+  ],
+  "cropRotation": {
+    "recommendedCrops": [],
+    "benefits": [],
+    "considerations": []
+  },
+  "monitoringSchedule": [
+    {
+      "frequency": "2 lần/tuần",
+      "cropStage": "Đẻ nhánh",
+      "whatToCheck": [
+        "Đốm lá",
+        "Mật độ sâu bệnh"
+      ],
+      "tools": [],
+      "threshold": ">5 cây bệnh/100m2",
+      "_id": {
+        "$oid": "692c6df82ef6ee9bd8d71080"
+      },
+      "actionTriggers": []
+    }
+  ],
+  "earlyWarningSystem": {
+    "indicators": [],
+    "monitoringTools": [],
+    "responseProtocol": []
+  },
+  "preventiveSchedule": {
+    "preSeasonPreparation": [
+      "Vệ sinh ruộng"
+    ],
+    "earlySeasonActions": [
+      "Xử lý hạt giống"
+    ],
+    "midSeasonActions": [],
+    "lateSeasonActions": [],
+    "postHarvestActions": []
+  },
+  "seedTreatment": [],
+  "soilManagement": [],
+  "waterManagement": [],
+  "nutritionManagement": [],
+  "sanitationPractices": [],
+  "biologicalControl": [],
+  "quarantineMeasures": [],
+  "farmHygiene": [],
+  "createdAt": {
+    "$date": "2025-11-30T16:16:56.134Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T16:16:56.134Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df82ef6ee9bd8d710ab"
+  },
+  "diseaseId": {
+    "$oid": "692c6df82ef6ee9bd8d71088"
+  },
+  "culturalPractices": [
+    {
+      "practice": "Vệ sinh ruộng",
+      "description": "Làm sạch tàn dư",
+      "timing": "Sau thu hoạch",
+      "procedure": [],
+      "effectiveness": 4,
+      "cost": "Thấp",
+      "benefits": [],
+      "limitations": [],
+      "_id": {
+        "$oid": "692c6df82ef6ee9bd8d710ac"
+      }
+    },
+    {
+      "practice": "Quản lý nước",
+      "description": "Điều chỉnh mực nước",
+      "timing": "Suốt vụ",
+      "procedure": [],
+      "effectiveness": 3,
+      "cost": "Thấp",
+      "benefits": [],
+      "limitations": [],
+      "_id": {
+        "$oid": "692c6df82ef6ee9bd8d710ad"
+      }
+    }
+  ],
+  "varietySelection": [
+    {
+      "varietyName": "Giống kháng",
+      "resistanceLevel": "Kháng cao",
+      "resistanceGenes": [],
+      "suitableRegions": [],
+      "suitableSeasons": [],
+      "notes": "Ưu tiên chọn giống kháng",
+      "_id": {
+        "$oid": "692c6df82ef6ee9bd8d710ae"
+      }
+    }
+  ],
+  "cropRotation": {
+    "recommendedCrops": [],
+    "benefits": [],
+    "considerations": []
+  },
+  "monitoringSchedule": [
+    {
+      "frequency": "2 lần/tuần",
+      "cropStage": "Đẻ nhánh",
+      "whatToCheck": [
+        "Đốm lá",
+        "Mật độ sâu bệnh"
+      ],
+      "tools": [],
+      "threshold": ">5 cây bệnh/100m2",
+      "_id": {
+        "$oid": "692c6df82ef6ee9bd8d710af"
+      },
+      "actionTriggers": []
+    }
+  ],
+  "earlyWarningSystem": {
+    "indicators": [],
+    "monitoringTools": [],
+    "responseProtocol": []
+  },
+  "preventiveSchedule": {
+    "preSeasonPreparation": [
+      "Vệ sinh ruộng"
+    ],
+    "earlySeasonActions": [
+      "Xử lý hạt giống"
+    ],
+    "midSeasonActions": [],
+    "lateSeasonActions": [],
+    "postHarvestActions": []
+  },
+  "seedTreatment": [],
+  "soilManagement": [],
+  "waterManagement": [],
+  "nutritionManagement": [],
+  "sanitationPractices": [],
+  "biologicalControl": [],
+  "quarantineMeasures": [],
+  "farmHygiene": [],
+  "createdAt": {
+    "$date": "2025-11-30T16:16:56.590Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T16:16:56.590Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df92ef6ee9bd8d710dc"
+  },
+  "diseaseId": {
+    "$oid": "692c6df82ef6ee9bd8d710b6"
+  },
+  "culturalPractices": [
+    {
+      "practice": "Vệ sinh ruộng",
+      "description": "Làm sạch tàn dư",
+      "timing": "Sau thu hoạch",
+      "procedure": [],
+      "effectiveness": 4,
+      "cost": "Thấp",
+      "benefits": [],
+      "limitations": [],
+      "_id": {
+        "$oid": "692c6df92ef6ee9bd8d710dd"
+      }
+    },
+    {
+      "practice": "Quản lý nước",
+      "description": "Điều chỉnh mực nước",
+      "timing": "Suốt vụ",
+      "procedure": [],
+      "effectiveness": 3,
+      "cost": "Thấp",
+      "benefits": [],
+      "limitations": [],
+      "_id": {
+        "$oid": "692c6df92ef6ee9bd8d710de"
+      }
+    }
+  ],
+  "varietySelection": [
+    {
+      "varietyName": "Giống kháng",
+      "resistanceLevel": "Kháng cao",
+      "resistanceGenes": [],
+      "suitableRegions": [],
+      "suitableSeasons": [],
+      "notes": "Ưu tiên chọn giống kháng",
+      "_id": {
+        "$oid": "692c6df92ef6ee9bd8d710df"
+      }
+    }
+  ],
+  "cropRotation": {
+    "recommendedCrops": [],
+    "benefits": [],
+    "considerations": []
+  },
+  "monitoringSchedule": [
+    {
+      "frequency": "2 lần/tuần",
+      "cropStage": "Đẻ nhánh",
+      "whatToCheck": [
+        "Đốm lá",
+        "Mật độ sâu bệnh"
+      ],
+      "tools": [],
+      "threshold": ">5 cây bệnh/100m2",
+      "_id": {
+        "$oid": "692c6df92ef6ee9bd8d710e0"
+      },
+      "actionTriggers": []
+    }
+  ],
+  "earlyWarningSystem": {
+    "indicators": [],
+    "monitoringTools": [],
+    "responseProtocol": []
+  },
+  "preventiveSchedule": {
+    "preSeasonPreparation": [
+      "Vệ sinh ruộng"
+    ],
+    "earlySeasonActions": [
+      "Xử lý hạt giống"
+    ],
+    "midSeasonActions": [],
+    "lateSeasonActions": [],
+    "postHarvestActions": []
+  },
+  "seedTreatment": [],
+  "soilManagement": [],
+  "waterManagement": [],
+  "nutritionManagement": [],
+  "sanitationPractices": [],
+  "biologicalControl": [],
+  "quarantineMeasures": [],
+  "farmHygiene": [],
+  "createdAt": {
+    "$date": "2025-11-30T16:16:57.045Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T16:16:57.045Z"
+  },
+  "__v": 0
+}]

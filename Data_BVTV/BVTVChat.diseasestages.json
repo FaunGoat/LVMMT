@@ -1,0 +1,277 @@
+[{
+  "_id": {
+    "$oid": "692c6df62ef6ee9bd8d70ff6"
+  },
+  "diseaseId": {
+    "$oid": "692c6df62ef6ee9bd8d70ff2"
+  },
+  "stages": [
+    {
+      "name": "Giai đoạn sớm",
+      "duration": "3-5 ngày",
+      "description": "Triệu chứng ban đầu của Rầy nâu",
+      "symptoms": [
+        "Rầy tụ tập ở gốc lúa, hút nhựa → cây vàng úa nhanh chóng.",
+        "Lá xoăn, khô cháy từ ngọn xuống gốc.",
+        "Truyền virus gây bệnh vàng lùn, lùn xoắn lá - rất nguy hiểm."
+      ],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692c6df62ef6ee9bd8d70ff7"
+      }
+    },
+    {
+      "name": "Giai đoạn phát triển",
+      "duration": "7-14 ngày",
+      "description": "Triệu chứng lan rộng và rõ rệt",
+      "symptoms": [
+        "Nặng: hiện tượng 'cháy rầy', cả ruộng chết hàng loạt trong 5-7 ngày.",
+        "Xuất hiện vệt mật ong (honeydew) trên lá."
+      ],
+      "severity": "Nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692c6df62ef6ee9bd8d70ff8"
+      }
+    }
+  ],
+  "totalDuration": "10-20 ngày",
+  "peakStage": 1,
+  "incubationPeriod": "2-3 ngày",
+  "notes": "Thời gian phát triển của Rầy nâu phụ thuộc vào điều kiện thời tiết.",
+  "createdAt": {
+    "$date": "2025-11-30T16:16:54.810Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T16:16:54.810Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df72ef6ee9bd8d71028"
+  },
+  "diseaseId": {
+    "$oid": "692c6df72ef6ee9bd8d71024"
+  },
+  "stages": [
+    {
+      "name": "Giai đoạn sớm",
+      "duration": "3-5 ngày",
+      "description": "Triệu chứng ban đầu của Bệnh lem lép hạt",
+      "symptoms": [
+        "Hạt lúa phình to gấp 2-3 lần, trấu nứt, bên trong chứa bột đen hoặc xanh lục.",
+        "Bông trắng xanh bao phủ, hạt lép hoàn toàn, không có gạo.",
+        "Hạt bệnh rơi xuống đất tạo nguồn bệnh cho vụ sau."
+      ],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692c6df72ef6ee9bd8d71029"
+      }
+    },
+    {
+      "name": "Giai đoạn phát triển",
+      "duration": "7-14 ngày",
+      "description": "Triệu chứng lan rộng và rõ rệt",
+      "symptoms": [
+        "Nấm độc hại (mycotoxin) gây hại cho người và gia súc khi ăn phải.",
+        "Xuất hiện nhiều nhất ở giai đoạn lúa sữa – chín sữa.",
+        "Hạt bệnh có mùi hôi đặc trưng."
+      ],
+      "severity": "Nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692c6df72ef6ee9bd8d7102a"
+      }
+    }
+  ],
+  "totalDuration": "10-20 ngày",
+  "peakStage": 1,
+  "incubationPeriod": "2-3 ngày",
+  "notes": "Thời gian phát triển của Bệnh lem lép hạt phụ thuộc vào điều kiện thời tiết.",
+  "createdAt": {
+    "$date": "2025-11-30T16:16:55.290Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T16:16:55.290Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df72ef6ee9bd8d7105a"
+  },
+  "diseaseId": {
+    "$oid": "692c6df72ef6ee9bd8d71056"
+  },
+  "stages": [
+    {
+      "name": "Giai đoạn sớm",
+      "duration": "1-2 ngày",
+      "description": "Triệu chứng ban đầu của Bệnh cháy bìa lá",
+      "symptoms": [
+        "Vết cháy từ mép lá vào trong, màu vàng cam đặc trưng.",
+        "Lá khô, dính nhau như bị thiêu, cây còi cọc.",
+        "Xuất hiện giọt nhựa vàng (bacterial ooze) vào buổi sáng sớm."
+      ],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692c6df72ef6ee9bd8d7105b"
+      }
+    },
+    {
+      "name": "Giai đoạn giữa",
+      "duration": "3-5 ngày",
+      "description": "Triệu chứng bắt đầu cháy lá của Bệnh cháy bìa lá",
+      "symptoms": [
+        "Vết cháy từ mép lá vào trong, màu vàng cam đặc trưng.",
+        "Lá khô, dính nhau như bị thiêu, cây còi cọc.",
+        "Xuất hiện giọt nhựa vàng (bacterial ooze) vào buổi sáng sớm."
+      ],
+      "severity": "Trung bình",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692c6df72ef6ee9bd8d7105b"
+      }
+    },
+    {
+      "name": "Giai đoạn phát triển",
+      "duration": "7-14 ngày",
+      "description": "Triệu chứng lan rộng và rõ rệt",
+      "symptoms": [
+        "Nặng: lá chết hàng loạt, giảm năng suất 30-50%.",
+        "Thường xuất hiện sau mưa bão, gió mạnh.",
+        "Lá có mùi hôi khi bệnh nặng."
+      ],
+      "severity": "Nặng",
+      "order": 3,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692c6df72ef6ee9bd8d7105c"
+      }
+    }
+  ],
+  "totalDuration": "10-20 ngày",
+  "peakStage": 2,
+  "incubationPeriod": "2-3 ngày",
+  "notes": "Thời gian phát triển của Bệnh cháy bìa lá phụ thuộc vào điều kiện thời tiết.",
+  "createdAt": {
+    "$date": "2025-11-30T16:16:55.760Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T16:16:55.760Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df82ef6ee9bd8d7108c"
+  },
+  "diseaseId": {
+    "$oid": "692c6df82ef6ee9bd8d71088"
+  },
+  "stages": [
+    {
+      "name": "Giai đoạn sớm",
+      "duration": "3-5 ngày",
+      "description": "Triệu chứng ban đầu của Bệnh đạo ôn",
+      "symptoms": [
+        "Đốm hình thoi, viền nâu, tâm xám trắng trên lá.",
+        "Lá khô cháy, cây còi cọc, giảm quang hợp.",
+        "Nặng: đốm lan sang thân, bông trắng, lép hạt."
+      ],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692c6df82ef6ee9bd8d7108d"
+      }
+    },
+    {
+      "name": "Giai đoạn phát triển",
+      "duration": "7-14 ngày",
+      "description": "Triệu chứng lan rộng và rõ rệt",
+      "symptoms": [
+        "Thường xuất hiện giai đoạn đẻ nhánh – trổ bông."
+      ],
+      "severity": "Nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692c6df82ef6ee9bd8d7108e"
+      }
+    }
+  ],
+  "totalDuration": "10-20 ngày",
+  "peakStage": 1,
+  "incubationPeriod": "2-3 ngày",
+  "notes": "Thời gian phát triển của Bệnh đạo ôn phụ thuộc vào điều kiện thời tiết.",
+  "createdAt": {
+    "$date": "2025-11-30T16:16:56.311Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T16:16:56.311Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df82ef6ee9bd8d710ba"
+  },
+  "diseaseId": {
+    "$oid": "692c6df82ef6ee9bd8d710b6"
+  },
+  "stages": [
+    {
+      "name": "Giai đoạn sớm",
+      "duration": "3-5 ngày",
+      "description": "Triệu chứng ban đầu của Sâu cuốn lá",
+      "symptoms": [
+        "Ấu trùng ăn biểu bì lá, kéo mép lá cuốn lại thành ống, bên trong có phân và tơ.",
+        "Lá bị cuốn trắng, khô cháy từ ngọn xuống, giảm diện tích quang hợp 30-40%.",
+        "Nặng: lá cuốn dày đặc, cây còi cọc, giảm năng suất 20-40%."
+      ],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692c6df82ef6ee9bd8d710bb"
+      }
+    },
+    {
+      "name": "Giai đoạn phát triển",
+      "duration": "7-14 ngày",
+      "description": "Triệu chứng lan rộng và rõ rệt",
+      "symptoms": [
+        "Ảnh hưởng nặng nhất ở giai đoạn đẻ nhánh và làm đòng.",
+        "Thường xuất hiện vào mùa mưa, độ ẩm cao."
+      ],
+      "severity": "Nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692c6df82ef6ee9bd8d710bc"
+      }
+    }
+  ],
+  "totalDuration": "10-20 ngày",
+  "peakStage": 1,
+  "incubationPeriod": "2-3 ngày",
+  "notes": "Thời gian phát triển của Sâu cuốn lá phụ thuộc vào điều kiện thời tiết.",
+  "createdAt": {
+    "$date": "2025-11-30T16:16:56.761Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T16:16:56.761Z"
+  },
+  "__v": 0
+}]

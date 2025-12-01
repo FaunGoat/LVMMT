@@ -1,0 +1,605 @@
+[{
+  "_id": {
+    "$oid": "692c6df62ef6ee9bd8d70ff2"
+  },
+  "name": "Rầy nâu",
+  "scientificName": "Nilaparvata lugens",
+  "commonName": "Brown Planthopper",
+  "description": "Rầy nâu là loại sâu hại nguy hiểm nhất trên lúa ở Việt Nam. Ngoài hút nhựa làm lúa chết, rầy nâu còn truyền virus gây bệnh vàng lùn và lùn xoắn lá, gây thiệt hại rất lớn.",
+  "type": "Sâu hại",
+  "severityRisk": "Rất cao",
+  "economicLoss": "Gây cháy rầy diện rộng, mất trắng năng suất.",
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dracdkeao/image/upload/v1764393308/ray-nau-1_xjfgzb.jpg",
+      "caption": "Rầy nâu tập trung ở gốc lúa",
+      "alt": "Rầy nâu trên cây lúa",
+      "_id": {
+        "$oid": "692180a8e33c36b90ca9941d"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dracdkeao/image/upload/v1764393309/ray-nau-2_pcbqla.jpg",
+      "caption": "Hiện tượng cháy rầy",
+      "alt": "Ruộng lúa bị cháy rầy",
+      "_id": {
+        "$oid": "692180a8e33c36b90ca9941e"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-11-30T16:16:54.751Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T10:22:44.307Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df72ef6ee9bd8d71024"
+  },
+  "name": "Bệnh lem lép hạt",
+  "scientificName": "Ustilaginoidea virens",
+  "commonName": "False Smut",
+  "description": "Bệnh lem lép hạt làm giảm năng suất và chất lượng gạo nghiêm trọng. Đặc biệt nguy hiểm là nấm bệnh tiết ra độc tố gây hại cho người và gia súc.",
+  "type": "Bệnh nấm",
+  "severityRisk": "Cao",
+  "economicLoss": "Giảm chất lượng gạo, năng suất và giá tiền giảm 30%.",
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dracdkeao/image/upload/v1764393308/lem-lep-1_mvbv5j.jpg",
+      "caption": "Hạt lúa bị lem lép",
+      "alt": "Bệnh lem lép trên bông lúa",
+      "_id": {
+        "$oid": "692180a8e33c36b90ca99420"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dracdkeao/image/upload/v1764393308/lem-lep-2_cdc2mi.jpg",
+      "caption": "Bông lúa nhiễm nấm",
+      "alt": "Bông lúa lem lép",
+      "_id": {
+        "$oid": "692180a8e33c36b90ca99421"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-11-30T16:16:55.235Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T10:22:46.415Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df72ef6ee9bd8d71056"
+  },
+  "name": "Bệnh cháy bìa lá",
+  "scientificName": "Xanthomonas oryzae pv. oryzae",
+  "commonName": "Bacterial Leaf Blight",
+  "description": "Bệnh cháy bìa lá là bệnh vi khuẩn nguy hiểm, lây lan nhanh qua nước và gió. Bệnh gây thiệt hại nặng nề trong điều kiện mưa bão.",
+  "type": "Bệnh vi khuẩn",
+  "severityRisk": "Cao",
+  "economicLoss": "Gây lép hạt, giảm năng suất 20-50%.",
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dracdkeao/image/upload/v1764393308/chay-bia-1_rmlnfb.jpg",
+      "caption": "Triệu chứng cháy bìa lá",
+      "alt": "Lá lúa bị cháy bìa",
+      "_id": {
+        "$oid": "692180a8e33c36b90ca99423"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dracdkeao/image/upload/v1764393309/chay-bia-2_g5dzrx.png",
+      "caption": "Lá khô dính nhau",
+      "alt": "Bệnh cháy bìa lá nặng",
+      "_id": {
+        "$oid": "692180a8e33c36b90ca99424"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-11-30T16:16:55.698Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T10:22:45.958Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df82ef6ee9bd8d71088"
+  },
+  "name": "Bệnh đạo ôn",
+  "scientificName": "Pyricularia oryzae",
+  "commonName": "Blast",
+  "description": "Bệnh đạo ôn là một trong những bệnh nguy hiểm nhất đối với cây lúa, gây thiệt hại lớn về năng suất và chất lượng. Bệnh có thể tấn công ở mọi giai đoạn sinh trưởng của cây lúa.",
+  "type": "Bệnh nấm",
+  "severityRisk": "Cao",
+  "economicLoss": "Có thể giảm năng suất tới 80% nếu không phòng trị kịp thời.",
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dracdkeao/image/upload/v1764393308/dao-on-1_j7rxbe.jpg",
+      "caption": "Triệu chứng đạo ôn trên lá lúa",
+      "alt": "Lá lúa bị đạo ôn",
+      "_id": {
+        "$oid": "692180a8e33c36b90ca99426"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dracdkeao/image/upload/v1764393309/dao-on-2_yx6ou7.jpg",
+      "caption": "Đốm bệnh hình thoi đặc trưng",
+      "alt": "Đốm đạo ôn hình thoi",
+      "_id": {
+        "$oid": "692180a8e33c36b90ca99427"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-11-30T16:16:56.256Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T10:22:45.499Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692c6df82ef6ee9bd8d710b6"
+  },
+  "name": "Sâu cuốn lá",
+  "scientificName": "Cnaphalocrocis medinalis",
+  "commonName": "Rice leaf roller",
+  "description": "Sâu cuốn lá là loại sâu hại phổ biến, gây thiệt hại bằng cách ăn biểu bì lá và cuốn lá lại. Tuy không nguy hiểm như rầy nâu nhưng nếu không kiểm soát kịp thời sẽ gây mất mát đáng kể.",
+  "type": "Sâu hại",
+  "severityRisk": "Cao",
+  "economicLoss": "20-40% năng suất nếu không kiểm soát kịp thời",
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dracdkeao/image/upload/v1764393309/sau-cuon-1_adlkxg.jpg",
+      "caption": "Lá lúa bị cuốn",
+      "alt": "Sâu cuốn lá trên lúa",
+      "_id": {
+        "$oid": "692180a8e33c36b90ca99429"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dracdkeao/image/upload/v1764393310/sau-cuon-2_tebb0v.jpg",
+      "caption": "Thiệt hại do sâu cuốn lá",
+      "alt": "Lá lúa bị cuốn trắng",
+      "_id": {
+        "$oid": "692180a8e33c36b90ca9942a"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-11-30T16:16:56.706Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T10:22:46.872Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54daff3e886e39c6ddea"
+  },
+  "name": "Bệnh Khô vằn",
+  "scientificName": "Rhizoctonia solani",
+  "commonName": "Ung thư lúa",
+  "description": "Bệnh gây hại chủ yếu trên bẹ lá, làm vết bệnh loang lổ như da hổ, gây đổ ngã.",
+  "type": "Bệnh nấm",
+  "severityRisk": "Cao",
+  "economicLoss": "20-50% năng suất nếu bệnh nặng giai đoạn trổ",
+  "images": [
+    {
+      "url": "kho_van_1.jpg",
+      "caption": "Vết bệnh vằn da hổ trên bẹ",
+      "_id": {
+        "$oid": "692d54daff3e886e39c6ddeb"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:02.708Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:02.708Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dbff3e886e39c6de15"
+  },
+  "name": "Bệnh Vàng lùn",
+  "scientificName": "Rice Grassy Stunt Virus",
+  "commonName": "Bệnh lúa cỏ",
+  "description": "Cây lúa bị lùn, lá vàng, đẻ nhánh vô hiệu nhiều.",
+  "type": "Bệnh virus",
+  "severityRisk": "Rất cao",
+  "economicLoss": "Mất trắng 100%",
+  "images": [
+    {
+      "url": "vang_lun.jpg",
+      "caption": "Bụi lúa lùn, lá vàng xòe",
+      "_id": {
+        "$oid": "692d54dbff3e886e39c6de16"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:03.800Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:03.800Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dcff3e886e39c6de31"
+  },
+  "name": "Bệnh Lùn xoắn lá",
+  "scientificName": "Rice Ragged Stunt Virus",
+  "commonName": "Bệnh lúa xoăn",
+  "description": "Lá lúa xanh đậm, xoắn lại như mũi khoan, mép lá rách.",
+  "type": "Bệnh virus",
+  "severityRisk": "Cao",
+  "economicLoss": "30-70% năng suất",
+  "images": [
+    {
+      "url": "lun_xoan_la.jpg",
+      "caption": "Lá xoắn tít",
+      "_id": {
+        "$oid": "692d54dcff3e886e39c6de32"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:04.237Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:04.237Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dcff3e886e39c6de4b"
+  },
+  "name": "Bệnh Đốm nâu",
+  "scientificName": "Bipolaris oryzae",
+  "commonName": "Bệnh tiêm lửa",
+  "description": "Đốm nâu tròn như hạt vừng trên lá.",
+  "type": "Bệnh nấm",
+  "severityRisk": "Trung bình",
+  "economicLoss": "10-20%",
+  "images": [
+    {
+      "url": "dom_nau.jpg",
+      "caption": "Đốm nâu tròn",
+      "_id": {
+        "$oid": "692d54dcff3e886e39c6de4c"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:04.664Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:04.664Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54ddff3e886e39c6de66"
+  },
+  "name": "Bệnh Lúa von",
+  "scientificName": "Gibberella fujikuroi",
+  "commonName": "Bệnh mạ đực",
+  "description": "Cây lúa cao vọt, mảnh khảnh, lá xanh nhạt.",
+  "type": "Bệnh nấm",
+  "severityRisk": "Trung bình",
+  "economicLoss": "Thấp",
+  "images": [
+    {
+      "url": "lua_von.jpg",
+      "caption": "Cây cao vọt",
+      "_id": {
+        "$oid": "692d54ddff3e886e39c6de67"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:05.094Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:05.094Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54ddff3e886e39c6de80"
+  },
+  "name": "Bệnh Sọc trong",
+  "scientificName": "Xanthomonas oryzae pv. oryzicola",
+  "commonName": "Sọc trong vi khuẩn",
+  "description": "Sọc trong suốt giữa gân lá, tiết dịch vi khuẩn.",
+  "type": "Bệnh vi khuẩn",
+  "severityRisk": "Cao",
+  "economicLoss": "15-30%",
+  "images": [
+    {
+      "url": "soc_trong.jpg",
+      "caption": "Sọc trong suốt",
+      "_id": {
+        "$oid": "692d54ddff3e886e39c6de81"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:05.513Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:05.513Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54ddff3e886e39c6de9a"
+  },
+  "name": "Bệnh Thối bẹ",
+  "scientificName": "Sarocladium oryzae",
+  "commonName": "Thối bẹ cờ",
+  "description": "Vết bệnh ở bẹ lá đòng làm bông lúa nghẹn.",
+  "type": "Bệnh nấm",
+  "severityRisk": "Trung bình",
+  "economicLoss": "Ảnh hưởng phẩm chất",
+  "images": [
+    {
+      "url": "thoi_be.jpg",
+      "caption": "Thối nâu đen bẹ lá",
+      "_id": {
+        "$oid": "692d54ddff3e886e39c6de9b"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:05.939Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:05.939Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54deff3e886e39c6deb4"
+  },
+  "name": "Bệnh Vàng lá chín sớm",
+  "scientificName": "Gonatophragmium sp.",
+  "commonName": "Vàng lá",
+  "description": "Lá vàng rực từ chóp, gân xanh, cây tàn lụi sớm.",
+  "type": "Bệnh nấm",
+  "severityRisk": "Cao",
+  "economicLoss": "Hạt lửng",
+  "images": [
+    {
+      "url": "vang_la_chin_som.jpg",
+      "caption": "Lá vàng gân xanh",
+      "_id": {
+        "$oid": "692d54deff3e886e39c6deb5"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:06.365Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:06.365Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54deff3e886e39c6dece"
+  },
+  "name": "Bệnh Thối thân",
+  "scientificName": "Sclerotium oryzae",
+  "commonName": "Tiêm hạch",
+  "description": "Thối gốc thân, có hạch nấm đen.",
+  "type": "Bệnh nấm",
+  "severityRisk": "Trung bình",
+  "economicLoss": "Đổ ngã",
+  "images": [
+    {
+      "url": "thoi_than.jpg",
+      "caption": "Hạch nấm đen",
+      "_id": {
+        "$oid": "692d54deff3e886e39c6decf"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:06.800Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:06.800Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dfff3e886e39c6dee8"
+  },
+  "name": "Bệnh Đốm vòng",
+  "scientificName": "Alternaria padwickii",
+  "commonName": "Đốm mắt cua",
+  "description": "Vết bệnh hình bầu dục, tâm trắng xám, viền nâu.",
+  "type": "Bệnh nấm",
+  "severityRisk": "Thấp",
+  "economicLoss": "Hạt lửng",
+  "images": [
+    {
+      "url": "dom_vong.jpg",
+      "caption": "Tâm trắng xám",
+      "_id": {
+        "$oid": "692d54dfff3e886e39c6dee9"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:07.207Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:07.207Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dfff3e886e39c6df02"
+  },
+  "name": "Sâu Đục thân 2 chấm",
+  "scientificName": "Scirpophaga incertulas",
+  "commonName": "Sâu đục thân",
+  "description": "Sâu non đục thân gây dảnh héo hoặc bông bạc.",
+  "type": "Sâu hại",
+  "severityRisk": "Rất cao",
+  "economicLoss": "Mất trắng",
+  "images": [
+    {
+      "url": "duc_than.jpg",
+      "caption": "Bông bạc trắng",
+      "_id": {
+        "$oid": "692d54dfff3e886e39c6df03"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:07.622Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:07.622Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54e0ff3e886e39c6df1e"
+  },
+  "name": "Bọ trĩ",
+  "scientificName": "Stenchaetothrips biformis",
+  "commonName": "Bù lạch",
+  "description": "Hại lúa non, làm lá cuốn, khô vàng đầu lá.",
+  "type": "Sâu hại",
+  "severityRisk": "Trung bình",
+  "economicLoss": "Chậm sinh trưởng",
+  "images": [
+    {
+      "url": "bo_tri.jpg",
+      "caption": "Đầu lá khô vàng",
+      "_id": {
+        "$oid": "692d54e0ff3e886e39c6df1f"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:08.040Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:08.040Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54e0ff3e886e39c6df37"
+  },
+  "name": "Nhện gié",
+  "scientificName": "Steneotarsonemus spinki",
+  "commonName": "Cạo gió",
+  "description": "Chích hút bẹ lá gây vết thâm đen cạo gió.",
+  "type": "Sâu bệnh khác",
+  "severityRisk": "Cao",
+  "economicLoss": "Giảm năng suất",
+  "images": [
+    {
+      "url": "nhen_gie.jpg",
+      "caption": "Vết thâm đen bẹ lá",
+      "_id": {
+        "$oid": "692d54e0ff3e886e39c6df38"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:08.468Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:08.468Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54e0ff3e886e39c6df50"
+  },
+  "name": "Muỗi hành",
+  "scientificName": "Orseolia oryzae",
+  "commonName": "Sâu năng",
+  "description": "Biến bẹ lá thành ống tròn như cọng hành.",
+  "type": "Sâu hại",
+  "severityRisk": "Cao",
+  "economicLoss": "Mất dảnh",
+  "images": [
+    {
+      "url": "muoi_hanh.jpg",
+      "caption": "Ống hành",
+      "_id": {
+        "$oid": "692d54e0ff3e886e39c6df51"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:08.897Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:08.897Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54e1ff3e886e39c6df69"
+  },
+  "name": "Bọ xít hôi",
+  "scientificName": "Leptocorisa acuta",
+  "commonName": "Bọ xít dài",
+  "description": "Chích hút hạt lúa giai đoạn ngậm sữa.",
+  "type": "Sâu hại",
+  "severityRisk": "Trung bình",
+  "economicLoss": "Hạt lép, đắng",
+  "images": [
+    {
+      "url": "bo_xit.jpg",
+      "caption": "Bọ xít chích hút",
+      "_id": {
+        "$oid": "692d54e1ff3e886e39c6df6a"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:09.332Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:09.332Z"
+  },
+  "__v": 0
+}]

@@ -89,7 +89,7 @@ function Home() {
       {/* Featured Posts Section */}
       <div className="container mx-auto py-10 px-4">
         <h2 className="text-2xl font-semibold text-center mb-8 text-sky-800">
-          Thông Tin Nổi Bật
+          Bệnh Lúa Nổi Bật
         </h2>
 
         {error && (
