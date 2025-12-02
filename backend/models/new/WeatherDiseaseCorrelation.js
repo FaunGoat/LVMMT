@@ -4,7 +4,7 @@ const weatherDiseaseCorrelationSchema = new mongoose.Schema(
   {
     diseaseId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Disease", // Lưu ý: Đảm bảo ref đúng với tên Model Disease chính
+      ref: "NewDisease", // Lưu ý: Đảm bảo ref đúng với tên Model Disease chính
       required: true,
       unique: true,
       index: true,

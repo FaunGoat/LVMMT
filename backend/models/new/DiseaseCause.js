@@ -4,7 +4,7 @@ const diseaseCauseSchema = new mongoose.Schema(
   {
     diseaseId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Disease",
+      ref: "NewDisease",
       required: true,
       unique: true,
       index: true,

@@ -2,6 +2,7 @@
 
 /**
  * Map Dialogflow entity values sang tên bệnh trong Database
+ * Đã mở rộng cho 20 bệnh (sử dụng placeholder)
  */
 const diseaseEntityMap = {
   dao_on: "Bệnh đạo ôn",
@@ -33,10 +34,21 @@ const treatmentTypeMap = {
   hoa_hoc: "Hóa học",
   sinh_hoc: "Sinh học",
   canh_tac: "Canh tác",
+  tong_hop: "Tổng hợp", // Thêm Tổng hợp nếu có trong DB
+};
+
+/**
+ * Map season entity sang Vietnamese (Mới: @season)
+ */
+const seasonMap = {
+  dong_xuan: "Đông Xuân",
+  he_thu: "Hè Thu",
+  ca_nam: "Cả năm",
 };
 
 /**
  * Map symptom keywords sang Vietnamese
+ * Cần mở rộng tương ứng với 20 bệnh
  */
 const symptomKeywordMap = {
   // Đạo ôn
@@ -44,92 +56,139 @@ const symptomKeywordMap = {
     keywords: ["đốm", "thoi", "viền nâu", "tâm xám"],
     disease: "Bệnh đạo ôn",
   },
-
   // Cháy bìa lá
   chay_bia_la_symptoms: {
     keywords: ["cháy bìa", "cháy mép", "mép lá", "bìa lá"],
     disease: "Bệnh cháy bìa lá",
   },
-
   // Rầy nâu
   ray_nau_symptoms: {
     keywords: ["vàng úa", "héo", "cháy rầy", "gốc vàng", "chết hàng loạt"],
     disease: "Rầy nâu",
   },
-
   // Lem lép hạt
   lem_lep_hat_symptoms: {
-    keywords: ["hạt lép", "hạt trắng", "bông trắng", "trấu nứt"],
+    keywords: ["lép hạt", "hạt đen", "hạt không chắc", "vỏ trấu"],
     disease: "Bệnh lem lép hạt",
   },
-
   // Sâu cuốn lá
   sau_cuon_la_symptoms: {
-    keywords: ["lá cuốn", "cuốn lá", "lá cuộn", "cuốn thành ống"],
+    keywords: ["lá cuốn", "lá cuộn", "mất diệp lục", "cuốn lá"],
     disease: "Sâu cuốn lá",
+  },
+  // Thêm các bệnh khác
+  muoi_hanh_symptoms: {
+    keywords: ["ống hành", "cọng hành", "sâu năng"],
+    disease: "Muỗi hành",
+  },
+  kho_van_symptoms: {
+    keywords: ["đốm vằn", "vết vằn", "vết loang lổ"],
+    disease: "Bệnh khô vằn",
+  },
+  sau_duc_than_symptoms: {
+    keywords: ["dảnh héo", "bông bạc", "lỗ đục", "bướm trắng"],
+    disease: "Sâu đục thân",
+  },
+  bo_tri_symptoms: {
+    keywords: ["lá xoăn", "lá cuộn tròn", "chóp lá bạc", "lá đầu lân"],
+    disease: "Bọ trĩ",
+  },
+  nhen_gie_symptoms: {
+    keywords: ["bẹ lá thâm", "lá vàng", "lá cứng giòn", "thâm đen", "thâm"],
+    disease: "Nhện gié",
+  },
+  bo_xit_hoi_symptoms: {
+    keywords: ["hạt bị đen", "hạt bị lép", "mùi hôi"],
+    disease: "Bọ xít hôi",
+  },
+  vang_lun_symptoms: {
+    keywords: ["lùn cây", "lá vàng cam", "cây thấp lùn"],
+    disease: "Bệnh vàng lùn",
+  },
+  lun_xoan_la_symptoms: {
+    keywords: ["lá xoắn", "lùn cây", "lá nhỏ hẹp", "đẻ nhánh vô hạn"],
+    disease: "Bệnh lùn xoắn lá",
+  },
+  vang_la_chin_som_symptoms: {
+    keywords: ["vàng sớm", "lá chuyển vàng cam", "hạt bị lép"],
+    disease: "Bệnh vàng lá chín sớm",
+  },
+  thoi_be_symptoms: {
+    keywords: ["bẹ lá thối", "có mùi hôi", "vết bệnh sũng nước"],
+    disease: "Bệnh thối bẹ",
+  },
+  lua_von_symptoms: {
+    keywords: ["cây vống cao", "lá dài thon", "cây cao bất thường"],
+    disease: "Bệnh lúa von",
+  },
+  soc_trong_symptoms: {
+    keywords: ["sọc trong", "đốm vàng lợt trên lá", "sọc vàng mờ"],
+    disease: "Bệnh sọc trong",
+  },
+  dom_vong_symptoms: {
+    keywords: ["đốm vòng", "đốm tròn có viền", "hình tròn"],
+    disease: "Bệnh đốm vòng",
+  },
+  dom_nau_symptoms: {
+    keywords: ["đốm nâu", "đốm nhỏ tròn", "có viền nâu đỏ"],
+    disease: "Bệnh đốm nâu",
+  },
+  thoi_than_symptoms: {
+    keywords: ["thân thối rữa", "cây đổ ngã", "thối mềm"],
+    disease: "Bệnh thối thân",
   },
 };
 
 /**
- * Lấy tên bệnh từ entity
- * @param {string} entityValue - Giá trị từ Dialogflow (vd: "dao_on")
- * @returns {string} - Tên bệnh trong DB (vd: "Bệnh đạo ôn")
+ * @param {Object} parameters - Dialogflow parameters object
+ * @param {string} entityName - Tên entity (VD: 'disease', 'symptom-keyword')
+ * @returns {string | string[]} - Giá trị entity được trích xuất
  */
-function getDiseaseName(entityValue) {
-  if (!entityValue) return null;
+function extractEntity(parameters, entityName) {
+  if (!parameters || !entityName) return null;
 
-  // Nếu entity value là reference value (dao_on, ray_nau...)
-  if (diseaseEntityMap[entityValue]) {
-    return diseaseEntityMap[entityValue];
+  const value = parameters[entityName];
+
+  // Trả về mảng cho symptom-keyword để có thể xử lý đa triệu chứng
+  if (entityName === "symptom-keyword" && Array.isArray(value)) {
+    return value
+      .filter(
+        (v) =>
+          v &&
+          (typeof v === "string" || (typeof v === "object" && v.stringValue))
+      )
+      .map((v) => (typeof v === "string" ? v.trim() : v.stringValue.trim()));
   }
 
-  // Nếu entity value là synonym (đạo ôn, rầy nâu...)
-  return entityValue;
-}
-
-/**
- * Lấy loại phương pháp điều trị
- * @param {string} entityValue - Giá trị từ Dialogflow (vd: "hoa_hoc")
- * @returns {string} - Loại điều trị (vd: "Hóa học")
- */
-function getTreatmentType(entityValue) {
-  if (!entityValue) return null;
-  return treatmentTypeMap[entityValue] || entityValue;
-}
-
-/**
- * Lấy từ khóa triệu chứng để tìm kiếm
- * @param {string} entityValue - Giá trị từ Dialogflow (vd: "dom_la")
- * @returns {string[]} - Mảng từ khóa để search
- */
-function getSymptomKeywords(entityValue) {
-  if (!entityValue) return [];
-
-  if (symptomKeywordMap[entityValue]) {
-    return symptomKeywordMap[entityValue].keywords;
+  // Logic cũ cho các entity đơn (disease, treatment_type, location,...)
+  // Case 1: String trực tiếp
+  if (typeof value === "string" && value.trim() !== "") {
+    return value.trim();
   }
 
-  return [entityValue];
+  // Case 2: Object có nested value (nếu Dialogflow trả về object)
+  if (typeof value === "object" && value !== null) {
+    const extracted =
+      value.value || value.name || value.stringValue || value[0];
+    if (extracted && typeof extracted === "string") {
+      return extracted.trim();
+    }
+  }
+
+  // Case 3: Array (chỉ lấy phần tử đầu tiên cho các entity không phải symptom)
+  if (Array.isArray(value) && value.length > 0) {
+    const firstItem = value[0];
+    if (typeof firstItem === "string") {
+      return firstItem.trim();
+    }
+    if (typeof firstItem === "object" && firstItem !== null) {
+      return firstItem.value || firstItem.name || null;
+    }
+  }
+
+  return null;
 }
 
-/**
- * Tạo regex pattern từ nhiều từ khóa
- * @param {string[]} keywords - Mảng từ khóa
- * @returns {RegExp} - Regex pattern
- */
-function createSearchPattern(keywords) {
-  if (!keywords || keywords.length === 0) return null;
-
-  // Tạo pattern: (từ1|từ2|từ3)
-  const pattern = keywords.join("|");
-  return new RegExp(pattern, "i");
-}
-
-/**
- * Làm sạch text input
- * @param {string} text - Text cần làm sạch
- * @returns {string} - Text đã làm sạch
- */
 function cleanText(text) {
   if (!text) return "";
 
@@ -173,60 +232,47 @@ function cleanText(text) {
   return cleaned.replace(/\s+/g, " ").trim();
 }
 
-/**
- * Extract entity value từ Dialogflow parameters
- * @param {Object} parameters - Dialogflow parameters
- * @param {string} entityName - Tên entity cần lấy
- * @returns {string|null} - Entity value
- */
-function extractEntity(parameters, entityName) {
-  if (!parameters || !entityName) return null;
+// --- HÀM MAPPING ---
 
-  const value = parameters[entityName];
+function getDiseaseName(entityValue) {
+  return diseaseEntityMap[entityValue] || entityValue;
+}
 
-  // Debug log
-  // console.log(`🔍 Extracting "${entityName}":`, typeof value, value);
+function getTreatmentType(entityValue) {
+  return treatmentTypeMap[entityValue] || entityValue;
+}
 
-  // Case 1: String trực tiếp
-  if (typeof value === "string" && value.trim() !== "") {
-    // console.log(`✅ String value: "${value}"`);
-    return value.trim();
-  }
+function getSymptomKeywords(entityValue) {
+  if (!entityValue) return [];
 
-  // Case 2: Object có nested value
-  if (typeof value === "object" && value !== null) {
-    // Thử các field phổ biến
-    const extracted =
-      value.value || value.name || value.stringValue || value[0];
-    // console.log(`🔎 Object extraction:`, extracted);
-    if (extracted && typeof extracted === "string") {
-      return extracted.trim();
+  // Đảm bảo entityValue là một mảng để dễ dàng xử lý
+  const entities = Array.isArray(entityValue) ? entityValue : [entityValue];
+  const keywords = new Set();
+
+  entities.forEach((entity) => {
+    // Nếu entity là một key trong map (vd: 'bo_xit_hoi_symptoms')
+    const mapEntry = symptomKeywordMap[entity];
+    if (mapEntry) {
+      mapEntry.keywords.forEach((keyword) => keywords.add(keyword));
+    } else {
+      // Nếu entity là một chuỗi mô tả triệu chứng trực tiếp (vd: 'thối thân')
+      keywords.add(entity);
     }
-  }
+  });
 
-  // Case 3: Array (Dialogflow đôi khi trả về array)
-  if (Array.isArray(value) && value.length > 0) {
-    const firstItem = value[0];
-    // console.log(`📦 Array extraction:`, firstItem);
-    if (typeof firstItem === "string") {
-      return firstItem.trim();
-    }
-    if (typeof firstItem === "object" && firstItem !== null) {
-      return firstItem.value || firstItem.name || null;
-    }
-  }
+  return Array.from(keywords);
+}
 
-  // console.log(`❌ Could not extract "${entityName}"`);
-  return null;
+// Hàm mới: Get Season
+function getSeason(entityValue) {
+  return seasonMap[entityValue] || entityValue;
 }
 
 /**
  * Xây dựng search query cho MongoDB
- * @param {string} diseaseName - Tên bệnh
- * @param {string[]} symptoms - Mảng triệu chứng
- * @returns {Object} - MongoDB query object
  */
-function buildSearchQuery(diseaseName = null, symptoms = []) {
+function buildSearchQuery(diseaseName = null) {
+  // <<< Bỏ tham số symptoms
   const conditions = [];
 
   if (diseaseName) {
@@ -238,44 +284,26 @@ function buildSearchQuery(diseaseName = null, symptoms = []) {
     );
   }
 
-  if (symptoms && symptoms.length > 0) {
-    symptoms.forEach((symptom) => {
-      conditions.push({
-        symptoms: { $elemMatch: { $regex: symptom, $options: "i" } },
-      });
-    });
-  }
+  // >>> ĐÃ LOẠI BỎ logic tìm kiếm theo triệu chứng ở đây để xử lý trong controller
 
   return conditions.length > 0 ? { $or: conditions } : {};
 }
 
-/**
- * Format location name
- * @param {string} location - Location entity value
- * @returns {string} - Formatted location
- */
+// Hàm formatLocation được giả định tồn tại từ code cũ
 function formatLocation(location) {
   if (!location) return "Cần Thơ";
-
-  const locationMap = {
-    dong_bang_song_cuu_long: "Đồng bằng sông Cửu Long",
-    dong_bang_song_hong: "Đồng bằng sông Hồng",
-    mien_trung: "Miền Trung",
-  };
-
-  return locationMap[location] || location;
+  // Thêm logic mapping cho location nếu cần
+  return location;
 }
 
 module.exports = {
-  diseaseEntityMap,
-  treatmentTypeMap,
-  symptomKeywordMap,
+  extractEntity,
   getDiseaseName,
   getTreatmentType,
   getSymptomKeywords,
-  createSearchPattern,
-  cleanText,
-  extractEntity,
+  getSeason,
   buildSearchQuery,
   formatLocation,
+  cleanText,
+  symptomKeywordMap, // Export thêm để dùng trong webhookController
 };
