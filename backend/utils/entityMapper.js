@@ -9,6 +9,21 @@ const diseaseEntityMap = {
   lem_lep_hat: "Bệnh lem lép hạt",
   chay_bia_la: "Bệnh cháy bìa lá",
   sau_cuon_la: "Sâu cuốn lá",
+  sau_duc_than: "Sâu đục thân",
+  bo_tri: "Bọ trĩ",
+  muoi_hanh: "Muỗi hành",
+  nhen_gie: "Nhện gié",
+  bo_xit_hoi: "Bọ xít hôi",
+  vang_lun: "Bệnh vàng lùn",
+  lun_xoan_la: "Bệnh lùn xoắn lá",
+  vang_la_chin_som: "Bệnh vàng lá chín sớm",
+  thoi_be: "Bệnh thối bẹ",
+  kho_van: "Bệnh khô vằn",
+  lua_von: "Bệnh lúa von",
+  soc_trong: "Bệnh sọc trong",
+  dom_vong: "Bệnh đốm vòng",
+  dom_nau: "Bệnh đốm nâu",
+  thoi_than: "Bệnh thối thân",
 };
 
 /**

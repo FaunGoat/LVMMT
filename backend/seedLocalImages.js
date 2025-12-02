@@ -19,6 +19,7 @@ const connectDB = async () => {
 // Hàm tiện ích để Update hoặc Insert (Upsert)
 const upsertData = async (Model, filter, updateData) => {
   return await Model.findOneAndUpdate(filter, updateData, {
+    // <-- updateData là đối tượng thuần
     new: true,
     upsert: true,
     setDefaultsOnInsert: true,
@@ -29,392 +30,342 @@ const updateDiseaseData = async () => {
   try {
     const diseasesData = [
       {
-        diseaseId: "692c6df62ef6ee9bd8d70ff2",
         diseaseName: "Rầy nâu",
-        symptoms: [
-          {
-            part: "Gốc",
-            description: "Rầy tụ tập dày đặc, xuất hiện mật ngọt (honeydew).",
-            stage: "Đẻ nhánh",
-            severity: "Nặng",
-          },
-          {
-            part: "Toàn cây",
-            description:
-              "Lúa chuyển vàng úa, khô cháy từ ngọn xuống gốc ('cháy rầy').",
-            stage: "Cuối vụ",
-            severity: "Rất nặng",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Cả năm",
+              startMonth: 1,
+              endMonth: 12,
+              peakMonths: [3, 4, 10, 11],
+              riskLevel: "Rất cao",
+              description:
+                "Rầy nâu phát triển liên tục, đặc biệt là các vụ trồng gối vụ. Mật độ cao và nguy cơ 'cháy rầy' thường xảy ra vào cuối các vụ chính (trước thu hoạch).",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "692c6df82ef6ee9bd8d71088",
-        diseaseName: "Bệnh đạo ôn",
-        symptoms: [
-          {
-            part: "Lá",
-            description:
-              "Vết bệnh hình thoi (mắt én), tâm xám trắng, viền nâu đậm.",
-            stage: "Đẻ nhánh",
-            severity: "Nặng",
-          },
-          {
-            part: "Cổ bông",
-            description:
-              "Vết thối nâu xám làm gãy gục cổ bông, gây lép trắng (bạc bông).",
-            stage: "Trổ",
-            severity: "Rất nặng",
-          },
-        ],
+        diseaseName: "Bệnh Đạo ôn",
+        season: {
+          seasons: [
+            {
+              type: "Đông Xuân",
+              startMonth: 11,
+              endMonth: 4,
+              peakMonths: [1, 2, 3],
+              riskLevel: "Rất cao",
+              description:
+                "Bệnh bùng phát mạnh do nhiệt độ thấp (20-25°C), ẩm độ cao, mưa phùn và sương mù dày đặc. Nguy hiểm nhất là đạo ôn cổ bông ở giai đoạn trổ.",
+            },
+            {
+              type: "Hè Thu",
+              startMonth: 4,
+              endMonth: 8,
+              peakMonths: [5, 6],
+              riskLevel: "Cao",
+              description:
+                "Vẫn xuất hiện trên lá khi có những đợt mưa dầm và bón thừa đạm.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "692c6df72ef6ee9bd8d71024",
-        diseaseName: "Bệnh lem lép hạt",
-        symptoms: [
-          {
-            part: "Hạt",
-            description:
-              "Vỏ trấu biến màu thành nâu, đen hoặc tím, hạt bên trong lép hoặc lửng.",
-            stage: "Trổ",
-            severity: "Cao",
-          },
-          {
-            part: "Bông",
-            description:
-              "Bông lúa không thoát ra khỏi bẹ được do nấm tấn công.",
-            stage: "Trổ",
-            severity: "Trung bình",
-          },
-        ],
+        diseaseName: "Bệnh Lem lép hạt",
+        season: {
+          seasons: [
+            {
+              type: "Hè Thu",
+              startMonth: 4,
+              endMonth: 8,
+              peakMonths: [6, 7],
+              riskLevel: "Rất cao",
+              description:
+                "Nguy cơ cao nhất khi lúa trổ gặp mưa kéo dài hoặc thời tiết âm u, tạo điều kiện ẩm ướt cho nhiều loại nấm và vi khuẩn tấn công hạt lúa.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "692c6df72ef6ee9bd8d71056",
-        diseaseName: "Bệnh cháy bìa lá",
-        symptoms: [
-          {
-            part: "Lá",
-            description:
-              "Vết bệnh màu xanh tối ở mép lá, sau chuyển sang vàng xám, tạo hình lượn sóng.",
-            stage: "Tất cả",
-            severity: "Nặng",
-          },
-          {
-            part: "Toàn cây",
-            description: "Khi nặng, lá bị cháy lan rộng, gây rụng hạt sớm.",
-            stage: "Trổ",
-            severity: "Nặng",
-          },
-        ],
+        diseaseName: "Bệnh Cháy bìa lá",
+        season: {
+          seasons: [
+            {
+              type: "Hè Thu",
+              startMonth: 4,
+              endMonth: 8,
+              peakMonths: [7, 8],
+              riskLevel: "Rất cao",
+              description:
+                "Lây lan mạnh mẽ sau các cơn mưa bão lớn kèm gió mạnh làm lá bị rách, kết hợp nhiệt độ cao giúp vi khuẩn phát triển nhanh chóng.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "692c6df82ef6ee9bd8d710b6",
         diseaseName: "Sâu cuốn lá",
-        symptoms: [
-          {
-            part: "Lá",
-            description:
-              "Sâu cuốn lá thành ống, ăn nhu mô, làm lá bị bạc trắng.",
-            stage: "Đẻ nhánh",
-            severity: "Cao",
-          },
-          {
-            part: "Bụi lúa",
-            description: "Giảm diện tích quang hợp, cây lúa còi cọc.",
-            stage: "Đẻ nhánh",
-            severity: "Trung bình",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Hè Thu",
+              startMonth: 4,
+              endMonth: 8,
+              peakMonths: [5, 6],
+              riskLevel: "Cao",
+              description:
+                "Sâu cuốn lá lớn phát triển mạnh mẽ nhất, gây thiệt hại nặng nề ở giai đoạn lúa đẻ nhánh do nguồn thức ăn dồi dào và nhiệt độ cao.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "692d54daff3e886e39c6ddea",
         diseaseName: "Bệnh Khô vằn",
-        symptoms: [
-          {
-            part: "Bẹ lá/Thân",
-            description:
-              "Vết bệnh loang lổ hình bầu dục, màu xám trắng viền nâu ('vằn da hổ').",
-            stage: "Làm đòng",
-            severity: "Cao",
-          },
-          {
-            part: "Thân",
-            description:
-              "Nấm tấn công làm thối thân, gây đổ ngã khi bệnh nặng.",
-            stage: "Trổ",
-            severity: "Nặng",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Hè Thu",
+              startMonth: 4,
+              endMonth: 8,
+              peakMonths: [6, 7],
+              riskLevel: "Rất cao",
+              description:
+                "Thời tiết nóng ẩm, mưa nhiều kết hợp với gieo sạ dày và bón thừa đạm là điều kiện lý tưởng để nấm lây lan từ gốc lên bẹ lá.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "692d54dbff3e886e39c6de15",
         diseaseName: "Bệnh Vàng lùn",
-        symptoms: [
-          {
-            part: "Toàn cây",
-            description: "Cây lúa thấp lùn, lá ngắn, cứng, xòe ngang.",
-            stage: "Đẻ nhánh",
-            severity: "Rất nặng",
-          },
-          {
-            part: "Lá",
-            description: "Lá chuyển màu vàng cam, vàng khô từ chóp lá lan vào.",
-            stage: "Đẻ nhánh",
-            severity: "Rất nặng",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Cả năm",
+              startMonth: 1,
+              endMonth: 12,
+              peakMonths: [3, 7, 11],
+              riskLevel: "Rất cao",
+              description:
+                "Bệnh virus do Rầy nâu truyền, bùng phát thành dịch lớn khi rầy di trú mạnh và trồng lúa liên tục không có thời gian cách ly.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "692d54dcff3e886e39c6de31",
         diseaseName: "Bệnh Lùn xoắn lá",
-        symptoms: [
-          {
-            part: "Lá",
-            description:
-              "Lá xanh đậm, xoắn lại, rìa lá rách và có bướu dọc gân lá.",
-            stage: "Đẻ nhánh",
-            severity: "Rất nặng",
-          },
-          {
-            part: "Toàn cây",
-            description:
-              "Cây lùn, chồi non biến dạng, không có khả năng trổ bông.",
-            stage: "Đẻ nhánh",
-            severity: "Rất nặng",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Cả năm",
+              startMonth: 1,
+              endMonth: 12,
+              peakMonths: [3, 7, 11],
+              riskLevel: "Rất cao",
+              description:
+                "Bệnh virus thường đi kèm Vàng lùn, do Rầy nâu truyền, gây biến dạng cây và mất khả năng trổ bông.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "temp_id_9",
         diseaseName: "Bệnh Đốm nâu",
-        symptoms: [
-          {
-            part: "Lá/Hạt",
-            description:
-              "Vết bệnh hình tròn hoặc bầu dục, màu nâu đậm, viền vàng (như hình mắt chim).",
-            stage: "Tất cả",
-            severity: "Trung bình",
-          },
-          {
-            part: "Hạt",
-            description:
-              "Xuất hiện vết bệnh trên vỏ trấu, làm giảm chất lượng hạt.",
-            stage: "Trổ",
-            severity: "Trung bình",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Đông Xuân",
+              startMonth: 11,
+              endMonth: 4,
+              peakMonths: [12, 1],
+              riskLevel: "Cao",
+              description:
+                "Gây hại nặng trên các ruộng chua, phèn, thiếu dinh dưỡng (K, Mn), thường xuất hiện sớm ở giai đoạn mạ và đẻ nhánh khi thời tiết ẩm ướt.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "temp_id_10",
         diseaseName: "Bệnh Lúa von",
-        symptoms: [
-          {
-            part: "Toàn cây",
-            description:
-              "Cây lúa non vươn cao bất thường (von), mảnh khảnh, lá vàng nhạt.",
-            stage: "Mạ/Đẻ nhánh",
-            severity: "Cao",
-          },
-          {
-            part: "Gốc",
-            description:
-              "Gốc thân có rễ bất định, cây chết trước hoặc sau khi trổ.",
-            stage: "Mạ/Đẻ nhánh",
-            severity: "Cao",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Đông Xuân",
+              startMonth: 11,
+              endMonth: 1,
+              peakMonths: [12],
+              riskLevel: "Cao",
+              description:
+                "Bệnh nấm phát sinh ở các trà lúa gieo sạ dày vào mùa lạnh ẩm. Gây hiện tượng cây lúa von cao bất thường và chết yểu.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "temp_id_11",
         diseaseName: "Bệnh Sọc trong",
-        symptoms: [
-          {
-            part: "Lá",
-            description: "Lá lúa có sọc vàng mờ hoặc trắng dọc theo gân lá.",
-            stage: "Đẻ nhánh",
-            severity: "Rất nặng",
-          },
-          {
-            part: "Toàn cây",
-            description: "Lá bị xoắn lại, mép lá rách, cây lùn.",
-            stage: "Đẻ nhánh",
-            severity: "Rất nặng",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Hè Thu",
+              startMonth: 4,
+              endMonth: 8,
+              peakMonths: [5, 6],
+              riskLevel: "Rất cao",
+              description:
+                "Bệnh virus do Rầy xanh đuôi đen truyền. Phổ biến trong điều kiện ấm áp và ẩm ướt, ruộng lúa gần nguồn cỏ dại.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "temp_id_12",
         diseaseName: "Bệnh Thối bẹ",
-        symptoms: [
-          {
-            part: "Bẹ lá",
-            description:
-              "Vết bệnh màu nâu không đều trên bẹ lá non bao quanh đòng lúa.",
-            stage: "Làm đòng",
-            severity: "Cao",
-          },
-          {
-            part: "Bông",
-            description:
-              "Bông lúa trổ không thoát, hoặc trổ ra bị lép, biến màu.",
-            stage: "Trổ",
-            severity: "Cao",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Hè Thu",
+              startMonth: 4,
+              endMonth: 8,
+              peakMonths: [7, 8],
+              riskLevel: "Cao",
+              description:
+                "Phát triển mạnh vào giai đoạn lúa làm đòng và trổ, khi có mưa ẩm và nhiệt độ cao, làm bẹ lá thối, gây nghẹt đòng.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "temp_id_13",
         diseaseName: "Bệnh Vàng lá chín sớm",
-        symptoms: [
-          {
-            part: "Lá",
-            description:
-              "Lá lúa vàng sớm từ lá dưới lên lá trên, sau đó khô và chết.",
-            stage: "Làm đòng",
-            severity: "Trung bình",
-          },
-          {
-            part: "Toàn cây",
-            description: "Lá vàng úa nhanh, khác với chín bình thường.",
-            stage: "Làm đòng",
-            severity: "Trung bình",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Tất cả các vụ",
+              startMonth: 1,
+              endMonth: 12,
+              peakMonths: [8, 12],
+              riskLevel: "Trung bình",
+              description:
+                "Đây chủ yếu là bệnh sinh lý do thiếu Kali hoặc Lân. Thường rõ rệt nhất ở giai đoạn lúa ôm đòng đến chín khi cây cần dinh dưỡng lớn.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "temp_id_14",
         diseaseName: "Bệnh Thối thân",
-        symptoms: [
-          {
-            part: "Thân",
-            description:
-              "Vết bệnh màu đen ở bẹ lá sát mặt nước, thân bị thối mềm.",
-            stage: "Làm đòng",
-            severity: "Nặng",
-          },
-          {
-            part: "Gốc",
-            description:
-              "Xuất hiện hạch nấm màu đen trong thân, cây lúa đổ ngã.",
-            stage: "Làm đòng",
-            severity: "Nặng",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Hè Thu",
+              startMonth: 4,
+              endMonth: 8,
+              peakMonths: [7, 8],
+              riskLevel: "Nặng",
+              description:
+                "Gây hại nghiêm trọng khi ruộng lúa luôn bị ngập nước (đặc biệt là gần mặt nước) và nhiệt độ cao, làm thân lúa bị thối mềm và đổ ngã.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "temp_id_15",
         diseaseName: "Bệnh Đốm vòng",
-        symptoms: [
-          {
-            part: "Lá",
-            description:
-              "Vết bệnh hình tròn hoặc hơi bầu dục, màu nâu đậm, thường có vòng đồng tâm mờ.",
-            stage: "Lá già",
-            severity: "Trung bình",
-          },
-          {
-            part: "Toàn cây",
-            description: "Lá bị vàng và khô nhanh do bệnh.",
-            stage: "Lá già",
-            severity: "Trung bình",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Đông Xuân",
+              startMonth: 11,
+              endMonth: 4,
+              peakMonths: [1, 2],
+              riskLevel: "Trung bình",
+              description:
+                "Phát triển khi thời tiết ẩm ướt và mát mẻ, thường gây hại trên các lá già ở phần dưới của cây lúa.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "692d54dfff3e886e39c6df02",
-        diseaseName: "Sâu Đục thân 2 chấm",
-        symptoms: [
-          {
-            part: "Dảnh",
-            description:
-              "Giai đoạn đẻ nhánh: dảnh héo (dảnh còn xanh nhưng dễ dàng rút ra).",
-            stage: "Đẻ nhánh",
-            severity: "Nặng",
-          },
-          {
-            part: "Bông",
-            description:
-              "Giai đoạn trổ: bông lúa trắng, hạt lép hoàn toàn ('bông bạc').",
-            stage: "Trổ",
-            severity: "Rất nặng",
-          },
-        ],
+        diseaseName: "Sâu Đục thân",
+        season: {
+          seasons: [
+            {
+              type: "Đông Xuân",
+              startMonth: 11,
+              endMonth: 4,
+              peakMonths: [3, 4],
+              riskLevel: "Rất cao",
+              description:
+                "Các lứa sâu non phát triển mạnh ở giai đoạn đẻ nhánh (gây 'dảnh héo') và làm đòng - trổ (gây 'bông bạc'), ảnh hưởng lớn đến năng suất.",
+            },
+            {
+              type: "Hè Thu",
+              startMonth: 4,
+              endMonth: 8,
+              peakMonths: [6, 7],
+              riskLevel: "Cao",
+              description:
+                "Thiệt hại tập trung vào giai đoạn lúa trổ, bướm nở rộ và đẻ trứng vào thời điểm lúa non.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "temp_id_17",
         diseaseName: "Bọ trĩ",
-        symptoms: [
-          {
-            part: "Lá non",
-            description:
-              "Lá non bị cuốn dọc, mép lá xoắn lại, có vệt trắng bạc do bọ trĩ cạo và hút nhựa.",
-            stage: "Mạ/Đẻ nhánh",
-            severity: "Cao",
-          },
-          {
-            part: "Toàn cây",
-            description: "Lúa còi cọc, chậm lớn.",
-            stage: "Mạ/Đẻ nhánh",
-            severity: "Cao",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Đầu vụ Hè Thu",
+              startMonth: 3,
+              endMonth: 5,
+              peakMonths: [4],
+              riskLevel: "Rất cao",
+              description:
+                "Gây hại khủng khiếp nhất trong điều kiện nắng nóng và khô hạn kéo dài, đặc biệt là ở giai đoạn mạ và lúa non.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "692d54e0ff3e886e39c6df37",
         diseaseName: "Nhện gié",
-        symptoms: [
-          {
-            part: "Bẹ lá",
-            description: "Vết thâm đen dọc bẹ lá, như bị 'cạo gió'.",
-            stage: "Làm đòng",
-            severity: "Cao",
-          },
-          {
-            part: "Hạt",
-            description:
-              "Lúa trổ không thoát hoặc nghẹn, hạt bị lem lép, biến màu.",
-            stage: "Trổ",
-            severity: "Cao",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Hè Thu",
+              startMonth: 6,
+              endMonth: 8,
+              peakMonths: [7],
+              riskLevel: "Cao",
+              description:
+                "Phát triển mạnh khi gặp thời tiết nóng ẩm và mưa nhẹ, gây hại tiềm ẩn ở giai đoạn làm đòng, làm lúa nghẹt và lem lép hạt khi trổ.",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "692d54e0ff3e886e39c6df50",
         diseaseName: "Muỗi hành",
-        symptoms: [
-          {
-            part: "Thân",
-            description:
-              "Đỉnh sinh trưởng bị biến dạng thành ống tròn dài màu trắng xanh ('cọng hành').",
-            stage: "Đẻ nhánh",
-            severity: "Cao",
-          },
-          {
-            part: "Bụi lúa",
-            description:
-              "Bụi lúa bị nhiễm có nhiều chồi nhưng không trổ bông được.",
-            stage: "Đẻ nhánh",
-            severity: "Cao",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Đầu vụ Hè Thu",
+              startMonth: 4,
+              endMonth: 6,
+              peakMonths: [5],
+              riskLevel: "Rất cao",
+              description:
+                "Thường phát sinh khi có mưa lớn vào đầu vụ, tạo điều kiện cho muỗi trưởng thành đẻ trứng, gây hại nặng ở giai đoạn lúa non ('ống hành').",
+            },
+          ],
+        },
       },
       {
-        diseaseId: "temp_id_20",
         diseaseName: "Bọ xít hôi",
-        symptoms: [
-          {
-            part: "Hạt",
-            description:
-              "Hút sữa hạt lúa, làm hạt lép lửng, trên vỏ trấu có chấm đen nhỏ (vết chích).",
-            stage: "Trổ",
-            severity: "Cao",
-          },
-          {
-            part: "Bông",
-            description: "Bông lúa có mùi hôi (mùi bọ xít).",
-            stage: "Trổ",
-            severity: "Cao",
-          },
-        ],
+        season: {
+          seasons: [
+            {
+              type: "Giai đoạn trổ",
+              startMonth: 6,
+              endMonth: 9,
+              peakMonths: [7, 8],
+              riskLevel: "Rất cao",
+              description:
+                "Gây hại tập trung vào lúc lúa bắt đầu vào chắc, chúng hút sữa hạt làm hạt lép lửng, phổ biến ở tất cả các vụ nếu lúa trổ rộ.",
+            },
+          ],
+        },
       },
     ];
 
@@ -424,10 +375,8 @@ const updateDiseaseData = async () => {
     for (const item of diseasesData) {
       // 1. Cập nhật hoặc Tạo mới Disease chính (Dựa theo name)
       // Sử dụng name làm key để tìm kiếm
-      const disease = await upsertData(
-        Disease,
-        { name: item.diseaseName },
-        item.diseaseName
+      const disease = await Disease.findOneAndUpdate(
+        { name: item.diseaseName } // Query (Tìm kiếm theo Tên)
       );
 
       console.log(`Updated Disease: ${disease.name}`);
@@ -441,6 +390,7 @@ const updateDiseaseData = async () => {
           { diseaseId: disease._id },
           { ...item.season, diseaseId: disease._id }
         );
+        console.log(`Updated DiseaseSeasons: ${disease.name}`);
       }
 
       if (item.cause) {
@@ -451,12 +401,13 @@ const updateDiseaseData = async () => {
         );
       }
 
-      if (item.symptoms) {
+      if (item.symptom) {
         await upsertData(
           DiseaseSymptom,
           { diseaseId: disease._id },
-          { ...item.symptoms, diseaseId: disease._id }
+          { ...item.symptom, diseaseId: disease._id }
         );
+        console.log(`Updated DiseaseSymptoms: ${disease.name}`);
       }
 
       if (item.prevention) {
@@ -473,6 +424,7 @@ const updateDiseaseData = async () => {
           { diseaseId: disease._id },
           { ...item.treatment, diseaseId: disease._id }
         );
+        console.log(`Updated DiseaseTreatments: ${disease.name}`);
       }
 
       if (item.weather) {
@@ -481,6 +433,7 @@ const updateDiseaseData = async () => {
           { diseaseId: disease._id },
           { ...item.weather, diseaseId: disease._id }
         );
+        console.log(`Updated DiseaseWeathers: ${disease.name}`);
       }
 
       // Nếu có stage

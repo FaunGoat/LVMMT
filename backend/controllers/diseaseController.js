@@ -7,10 +7,35 @@ const DiseaseTreatment = require("../models/new/DiseaseTreatment");
 const DiseasePrevention = require("../models/new/DiseasePrevention");
 const WeatherDiseaseCorrelation = require("../models/new/WeatherDiseaseCorrelation");
 
-// Lấy tất cả bệnh (chỉ thông tin cơ bản)
+// ==========================================
+// HELPER FUNCTIONS
+// ==========================================
+
+// Hàm tạo Regex tìm kiếm tiếng Việt bất chấp dấu
+// Ví dụ: "dao on" -> tìm được "Đạo ôn", "đạo ôn", "ĐẠO ÔN"
+function createVietnameseRegex(keyword) {
+  if (!keyword) return "";
+
+  const str = keyword.toLowerCase();
+  let regexStr = str
+    .replace(/a/g, "[aáàảãạăắằẳẵặâấầẩẫậ]")
+    .replace(/d/g, "[dđ]")
+    .replace(/e/g, "[eéèẻẽẹêếềểễệ]")
+    .replace(/i/g, "[iíìỉĩị]")
+    .replace(/o/g, "[oóòỏõọôốồổỗộơớờởỡợ]")
+    .replace(/u/g, "[uúùủũụưứừửữự]")
+    .replace(/y/g, "[yýỳỷỹỵ]");
+
+  return new RegExp(regexStr, "i");
+}
+
+// ==========================================
+// CONTROLLER FUNCTIONS
+// ==========================================
+
+// 1. Lấy tất cả bệnh (chỉ thông tin cơ bản)
 exports.getAllDiseases = async (req, res) => {
   try {
-    // Bây giờ hàm này sẽ lấy ID từ models/new/Disease
     const diseases = await Disease.find({}).sort({ name: 1 });
     res.json({
       success: true,
@@ -26,17 +51,121 @@ exports.getAllDiseases = async (req, res) => {
   }
 };
 
-// Lấy chi tiết 1 bệnh (với TẤT CẢ thông tin liên quan)
+// 2. Tìm kiếm và Lọc bệnh (Nâng cao)
+// Hỗ trợ: Tên, Loại, Mức độ, Mùa vụ, Giai đoạn, Bộ phận
+exports.searchDiseases = async (req, res) => {
+  try {
+    const {
+      query, // Từ khóa tìm kiếm
+      type, // Loại bệnh: Nấm, Vi khuẩn...
+      severityRisk, // Mức độ: Rất cao, Cao...
+      season, // Mùa vụ: Đông Xuân, Hè Thu...
+      cropStage, // Giai đoạn: Đẻ nhánh, Trổ bông...
+      symptomPart, // Bộ phận: Lá, Thân, Rễ...
+    } = req.query;
+
+    // Danh sách ID hợp lệ sau khi lọc qua các bảng phụ
+    // null nghĩa là chưa có bộ lọc phụ nào được áp dụng
+    let validIds = null;
+
+    // --- BƯỚC 1: LỌC THEO MÙA VỤ HOẶC GIAI ĐOẠN (Bảng DiseaseSeason) ---
+    if ((season && season !== "all") || (cropStage && cropStage !== "all")) {
+      let seasonQuery = {};
+
+      if (season && season !== "all") {
+        seasonQuery["seasons.type"] = season;
+      }
+
+      if (cropStage && cropStage !== "all") {
+        seasonQuery["criticalPeriods.cropStage"] = cropStage;
+      }
+
+      // Tìm các diseaseId thỏa mãn trong bảng Season
+      const seasonResults = await DiseaseSeason.find(seasonQuery).distinct(
+        "diseaseId"
+      );
+      validIds = seasonResults.map((id) => id.toString());
+    }
+
+    // --- BƯỚC 2: LỌC THEO BỘ PHẬN BỊ BỆNH (Bảng DiseaseSymptom) ---
+    if (symptomPart && symptomPart !== "all") {
+      const symptomQuery = {
+        "symptoms.part": symptomPart,
+      };
+
+      const symptomResults = await DiseaseSymptom.find(symptomQuery).distinct(
+        "diseaseId"
+      );
+      const stringSymptomIds = symptomResults.map((id) => id.toString());
+
+      if (validIds === null) {
+        // Nếu chưa lọc Season/Stage, lấy kết quả này làm gốc
+        validIds = stringSymptomIds;
+      } else {
+        // Nếu đã có danh sách ID từ Bước 1, lấy GIAO (Intersection)
+        validIds = validIds.filter((id) => stringSymptomIds.includes(id));
+      }
+    }
+
+    // --- BƯỚC 3: TẠO QUERY CHO BẢNG CHÍNH (Disease) ---
+    let dbQuery = {};
+
+    // a. Áp dụng filter ID từ các bước trên
+    if (validIds !== null) {
+      if (validIds.length === 0) {
+        // Nếu lọc chéo không ra kết quả -> Trả về rỗng ngay
+        return res.json({ success: true, count: 0, data: [] });
+      }
+      dbQuery._id = { $in: validIds };
+    }
+
+    // b. Tìm kiếm từ khóa (Regex thông minh)
+    if (query && query.trim()) {
+      const searchRegex = createVietnameseRegex(query.trim());
+      dbQuery.$or = [
+        { name: { $regex: searchRegex } },
+        { commonName: { $regex: searchRegex } },
+        { scientificName: { $regex: query.trim(), $options: "i" } },
+      ];
+    }
+
+    // c. Filter các thuộc tính cơ bản
+    if (type && type !== "all") {
+      dbQuery.type = type;
+    }
+
+    if (severityRisk && severityRisk !== "all") {
+      dbQuery.severityRisk = severityRisk;
+    }
+
+    // --- BƯỚC 4: THỰC THI ---
+    const diseases = await Disease.find(dbQuery).sort({ name: 1 });
+
+    res.json({
+      success: true,
+      count: diseases.length,
+      data: diseases,
+    });
+  } catch (error) {
+    console.error("Error searching diseases:", error);
+    res.status(500).json({
+      success: false,
+      error: "Không thể tìm kiếm bệnh lúa",
+    });
+  }
+};
+
+// 3. Lấy chi tiết 1 bệnh (với TẤT CẢ thông tin liên quan qua populate)
 exports.getDiseaseById = async (req, res) => {
   try {
     const disease = await Disease.findById(req.params.id)
-      .populate("stages") // Giai đoạn phát triển
-      .populate("seasons") // Mùa vụ
-      .populate("causes") // Nguyên nhân
-      .populate("symptoms") // Triệu chứng
-      .populate("treatments") // Điều trị
-      .populate("prevention") // Phòng ngừa
-      .populate("weatherCorrelation"); // Thời tiết
+      .populate("stages")
+      .populate("seasons")
+      .populate("causes")
+      .populate("symptoms")
+      .populate("treatments")
+      .populate("prevention")
+      .populate("weatherCorrelation");
 
     if (!disease) {
       return res.status(404).json({
@@ -58,24 +187,22 @@ exports.getDiseaseById = async (req, res) => {
   }
 };
 
-// GET /api/diseases/:id/full - Lấy TOÀN BỘ thông tin chi tiết của 1 bệnh
+// 4. Lấy TOÀN BỘ thông tin chi tiết (Query từng bảng riêng lẻ)
 exports.getDiseaseFullDetails = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Không cần require lại ở đây nữa vì đã import ở đầu file
-
-    // 1. Tìm bệnh trong collection MỚI
+    // Tìm bệnh trong collection chính
     const disease = await Disease.findById(id);
 
     if (!disease) {
       return res.status(404).json({
         success: false,
-        error: "Không tìm thấy bệnh lúa trong database mới",
+        error: "Không tìm thấy bệnh lúa",
       });
     }
 
-    // 2. Lấy chi tiết từ các collection MỚI
+    // Lấy chi tiết từ các collection phụ song song
     const [
       stages,
       seasons,
@@ -116,13 +243,12 @@ exports.getDiseaseFullDetails = async (req, res) => {
   }
 };
 
-// Lấy chi tiết bệnh theo SECTIONS (tối ưu hơn)
+// 5. Lấy chi tiết bệnh theo SECTIONS (Tối ưu performance)
 exports.getDiseaseSections = async (req, res) => {
   try {
     const { id } = req.params;
-    const { sections } = req.query; // ?sections=stages,symptoms,treatments
+    const { sections } = req.query;
 
-    // Mặc định lấy tất cả
     const requestedSections = sections
       ? sections.split(",")
       : [
@@ -135,7 +261,6 @@ exports.getDiseaseSections = async (req, res) => {
           "weatherCorrelation",
         ];
 
-    // Lấy disease cơ bản
     const disease = await Disease.findById(id);
 
     if (!disease) {
@@ -145,13 +270,9 @@ exports.getDiseaseSections = async (req, res) => {
       });
     }
 
-    // Populate chỉ những sections được yêu cầu
-    const populatePromises = [];
-
-    requestedSections.forEach((section) => {
-      populatePromises.push(disease.populate(section));
-    });
-
+    const populatePromises = requestedSections.map((section) =>
+      disease.populate(section)
+    );
     await Promise.all(populatePromises);
 
     res.json({
@@ -167,50 +288,12 @@ exports.getDiseaseSections = async (req, res) => {
   }
 };
 
-// Tìm kiếm bệnh theo tên
-exports.searchDiseases = async (req, res) => {
-  try {
-    const { query } = req.query;
-
-    if (!query) {
-      return res.status(400).json({
-        success: false,
-        error: "Vui lòng nhập từ khóa tìm kiếm",
-      });
-    }
-
-    const diseases = await Disease.find({
-      $or: [
-        { name: { $regex: query, $options: "i" } },
-        { commonName: { $regex: query, $options: "i" } },
-        { scientificName: { $regex: query, $options: "i" } },
-      ],
-    });
-
-    res.json({
-      success: true,
-      count: diseases.length,
-      data: diseases,
-    });
-  } catch (error) {
-    console.error("Error searching diseases:", error);
-    res.status(500).json({
-      success: false,
-      error: "Không thể tìm kiếm bệnh lúa",
-    });
-  }
-};
-
-// Lấy bệnh theo mùa vụ hiện tại
+// 6. Lấy bệnh theo mùa vụ hiện tại (API chuyên biệt cho Widget/Homepage)
 exports.getDiseasesBySeason = async (req, res) => {
   try {
     const currentMonth = new Date().getMonth() + 1;
-    const { season } = req.query; // "Đông Xuân" hoặc "Hè Thu"
+    const { season } = req.query;
 
-    // Import DiseaseSeason model
-    const DiseaseSeason = require("../models/new/DiseaseSeason");
-
-    // Tìm các bệnh có season phù hợp
     const diseaseSeasons = await DiseaseSeason.find({
       "seasons.type": season || {
         $in:
@@ -218,7 +301,6 @@ exports.getDiseasesBySeason = async (req, res) => {
       },
     }).populate("diseaseId");
 
-    // Lấy thông tin disease
     const diseases = diseaseSeasons.map((ds) => ds.diseaseId).filter((d) => d); // Loại bỏ null
 
     // Sắp xếp theo mức độ nguy hiểm
@@ -246,10 +328,10 @@ exports.getDiseasesBySeason = async (req, res) => {
   }
 };
 
-// Lấy bệnh theo giai đoạn cây trồng
+// 7. Lấy bệnh theo giai đoạn cây trồng (API chuyên biệt)
 exports.getDiseasesByCropStage = async (req, res) => {
   try {
-    const { cropStage } = req.query; // "Đẻ nhánh", "Trổ bông", v.v.
+    const { cropStage } = req.query;
 
     if (!cropStage) {
       return res.status(400).json({
@@ -258,9 +340,6 @@ exports.getDiseasesByCropStage = async (req, res) => {
       });
     }
 
-    const DiseaseSeason = require("../models/new/DiseaseSeason");
-
-    // Tìm các bệnh có critical period ở giai đoạn này
     const diseaseSeasons = await DiseaseSeason.find({
       "criticalPeriods.cropStage": cropStage,
     }).populate("diseaseId");
@@ -285,7 +364,7 @@ exports.getDiseasesByCropStage = async (req, res) => {
   }
 };
 
-// Lấy bệnh theo điều kiện thời tiết hiện tại
+// 8. Lấy bệnh theo điều kiện thời tiết
 exports.getDiseasesByWeather = async (req, res) => {
   try {
     const { temperature, humidity, rainfall } = req.query;
@@ -300,9 +379,6 @@ exports.getDiseasesByWeather = async (req, res) => {
     const temp = parseFloat(temperature);
     const humid = parseFloat(humidity);
 
-    const WeatherDiseaseCorrelation = require("../models/new/WeatherDiseaseCorrelation");
-
-    // Tìm các bệnh có nguy cơ với điều kiện thời tiết này
     const correlations = await WeatherDiseaseCorrelation.find({
       $and: [
         { "weatherTriggers.threshold.temperature.min": { $lte: temp } },
@@ -331,7 +407,7 @@ exports.getDiseasesByWeather = async (req, res) => {
       };
     });
 
-    // Sắp xếp theo mức độ nguy cơ
+    // Sắp xếp theo rủi ro
     diseasesWithRisk.sort((a, b) => {
       const riskOrder = { "Rất cao": 4, Cao: 3, "Trung bình": 2, Thấp: 1 };
       return (
