@@ -13,12 +13,12 @@ const DiseaseCauses = ({ causes }) => {
       {causes.pathogen && (
         <div className="bg-white rounded-lg shadow p-5 border mb-4">
           <h4 className="text-lg font-bold text-gray-800 mb-3">
-            Mầm bệnh chính
+            Nguyên nhân chính
           </h4>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div className="bg-purple-50 rounded p-3 border border-purple-200">
-              <p className="text-sm text-gray-600">Loại mầm bệnh</p>
+              <p className="text-sm text-gray-600">Loại mầm bệnh/côn trùng</p>
               <p className="text-lg font-bold text-purple-700">
                 {causes.pathogen.type}
               </p>

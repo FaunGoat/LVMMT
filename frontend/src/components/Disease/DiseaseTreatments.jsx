@@ -29,7 +29,20 @@ const DiseaseTreatments = ({ treatments }) => {
 
       {/* Type Filter */}
       <div className="flex flex-wrap gap-2 mb-6">
-        {/* <button
+        {uniqueTypes.map((type) => (
+          <button
+            key={type}
+            onClick={() => setSelectedType(type)}
+            className={`px-4 py-2 rounded-lg font-medium transition ${
+              selectedType === type
+                ? "bg-sky-500 text-white shadow-md"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+            }`}
+          >
+            {type}
+          </button>
+        ))}
+        <button
           onClick={() => setSelectedType("all")}
           className={`px-4 py-2 rounded-lg font-medium transition ${
             selectedType === "all"
@@ -38,20 +51,7 @@ const DiseaseTreatments = ({ treatments }) => {
           }`}
         >
           Tất cả
-        </button> */}
-        {uniqueTypes.map((type) => (
-          <button
-            key={type}
-            onClick={() => setSelectedType(type)}
-            className={`px-4 py-2 rounded-lg font-medium transition ${
-              selectedType === "all"
-                ? "bg-sky-500 text-white shadow-md"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            {type}
-          </button>
-        ))}
+        </button>
       </div>
 
       {/* Treatments List */}

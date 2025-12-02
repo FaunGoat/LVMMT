@@ -24,7 +24,7 @@ const DiseaseStages = ({ stages }) => {
       {/* Tổng thời gian */}
       <div className="absolute left-1/2 -translate-x-1/2 bg-blue-100 px-4 py-1 rounded-full border border-blue-300">
         <p className="text-base font-semibold text-blue-800 whitespace-nowrap">
-          Tổng thời gian: {stages.totalDuration}
+          Thời gian: {stages.totalDuration}
         </p>
       </div>
 
