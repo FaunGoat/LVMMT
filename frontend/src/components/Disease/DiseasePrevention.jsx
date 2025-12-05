@@ -668,7 +668,7 @@ const DiseasePrevention = ({ prevention }) => {
         )}
 
       {/* Farm Hygiene (Vệ sinh Nông trại) - New */}
-      {prevention.farmHygiene && prevention.farmHygiene.length > 0 && (
+      {/* {prevention.farmHygiene && prevention.farmHygiene.length > 0 && (
         <div className="space-y-4 mb-8">
           <h4 className="text-xl font-bold text-gray-800 mb-4">
             Vệ sinh Nông trại
@@ -699,7 +699,7 @@ const DiseasePrevention = ({ prevention }) => {
             </div>
           ))}
         </div>
-      )}
+      )} */}
 
       {/* Preventive Schedule (Lịch trình Phòng ngừa) - Uncommented and Styled */}
       {prevention.preventiveSchedule &&
