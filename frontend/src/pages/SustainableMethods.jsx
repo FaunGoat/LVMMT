@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { FaBars } from "@react-icons/all-files/fa/FaBars";
-import { FaTimes as FaTimesIcon } from "@react-icons/all-files/fa/FaTimes";
+import { FaBars } from "react-icons/fa";
+import { FaTimes as FaTimesIcon } from "react-icons/fa";
 import WeatherPopup from "../components/Common/WeatherPopup";
 import { useLocation } from "react-router-dom";
 import placeholderImage from "../assets/images/placeholder.jpg";
 
+import DiseaseFilter from "../components/Disease/DiseaseFilter";
 import DiseaseStages from "../components/Disease/DiseaseStages";
 import DiseaseSeasons from "../components/Disease/DiseaseSeasons";
 import DiseaseCauses from "../components/Disease/DiseaseCauses";
@@ -25,6 +26,12 @@ function SustainableMethods() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [activeSection, setActiveSection] = useState("images");
+  const [filterType, setFilterType] = useState("all");
+  const [filterRisk, setFilterRisk] = useState("all");
+  const [filterSeason, setFilterSeason] = useState("all");
+  const [filterStage, setFilterStage] = useState("all");
+  const [filterPart, setFilterPart] = useState("all");
+  const [isFilterPopupOpen, setIsFilterPopupOpen] = useState(false);
   const location = useLocation();
 
   // Refs cho các section
@@ -66,6 +73,18 @@ function SustainableMethods() {
       }
     }
   }, [location.search, diseases]);
+
+  // useEffect(() => {
+  //   if (
+  //     filterType !== "all" ||
+  //     filterRisk !== "all" ||
+  //     filterSeason !== "all" ||
+  //     filterStage !== "all" ||
+  //     filterPart !== "all"
+  //   ) {
+  //     handleSearch();
+  //   }
+  // }, [filterType, filterRisk, filterSeason, filterStage, filterPart]);
 
   const fetchDiseaseDetails = async (diseaseId) => {
     try {
@@ -133,29 +152,46 @@ function SustainableMethods() {
   };
 
   const handleSearch = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
 
-    if (!searchQuery.trim()) {
+    // Reset logic: Nếu không có gì để lọc thì load all
+    const isAllFiltersDefault =
+      filterType === "all" &&
+      filterRisk === "all" &&
+      filterSeason === "all" &&
+      filterStage === "all" &&
+      filterPart === "all";
+
+    if (!searchQuery.trim() && isAllFiltersDefault) {
       fetchDiseases();
       return;
     }
 
+    setIsFilterPopupOpen(false);
+
     try {
       setLoading(true);
+      const params = new URLSearchParams();
+
+      // Append params cơ bản
+      if (searchQuery.trim()) params.append("query", searchQuery.trim());
+      if (filterType !== "all") params.append("type", filterType);
+      if (filterRisk !== "all") params.append("severityRisk", filterRisk);
+
+      // ✅ Append params mới
+      if (filterSeason !== "all") params.append("season", filterSeason);
+      if (filterStage !== "all") params.append("cropStage", filterStage);
+      if (filterPart !== "all") params.append("symptomPart", filterPart);
+
       const response = await fetch(
-        `http://localhost:5000/api/diseases/search?query=${encodeURIComponent(
-          searchQuery
-        )}`
+        `http://localhost:5000/api/diseases/search?${params.toString()}`
       );
 
-      if (!response.ok) {
-        throw new Error("Không thể tìm kiếm");
-      }
-
+      // ... (Phần xử lý response giữ nguyên như code trước)
+      if (!response.ok) throw new Error("Không thể tìm kiếm");
       const data = await response.json();
-
       if (data.success) {
-        // ✅ Lấy URL trực tiếp từ database
+        // Map images logic...
         const diseasesWithImages = data.data.map((disease) => ({
           ...disease,
           images:
@@ -165,20 +201,27 @@ function SustainableMethods() {
               alt: img.alt || disease.name,
             })) || [],
         }));
-
         setDiseases(diseasesWithImages);
-        if (diseasesWithImages.length > 0) {
+        if (diseasesWithImages.length > 0)
           setSelectedDisease(diseasesWithImages[0]);
-        } else {
-          setSelectedDisease(null);
-        }
+        else setSelectedDisease(null);
       }
     } catch (err) {
-      console.error("Error searching diseases:", err);
       setError(err.message);
     } finally {
       setLoading(false);
     }
+  };
+
+  const clearFilters = () => {
+    setFilterType("all");
+    setFilterRisk("all");
+    setFilterSeason("all");
+    setFilterStage("all");
+    setFilterPart("all");
+    setSearchQuery("");
+    setIsFilterPopupOpen(false); // ✅ Đóng popup
+    fetchDiseases();
   };
 
   // Scroll đến section
@@ -244,13 +287,16 @@ function SustainableMethods() {
       <WeatherPopup />
 
       {/* Header */}
-      <div className="bg-gradient-to-r from-sky-500 to-blue-600 text-white p-6 shadow-lg relative">
-        <button
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="absolute left-6 top-8 text-white hover:text-gray-200 focus:outline-none transition z-50"
+      <div className="bg-gradient-to-r from-sky-500 to-blue-600 text-white p-4 shadow-lg relative">
+        {/* <button
+          onClick={() => {
+            setIsSidebarOpen(!isSidebarOpen);
+            setIsFilterPopupOpen(false);
+          }}
+          className="absolute left-6 top-16 text-white hover:text-gray-200 focus:outline-none transition z-50"
         >
           {isSidebarOpen ? <FaTimesIcon size={24} /> : <FaBars size={24} />}
-        </button>
+        </button> */}
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-2">Thông tin Bệnh Lúa</h1>
           <p className="text-sky-100">
@@ -266,31 +312,73 @@ function SustainableMethods() {
           className={`bg-white shadow-xl overflow-y-auto transition-all duration-300 ${
             isSidebarOpen ? "w-80" : "w-0"
           }`}
-          style={{ height: "calc(100vh - 160px)", position: "sticky", top: 0 }}
+          style={{
+            height: "calc(100vh - 160px)",
+            position: "sticky",
+            top: "110px",
+            left: 0,
+            zIndex: 30,
+          }}
         >
+          {!isSidebarOpen && (
+            <button
+              onClick={() => {
+                setIsSidebarOpen(true); // Mở Sidebar
+                // Không cần đóng popup vì nó đã ẩn cùng sidebar rồi
+              }}
+              // Đặt nó ở vị trí tương đương với vị trí cũ (hoặc vị trí dễ truy cập)
+              className="fixed left-0 top-[115px] text-sky-600 bg-white p-3 rounded-r-full shadow-lg hover:bg-sky-50 transition z-40"
+            >
+              <FaBars size={24} />
+            </button>
+          )}
           {isSidebarOpen && (
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-sky-700 mb-4">
-                Danh sách bệnh
+            <div className="p-6 relative">
+              <button
+                onClick={() => {
+                  setIsSidebarOpen(false); // Luôn đóng Sidebar
+                  setIsFilterPopupOpen(false); // Luôn đóng Filter Popup
+                }}
+                // Đặt nút ở góc trên bên phải của sidebar
+                className="absolute top-0 right-0 p-3 text-gray-500 hover:text-red-500 focus:outline-none transition z-50"
+              >
+                <FaTimesIcon size={24} />
+              </button>
+              <h3 className="text-2xl font-bold text-sky-700 mb-4">
+                Danh sách Bệnh
               </h3>
 
-              {/* Search */}
-              <div className="mb-6">
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyPress={(e) => e.key === "Enter" && handleSearch(e)}
-                  placeholder="Tìm kiếm bệnh..."
-                  className="w-full p-3 border-2 border-sky-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent"
-                />
-                <button
-                  onClick={handleSearch}
-                  className="w-full mt-2 bg-sky-500 text-white py-2 px-4 rounded-lg hover:bg-sky-600 transition font-medium"
-                >
-                  Tìm kiếm
-                </button>
+              {/* KHU VỰC TÌM KIẾM & FILTER */}
+              <div className="mb-6 space-y-3">
+                {/* Input Search */}
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyPress={(e) => e.key === "Enter" && handleSearch(e)}
+                    placeholder="Tìm kiếm bệnh (vd: dao on)..."
+                    className="w-full p-3 border border-sky-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-sm"
+                  />
+                </div>
+
+                {/* Nút Tìm kiếm chính và Nút mở Popup */}
+                <div className="flex gap-2">
+                  <button
+                    onClick={handleSearch}
+                    className="flex-1 bg-sky-500 text-white py-2 px-4 rounded-lg hover:bg-sky-600 transition font-medium text-sm flex justify-center items-center gap-2"
+                  >
+                    <span>Tìm kiếm</span>
+                  </button>
+                  <button
+                    onClick={() => setIsFilterPopupOpen(true)} // Mở Popup
+                    className="px-4 py-2 bg-blue-100 text-sky-700 rounded-lg hover:bg-blue-200 transition font-medium text-sm"
+                  >
+                    Bộ lọc
+                  </button>
+                </div>
               </div>
+              {/* KẾT THÚC KHU VỰC TÌM KIẾM & FILTER */}
 
               {/* Disease List */}
               {loading ? (
@@ -309,9 +397,15 @@ function SustainableMethods() {
                   </button>
                 </div>
               ) : diseases.length === 0 ? (
-                <p className="text-center text-gray-500 p-4">
-                  Không tìm thấy bệnh nào
-                </p>
+                <div className="text-center text-gray-500 p-4 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+                  <p>Không tìm thấy bệnh phù hợp.</p>
+                  <button
+                    onClick={clearFilters}
+                    className="text-sky-500 text-sm mt-2 underline"
+                  >
+                    Xóa tìm kiếm
+                  </button>
+                </div>
               ) : (
                 <div className="space-y-2">
                   {diseases.map((disease) => (
@@ -327,7 +421,9 @@ function SustainableMethods() {
                           : "bg-sky-50 hover:bg-sky-100 text-gray-700"
                       }`}
                     >
-                      <p className="font-semibold">{disease.name}</p>
+                      <div className="flex justify-between items-start">
+                        <p className="font-semibold">{disease.name}</p>
+                      </div>
                       <p
                         className={`text-xs mt-1 ${
                           selectedDisease?._id === disease._id
@@ -349,7 +445,7 @@ function SustainableMethods() {
         <div className="flex-1 flex">
           {/* Main Content */}
           <div className="flex-1 overflow-y-auto">
-            <div className="max-w-7xl mx-auto p-6">
+            <div className="max-w-7xl mx-auto p-4 pt-2">
               {loading ? (
                 <div className="text-center py-20">
                   <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-sky-500 mx-auto"></div>
@@ -558,7 +654,9 @@ function SustainableMethods() {
               style={{
                 height: "calc(100vh - 160px)",
                 position: "sticky",
-                top: 0,
+                top: "110px",
+                right: 0,
+                zIndex: 20,
               }}
             >
               <h3 className="text-lg font-bold text-sky-700 mb-4 flex items-center gap-2">
@@ -648,6 +746,23 @@ function SustainableMethods() {
           </div>
         </div>
       </div>
+      {/* ✅ RENDER COMPONENT FILTER MODAL MỚI */}
+      <DiseaseFilter
+        isFilterPopupOpen={isFilterPopupOpen}
+        setIsFilterPopupOpen={setIsFilterPopupOpen}
+        filterType={filterType}
+        setFilterType={setFilterType}
+        filterRisk={filterRisk}
+        setFilterRisk={setFilterRisk}
+        filterSeason={filterSeason}
+        setFilterSeason={setFilterSeason}
+        filterStage={filterStage}
+        setFilterStage={setFilterStage}
+        filterPart={filterPart}
+        setFilterPart={setFilterPart}
+        handleSearch={handleSearch}
+        clearFilters={clearFilters}
+      />
     </div>
   );
 }

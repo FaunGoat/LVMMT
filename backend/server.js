@@ -1,7 +1,6 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const cors = require("cors");
-const path = require("path");
 const { setupWeatherCron } = require("./config/cron");
 require("dotenv").config();
 
@@ -29,6 +28,9 @@ app.use("/api/chat", require("./routes/chatbot"));
 app.use("/webhook", require("./routes/webhook"));
 app.use("/api/diseases", require("./routes/disease"));
 app.use("/api/weather", require("./routes/weather"));
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/admin/diseases", require("./routes/diseaseAdmin"));
+app.use("/api/admin/disease-details", require("./routes/diseaseDetail"));
 
 app.get("/", (req, res) => {
   res.send("WELCOME TO LÚA VIỆT. API!");

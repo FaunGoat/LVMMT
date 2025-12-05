@@ -11,10 +11,15 @@
       "startMonth": 1,
       "endMonth": 12,
       "riskLevel": "Rất cao",
-      "peakMonths": [],
-      "description": "Phát triển mạnh khi trồng lúa liên tục.",
+      "peakMonths": [
+        3,
+        4,
+        10,
+        11
+      ],
+      "description": "Rầy nâu phát triển liên tục, đặc biệt là các vụ trồng gối vụ. Mật độ cao và nguy cơ 'cháy rầy' thường xảy ra vào cuối các vụ chính (trước thu hoạch).",
       "_id": {
-        "$oid": "692d6c743a5736cf93a203b7"
+        "$oid": "692e5817ceb211fe98411142"
       },
       "historicalOutbreaks": []
     }
@@ -25,7 +30,7 @@
     "$date": "2025-11-30T16:16:54.871Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T10:22:44.992Z"
+    "$date": "2025-12-02T03:08:07.056Z"
   },
   "__v": 0
 },
@@ -39,13 +44,16 @@
   "seasons": [
     {
       "type": "Hè Thu",
-      "startMonth": 7,
-      "endMonth": 9,
-      "riskLevel": "Cao",
-      "peakMonths": [],
-      "description": "Giai đoạn trổ thường có mưa.",
+      "startMonth": 4,
+      "endMonth": 8,
+      "riskLevel": "Rất cao",
+      "peakMonths": [
+        6,
+        7
+      ],
+      "description": "Nguy cơ cao nhất khi lúa trổ gặp mưa kéo dài hoặc thời tiết âm u, tạo điều kiện ẩm ướt cho nhiều loại nấm và vi khuẩn tấn công hạt lúa.",
       "_id": {
-        "$oid": "692d6c763a5736cf93a2041f"
+        "$oid": "692e5817ceb211fe98411158"
       },
       "historicalOutbreaks": []
     }
@@ -76,7 +84,7 @@
     "$date": "2025-11-30T16:16:55.346Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T10:22:46.469Z"
+    "$date": "2025-12-02T03:08:07.325Z"
   },
   "__v": 0
 },
@@ -90,13 +98,16 @@
   "seasons": [
     {
       "type": "Hè Thu",
-      "startMonth": 6,
-      "endMonth": 9,
-      "riskLevel": "Cao",
-      "peakMonths": [],
-      "description": "Mùa mưa bão.",
+      "startMonth": 4,
+      "endMonth": 8,
+      "riskLevel": "Rất cao",
+      "peakMonths": [
+        7,
+        8
+      ],
+      "description": "Lây lan mạnh mẽ sau các cơn mưa bão lớn kèm gió mạnh làm lá bị rách, kết hợp nhiệt độ cao giúp vi khuẩn phát triển nhanh chóng.",
       "_id": {
-        "$oid": "692d6c763a5736cf93a203ff"
+        "$oid": "692e5817ceb211fe98411162"
       },
       "historicalOutbreaks": []
     }
@@ -118,7 +129,7 @@
     "$date": "2025-11-30T16:16:55.859Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T10:22:46.022Z"
+    "$date": "2025-12-02T03:08:07.409Z"
   },
   "__v": 0
 },
@@ -133,12 +144,31 @@
     {
       "type": "Đông Xuân",
       "startMonth": 11,
-      "endMonth": 3,
+      "endMonth": 4,
       "riskLevel": "Rất cao",
-      "peakMonths": [],
-      "description": "Thời tiết lạnh, có sương mù.",
+      "peakMonths": [
+        1,
+        2,
+        3
+      ],
+      "description": "Bệnh bùng phát mạnh do nhiệt độ thấp (20-25°C), ẩm độ cao, mưa phùn và sương mù dày đặc. Nguy hiểm nhất là đạo ôn cổ bông ở giai đoạn trổ.",
       "_id": {
-        "$oid": "692d6c753a5736cf93a203da"
+        "$oid": "692e5817ceb211fe9841114d"
+      },
+      "historicalOutbreaks": []
+    },
+    {
+      "type": "Hè Thu",
+      "startMonth": 4,
+      "endMonth": 8,
+      "riskLevel": "Cao",
+      "peakMonths": [
+        5,
+        6
+      ],
+      "description": "Vẫn xuất hiện trên lá khi có những đợt mưa dầm và bón thừa đạm.",
+      "_id": {
+        "$oid": "692e5817ceb211fe9841114e"
       },
       "historicalOutbreaks": []
     }
@@ -169,7 +199,7 @@
     "$date": "2025-11-30T16:16:56.366Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T10:22:45.554Z"
+    "$date": "2025-12-02T03:08:07.241Z"
   },
   "__v": 0
 },
@@ -183,13 +213,16 @@
   "seasons": [
     {
       "type": "Hè Thu",
-      "startMonth": 5,
-      "endMonth": 9,
-      "riskLevel": "Rất cao",
-      "peakMonths": [],
-      "description": "Đa số các đợt bướm rộ xảy ra trong vụ này.",
+      "startMonth": 4,
+      "endMonth": 8,
+      "riskLevel": "Cao",
+      "peakMonths": [
+        5,
+        6
+      ],
+      "description": "Sâu cuốn lá lớn phát triển mạnh mẽ nhất, gây thiệt hại nặng nề ở giai đoạn lúa đẻ nhánh do nguồn thức ăn dồi dào và nhiệt độ cao.",
       "_id": {
-        "$oid": "692d6c763a5736cf93a2043f"
+        "$oid": "692e5817ceb211fe9841116a"
       },
       "historicalOutbreaks": []
     }
@@ -219,7 +252,7 @@
     "$date": "2025-11-30T16:16:56.817Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T10:22:46.955Z"
+    "$date": "2025-12-02T03:08:07.492Z"
   },
   "__v": 0
 },
@@ -731,16 +764,16 @@
   "seasons": [
     {
       "type": "Hè Thu",
-      "startMonth": 5,
-      "endMonth": 9,
+      "startMonth": 4,
+      "endMonth": 8,
       "riskLevel": "Rất cao",
       "peakMonths": [
-        7,
-        8
+        6,
+        7
       ],
-      "description": "Nóng ẩm mưa nhiều",
+      "description": "Thời tiết nóng ẩm, mưa nhiều kết hợp với gieo sạ dày và bón thừa đạm là điều kiện lý tưởng để nấm lây lan từ gốc lên bẹ lá.",
       "_id": {
-        "$oid": "692d54dbff3e886e39c6de0a"
+        "$oid": "692e5817ceb211fe98411172"
       },
       "historicalOutbreaks": []
     }
@@ -765,7 +798,7 @@
     "$date": "2025-12-01T08:42:03.636Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:03.636Z"
+    "$date": "2025-12-02T03:08:07.576Z"
   },
   "__v": 0
 },
@@ -778,14 +811,18 @@
   },
   "seasons": [
     {
-      "type": "Hè Thu",
-      "startMonth": 5,
-      "endMonth": 8,
+      "type": "Cả năm",
+      "startMonth": 1,
+      "endMonth": 12,
       "riskLevel": "Rất cao",
-      "peakMonths": [],
-      "description": "Mật độ rầy nâu cao",
+      "peakMonths": [
+        3,
+        7,
+        11
+      ],
+      "description": "Bệnh virus do Rầy nâu truyền, bùng phát thành dịch lớn khi rầy di trú mạnh và trồng lúa liên tục không có thời gian cách ly.",
       "_id": {
-        "$oid": "692d54dcff3e886e39c6de26"
+        "$oid": "692e5817ceb211fe98411179"
       },
       "historicalOutbreaks": []
     }
@@ -806,7 +843,7 @@
     "$date": "2025-12-01T08:42:04.070Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:04.070Z"
+    "$date": "2025-12-02T03:08:07.687Z"
   },
   "__v": 0
 },
@@ -819,13 +856,18 @@
   },
   "seasons": [
     {
-      "type": "Hè Thu",
-      "startMonth": 6,
-      "endMonth": 9,
-      "riskLevel": "Cao",
-      "peakMonths": [],
+      "type": "Cả năm",
+      "startMonth": 1,
+      "endMonth": 12,
+      "riskLevel": "Rất cao",
+      "peakMonths": [
+        3,
+        7,
+        11
+      ],
+      "description": "Bệnh virus thường đi kèm Vàng lùn, do Rầy nâu truyền, gây biến dạng cây và mất khả năng trổ bông.",
       "_id": {
-        "$oid": "692d54dcff3e886e39c6de41"
+        "$oid": "692e5817ceb211fe98411180"
       },
       "historicalOutbreaks": []
     }
@@ -846,7 +888,7 @@
     "$date": "2025-12-01T08:42:04.505Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:04.505Z"
+    "$date": "2025-12-02T03:08:07.770Z"
   },
   "__v": 0
 },
@@ -860,12 +902,16 @@
   "seasons": [
     {
       "type": "Đông Xuân",
-      "startMonth": 12,
-      "endMonth": 3,
-      "riskLevel": "Trung bình",
-      "peakMonths": [],
+      "startMonth": 11,
+      "endMonth": 4,
+      "riskLevel": "Cao",
+      "peakMonths": [
+        12,
+        1
+      ],
+      "description": "Gây hại nặng trên các ruộng chua, phèn, thiếu dinh dưỡng (K, Mn), thường xuất hiện sớm ở giai đoạn mạ và đẻ nhánh khi thời tiết ẩm ướt.",
       "_id": {
-        "$oid": "692d54dcff3e886e39c6de5c"
+        "$oid": "692e5817ceb211fe98411187"
       },
       "historicalOutbreaks": []
     }
@@ -886,7 +932,7 @@
     "$date": "2025-12-01T08:42:04.936Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:04.936Z"
+    "$date": "2025-12-02T03:08:07.853Z"
   },
   "__v": 0
 },
@@ -899,13 +945,16 @@
   },
   "seasons": [
     {
-      "type": "Cả năm",
-      "startMonth": 1,
-      "endMonth": 12,
-      "riskLevel": "Trung bình",
-      "peakMonths": [],
+      "type": "Đông Xuân",
+      "startMonth": 11,
+      "endMonth": 1,
+      "riskLevel": "Cao",
+      "peakMonths": [
+        12
+      ],
+      "description": "Bệnh nấm phát sinh ở các trà lúa gieo sạ dày vào mùa lạnh ẩm. Gây hiện tượng cây lúa von cao bất thường và chết yểu.",
       "_id": {
-        "$oid": "692d54ddff3e886e39c6de76"
+        "$oid": "692e5817ceb211fe9841118e"
       },
       "historicalOutbreaks": []
     }
@@ -926,7 +975,7 @@
     "$date": "2025-12-01T08:42:05.354Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:05.354Z"
+    "$date": "2025-12-02T03:08:07.937Z"
   },
   "__v": 0
 },
@@ -940,12 +989,16 @@
   "seasons": [
     {
       "type": "Hè Thu",
-      "startMonth": 7,
-      "endMonth": 9,
+      "startMonth": 4,
+      "endMonth": 8,
       "riskLevel": "Rất cao",
-      "peakMonths": [],
+      "peakMonths": [
+        5,
+        6
+      ],
+      "description": "Bệnh virus do Rầy xanh đuôi đen truyền. Phổ biến trong điều kiện ấm áp và ẩm ướt, ruộng lúa gần nguồn cỏ dại.",
       "_id": {
-        "$oid": "692d54ddff3e886e39c6de90"
+        "$oid": "692e5818ceb211fe98411195"
       },
       "historicalOutbreaks": []
     }
@@ -966,7 +1019,7 @@
     "$date": "2025-12-01T08:42:05.776Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:05.776Z"
+    "$date": "2025-12-02T03:08:08.019Z"
   },
   "__v": 0
 },
@@ -980,12 +1033,16 @@
   "seasons": [
     {
       "type": "Hè Thu",
-      "startMonth": 8,
-      "endMonth": 10,
+      "startMonth": 4,
+      "endMonth": 8,
       "riskLevel": "Cao",
-      "peakMonths": [],
+      "peakMonths": [
+        7,
+        8
+      ],
+      "description": "Phát triển mạnh vào giai đoạn lúa làm đòng và trổ, khi có mưa ẩm và nhiệt độ cao, làm bẹ lá thối, gây nghẹt đòng.",
       "_id": {
-        "$oid": "692d54deff3e886e39c6deaa"
+        "$oid": "692e5818ceb211fe9841119c"
       },
       "historicalOutbreaks": []
     }
@@ -1006,7 +1063,7 @@
     "$date": "2025-12-01T08:42:06.202Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:06.202Z"
+    "$date": "2025-12-02T03:08:08.106Z"
   },
   "__v": 0
 },
@@ -1019,13 +1076,17 @@
   },
   "seasons": [
     {
-      "type": "Đông Xuân",
+      "type": "Tất cả các vụ",
       "startMonth": 1,
-      "endMonth": 3,
-      "riskLevel": "Cao",
-      "peakMonths": [],
+      "endMonth": 12,
+      "riskLevel": "Trung bình",
+      "peakMonths": [
+        8,
+        12
+      ],
+      "description": "Đây chủ yếu là bệnh sinh lý do thiếu Kali hoặc Lân. Thường rõ rệt nhất ở giai đoạn lúa ôm đòng đến chín khi cây cần dinh dưỡng lớn.",
       "_id": {
-        "$oid": "692d54deff3e886e39c6dec4"
+        "$oid": "692e5818ceb211fe984111a3"
       },
       "historicalOutbreaks": []
     }
@@ -1046,7 +1107,7 @@
     "$date": "2025-12-01T08:42:06.638Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:06.638Z"
+    "$date": "2025-12-02T03:08:08.196Z"
   },
   "__v": 0
 },
@@ -1060,12 +1121,16 @@
   "seasons": [
     {
       "type": "Hè Thu",
-      "startMonth": 8,
-      "endMonth": 10,
-      "riskLevel": "Trung bình",
-      "peakMonths": [],
+      "startMonth": 4,
+      "endMonth": 8,
+      "riskLevel": "Nặng",
+      "peakMonths": [
+        7,
+        8
+      ],
+      "description": "Gây hại nghiêm trọng khi ruộng lúa luôn bị ngập nước (đặc biệt là gần mặt nước) và nhiệt độ cao, làm thân lúa bị thối mềm và đổ ngã.",
       "_id": {
-        "$oid": "692d54dfff3e886e39c6dede"
+        "$oid": "692e5818ceb211fe984111aa"
       },
       "historicalOutbreaks": []
     }
@@ -1086,7 +1151,7 @@
     "$date": "2025-12-01T08:42:07.053Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:07.053Z"
+    "$date": "2025-12-02T03:08:08.281Z"
   },
   "__v": 0
 },
@@ -1099,13 +1164,17 @@
   },
   "seasons": [
     {
-      "type": "Cả năm",
-      "startMonth": 1,
-      "endMonth": 12,
-      "riskLevel": "Thấp",
-      "peakMonths": [],
+      "type": "Đông Xuân",
+      "startMonth": 11,
+      "endMonth": 4,
+      "riskLevel": "Trung bình",
+      "peakMonths": [
+        1,
+        2
+      ],
+      "description": "Phát triển khi thời tiết ẩm ướt và mát mẻ, thường gây hại trên các lá già ở phần dưới của cây lúa.",
       "_id": {
-        "$oid": "692d54dfff3e886e39c6def8"
+        "$oid": "692e5818ceb211fe984111b1"
       },
       "historicalOutbreaks": []
     }
@@ -1126,7 +1195,7 @@
     "$date": "2025-12-01T08:42:07.467Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:07.467Z"
+    "$date": "2025-12-02T03:08:08.363Z"
   },
   "__v": 0
 },
@@ -1140,12 +1209,31 @@
   "seasons": [
     {
       "type": "Đông Xuân",
-      "startMonth": 12,
-      "endMonth": 2,
+      "startMonth": 11,
+      "endMonth": 4,
       "riskLevel": "Rất cao",
-      "peakMonths": [],
+      "peakMonths": [
+        3,
+        4
+      ],
+      "description": "Các lứa sâu non phát triển mạnh ở giai đoạn đẻ nhánh (gây 'dảnh héo') và làm đòng - trổ (gây 'bông bạc'), ảnh hưởng lớn đến năng suất.",
       "_id": {
-        "$oid": "692d54dfff3e886e39c6df12"
+        "$oid": "692e5818ceb211fe984111b8"
+      },
+      "historicalOutbreaks": []
+    },
+    {
+      "type": "Hè Thu",
+      "startMonth": 4,
+      "endMonth": 8,
+      "riskLevel": "Cao",
+      "peakMonths": [
+        6,
+        7
+      ],
+      "description": "Thiệt hại tập trung vào giai đoạn lúa trổ, bướm nở rộ và đẻ trứng vào thời điểm lúa non.",
+      "_id": {
+        "$oid": "692e5818ceb211fe984111b9"
       },
       "historicalOutbreaks": []
     }
@@ -1175,7 +1263,7 @@
     "$date": "2025-12-01T08:42:07.880Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:07.880Z"
+    "$date": "2025-12-02T03:08:08.443Z"
   },
   "__v": 0
 },
@@ -1188,13 +1276,16 @@
   },
   "seasons": [
     {
-      "type": "Hè Thu",
-      "startMonth": 4,
-      "endMonth": 6,
-      "riskLevel": "Cao",
-      "peakMonths": [],
+      "type": "Đầu vụ Hè Thu",
+      "startMonth": 3,
+      "endMonth": 5,
+      "riskLevel": "Rất cao",
+      "peakMonths": [
+        4
+      ],
+      "description": "Gây hại khủng khiếp nhất trong điều kiện nắng nóng và khô hạn kéo dài, đặc biệt là ở giai đoạn mạ và lúa non.",
       "_id": {
-        "$oid": "692d54e0ff3e886e39c6df2e"
+        "$oid": "692e5818ceb211fe984111c2"
       },
       "historicalOutbreaks": []
     }
@@ -1215,7 +1306,7 @@
     "$date": "2025-12-01T08:42:08.299Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:08.299Z"
+    "$date": "2025-12-02T03:08:08.539Z"
   },
   "__v": 0
 },
@@ -1229,12 +1320,15 @@
   "seasons": [
     {
       "type": "Hè Thu",
-      "startMonth": 5,
+      "startMonth": 6,
       "endMonth": 8,
-      "riskLevel": "Rất cao",
-      "peakMonths": [],
+      "riskLevel": "Cao",
+      "peakMonths": [
+        7
+      ],
+      "description": "Phát triển mạnh khi gặp thời tiết nóng ẩm và mưa nhẹ, gây hại tiềm ẩn ở giai đoạn làm đòng, làm lúa nghẹt và lem lép hạt khi trổ.",
       "_id": {
-        "$oid": "692d54e0ff3e886e39c6df47"
+        "$oid": "692e5818ceb211fe984111c9"
       },
       "historicalOutbreaks": []
     }
@@ -1255,7 +1349,7 @@
     "$date": "2025-12-01T08:42:08.740Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:08.740Z"
+    "$date": "2025-12-02T03:08:08.621Z"
   },
   "__v": 0
 },
@@ -1268,13 +1362,16 @@
   },
   "seasons": [
     {
-      "type": "Đông Xuân",
-      "startMonth": 11,
-      "endMonth": 1,
-      "riskLevel": "Trung bình",
-      "peakMonths": [],
+      "type": "Đầu vụ Hè Thu",
+      "startMonth": 4,
+      "endMonth": 6,
+      "riskLevel": "Rất cao",
+      "peakMonths": [
+        5
+      ],
+      "description": "Thường phát sinh khi có mưa lớn vào đầu vụ, tạo điều kiện cho muỗi trưởng thành đẻ trứng, gây hại nặng ở giai đoạn lúa non ('ống hành').",
       "_id": {
-        "$oid": "692d54e1ff3e886e39c6df60"
+        "$oid": "692e5818ceb211fe984111d0"
       },
       "historicalOutbreaks": []
     }
@@ -1295,7 +1392,7 @@
     "$date": "2025-12-01T08:42:09.174Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:09.174Z"
+    "$date": "2025-12-02T03:08:08.703Z"
   },
   "__v": 0
 },
@@ -1308,13 +1405,17 @@
   },
   "seasons": [
     {
-      "type": "Cả năm",
-      "startMonth": 1,
-      "endMonth": 12,
-      "riskLevel": "Trung bình",
-      "peakMonths": [],
+      "type": "Giai đoạn trổ",
+      "startMonth": 6,
+      "endMonth": 9,
+      "riskLevel": "Rất cao",
+      "peakMonths": [
+        7,
+        8
+      ],
+      "description": "Gây hại tập trung vào lúc lúa bắt đầu vào chắc, chúng hút sữa hạt làm hạt lép lửng, phổ biến ở tất cả các vụ nếu lúa trổ rộ.",
       "_id": {
-        "$oid": "692d54e1ff3e886e39c6df79"
+        "$oid": "692e5818ceb211fe984111d7"
       },
       "historicalOutbreaks": []
     }
@@ -1335,7 +1436,7 @@
     "$date": "2025-12-01T08:42:09.601Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:09.601Z"
+    "$date": "2025-12-02T03:08:08.785Z"
   },
   "__v": 0
 }]

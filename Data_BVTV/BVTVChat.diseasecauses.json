@@ -25,7 +25,7 @@
     "$date": "2025-11-30T16:16:54.928Z"
   },
   "updatedAt": {
-    "$date": "2025-11-30T17:50:38.726Z"
+    "$date": "2025-12-01T10:22:45.090Z"
   },
   "__v": 0
 },
@@ -38,10 +38,24 @@
   },
   "pathogen": {
     "type": "Nấm",
-    "scientificName": "Đa tác nhân",
+    "scientificName": "Đa tác nhân (Bipolaris, Sarocladium)",
+    "spreadMethod": [
+      "Không khí",
+      "Hạt giống",
+      "Tàn dư"
+    ],
     "optimumConditions": "Độ ẩm không khí cao khi trổ."
   },
-  "environmentalFactors": [],
+  "environmentalFactors": [
+    {
+      "factor": "Độ ẩm",
+      "description": "Mưa liên tục trong giai đoạn trổ",
+      "impact": "Cao",
+      "_id": {
+        "$oid": "692d6c763a5736cf93a20426"
+      }
+    }
+  ],
   "predisposingFactors": [],
   "resistanceFactors": [],
   "cropFactors": [],
@@ -52,7 +66,7 @@
     "$date": "2025-11-30T16:16:55.402Z"
   },
   "updatedAt": {
-    "$date": "2025-11-30T17:50:38.593Z"
+    "$date": "2025-12-01T10:22:46.531Z"
   },
   "__v": 0
 },
@@ -65,14 +79,24 @@
   },
   "pathogen": {
     "type": "Vi khuẩn",
-    "scientificName": "Xanthomonas oryzae",
+    "scientificName": "Xanthomonas oryzae pv. oryzae",
     "spreadMethod": [
-      "Nước tưới",
-      "Mưa gió"
+      "Nước mưa",
+      "Gió",
+      "Qua vết thương"
     ],
-    "optimumConditions": "Nhiệt độ 26-30°C, độ ẩm cao, mưa to gió lớn."
+    "optimumConditions": "Nhiệt độ 26-30°C, ẩm độ cao."
   },
-  "environmentalFactors": [],
+  "environmentalFactors": [
+    {
+      "factor": "Gió",
+      "description": "Gió lớn kèm mưa gây vết thương",
+      "impact": "Rất cao",
+      "_id": {
+        "$oid": "692d6c763a5736cf93a20404"
+      }
+    }
+  ],
   "predisposingFactors": [],
   "resistanceFactors": [],
   "cropFactors": [],
@@ -83,7 +107,7 @@
     "$date": "2025-11-30T16:16:55.926Z"
   },
   "updatedAt": {
-    "$date": "2025-11-30T17:50:38.458Z"
+    "$date": "2025-12-01T10:22:46.078Z"
   },
   "__v": 0
 },
@@ -96,8 +120,7 @@
   },
   "pathogen": {
     "type": "Nấm",
-    "scientificName": "Pyricularia oryzae",
-    "commonName": "Nấm đạo ôn",
+    "scientificName": "Magnaporthe oryzae",
     "spreadMethod": [
       "Gió",
       "Hạt giống",
@@ -105,7 +128,16 @@
     ],
     "optimumConditions": "Nhiệt độ 20-28°C, độ ẩm >90%, trời âm u."
   },
-  "environmentalFactors": [],
+  "environmentalFactors": [
+    {
+      "factor": "Nhiệt độ",
+      "description": "Lạnh, có sương mù",
+      "impact": "Rất cao",
+      "_id": {
+        "$oid": "692d6c753a5736cf93a203e1"
+      }
+    }
+  ],
   "predisposingFactors": [],
   "resistanceFactors": [],
   "cropFactors": [
@@ -115,7 +147,7 @@
       "impact": "Rất cao",
       "preventionTips": [],
       "_id": {
-        "$oid": "692c83ee33038592e46b1bb7"
+        "$oid": "692d51690623bc5db2353903"
       }
     }
   ],
@@ -126,7 +158,7 @@
     "$date": "2025-11-30T16:16:56.421Z"
   },
   "updatedAt": {
-    "$date": "2025-11-30T17:50:38.210Z"
+    "$date": "2025-12-01T10:22:45.609Z"
   },
   "__v": 0
 },
@@ -140,9 +172,21 @@
   "pathogen": {
     "type": "Côn trùng",
     "scientificName": "Cnaphalocrocis medinalis",
-    "optimumConditions": "Ruộng bón thừa đạm, lá xanh tốt."
+    "spreadMethod": [
+      "Bướm bay"
+    ],
+    "optimumConditions": "Lúa rậm rạp, bón thừa đạm, trời âm u."
   },
-  "environmentalFactors": [],
+  "environmentalFactors": [
+    {
+      "factor": "Ánh sáng",
+      "description": "Trời âm u, ít nắng",
+      "impact": "Cao",
+      "_id": {
+        "$oid": "692d6c773a5736cf93a20446"
+      }
+    }
+  ],
   "predisposingFactors": [],
   "resistanceFactors": [],
   "cropFactors": [],
@@ -153,101 +197,863 @@
     "$date": "2025-11-30T16:16:56.872Z"
   },
   "updatedAt": {
-    "$date": "2025-11-30T17:50:38.915Z"
+    "$date": "2025-12-01T10:22:47.021Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "692c805925883501d4f799fe"
+    "$oid": "692d5290404ffd1094dd8b86"
   },
   "diseaseId": {
-    "$oid": "692c805925883501d4f799fd"
+    "$oid": "692d528f404ffd1094dd8b74"
   },
-  "__v": 0,
-  "createdAt": {
-    "$date": "2025-11-30T17:35:20.371Z"
+  "pathogen": {
+    "type": "Nấm",
+    "scientificName": "Rhizoctonia solani",
+    "spreadMethod": [
+      "Hạch nấm trôi theo nước",
+      "Tiếp xúc cây bệnh"
+    ],
+    "hostRange": []
   },
-  "cropFactors": [
+  "environmentalFactors": [
     {
-      "factor": "Tình trạng dinh dưỡng",
-      "description": "Bón thừa đạm (N) làm lá mềm yếu, bệnh phát triển mạnh.",
+      "factor": "Độ ẩm",
+      "description": "Độ ẩm cao > 90% trong ruộng rậm rạp",
       "impact": "Rất cao",
-      "preventionTips": [],
       "_id": {
-        "$oid": "692c805884da167b1f3e5403"
+        "$oid": "692d5290404ffd1094dd8b87"
       }
     }
   ],
-  "environmentalFactors": [],
-  "interactionWithOtherDiseases": [],
-  "managementFactors": [],
-  "pathogen": {
-    "commonName": "Nấm đạo ôn",
-    "spreadMethod": [
-      "Gió",
-      "Hạt giống",
-      "Tàn dư cây trồng"
-    ],
-    "optimumConditions": "Nhiệt độ 20-28°C, độ ẩm >90%, trời âm u."
-  },
   "predisposingFactors": [],
   "resistanceFactors": [],
+  "cropFactors": [],
   "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:32:16.739Z"
+  },
   "updatedAt": {
-    "$date": "2025-11-30T17:35:20.371Z"
-  }
+    "$date": "2025-12-01T08:32:16.739Z"
+  },
+  "__v": 0
 },
 {
   "_id": {
-    "$oid": "692c805925883501d4f79a01"
+    "$oid": "692d5291404ffd1094dd8ba2"
   },
   "diseaseId": {
-    "$oid": "692c805925883501d4f79a00"
+    "$oid": "692d5291404ffd1094dd8b9f"
   },
-  "__v": 0,
-  "createdAt": {
-    "$date": "2025-11-30T17:35:20.725Z"
+  "pathogen": {
+    "type": "Virus",
+    "scientificName": "RGSV",
+    "spreadMethod": [
+      "Rầy nâu môi giới"
+    ],
+    "hostRange": []
   },
+  "environmentalFactors": [
+    {
+      "factor": "Thời tiết",
+      "description": "Nắng nóng xen kẽ mưa",
+      "impact": "Cao",
+      "_id": {
+        "$oid": "692d5291404ffd1094dd8ba3"
+      }
+    }
+  ],
+  "predisposingFactors": [],
+  "resistanceFactors": [],
   "cropFactors": [],
-  "environmentalFactors": [],
-  "interactionWithOtherDiseases": [],
+  "soilFactors": [],
   "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:32:17.173Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:17.173Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5291404ffd1094dd8bbe"
+  },
+  "diseaseId": {
+    "$oid": "692d5291404ffd1094dd8bbb"
+  },
+  "pathogen": {
+    "type": "Virus",
+    "scientificName": "RRSV",
+    "spreadMethod": [
+      "Rầy nâu môi giới"
+    ],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:32:17.588Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:17.588Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5291404ffd1094dd8bd8"
+  },
+  "diseaseId": {
+    "$oid": "692d5291404ffd1094dd8bd5"
+  },
   "pathogen": {
     "type": "Nấm",
-    "scientificName": "Đa tác nhân",
-    "optimumConditions": "Độ ẩm không khí cao khi trổ."
+    "scientificName": "Bipolaris oryzae",
+    "spreadMethod": [],
+    "hostRange": []
   },
+  "soilFactors": [
+    {
+      "factor": "Dinh dưỡng",
+      "description": "Đất thiếu Kali, Silic",
+      "remediation": [],
+      "_id": {
+        "$oid": "692d5291404ffd1094dd8bd9"
+      }
+    }
+  ],
   "predisposingFactors": [],
   "resistanceFactors": [],
-  "soilFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:32:17.967Z"
+  },
   "updatedAt": {
-    "$date": "2025-11-30T17:35:20.725Z"
-  }
+    "$date": "2025-12-01T08:32:17.967Z"
+  },
+  "__v": 0
 },
 {
   "_id": {
-    "$oid": "692c805a25883501d4f79a04"
+    "$oid": "692d5292404ffd1094dd8bf3"
   },
   "diseaseId": {
-    "$oid": "692c805a25883501d4f79a03"
+    "$oid": "692d5292404ffd1094dd8bf0"
   },
-  "__v": 0,
-  "createdAt": {
-    "$date": "2025-11-30T17:35:21.116Z"
-  },
-  "cropFactors": [],
-  "environmentalFactors": [],
-  "interactionWithOtherDiseases": [],
-  "managementFactors": [],
   "pathogen": {
-    "type": "Côn trùng",
-    "optimumConditions": "Ruộng bón thừa đạm, lá xanh tốt."
+    "type": "Nấm",
+    "scientificName": "Fusarium moniliforme",
+    "spreadMethod": [
+      "Hạt giống"
+    ],
+    "hostRange": []
   },
   "predisposingFactors": [],
   "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
   "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:32:18.348Z"
+  },
   "updatedAt": {
-    "$date": "2025-11-30T17:35:21.116Z"
-  }
+    "$date": "2025-12-01T08:32:18.348Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5292404ffd1094dd8c0d"
+  },
+  "diseaseId": {
+    "$oid": "692d5292404ffd1094dd8c0a"
+  },
+  "pathogen": {
+    "type": "Vi khuẩn",
+    "scientificName": "Xanthomonas oryzae",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:32:18.732Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:18.732Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5293404ffd1094dd8c27"
+  },
+  "diseaseId": {
+    "$oid": "692d5293404ffd1094dd8c24"
+  },
+  "pathogen": {
+    "type": "Nấm",
+    "scientificName": "Sarocladium oryzae",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:32:19.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:19.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5293404ffd1094dd8c41"
+  },
+  "diseaseId": {
+    "$oid": "692d5293404ffd1094dd8c3e"
+  },
+  "pathogen": {
+    "type": "Nấm",
+    "scientificName": "Gonatophragmium sp.",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:32:19.547Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:19.547Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5293404ffd1094dd8c5b"
+  },
+  "diseaseId": {
+    "$oid": "692d5293404ffd1094dd8c58"
+  },
+  "pathogen": {
+    "type": "Nấm",
+    "scientificName": "Magnaporthe salvinii",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:32:19.944Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:19.944Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5294404ffd1094dd8c75"
+  },
+  "diseaseId": {
+    "$oid": "692d5294404ffd1094dd8c72"
+  },
+  "pathogen": {
+    "type": "Nấm",
+    "scientificName": "Alternaria padwickii",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:32:20.341Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:20.341Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5294404ffd1094dd8c8f"
+  },
+  "diseaseId": {
+    "$oid": "692d5294404ffd1094dd8c8c"
+  },
+  "pathogen": {
+    "type": "Côn trùng",
+    "scientificName": "Scirpophaga incertulas",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:32:20.729Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:20.729Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5295404ffd1094dd8cab"
+  },
+  "diseaseId": {
+    "$oid": "692d5295404ffd1094dd8ca8"
+  },
+  "pathogen": {
+    "type": "Côn trùng",
+    "scientificName": "Stenchaetothrips biformis",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:32:21.109Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:21.109Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5295404ffd1094dd8cc4"
+  },
+  "diseaseId": {
+    "$oid": "692d5295404ffd1094dd8cc1"
+  },
+  "pathogen": {
+    "type": "Côn trùng",
+    "scientificName": "Steneotarsonemus spinki",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:32:21.495Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:21.495Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dbff3e886e39c6ddfb"
+  },
+  "diseaseId": {
+    "$oid": "692d54daff3e886e39c6ddea"
+  },
+  "pathogen": {
+    "type": "Nấm",
+    "scientificName": "Rhizoctonia solani",
+    "spreadMethod": [
+      "Hạch nấm trôi theo nước",
+      "Tiếp xúc cây bệnh"
+    ],
+    "hostRange": []
+  },
+  "environmentalFactors": [
+    {
+      "factor": "Độ ẩm",
+      "description": "Độ ẩm cao > 90% trong ruộng rậm rạp",
+      "impact": "Rất cao",
+      "_id": {
+        "$oid": "692d54dbff3e886e39c6ddfc"
+      }
+    }
+  ],
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:03.413Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:03.413Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dbff3e886e39c6de18"
+  },
+  "diseaseId": {
+    "$oid": "692d54dbff3e886e39c6de15"
+  },
+  "pathogen": {
+    "type": "Virus",
+    "scientificName": "RGSV",
+    "spreadMethod": [
+      "Rầy nâu môi giới"
+    ],
+    "hostRange": []
+  },
+  "environmentalFactors": [
+    {
+      "factor": "Thời tiết",
+      "description": "Nắng nóng xen kẽ mưa",
+      "impact": "Cao",
+      "_id": {
+        "$oid": "692d54dbff3e886e39c6de19"
+      }
+    }
+  ],
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:03.854Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:03.854Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dcff3e886e39c6de34"
+  },
+  "diseaseId": {
+    "$oid": "692d54dcff3e886e39c6de31"
+  },
+  "pathogen": {
+    "type": "Virus",
+    "scientificName": "RRSV",
+    "spreadMethod": [
+      "Rầy nâu môi giới"
+    ],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:04.290Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:04.290Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dcff3e886e39c6de4e"
+  },
+  "diseaseId": {
+    "$oid": "692d54dcff3e886e39c6de4b"
+  },
+  "pathogen": {
+    "type": "Nấm",
+    "scientificName": "Bipolaris oryzae",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "soilFactors": [
+    {
+      "factor": "Dinh dưỡng",
+      "description": "Đất thiếu Kali, Silic",
+      "remediation": [],
+      "_id": {
+        "$oid": "692d54dcff3e886e39c6de4f"
+      }
+    }
+  ],
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:04.722Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:04.722Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54ddff3e886e39c6de69"
+  },
+  "diseaseId": {
+    "$oid": "692d54ddff3e886e39c6de66"
+  },
+  "pathogen": {
+    "type": "Nấm",
+    "scientificName": "Fusarium moniliforme",
+    "spreadMethod": [
+      "Hạt giống"
+    ],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:05.146Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:05.146Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54ddff3e886e39c6de83"
+  },
+  "diseaseId": {
+    "$oid": "692d54ddff3e886e39c6de80"
+  },
+  "pathogen": {
+    "type": "Vi khuẩn",
+    "scientificName": "Xanthomonas oryzae",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:05.565Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:05.565Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54ddff3e886e39c6de9d"
+  },
+  "diseaseId": {
+    "$oid": "692d54ddff3e886e39c6de9a"
+  },
+  "pathogen": {
+    "type": "Nấm",
+    "scientificName": "Sarocladium oryzae",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:05.989Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:05.989Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54deff3e886e39c6deb7"
+  },
+  "diseaseId": {
+    "$oid": "692d54deff3e886e39c6deb4"
+  },
+  "pathogen": {
+    "type": "Nấm",
+    "scientificName": "Gonatophragmium sp.",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:06.420Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:06.420Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54deff3e886e39c6ded1"
+  },
+  "diseaseId": {
+    "$oid": "692d54deff3e886e39c6dece"
+  },
+  "pathogen": {
+    "type": "Nấm",
+    "scientificName": "Magnaporthe salvinii",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:06.851Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:06.851Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dfff3e886e39c6deeb"
+  },
+  "diseaseId": {
+    "$oid": "692d54dfff3e886e39c6dee8"
+  },
+  "pathogen": {
+    "type": "Nấm",
+    "scientificName": "Alternaria padwickii",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:07.257Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:07.257Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dfff3e886e39c6df05"
+  },
+  "diseaseId": {
+    "$oid": "692d54dfff3e886e39c6df02"
+  },
+  "pathogen": {
+    "type": "Côn trùng",
+    "scientificName": "Scirpophaga incertulas",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:07.673Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:07.673Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54e0ff3e886e39c6df21"
+  },
+  "diseaseId": {
+    "$oid": "692d54e0ff3e886e39c6df1e"
+  },
+  "pathogen": {
+    "type": "Côn trùng",
+    "scientificName": "Stenchaetothrips biformis",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:08.092Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:08.092Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54e0ff3e886e39c6df3a"
+  },
+  "diseaseId": {
+    "$oid": "692d54e0ff3e886e39c6df37"
+  },
+  "pathogen": {
+    "type": "Côn trùng",
+    "scientificName": "Steneotarsonemus spinki",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:08.522Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:08.522Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54e0ff3e886e39c6df53"
+  },
+  "diseaseId": {
+    "$oid": "692d54e0ff3e886e39c6df50"
+  },
+  "pathogen": {
+    "type": "Côn trùng",
+    "scientificName": "Orseolia oryzae",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:08.952Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:08.952Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54e1ff3e886e39c6df6c"
+  },
+  "diseaseId": {
+    "$oid": "692d54e1ff3e886e39c6df69"
+  },
+  "pathogen": {
+    "type": "Côn trùng",
+    "scientificName": "Leptocorisa acuta",
+    "spreadMethod": [],
+    "hostRange": []
+  },
+  "predisposingFactors": [],
+  "resistanceFactors": [],
+  "environmentalFactors": [],
+  "cropFactors": [],
+  "soilFactors": [],
+  "managementFactors": [],
+  "interactionWithOtherDiseases": [],
+  "createdAt": {
+    "$date": "2025-12-01T08:42:09.387Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:09.387Z"
+  },
+  "__v": 0
 }]

@@ -8,26 +8,23 @@
   "symptoms": [
     {
       "part": "Gốc",
-      "description": "Rầy tụ tập dày đặc ở gốc lúa, xuất hiện vệt mật ong (honeydew).",
-      "stage": "Giữa",
+      "description": "Rầy tụ tập dày đặc, xuất hiện mật ngọt (honeydew).",
+      "stage": "Đẻ nhánh",
       "severity": "Nặng",
       "visualCharacteristics": {
-        "color": [
-          "Nâu đen"
-        ],
-        "shape": "Đốm"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d6c753a5736cf93a203bc"
+        "$oid": "692e56eb0ed67023ee7a129d"
       },
       "images": []
     },
     {
       "part": "Toàn cây",
-      "description": "Cây vàng úa nhanh chóng, lá xoăn, khô cháy từ ngọn xuống gốc ('cháy rầy').",
-      "stage": "Tất cả",
+      "description": "Lúa chuyển vàng úa, khô cháy từ ngọn xuống gốc ('cháy rầy').",
+      "stage": "Cuối vụ",
       "severity": "Rất nặng",
       "visualCharacteristics": {
         "color": []
@@ -35,7 +32,7 @@
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d6c753a5736cf93a203bd"
+        "$oid": "692e56eb0ed67023ee7a129e"
       },
       "images": []
     }
@@ -47,7 +44,7 @@
     "$date": "2025-11-30T16:16:54.989Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T10:22:45.148Z"
+    "$date": "2025-12-02T03:03:07.814Z"
   },
   "__v": 0
 },
@@ -61,20 +58,31 @@
   "symptoms": [
     {
       "part": "Hạt",
-      "description": "Vỏ trấu bị biến màu thành nâu, đen hoặc tím; hạt bị lửng, lép, gạo bị bạc bụng.",
-      "stage": "Trổ bông",
-      "severity": "Trung bình",
+      "description": "Vỏ trấu biến màu thành nâu, đen hoặc tím, hạt bên trong lép hoặc lửng.",
+      "stage": "Trổ",
+      "severity": "Cao",
       "visualCharacteristics": {
-        "color": [
-          "Nâu",
-          "Đen"
-        ],
-        "texture": "Lép"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d6c763a5736cf93a20429"
+        "$oid": "692e56ec0ed67023ee7a12db"
+      },
+      "images": []
+    },
+    {
+      "part": "Bông",
+      "description": "Bông lúa không thoát ra khỏi bẹ được do nấm tấn công (nghẹt đòng).",
+      "stage": "Trổ",
+      "severity": "Trung bình",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a12dc"
       },
       "images": []
     }
@@ -86,7 +94,7 @@
     "$date": "2025-11-30T16:16:55.457Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T10:22:46.585Z"
+    "$date": "2025-12-02T03:03:08.190Z"
   },
   "__v": 0
 },
@@ -100,20 +108,46 @@
   "symptoms": [
     {
       "part": "Lá",
-      "description": "Bắt đầu từ mép lá, lan vào trong, màu xanh xám như thấm nước, sau chuyển vàng và khô (hình lượn sóng).",
-      "stage": "Giữa",
+      "description": "Vết bệnh màu xanh tối ở mép lá, sau chuyển sang vàng xám, tạo hình lượn sóng.",
+      "stage": "Tất cả",
       "severity": "Nặng",
       "visualCharacteristics": {
-        "color": [
-          "Vàng xám",
-          "Trắng"
-        ],
-        "pattern": "Lượn sóng"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d6c763a5736cf93a20407"
+        "$oid": "692e56ec0ed67023ee7a12f7"
+      },
+      "images": []
+    },
+    {
+      "part": "Toàn cây",
+      "description": "Khi nặng, lá bị cháy lan rộng, làm lúa còi cọc và rụng hạt sớm.",
+      "stage": "Trổ",
+      "severity": "Nặng",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a12f8"
+      },
+      "images": []
+    },
+    {
+      "part": "Lá",
+      "description": "Chảy giọt dịch khuẩn màu trắng đục vào buổi sáng sớm.",
+      "stage": "Đẻ nhánh",
+      "severity": "Cao",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a12f9"
       },
       "images": []
     }
@@ -125,7 +159,7 @@
     "$date": "2025-11-30T16:16:56.003Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T10:22:46.133Z"
+    "$date": "2025-12-02T03:03:08.377Z"
   },
   "__v": 0
 },
@@ -139,27 +173,23 @@
   "symptoms": [
     {
       "part": "Lá",
-      "description": "Vết bệnh hình thoi, tâm xám trắng, viền nâu đậm, có thể lan rộng thành mảng lớn ('cháy lá').",
-      "stage": "Giữa",
+      "description": "Vết bệnh hình thoi (mắt én), tâm xám trắng, viền nâu đậm.",
+      "stage": "Đẻ nhánh",
       "severity": "Nặng",
       "visualCharacteristics": {
-        "color": [
-          "Xám trắng",
-          "Nâu đậm"
-        ],
-        "shape": "Hình thoi"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d6c753a5736cf93a203e5"
+        "$oid": "692e56ec0ed67023ee7a12b9"
       },
       "images": []
     },
     {
-      "part": "Bông",
-      "description": "Đạo ôn cổ bông: Vết bệnh nâu đen tại cổ bông hoặc trên gié, hạt lúa bị lép, gãy cổ bông.",
-      "stage": "Trổ bông",
+      "part": "Cổ bông",
+      "description": "Vết thối nâu xám làm gãy gục cổ bông, gây lép trắng (bạc bông).",
+      "stage": "Trổ",
       "severity": "Rất nặng",
       "visualCharacteristics": {
         "color": []
@@ -167,7 +197,7 @@
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d6c753a5736cf93a203e6"
+        "$oid": "692e56ec0ed67023ee7a12ba"
       },
       "images": []
     }
@@ -179,7 +209,7 @@
     "$date": "2025-11-30T16:16:56.476Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T10:22:45.664Z"
+    "$date": "2025-12-02T03:03:08.000Z"
   },
   "__v": 0
 },
@@ -193,19 +223,46 @@
   "symptoms": [
     {
       "part": "Lá",
-      "description": "Lá bị cuốn dọc thành ống, mép lá trắng, bên trong có sâu non và phân. Lá bị bạc trắng, giảm quang hợp.",
-      "stage": "Giữa",
-      "severity": "Nặng",
+      "description": "Sâu cuốn lá thành ống, ăn nhu mô, làm lá bị bạc trắng.",
+      "stage": "Đẻ nhánh",
+      "severity": "Cao",
       "visualCharacteristics": {
-        "color": [
-          "Trắng bạc"
-        ],
-        "shape": "Cuốn ống"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d6c773a5736cf93a20449"
+        "$oid": "692e56ec0ed67023ee7a1315"
+      },
+      "images": []
+    },
+    {
+      "part": "Bụi lúa",
+      "description": "Giảm diện tích quang hợp, cây lúa còi cọc.",
+      "stage": "Đẻ nhánh",
+      "severity": "Trung bình",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a1316"
+      },
+      "images": []
+    },
+    {
+      "part": "Lá",
+      "description": "Nhìn thấy nhộng sâu trong ống lá.",
+      "stage": "Cuối đẻ nhánh",
+      "severity": "Cao",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a1317"
       },
       "images": []
     }
@@ -217,464 +274,7 @@
     "$date": "2025-11-30T16:16:56.927Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T10:22:47.073Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5290404ffd1094dd8b89"
-  },
-  "diseaseId": {
-    "$oid": "692d528f404ffd1094dd8b74"
-  },
-  "symptoms": [
-    {
-      "part": "Thân",
-      "description": "Vết bệnh hình bầu dục, màu xám trắng, viền nâu, loang lổ vằn vện",
-      "stage": "Giữa",
-      "severity": "Nặng",
-      "visualCharacteristics": {
-        "color": [
-          "Xám trắng",
-          "Nâu"
-        ],
-        "shape": "Hình thoi",
-        "pattern": "Lan tỏa"
-      },
-      "distinguishingFeatures": [],
-      "fieldDiagnosis": [],
-      "_id": {
-        "$oid": "692d5290404ffd1094dd8b8a"
-      },
-      "images": []
-    }
-  ],
-  "diagnosticChecklist": [],
-  "similarDiseases": [],
-  "laboratoryTests": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:16.787Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:16.787Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5291404ffd1094dd8ba5"
-  },
-  "diseaseId": {
-    "$oid": "692d5291404ffd1094dd8b9f"
-  },
-  "symptoms": [
-    {
-      "part": "Toàn cây",
-      "description": "Cây thấp lùn, lá vàng nhạt",
-      "stage": "Sớm",
-      "severity": "Rất nặng",
-      "visualCharacteristics": {
-        "color": [
-          "Vàng"
-        ],
-        "shape": "Biến dạng"
-      },
-      "distinguishingFeatures": [],
-      "fieldDiagnosis": [],
-      "_id": {
-        "$oid": "692d5291404ffd1094dd8ba6"
-      },
-      "images": []
-    }
-  ],
-  "diagnosticChecklist": [],
-  "similarDiseases": [],
-  "laboratoryTests": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:17.221Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:17.221Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5291404ffd1094dd8bc0"
-  },
-  "diseaseId": {
-    "$oid": "692d5291404ffd1094dd8bbb"
-  },
-  "symptoms": [
-    {
-      "part": "Lá",
-      "description": "Lá ngắn, xoắn, mép lá rách",
-      "stage": "Giữa",
-      "severity": "Nặng",
-      "visualCharacteristics": {
-        "color": [
-          "Xanh đậm"
-        ],
-        "shape": "Xoắn"
-      },
-      "distinguishingFeatures": [],
-      "fieldDiagnosis": [],
-      "_id": {
-        "$oid": "692d5291404ffd1094dd8bc1"
-      },
-      "images": []
-    }
-  ],
-  "diagnosticChecklist": [],
-  "similarDiseases": [],
-  "laboratoryTests": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:17.635Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:17.635Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5292404ffd1094dd8bdb"
-  },
-  "diseaseId": {
-    "$oid": "692d5291404ffd1094dd8bd5"
-  },
-  "symptoms": [
-    {
-      "part": "Lá",
-      "description": "Vết bệnh hình tròn màu nâu",
-      "stage": "Tất cả",
-      "severity": "Trung bình",
-      "visualCharacteristics": {
-        "color": [
-          "Nâu"
-        ],
-        "shape": "Tròn"
-      },
-      "distinguishingFeatures": [],
-      "fieldDiagnosis": [],
-      "_id": {
-        "$oid": "692d5292404ffd1094dd8bdc"
-      },
-      "images": []
-    }
-  ],
-  "diagnosticChecklist": [],
-  "similarDiseases": [],
-  "laboratoryTests": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:18.015Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:18.015Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5292404ffd1094dd8bf5"
-  },
-  "diseaseId": {
-    "$oid": "692d5292404ffd1094dd8bf0"
-  },
-  "symptoms": [
-    {
-      "part": "Toàn cây",
-      "description": "Cao vọt, rễ khí sinh ở đốt",
-      "stage": "Sớm",
-      "severity": "Trung bình",
-      "visualCharacteristics": {
-        "color": [
-          "Xanh nhạt"
-        ],
-        "size": "Cao"
-      },
-      "distinguishingFeatures": [],
-      "fieldDiagnosis": [],
-      "_id": {
-        "$oid": "692d5292404ffd1094dd8bf6"
-      },
-      "images": []
-    }
-  ],
-  "diagnosticChecklist": [],
-  "similarDiseases": [],
-  "laboratoryTests": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:18.394Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:18.394Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5292404ffd1094dd8c0f"
-  },
-  "diseaseId": {
-    "$oid": "692d5292404ffd1094dd8c0a"
-  },
-  "symptoms": [
-    {
-      "part": "Lá",
-      "description": "Vết sọc thấm nước giữa gân",
-      "stage": "Giữa",
-      "severity": "Nặng",
-      "visualCharacteristics": {
-        "texture": "Ướt",
-        "pattern": "Sọc dọc",
-        "color": []
-      },
-      "distinguishingFeatures": [],
-      "fieldDiagnosis": [],
-      "_id": {
-        "$oid": "692d5292404ffd1094dd8c10"
-      },
-      "images": []
-    }
-  ],
-  "diagnosticChecklist": [],
-  "similarDiseases": [],
-  "laboratoryTests": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:18.780Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:18.780Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5293404ffd1094dd8c29"
-  },
-  "diseaseId": {
-    "$oid": "692d5293404ffd1094dd8c24"
-  },
-  "symptoms": [
-    {
-      "part": "Thân",
-      "description": "Bẹ lá đòng nâu đen",
-      "stage": "Muộn",
-      "severity": "Nặng",
-      "visualCharacteristics": {
-        "color": [
-          "Nâu đen"
-        ],
-        "location": "Bẹ lá đòng"
-      },
-      "distinguishingFeatures": [],
-      "fieldDiagnosis": [],
-      "_id": {
-        "$oid": "692d5293404ffd1094dd8c2a"
-      },
-      "images": []
-    }
-  ],
-  "diagnosticChecklist": [],
-  "similarDiseases": [],
-  "laboratoryTests": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:19.196Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:19.196Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5293404ffd1094dd8c43"
-  },
-  "diseaseId": {
-    "$oid": "692d5293404ffd1094dd8c3e"
-  },
-  "symptoms": [
-    {
-      "part": "Lá",
-      "description": "Vệt vàng dọc gân lá",
-      "stage": "Muộn",
-      "severity": "Nặng",
-      "visualCharacteristics": {
-        "color": [
-          "Vàng cam"
-        ],
-        "pattern": "Dọc gân"
-      },
-      "distinguishingFeatures": [],
-      "fieldDiagnosis": [],
-      "_id": {
-        "$oid": "692d5293404ffd1094dd8c44"
-      },
-      "images": []
-    }
-  ],
-  "diagnosticChecklist": [],
-  "similarDiseases": [],
-  "laboratoryTests": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:19.595Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:19.595Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5293404ffd1094dd8c5d"
-  },
-  "diseaseId": {
-    "$oid": "692d5293404ffd1094dd8c58"
-  },
-  "symptoms": [
-    {
-      "part": "Gốc",
-      "description": "Gốc thân thối đen, mềm nhũn",
-      "stage": "Muộn",
-      "severity": "Trung bình",
-      "visualCharacteristics": {
-        "color": [
-          "Đen"
-        ],
-        "texture": "Mềm"
-      },
-      "distinguishingFeatures": [],
-      "fieldDiagnosis": [],
-      "_id": {
-        "$oid": "692d5293404ffd1094dd8c5e"
-      },
-      "images": []
-    }
-  ],
-  "diagnosticChecklist": [],
-  "similarDiseases": [],
-  "laboratoryTests": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:19.990Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:19.990Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5294404ffd1094dd8c77"
-  },
-  "diseaseId": {
-    "$oid": "692d5294404ffd1094dd8c72"
-  },
-  "symptoms": [
-    {
-      "part": "Lá",
-      "description": "Vết bệnh có vòng đồng tâm",
-      "stage": "Tất cả",
-      "severity": "Nhẹ",
-      "visualCharacteristics": {
-        "color": [
-          "Trắng xám"
-        ],
-        "shape": "Bầu dục"
-      },
-      "distinguishingFeatures": [],
-      "fieldDiagnosis": [],
-      "_id": {
-        "$oid": "692d5294404ffd1094dd8c78"
-      },
-      "images": []
-    }
-  ],
-  "diagnosticChecklist": [],
-  "similarDiseases": [],
-  "laboratoryTests": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:20.387Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:20.387Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5294404ffd1094dd8c91"
-  },
-  "diseaseId": {
-    "$oid": "692d5294404ffd1094dd8c8c"
-  },
-  "symptoms": [
-    {
-      "part": "Thân",
-      "description": "Dảnh héo khô hoặc bông bạc",
-      "stage": "Tất cả",
-      "severity": "Rất nặng",
-      "visualCharacteristics": {
-        "color": [
-          "Trắng"
-        ],
-        "shape": "Khô héo"
-      },
-      "distinguishingFeatures": [],
-      "fieldDiagnosis": [],
-      "_id": {
-        "$oid": "692d5294404ffd1094dd8c92"
-      },
-      "images": []
-    }
-  ],
-  "diagnosticChecklist": [],
-  "similarDiseases": [],
-  "laboratoryTests": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:20.775Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:20.775Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5295404ffd1094dd8cad"
-  },
-  "diseaseId": {
-    "$oid": "692d5295404ffd1094dd8ca8"
-  },
-  "symptoms": [
-    {
-      "part": "Lá",
-      "description": "Lá cuốn, đầu lá khô vàng",
-      "stage": "Sớm",
-      "severity": "Trung bình",
-      "visualCharacteristics": {
-        "color": [
-          "Vàng khô"
-        ],
-        "shape": "Cuốn tròn"
-      },
-      "distinguishingFeatures": [],
-      "fieldDiagnosis": [],
-      "_id": {
-        "$oid": "692d5295404ffd1094dd8cae"
-      },
-      "images": []
-    }
-  ],
-  "diagnosticChecklist": [],
-  "similarDiseases": [],
-  "laboratoryTests": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:21.154Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:21.154Z"
+    "$date": "2025-12-02T03:03:08.548Z"
   },
   "__v": 0
 },
@@ -687,22 +287,32 @@
   },
   "symptoms": [
     {
-      "part": "Thân",
-      "description": "Vết bệnh hình bầu dục, màu xám trắng, viền nâu, loang lổ vằn vện",
-      "stage": "Giữa",
-      "severity": "Nặng",
+      "part": "Bẹ lá/Thân",
+      "description": "Vết bệnh loang lổ hình bầu dục, màu xám trắng viền nâu ('vằn da hổ').",
+      "stage": "Làm đòng",
+      "severity": "Cao",
       "visualCharacteristics": {
-        "color": [
-          "Xám trắng",
-          "Nâu"
-        ],
-        "shape": "Hình thoi",
-        "pattern": "Lan tỏa"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d54dbff3e886e39c6de00"
+        "$oid": "692e56ec0ed67023ee7a1339"
+      },
+      "images": []
+    },
+    {
+      "part": "Thân",
+      "description": "Nấm tấn công làm thối thân, gây đổ ngã khi bệnh nặng, vết bệnh lan lên lá.",
+      "stage": "Trổ",
+      "severity": "Nặng",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a133a"
       },
       "images": []
     }
@@ -714,7 +324,7 @@
     "$date": "2025-12-01T08:42:03.466Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:03.466Z"
+    "$date": "2025-12-02T03:03:08.717Z"
   },
   "__v": 0
 },
@@ -728,19 +338,31 @@
   "symptoms": [
     {
       "part": "Toàn cây",
-      "description": "Cây thấp lùn, lá vàng nhạt",
-      "stage": "Sớm",
+      "description": "Cây lúa thấp lùn, lá ngắn, cứng, xòe ngang (virus do Rầy nâu truyền).",
+      "stage": "Đẻ nhánh",
       "severity": "Rất nặng",
       "visualCharacteristics": {
-        "color": [
-          "Vàng"
-        ],
-        "shape": "Biến dạng"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d54dbff3e886e39c6de1c"
+        "$oid": "692e56ec0ed67023ee7a1359"
+      },
+      "images": []
+    },
+    {
+      "part": "Lá",
+      "description": "Lá chuyển màu vàng cam, vàng khô từ chóp lá lan vào.",
+      "stage": "Đẻ nhánh",
+      "severity": "Rất nặng",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a135a"
       },
       "images": []
     }
@@ -752,7 +374,7 @@
     "$date": "2025-12-01T08:42:03.907Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:03.907Z"
+    "$date": "2025-12-02T03:03:08.925Z"
   },
   "__v": 0
 },
@@ -766,19 +388,31 @@
   "symptoms": [
     {
       "part": "Lá",
-      "description": "Lá ngắn, xoắn, mép lá rách",
-      "stage": "Giữa",
-      "severity": "Nặng",
+      "description": "Lá xanh đậm, xoắn lại, rìa lá rách và có bướu dọc gân lá.",
+      "stage": "Đẻ nhánh",
+      "severity": "Rất nặng",
       "visualCharacteristics": {
-        "color": [
-          "Xanh đậm"
-        ],
-        "shape": "Xoắn"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d54dcff3e886e39c6de37"
+        "$oid": "692e56ed0ed67023ee7a1372"
+      },
+      "images": []
+    },
+    {
+      "part": "Toàn cây",
+      "description": "Cây lùn, chồi non biến dạng, không có khả năng trổ bông (virus do Rầy nâu truyền).",
+      "stage": "Đẻ nhánh",
+      "severity": "Rất nặng",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a1373"
       },
       "images": []
     }
@@ -790,7 +424,7 @@
     "$date": "2025-12-01T08:42:04.343Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:04.343Z"
+    "$date": "2025-12-02T03:03:09.107Z"
   },
   "__v": 0
 },
@@ -803,20 +437,32 @@
   },
   "symptoms": [
     {
-      "part": "Lá",
-      "description": "Vết bệnh hình tròn màu nâu",
+      "part": "Lá/Hạt",
+      "description": "Vết bệnh hình tròn hoặc bầu dục, màu nâu đậm, viền vàng (như hình mắt chim).",
       "stage": "Tất cả",
       "severity": "Trung bình",
       "visualCharacteristics": {
-        "color": [
-          "Nâu"
-        ],
-        "shape": "Tròn"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d54dcff3e886e39c6de52"
+        "$oid": "692e56ed0ed67023ee7a1390"
+      },
+      "images": []
+    },
+    {
+      "part": "Hạt",
+      "description": "Xuất hiện vết bệnh trên vỏ trấu, làm giảm chất lượng hạt.",
+      "stage": "Trổ",
+      "severity": "Trung bình",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a1391"
       },
       "images": []
     }
@@ -828,7 +474,7 @@
     "$date": "2025-12-01T08:42:04.774Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:04.774Z"
+    "$date": "2025-12-02T03:03:09.282Z"
   },
   "__v": 0
 },
@@ -842,19 +488,31 @@
   "symptoms": [
     {
       "part": "Toàn cây",
-      "description": "Cao vọt, rễ khí sinh ở đốt",
-      "stage": "Sớm",
-      "severity": "Trung bình",
+      "description": "Cây lúa non vươn cao bất thường (von), mảnh khảnh, lá vàng nhạt.",
+      "stage": "Mạ/Đẻ nhánh",
+      "severity": "Cao",
       "visualCharacteristics": {
-        "color": [
-          "Xanh nhạt"
-        ],
-        "size": "Cao"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d54ddff3e886e39c6de6c"
+        "$oid": "692e56ed0ed67023ee7a13b4"
+      },
+      "images": []
+    },
+    {
+      "part": "Gốc",
+      "description": "Gốc thân có rễ bất định, cây chết trước hoặc sau khi trổ, có lớp phấn hồng trên lá.",
+      "stage": "Mạ/Đẻ nhánh",
+      "severity": "Cao",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a13b5"
       },
       "images": []
     }
@@ -866,7 +524,7 @@
     "$date": "2025-12-01T08:42:05.196Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:05.196Z"
+    "$date": "2025-12-02T03:03:09.450Z"
   },
   "__v": 0
 },
@@ -880,18 +538,31 @@
   "symptoms": [
     {
       "part": "Lá",
-      "description": "Vết sọc thấm nước giữa gân",
-      "stage": "Giữa",
-      "severity": "Nặng",
+      "description": "Lá lúa có sọc vàng mờ hoặc trắng dọc theo gân lá.",
+      "stage": "Đẻ nhánh",
+      "severity": "Rất nặng",
       "visualCharacteristics": {
-        "texture": "Ướt",
-        "pattern": "Sọc dọc",
         "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d54ddff3e886e39c6de86"
+        "$oid": "692e56ed0ed67023ee7a13cc"
+      },
+      "images": []
+    },
+    {
+      "part": "Toàn cây",
+      "description": "Lá bị xoắn lại, mép lá rách, cây lùn (virus do Rầy xanh truyền).",
+      "stage": "Đẻ nhánh",
+      "severity": "Rất nặng",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a13cd"
       },
       "images": []
     }
@@ -903,7 +574,7 @@
     "$date": "2025-12-01T08:42:05.615Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:05.615Z"
+    "$date": "2025-12-02T03:03:09.626Z"
   },
   "__v": 0
 },
@@ -916,20 +587,32 @@
   },
   "symptoms": [
     {
-      "part": "Thân",
-      "description": "Bẹ lá đòng nâu đen",
-      "stage": "Muộn",
-      "severity": "Nặng",
+      "part": "Bẹ lá",
+      "description": "Vết bệnh màu nâu không đều trên bẹ lá non bao quanh đòng lúa.",
+      "stage": "Làm đòng",
+      "severity": "Cao",
       "visualCharacteristics": {
-        "color": [
-          "Nâu đen"
-        ],
-        "location": "Bẹ lá đòng"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d54deff3e886e39c6dea0"
+        "$oid": "692e56ed0ed67023ee7a13ea"
+      },
+      "images": []
+    },
+    {
+      "part": "Bông",
+      "description": "Bông lúa trổ không thoát, hoặc trổ ra bị lép, biến màu.",
+      "stage": "Trổ",
+      "severity": "Cao",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a13eb"
       },
       "images": []
     }
@@ -941,7 +624,7 @@
     "$date": "2025-12-01T08:42:06.040Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:06.040Z"
+    "$date": "2025-12-02T03:03:09.806Z"
   },
   "__v": 0
 },
@@ -955,19 +638,31 @@
   "symptoms": [
     {
       "part": "Lá",
-      "description": "Vệt vàng dọc gân lá",
-      "stage": "Muộn",
-      "severity": "Nặng",
+      "description": "Lá lúa vàng sớm từ lá dưới lên lá trên, sau đó khô và chết, màu vàng hơi đỏ.",
+      "stage": "Làm đòng",
+      "severity": "Trung bình",
       "visualCharacteristics": {
-        "color": [
-          "Vàng cam"
-        ],
-        "pattern": "Dọc gân"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d54deff3e886e39c6deba"
+        "$oid": "692e56ed0ed67023ee7a140e"
+      },
+      "images": []
+    },
+    {
+      "part": "Toàn cây",
+      "description": "Lá vàng úa nhanh, khác với chín bình thường, lúa trổ sớm hơn.",
+      "stage": "Làm đòng",
+      "severity": "Trung bình",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a140f"
       },
       "images": []
     }
@@ -979,7 +674,7 @@
     "$date": "2025-12-01T08:42:06.474Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:06.474Z"
+    "$date": "2025-12-02T03:03:09.984Z"
   },
   "__v": 0
 },
@@ -992,20 +687,32 @@
   },
   "symptoms": [
     {
-      "part": "Gốc",
-      "description": "Gốc thân thối đen, mềm nhũn",
-      "stage": "Muộn",
-      "severity": "Trung bình",
+      "part": "Thân",
+      "description": "Vết bệnh màu đen ở bẹ lá sát mặt nước, thân bị thối mềm.",
+      "stage": "Làm đòng",
+      "severity": "Nặng",
       "visualCharacteristics": {
-        "color": [
-          "Đen"
-        ],
-        "texture": "Mềm"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d54deff3e886e39c6ded4"
+        "$oid": "692e56ee0ed67023ee7a1426"
+      },
+      "images": []
+    },
+    {
+      "part": "Gốc",
+      "description": "Xuất hiện hạch nấm màu đen trong thân, cây lúa đổ ngã.",
+      "stage": "Làm đòng",
+      "severity": "Nặng",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a1427"
       },
       "images": []
     }
@@ -1017,7 +724,7 @@
     "$date": "2025-12-01T08:42:06.901Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:06.901Z"
+    "$date": "2025-12-02T03:03:10.149Z"
   },
   "__v": 0
 },
@@ -1031,19 +738,31 @@
   "symptoms": [
     {
       "part": "Lá",
-      "description": "Vết bệnh có vòng đồng tâm",
-      "stage": "Tất cả",
-      "severity": "Nhẹ",
+      "description": "Vết bệnh hình tròn hoặc hơi bầu dục, màu nâu đậm, thường có vòng đồng tâm mờ.",
+      "stage": "Lá già",
+      "severity": "Trung bình",
       "visualCharacteristics": {
-        "color": [
-          "Trắng xám"
-        ],
-        "shape": "Bầu dục"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d54dfff3e886e39c6deee"
+        "$oid": "692e56ee0ed67023ee7a1444"
+      },
+      "images": []
+    },
+    {
+      "part": "Toàn cây",
+      "description": "Lá bị vàng và khô nhanh do bệnh.",
+      "stage": "Lá già",
+      "severity": "Trung bình",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a1445"
       },
       "images": []
     }
@@ -1055,7 +774,7 @@
     "$date": "2025-12-01T08:42:07.309Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:07.309Z"
+    "$date": "2025-12-02T03:03:10.323Z"
   },
   "__v": 0
 },
@@ -1068,20 +787,47 @@
   },
   "symptoms": [
     {
-      "part": "Thân",
-      "description": "Dảnh héo khô hoặc bông bạc",
-      "stage": "Tất cả",
-      "severity": "Rất nặng",
+      "part": "Dảnh",
+      "description": "Giai đoạn đẻ nhánh: dảnh héo (dảnh còn xanh nhưng dễ dàng rút ra).",
+      "stage": "Đẻ nhánh",
+      "severity": "Nặng",
       "visualCharacteristics": {
-        "color": [
-          "Trắng"
-        ],
-        "shape": "Khô héo"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d54dfff3e886e39c6df08"
+        "$oid": "692e56ee0ed67023ee7a145c"
+      },
+      "images": []
+    },
+    {
+      "part": "Bông",
+      "description": "Giai đoạn trổ: bông lúa trắng, hạt lép hoàn toàn ('bông bạc').",
+      "stage": "Trổ",
+      "severity": "Rất nặng",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a145d"
+      },
+      "images": []
+    },
+    {
+      "part": "Thân",
+      "description": "Lỗ đục và phân sâu màu nâu bám ngoài thân lúa.",
+      "stage": "Tất cả",
+      "severity": "Nặng",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a145e"
       },
       "images": []
     }
@@ -1093,7 +839,7 @@
     "$date": "2025-12-01T08:42:07.724Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:07.724Z"
+    "$date": "2025-12-02T03:03:10.491Z"
   },
   "__v": 0
 },
@@ -1106,20 +852,32 @@
   },
   "symptoms": [
     {
-      "part": "Lá",
-      "description": "Lá cuốn, đầu lá khô vàng",
-      "stage": "Sớm",
-      "severity": "Trung bình",
+      "part": "Lá non",
+      "description": "Lá non bị cuốn dọc, mép lá xoắn lại, có vệt trắng bạc do bọ trĩ cạo và hút nhựa.",
+      "stage": "Mạ/Đẻ nhánh",
+      "severity": "Cao",
       "visualCharacteristics": {
-        "color": [
-          "Vàng khô"
-        ],
-        "shape": "Cuốn tròn"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d54e0ff3e886e39c6df24"
+        "$oid": "692e56ee0ed67023ee7a147d"
+      },
+      "images": []
+    },
+    {
+      "part": "Toàn cây",
+      "description": "Lúa còi cọc, chậm lớn, có màu nâu vàng từ chóp lá.",
+      "stage": "Mạ/Đẻ nhánh",
+      "severity": "Cao",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a147e"
       },
       "images": []
     }
@@ -1131,7 +889,7 @@
     "$date": "2025-12-01T08:42:08.143Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:08.143Z"
+    "$date": "2025-12-02T03:03:10.681Z"
   },
   "__v": 0
 },
@@ -1144,20 +902,32 @@
   },
   "symptoms": [
     {
-      "part": "Bông",
-      "description": "Hạt lúa nâu đen, biến dạng",
-      "stage": "Muộn",
-      "severity": "Nặng",
+      "part": "Bẹ lá",
+      "description": "Vết thâm đen dọc bẹ lá, như bị \"cạo gió\" (do nhện chích hút).",
+      "stage": "Làm đòng",
+      "severity": "Cao",
       "visualCharacteristics": {
-        "color": [
-          "Nâu đen"
-        ],
-        "shape": "Biến dạng"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d54e0ff3e886e39c6df3d"
+        "$oid": "692e56ee0ed67023ee7a149d"
+      },
+      "images": []
+    },
+    {
+      "part": "Hạt",
+      "description": "Lúa trổ không thoát hoặc nghẹn, hạt bị lem lép, biến màu nâu đen.",
+      "stage": "Trổ",
+      "severity": "Cao",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a149e"
       },
       "images": []
     }
@@ -1169,7 +939,7 @@
     "$date": "2025-12-01T08:42:08.577Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:08.577Z"
+    "$date": "2025-12-02T03:03:10.855Z"
   },
   "__v": 0
 },
@@ -1183,19 +953,31 @@
   "symptoms": [
     {
       "part": "Thân",
-      "description": "Dảnh lúa biến thành ống tròn màu trắng bạc",
-      "stage": "Giữa",
-      "severity": "Nặng",
+      "description": "Đỉnh sinh trưởng bị biến dạng thành ống tròn dài màu trắng xanh (\"cọng hành\").",
+      "stage": "Đẻ nhánh",
+      "severity": "Cao",
       "visualCharacteristics": {
-        "color": [
-          "Trắng bạc"
-        ],
-        "shape": "Ống tròn"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d54e1ff3e886e39c6df56"
+        "$oid": "692e56ef0ed67023ee7a14c1"
+      },
+      "images": []
+    },
+    {
+      "part": "Bụi lúa",
+      "description": "Bụi lúa bị nhiễm có nhiều chồi nhưng không trổ bông được.",
+      "stage": "Đẻ nhánh",
+      "severity": "Cao",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ef0ed67023ee7a14c2"
       },
       "images": []
     }
@@ -1207,7 +989,7 @@
     "$date": "2025-12-01T08:42:09.012Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:09.012Z"
+    "$date": "2025-12-02T03:03:11.126Z"
   },
   "__v": 0
 },
@@ -1221,19 +1003,31 @@
   "symptoms": [
     {
       "part": "Hạt",
-      "description": "Vết chích nâu tròn trên vỏ trấu",
-      "stage": "Muộn",
-      "severity": "Trung bình",
+      "description": "Hút sữa hạt lúa, làm hạt lép lửng, trên vỏ trấu có chấm đen nhỏ (vết chích).",
+      "stage": "Trổ",
+      "severity": "Cao",
       "visualCharacteristics": {
-        "color": [
-          "Nâu đen"
-        ],
-        "location": "Vỏ trấu"
+        "color": []
       },
       "distinguishingFeatures": [],
       "fieldDiagnosis": [],
       "_id": {
-        "$oid": "692d54e1ff3e886e39c6df6f"
+        "$oid": "692e56ef0ed67023ee7a14dd"
+      },
+      "images": []
+    },
+    {
+      "part": "Bông",
+      "description": "Bông lúa có mùi hôi (mùi bọ xít).",
+      "stage": "Trổ",
+      "severity": "Cao",
+      "visualCharacteristics": {
+        "color": []
+      },
+      "distinguishingFeatures": [],
+      "fieldDiagnosis": [],
+      "_id": {
+        "$oid": "692e56ef0ed67023ee7a14de"
       },
       "images": []
     }
@@ -1245,7 +1039,7 @@
     "$date": "2025-12-01T08:42:09.439Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:09.439Z"
+    "$date": "2025-12-02T03:03:11.296Z"
   },
   "__v": 0
 }]

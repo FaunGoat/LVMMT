@@ -9,44 +9,37 @@
     {
       "name": "Giai đoạn sớm",
       "duration": "3-5 ngày",
-      "description": "Triệu chứng ban đầu của Rầy nâu",
-      "symptoms": [
-        "Rầy tụ tập ở gốc lúa, hút nhựa → cây vàng úa nhanh chóng.",
-        "Lá xoăn, khô cháy từ ngọn xuống gốc.",
-        "Truyền virus gây bệnh vàng lùn, lùn xoắn lá - rất nguy hiểm."
-      ],
+      "description": "Rầy tụ tập ở gốc, bắt đầu truyền virus.",
+      "symptoms": [],
       "severity": "Nhẹ",
       "order": 1,
       "visualSigns": [],
       "_id": {
-        "$oid": "692c6df62ef6ee9bd8d70ff7"
+        "$oid": "692d6c753a5736cf93a203d2"
       }
     },
     {
       "name": "Giai đoạn phát triển",
       "duration": "7-14 ngày",
-      "description": "Triệu chứng lan rộng và rõ rệt",
-      "symptoms": [
-        "Nặng: hiện tượng 'cháy rầy', cả ruộng chết hàng loạt trong 5-7 ngày.",
-        "Xuất hiện vệt mật ong (honeydew) trên lá."
-      ],
+      "description": "Mật độ tăng cao, gây hiện tượng 'cháy rầy'.",
+      "symptoms": [],
       "severity": "Nặng",
       "order": 2,
       "visualSigns": [],
       "_id": {
-        "$oid": "692c6df62ef6ee9bd8d70ff8"
+        "$oid": "692d6c753a5736cf93a203d3"
       }
     }
   ],
-  "totalDuration": "10-20 ngày",
-  "peakStage": 1,
-  "incubationPeriod": "2-3 ngày",
+  "totalDuration": "Kéo dài suốt vụ",
+  "peakStage": 2,
+  "incubationPeriod": "3-5 ngày",
   "notes": "Thời gian phát triển của Rầy nâu phụ thuộc vào điều kiện thời tiết.",
   "createdAt": {
     "$date": "2025-11-30T16:16:54.810Z"
   },
   "updatedAt": {
-    "$date": "2025-11-30T16:16:54.810Z"
+    "$date": "2025-12-01T10:22:45.433Z"
   },
   "__v": 0
 },
@@ -59,47 +52,27 @@
   },
   "stages": [
     {
-      "name": "Giai đoạn sớm",
-      "duration": "3-5 ngày",
-      "description": "Triệu chứng ban đầu của Bệnh lem lép hạt",
-      "symptoms": [
-        "Hạt lúa phình to gấp 2-3 lần, trấu nứt, bên trong chứa bột đen hoặc xanh lục.",
-        "Bông trắng xanh bao phủ, hạt lép hoàn toàn, không có gạo.",
-        "Hạt bệnh rơi xuống đất tạo nguồn bệnh cho vụ sau."
-      ],
-      "severity": "Nhẹ",
+      "name": "Trổ bông",
+      "duration": "5-7 ngày",
+      "description": "Nấm tấn công khi bông lúa hé mở.",
+      "symptoms": [],
+      "severity": "Trung bình",
       "order": 1,
       "visualSigns": [],
       "_id": {
-        "$oid": "692c6df72ef6ee9bd8d71029"
-      }
-    },
-    {
-      "name": "Giai đoạn phát triển",
-      "duration": "7-14 ngày",
-      "description": "Triệu chứng lan rộng và rõ rệt",
-      "symptoms": [
-        "Nấm độc hại (mycotoxin) gây hại cho người và gia súc khi ăn phải.",
-        "Xuất hiện nhiều nhất ở giai đoạn lúa sữa – chín sữa.",
-        "Hạt bệnh có mùi hôi đặc trưng."
-      ],
-      "severity": "Nặng",
-      "order": 2,
-      "visualSigns": [],
-      "_id": {
-        "$oid": "692c6df72ef6ee9bd8d7102a"
+        "$oid": "692d6c763a5736cf93a20439"
       }
     }
   ],
-  "totalDuration": "10-20 ngày",
+  "totalDuration": "Suốt giai đoạn trổ",
   "peakStage": 1,
-  "incubationPeriod": "2-3 ngày",
+  "incubationPeriod": "Không áp dụng",
   "notes": "Thời gian phát triển của Bệnh lem lép hạt phụ thuộc vào điều kiện thời tiết.",
   "createdAt": {
     "$date": "2025-11-30T16:16:55.290Z"
   },
   "updatedAt": {
-    "$date": "2025-11-30T16:16:55.290Z"
+    "$date": "2025-12-01T10:22:46.818Z"
   },
   "__v": 0
 },
@@ -112,63 +85,39 @@
   },
   "stages": [
     {
-      "name": "Giai đoạn sớm",
-      "duration": "1-2 ngày",
-      "description": "Triệu chứng ban đầu của Bệnh cháy bìa lá",
-      "symptoms": [
-        "Vết cháy từ mép lá vào trong, màu vàng cam đặc trưng.",
-        "Lá khô, dính nhau như bị thiêu, cây còi cọc.",
-        "Xuất hiện giọt nhựa vàng (bacterial ooze) vào buổi sáng sớm."
-      ],
+      "name": "Khởi phát",
+      "duration": "5 ngày",
+      "description": "Chấm nhỏ ở mép lá, thấm nước.",
+      "symptoms": [],
       "severity": "Nhẹ",
       "order": 1,
       "visualSigns": [],
       "_id": {
-        "$oid": "692c6df72ef6ee9bd8d7105b"
+        "$oid": "692d6c763a5736cf93a20417"
       }
     },
     {
-      "name": "Giai đoạn giữa",
-      "duration": "3-5 ngày",
-      "description": "Triệu chứng bắt đầu cháy lá của Bệnh cháy bìa lá",
-      "symptoms": [
-        "Vết cháy từ mép lá vào trong, màu vàng cam đặc trưng.",
-        "Lá khô, dính nhau như bị thiêu, cây còi cọc.",
-        "Xuất hiện giọt nhựa vàng (bacterial ooze) vào buổi sáng sớm."
-      ],
-      "severity": "Trung bình",
+      "name": "Lan rộng",
+      "duration": "10-15 ngày",
+      "description": "Cháy lan rộng hình lượn sóng, lá khô rụi.",
+      "symptoms": [],
+      "severity": "Nặng",
       "order": 2,
       "visualSigns": [],
       "_id": {
-        "$oid": "692c6df72ef6ee9bd8d7105b"
-      }
-    },
-    {
-      "name": "Giai đoạn phát triển",
-      "duration": "7-14 ngày",
-      "description": "Triệu chứng lan rộng và rõ rệt",
-      "symptoms": [
-        "Nặng: lá chết hàng loạt, giảm năng suất 30-50%.",
-        "Thường xuất hiện sau mưa bão, gió mạnh.",
-        "Lá có mùi hôi khi bệnh nặng."
-      ],
-      "severity": "Nặng",
-      "order": 3,
-      "visualSigns": [],
-      "_id": {
-        "$oid": "692c6df72ef6ee9bd8d7105c"
+        "$oid": "692d6c763a5736cf93a20418"
       }
     }
   ],
-  "totalDuration": "10-20 ngày",
+  "totalDuration": "Kéo dài",
   "peakStage": 2,
-  "incubationPeriod": "2-3 ngày",
+  "incubationPeriod": "3-7 ngày",
   "notes": "Thời gian phát triển của Bệnh cháy bìa lá phụ thuộc vào điều kiện thời tiết.",
   "createdAt": {
     "$date": "2025-11-30T16:16:55.760Z"
   },
   "updatedAt": {
-    "$date": "2025-11-30T16:16:55.760Z"
+    "$date": "2025-12-01T10:22:46.360Z"
   },
   "__v": 0
 },
@@ -181,45 +130,39 @@
   },
   "stages": [
     {
-      "name": "Giai đoạn sớm",
-      "duration": "3-5 ngày",
-      "description": "Triệu chứng ban đầu của Bệnh đạo ôn",
-      "symptoms": [
-        "Đốm hình thoi, viền nâu, tâm xám trắng trên lá.",
-        "Lá khô cháy, cây còi cọc, giảm quang hợp.",
-        "Nặng: đốm lan sang thân, bông trắng, lép hạt."
-      ],
+      "name": "Đốm nhỏ",
+      "duration": "2-3 ngày",
+      "description": "Vết bệnh chấm nhỏ màu nâu nhạt.",
+      "symptoms": [],
       "severity": "Nhẹ",
       "order": 1,
       "visualSigns": [],
       "_id": {
-        "$oid": "692c6df82ef6ee9bd8d7108d"
+        "$oid": "692d6c753a5736cf93a203f7"
       }
     },
     {
-      "name": "Giai đoạn phát triển",
-      "duration": "7-14 ngày",
-      "description": "Triệu chứng lan rộng và rõ rệt",
-      "symptoms": [
-        "Thường xuất hiện giai đoạn đẻ nhánh – trổ bông."
-      ],
+      "name": "Phát triển",
+      "duration": "5-7 ngày",
+      "description": "Vết bệnh hình thoi điển hình, lây lan nhanh.",
+      "symptoms": [],
       "severity": "Nặng",
       "order": 2,
       "visualSigns": [],
       "_id": {
-        "$oid": "692c6df82ef6ee9bd8d7108e"
+        "$oid": "692d6c753a5736cf93a203f8"
       }
     }
   ],
-  "totalDuration": "10-20 ngày",
-  "peakStage": 1,
-  "incubationPeriod": "2-3 ngày",
+  "totalDuration": "7-10 ngày/vết bệnh",
+  "peakStage": 2,
+  "incubationPeriod": "3-5 ngày",
   "notes": "Thời gian phát triển của Bệnh đạo ôn phụ thuộc vào điều kiện thời tiết.",
   "createdAt": {
     "$date": "2025-11-30T16:16:56.311Z"
   },
   "updatedAt": {
-    "$date": "2025-11-30T16:16:56.311Z"
+    "$date": "2025-12-01T10:22:45.901Z"
   },
   "__v": 0
 },
@@ -232,46 +175,1191 @@
   },
   "stages": [
     {
-      "name": "Giai đoạn sớm",
-      "duration": "3-5 ngày",
-      "description": "Triệu chứng ban đầu của Sâu cuốn lá",
-      "symptoms": [
-        "Ấu trùng ăn biểu bì lá, kéo mép lá cuốn lại thành ống, bên trong có phân và tơ.",
-        "Lá bị cuốn trắng, khô cháy từ ngọn xuống, giảm diện tích quang hợp 30-40%.",
-        "Nặng: lá cuốn dày đặc, cây còi cọc, giảm năng suất 20-40%."
-      ],
+      "name": "Ấu trùng non",
+      "duration": "7-10 ngày",
+      "description": "Sâu mới nở bắt đầu cuốn và ăn lá non.",
+      "symptoms": [],
       "severity": "Nhẹ",
       "order": 1,
       "visualSigns": [],
       "_id": {
-        "$oid": "692c6df82ef6ee9bd8d710bb"
+        "$oid": "692d6c773a5736cf93a20459"
       }
     },
     {
-      "name": "Giai đoạn phát triển",
-      "duration": "7-14 ngày",
-      "description": "Triệu chứng lan rộng và rõ rệt",
-      "symptoms": [
-        "Ảnh hưởng nặng nhất ở giai đoạn đẻ nhánh và làm đòng.",
-        "Thường xuất hiện vào mùa mưa, độ ẩm cao."
-      ],
+      "name": "Ấu trùng lớn",
+      "duration": "15-20 ngày",
+      "description": "Sâu lớn ăn mạnh, làm lá bị bạc trắng.",
+      "symptoms": [],
       "severity": "Nặng",
       "order": 2,
       "visualSigns": [],
       "_id": {
-        "$oid": "692c6df82ef6ee9bd8d710bc"
+        "$oid": "692d6c773a5736cf93a2045a"
       }
     }
   ],
-  "totalDuration": "10-20 ngày",
-  "peakStage": 1,
-  "incubationPeriod": "2-3 ngày",
+  "totalDuration": "25-30 ngày (sâu non)",
+  "peakStage": 2,
+  "incubationPeriod": "3-5 ngày (trứng)",
   "notes": "Thời gian phát triển của Sâu cuốn lá phụ thuộc vào điều kiện thời tiết.",
   "createdAt": {
     "$date": "2025-11-30T16:16:56.761Z"
   },
   "updatedAt": {
-    "$date": "2025-11-30T16:16:56.761Z"
+    "$date": "2025-12-01T10:22:47.290Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5290404ffd1094dd8b97"
+  },
+  "diseaseId": {
+    "$oid": "692d528f404ffd1094dd8b74"
+  },
+  "stages": [
+    {
+      "name": "Chớm bệnh",
+      "duration": "3-5 ngày",
+      "description": "Vết bệnh xám xanh",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5290404ffd1094dd8b98"
+      }
+    },
+    {
+      "name": "Tiến triển",
+      "duration": "5-7 ngày",
+      "description": "Vết bệnh lan lên lá",
+      "symptoms": [],
+      "severity": "Trung bình",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5290404ffd1094dd8b99"
+      }
+    },
+    {
+      "name": "Gây hại nặng",
+      "duration": "5-7 ngày",
+      "description": "Cây đổ ngã",
+      "symptoms": [],
+      "severity": "Nặng",
+      "order": 3,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5290404ffd1094dd8b9a"
+      }
+    }
+  ],
+  "totalDuration": "15-20 ngày",
+  "peakStage": 3,
+  "incubationPeriod": "3-5 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:32:16.992Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:16.992Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5291404ffd1094dd8bb3"
+  },
+  "diseaseId": {
+    "$oid": "692d5291404ffd1094dd8b9f"
+  },
+  "stages": [
+    {
+      "name": "Ủ bệnh",
+      "duration": "10-15 ngày",
+      "description": "Chưa biểu hiện rõ",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5291404ffd1094dd8bb4"
+      }
+    },
+    {
+      "name": "Phát bệnh",
+      "duration": "Kéo dài",
+      "description": "Lá vàng, lùn",
+      "symptoms": [],
+      "severity": "Rất nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5291404ffd1094dd8bb5"
+      }
+    }
+  ],
+  "totalDuration": "Suốt vòng đời cây",
+  "peakStage": 2,
+  "incubationPeriod": "10-20 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:32:17.432Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:17.432Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5291404ffd1094dd8bce"
+  },
+  "diseaseId": {
+    "$oid": "692d5291404ffd1094dd8bbb"
+  },
+  "stages": [
+    {
+      "name": "Sớm",
+      "duration": "10 ngày",
+      "description": "Lá xanh đậm",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5291404ffd1094dd8bcf"
+      }
+    },
+    {
+      "name": "Toàn phát",
+      "duration": "Kéo dài",
+      "description": "Lá xoắn, nghẹn đòng",
+      "symptoms": [],
+      "severity": "Nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5291404ffd1094dd8bd0"
+      }
+    }
+  ],
+  "totalDuration": "Suốt vòng đời",
+  "peakStage": 2,
+  "incubationPeriod": "10-15 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:32:17.822Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:17.822Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5292404ffd1094dd8be9"
+  },
+  "diseaseId": {
+    "$oid": "692d5291404ffd1094dd8bd5"
+  },
+  "stages": [
+    {
+      "name": "Khởi phát",
+      "duration": "3-5 ngày",
+      "description": "Chấm nhỏ nâu",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5292404ffd1094dd8bea"
+      }
+    },
+    {
+      "name": "Lan rộng",
+      "duration": "7-10 ngày",
+      "description": "Liên kết khô lá",
+      "symptoms": [],
+      "severity": "Trung bình",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5292404ffd1094dd8beb"
+      }
+    }
+  ],
+  "totalDuration": "Kéo dài",
+  "peakStage": 2,
+  "incubationPeriod": "2-3 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:32:18.205Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:18.205Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5292404ffd1094dd8c03"
+  },
+  "diseaseId": {
+    "$oid": "692d5292404ffd1094dd8bf0"
+  },
+  "stages": [
+    {
+      "name": "Mạ",
+      "duration": "15 ngày",
+      "description": "Cây cao vọt",
+      "symptoms": [],
+      "severity": "Trung bình",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5292404ffd1094dd8c04"
+      }
+    },
+    {
+      "name": "Trưởng thành",
+      "duration": "30-40 ngày",
+      "description": "Cây chết nhanh",
+      "symptoms": [],
+      "severity": "Nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5292404ffd1094dd8c05"
+      }
+    }
+  ],
+  "totalDuration": "Đến trổ",
+  "peakStage": 2,
+  "incubationPeriod": "Từ hạt",
+  "createdAt": {
+    "$date": "2025-12-01T08:32:18.584Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:18.584Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5292404ffd1094dd8c1d"
+  },
+  "diseaseId": {
+    "$oid": "692d5292404ffd1094dd8c0a"
+  },
+  "stages": [
+    {
+      "name": "Sớm",
+      "duration": "3 ngày",
+      "description": "Sọc thấm nước",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5292404ffd1094dd8c1e"
+      }
+    },
+    {
+      "name": "Nặng",
+      "duration": "7 ngày",
+      "description": "Lá bạc trắng",
+      "symptoms": [],
+      "severity": "Rất nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5292404ffd1094dd8c1f"
+      }
+    }
+  ],
+  "totalDuration": "10-15 ngày",
+  "peakStage": 2,
+  "incubationPeriod": "3-5 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:32:18.987Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:18.987Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5293404ffd1094dd8c37"
+  },
+  "diseaseId": {
+    "$oid": "692d5293404ffd1094dd8c24"
+  },
+  "stages": [
+    {
+      "name": "Làm đòng",
+      "duration": "7 ngày",
+      "description": "Vết nâu tím",
+      "symptoms": [],
+      "severity": "Trung bình",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5293404ffd1094dd8c38"
+      }
+    },
+    {
+      "name": "Trổ bông",
+      "duration": "7 ngày",
+      "description": "Bông nghẹn",
+      "symptoms": [],
+      "severity": "Nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5293404ffd1094dd8c39"
+      }
+    }
+  ],
+  "totalDuration": "10-15 ngày",
+  "peakStage": 2,
+  "incubationPeriod": "5 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:32:19.396Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:19.396Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5293404ffd1094dd8c51"
+  },
+  "diseaseId": {
+    "$oid": "692d5293404ffd1094dd8c3e"
+  },
+  "stages": [
+    {
+      "name": "Chớm xuất hiện",
+      "duration": "2-3 ngày",
+      "description": "Vệt vàng",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5293404ffd1094dd8c52"
+      }
+    },
+    {
+      "name": "Bùng phát",
+      "duration": "5-7 ngày",
+      "description": "Lá cháy khô",
+      "symptoms": [],
+      "severity": "Nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5293404ffd1094dd8c53"
+      }
+    }
+  ],
+  "totalDuration": "7-10 ngày",
+  "peakStage": 2,
+  "incubationPeriod": "Unknown",
+  "createdAt": {
+    "$date": "2025-12-01T08:32:19.797Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:19.797Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5294404ffd1094dd8c6b"
+  },
+  "diseaseId": {
+    "$oid": "692d5293404ffd1094dd8c58"
+  },
+  "stages": [
+    {
+      "name": "Đầu",
+      "duration": "10 ngày",
+      "description": "Vết đen nhỏ",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5294404ffd1094dd8c6c"
+      }
+    },
+    {
+      "name": "Sau",
+      "duration": "10 ngày",
+      "description": "Thối nhũn, đổ rạp",
+      "symptoms": [],
+      "severity": "Nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5294404ffd1094dd8c6d"
+      }
+    }
+  ],
+  "totalDuration": "Cuối vụ",
+  "peakStage": 2,
+  "incubationPeriod": "Lâu",
+  "createdAt": {
+    "$date": "2025-12-01T08:32:20.195Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:20.195Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5294404ffd1094dd8c85"
+  },
+  "diseaseId": {
+    "$oid": "692d5294404ffd1094dd8c72"
+  },
+  "stages": [
+    {
+      "name": "Lá",
+      "duration": "5-7 ngày",
+      "description": "Vết đốm đồng tâm",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5294404ffd1094dd8c86"
+      }
+    },
+    {
+      "name": "Hạt",
+      "duration": "Khi trổ",
+      "description": "Vết bệnh trên vỏ trấu",
+      "symptoms": [],
+      "severity": "Trung bình",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5294404ffd1094dd8c87"
+      }
+    }
+  ],
+  "totalDuration": "Suốt vụ",
+  "peakStage": 1,
+  "incubationPeriod": "3-5 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:32:20.587Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:20.587Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5294404ffd1094dd8ca0"
+  },
+  "diseaseId": {
+    "$oid": "692d5294404ffd1094dd8c8c"
+  },
+  "stages": [
+    {
+      "name": "Sâu non",
+      "duration": "25-30 ngày",
+      "description": "Gây dảnh héo, bông bạc",
+      "symptoms": [],
+      "severity": "Rất nặng",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5294404ffd1094dd8ca1"
+      }
+    },
+    {
+      "name": "Bướm",
+      "duration": "3-5 ngày",
+      "description": "Đẻ trứng",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5294404ffd1094dd8ca2"
+      }
+    }
+  ],
+  "totalDuration": "40-50 ngày",
+  "peakStage": 2,
+  "incubationPeriod": "7 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:32:20.966Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:20.966Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d5295404ffd1094dd8cbb"
+  },
+  "diseaseId": {
+    "$oid": "692d5295404ffd1094dd8ca8"
+  },
+  "stages": [
+    {
+      "name": "Ấu trùng",
+      "duration": "10-15 ngày",
+      "description": "Chích hút nhựa",
+      "symptoms": [],
+      "severity": "Trung bình",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d5295404ffd1094dd8cbc"
+      }
+    }
+  ],
+  "totalDuration": "15-20 ngày",
+  "peakStage": 1,
+  "incubationPeriod": "3 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:32:21.350Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:32:21.350Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dbff3e886e39c6de0d"
+  },
+  "diseaseId": {
+    "$oid": "692d54daff3e886e39c6ddea"
+  },
+  "stages": [
+    {
+      "name": "Chớm bệnh",
+      "duration": "3-5 ngày",
+      "description": "Vết bệnh xám xanh",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54dbff3e886e39c6de0e"
+      }
+    },
+    {
+      "name": "Tiến triển",
+      "duration": "5-7 ngày",
+      "description": "Vết bệnh lan lên lá",
+      "symptoms": [],
+      "severity": "Trung bình",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54dbff3e886e39c6de0f"
+      }
+    },
+    {
+      "name": "Gây hại nặng",
+      "duration": "5-7 ngày",
+      "description": "Cây đổ ngã",
+      "symptoms": [],
+      "severity": "Nặng",
+      "order": 3,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54dbff3e886e39c6de10"
+      }
+    }
+  ],
+  "totalDuration": "15-20 ngày",
+  "peakStage": 3,
+  "incubationPeriod": "3-5 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:42:03.691Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:03.691Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dcff3e886e39c6de29"
+  },
+  "diseaseId": {
+    "$oid": "692d54dbff3e886e39c6de15"
+  },
+  "stages": [
+    {
+      "name": "Ủ bệnh",
+      "duration": "10-15 ngày",
+      "description": "Chưa biểu hiện rõ",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54dcff3e886e39c6de2a"
+      }
+    },
+    {
+      "name": "Phát bệnh",
+      "duration": "Kéo dài",
+      "description": "Lá vàng, lùn",
+      "symptoms": [],
+      "severity": "Rất nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54dcff3e886e39c6de2b"
+      }
+    }
+  ],
+  "totalDuration": "Suốt vòng đời cây",
+  "peakStage": 2,
+  "incubationPeriod": "10-20 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:42:04.126Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:04.126Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dcff3e886e39c6de44"
+  },
+  "diseaseId": {
+    "$oid": "692d54dcff3e886e39c6de31"
+  },
+  "stages": [
+    {
+      "name": "Sớm",
+      "duration": "10 ngày",
+      "description": "Lá xanh đậm",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54dcff3e886e39c6de45"
+      }
+    },
+    {
+      "name": "Toàn phát",
+      "duration": "Kéo dài",
+      "description": "Lá xoắn, nghẹn đòng",
+      "symptoms": [],
+      "severity": "Nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54dcff3e886e39c6de46"
+      }
+    }
+  ],
+  "totalDuration": "Suốt vòng đời",
+  "peakStage": 2,
+  "incubationPeriod": "10-15 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:42:04.558Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:04.558Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dcff3e886e39c6de5f"
+  },
+  "diseaseId": {
+    "$oid": "692d54dcff3e886e39c6de4b"
+  },
+  "stages": [
+    {
+      "name": "Khởi phát",
+      "duration": "3-5 ngày",
+      "description": "Chấm nhỏ nâu",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54dcff3e886e39c6de60"
+      }
+    },
+    {
+      "name": "Lan rộng",
+      "duration": "7-10 ngày",
+      "description": "Liên kết khô lá",
+      "symptoms": [],
+      "severity": "Trung bình",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54dcff3e886e39c6de61"
+      }
+    }
+  ],
+  "totalDuration": "Kéo dài",
+  "peakStage": 2,
+  "incubationPeriod": "2-3 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:42:04.991Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:04.991Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54ddff3e886e39c6de79"
+  },
+  "diseaseId": {
+    "$oid": "692d54ddff3e886e39c6de66"
+  },
+  "stages": [
+    {
+      "name": "Mạ",
+      "duration": "15 ngày",
+      "description": "Cây cao vọt",
+      "symptoms": [],
+      "severity": "Trung bình",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54ddff3e886e39c6de7a"
+      }
+    },
+    {
+      "name": "Trưởng thành",
+      "duration": "30-40 ngày",
+      "description": "Cây chết nhanh",
+      "symptoms": [],
+      "severity": "Nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54ddff3e886e39c6de7b"
+      }
+    }
+  ],
+  "totalDuration": "Đến trổ",
+  "peakStage": 2,
+  "incubationPeriod": "Từ hạt",
+  "createdAt": {
+    "$date": "2025-12-01T08:42:05.406Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:05.406Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54ddff3e886e39c6de93"
+  },
+  "diseaseId": {
+    "$oid": "692d54ddff3e886e39c6de80"
+  },
+  "stages": [
+    {
+      "name": "Sớm",
+      "duration": "3 ngày",
+      "description": "Sọc thấm nước",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54ddff3e886e39c6de94"
+      }
+    },
+    {
+      "name": "Nặng",
+      "duration": "7 ngày",
+      "description": "Lá bạc trắng",
+      "symptoms": [],
+      "severity": "Rất nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54ddff3e886e39c6de95"
+      }
+    }
+  ],
+  "totalDuration": "10-15 ngày",
+  "peakStage": 2,
+  "incubationPeriod": "3-5 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:42:05.828Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:05.828Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54deff3e886e39c6dead"
+  },
+  "diseaseId": {
+    "$oid": "692d54ddff3e886e39c6de9a"
+  },
+  "stages": [
+    {
+      "name": "Làm đòng",
+      "duration": "7 ngày",
+      "description": "Vết nâu tím",
+      "symptoms": [],
+      "severity": "Trung bình",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54deff3e886e39c6deae"
+      }
+    },
+    {
+      "name": "Trổ bông",
+      "duration": "7 ngày",
+      "description": "Bông nghẹn",
+      "symptoms": [],
+      "severity": "Nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54deff3e886e39c6deaf"
+      }
+    }
+  ],
+  "totalDuration": "10-15 ngày",
+  "peakStage": 2,
+  "incubationPeriod": "5 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:42:06.257Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:06.257Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54deff3e886e39c6dec7"
+  },
+  "diseaseId": {
+    "$oid": "692d54deff3e886e39c6deb4"
+  },
+  "stages": [
+    {
+      "name": "Chớm xuất hiện",
+      "duration": "2-3 ngày",
+      "description": "Vệt vàng",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54deff3e886e39c6dec8"
+      }
+    },
+    {
+      "name": "Bùng phát",
+      "duration": "5-7 ngày",
+      "description": "Lá cháy khô",
+      "symptoms": [],
+      "severity": "Nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54deff3e886e39c6dec9"
+      }
+    }
+  ],
+  "totalDuration": "7-10 ngày",
+  "peakStage": 2,
+  "incubationPeriod": "Unknown",
+  "createdAt": {
+    "$date": "2025-12-01T08:42:06.698Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:06.698Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dfff3e886e39c6dee1"
+  },
+  "diseaseId": {
+    "$oid": "692d54deff3e886e39c6dece"
+  },
+  "stages": [
+    {
+      "name": "Đầu",
+      "duration": "10 ngày",
+      "description": "Vết đen nhỏ",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54dfff3e886e39c6dee2"
+      }
+    },
+    {
+      "name": "Sau",
+      "duration": "10 ngày",
+      "description": "Thối nhũn, đổ rạp",
+      "symptoms": [],
+      "severity": "Nặng",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54dfff3e886e39c6dee3"
+      }
+    }
+  ],
+  "totalDuration": "Cuối vụ",
+  "peakStage": 2,
+  "incubationPeriod": "Lâu",
+  "createdAt": {
+    "$date": "2025-12-01T08:42:07.105Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:07.105Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dfff3e886e39c6defb"
+  },
+  "diseaseId": {
+    "$oid": "692d54dfff3e886e39c6dee8"
+  },
+  "stages": [
+    {
+      "name": "Lá",
+      "duration": "5-7 ngày",
+      "description": "Vết đốm đồng tâm",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54dfff3e886e39c6defc"
+      }
+    },
+    {
+      "name": "Hạt",
+      "duration": "Khi trổ",
+      "description": "Vết bệnh trên vỏ trấu",
+      "symptoms": [],
+      "severity": "Trung bình",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54dfff3e886e39c6defd"
+      }
+    }
+  ],
+  "totalDuration": "Suốt vụ",
+  "peakStage": 1,
+  "incubationPeriod": "3-5 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:42:07.519Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:07.519Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54dfff3e886e39c6df16"
+  },
+  "diseaseId": {
+    "$oid": "692d54dfff3e886e39c6df02"
+  },
+  "stages": [
+    {
+      "name": "Sâu non",
+      "duration": "25-30 ngày",
+      "description": "Gây dảnh héo, bông bạc",
+      "symptoms": [],
+      "severity": "Rất nặng",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54dfff3e886e39c6df17"
+      }
+    },
+    {
+      "name": "Bướm",
+      "duration": "3-5 ngày",
+      "description": "Đẻ trứng",
+      "symptoms": [],
+      "severity": "Nhẹ",
+      "order": 2,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54dfff3e886e39c6df18"
+      }
+    }
+  ],
+  "totalDuration": "40-50 ngày",
+  "peakStage": 2,
+  "incubationPeriod": "7 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:42:07.934Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:07.934Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54e0ff3e886e39c6df31"
+  },
+  "diseaseId": {
+    "$oid": "692d54e0ff3e886e39c6df1e"
+  },
+  "stages": [
+    {
+      "name": "Ấu trùng",
+      "duration": "10-15 ngày",
+      "description": "Chích hút nhựa",
+      "symptoms": [],
+      "severity": "Trung bình",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54e0ff3e886e39c6df32"
+      }
+    }
+  ],
+  "totalDuration": "15-20 ngày",
+  "peakStage": 1,
+  "incubationPeriod": "3 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:42:08.351Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:08.351Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54e0ff3e886e39c6df4a"
+  },
+  "diseaseId": {
+    "$oid": "692d54e0ff3e886e39c6df37"
+  },
+  "stages": [
+    {
+      "name": "Phát triển",
+      "duration": "Kéo dài",
+      "description": "Sống trong bẹ lá",
+      "symptoms": [],
+      "severity": "Nặng",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54e0ff3e886e39c6df4b"
+      }
+    }
+  ],
+  "totalDuration": "10-12 ngày",
+  "peakStage": 1,
+  "incubationPeriod": "2 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:42:08.791Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:08.791Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54e1ff3e886e39c6df63"
+  },
+  "diseaseId": {
+    "$oid": "692d54e0ff3e886e39c6df50"
+  },
+  "stages": [
+    {
+      "name": "Sâu non",
+      "duration": "15 ngày",
+      "description": "Kích thích tạo ống hành",
+      "symptoms": [],
+      "severity": "Nặng",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54e1ff3e886e39c6df64"
+      }
+    }
+  ],
+  "totalDuration": "25-30 ngày",
+  "peakStage": 1,
+  "incubationPeriod": "3-4 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:42:09.227Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:09.227Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692d54e1ff3e886e39c6df7c"
+  },
+  "diseaseId": {
+    "$oid": "692d54e1ff3e886e39c6df69"
+  },
+  "stages": [
+    {
+      "name": "Chích hút",
+      "duration": "20 ngày",
+      "description": "Chích hút hạt",
+      "symptoms": [],
+      "severity": "Trung bình",
+      "order": 1,
+      "visualSigns": [],
+      "_id": {
+        "$oid": "692d54e1ff3e886e39c6df7d"
+      }
+    }
+  ],
+  "totalDuration": "30-40 ngày",
+  "peakStage": 1,
+  "incubationPeriod": "6 ngày",
+  "createdAt": {
+    "$date": "2025-12-01T08:42:09.675Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T08:42:09.675Z"
   },
   "__v": 0
 }]

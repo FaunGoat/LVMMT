@@ -11,12 +11,11 @@
       "priority": 1,
       "methods": [
         {
-          "name": "Actara 25WG (Thiamethoxam)",
-          "dosage": "15g/10 lít nước, phun khi rầy tuổi 1-2 (mật độ >500 con/m²)",
+          "name": "Actara 25WG",
+          "dosage": "Phun vào gốc lúa.",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
-          "effectiveness": 4,
           "compatibility": [],
           "incompatibility": [],
           "sideEffects": [],
@@ -24,24 +23,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d6c753a5736cf93a203c9"
-          }
-        },
-        {
-          "name": "Virtako 40WG",
-          "dosage": "15g/10 lít nước, phun khi rầy tuổi 1-2 (mật độ >500 con/m²)",
-          "applicationMethod": "Phun",
-          "equipmentRequired": [],
-          "effectiveStages": [],
-          "effectiveness": 4,
-          "compatibility": [],
-          "incompatibility": [],
-          "sideEffects": [],
-          "resistance": {
-            "rotation": []
-          },
-          "_id": {
-            "$oid": "692d6c753a5736cf93a203ca"
+            "$oid": "692e56eb0ed67023ee7a12a3"
           }
         }
       ],
@@ -50,7 +32,65 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d6c753a5736cf93a203c8"
+        "$oid": "692e56eb0ed67023ee7a12a2"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Tháo cạn nước",
+          "dosage": "Tháo cạn nước 1-2 ngày.",
+          "applicationMethod": "Tháo nước",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56eb0ed67023ee7a12a5"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56eb0ed67023ee7a12a4"
+      }
+    },
+    {
+      "type": "Sinh học",
+      "priority": 3,
+      "methods": [
+        {
+          "name": "Bảo vệ Thiên địch",
+          "dosage": "Bảo vệ nhện, bọ rùa...",
+          "applicationMethod": "Quản lý",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56eb0ed67023ee7a12a7"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56eb0ed67023ee7a12a6"
       }
     }
   ],
@@ -72,7 +112,7 @@
     "$date": "2025-11-30T16:16:55.053Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T10:22:45.282Z"
+    "$date": "2025-12-02T03:03:07.864Z"
   },
   "__v": 0
 },
@@ -90,8 +130,7 @@
       "methods": [
         {
           "name": "Tilt Super (Propiconazole)",
-          "dosage": "Theo khuyến cáo",
-          "timing": "Phun phòng 2 lần (trước và sau khi lúa trổ)",
+          "dosage": "Phun 2 lần: trước và sau khi trổ.",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
@@ -102,7 +141,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d6c763a5736cf93a20432"
+            "$oid": "692e56ec0ed67023ee7a12e1"
           }
         }
       ],
@@ -111,7 +150,36 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d6c763a5736cf93a20431"
+        "$oid": "692e56ec0ed67023ee7a12e0"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Xử lý hạt giống",
+          "dosage": "Ngâm hạt giống trong nước nóng hoặc thuốc trừ nấm.",
+          "applicationMethod": "Ngâm",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ec0ed67023ee7a12e3"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a12e2"
       }
     }
   ],
@@ -133,7 +201,7 @@
     "$date": "2025-11-30T16:16:55.521Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T10:22:46.697Z"
+    "$date": "2025-12-02T03:03:08.247Z"
   },
   "__v": 0
 },
@@ -150,8 +218,8 @@
       "priority": 1,
       "methods": [
         {
-          "name": "Kasumin (Kasugamycin)",
-          "dosage": "Theo hướng dẫn",
+          "name": "Kasumin/Starner",
+          "dosage": "Phun thuốc kháng sinh đặc trị vi khuẩn.",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
@@ -162,7 +230,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d6c763a5736cf93a20410"
+            "$oid": "692e56ec0ed67023ee7a12ff"
           }
         }
       ],
@@ -171,7 +239,65 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d6c763a5736cf93a2040f"
+        "$oid": "692e56ec0ed67023ee7a12fe"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Tháo nước và phơi ruộng",
+          "dosage": "Tháo cạn nước, giúp vết bệnh khô nhanh.",
+          "applicationMethod": "Quản lý nước",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ec0ed67023ee7a1301"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a1300"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 3,
+      "methods": [
+        {
+          "name": "Cân đối phân bón",
+          "dosage": "Giảm bón đạm, tăng cường Kali.",
+          "applicationMethod": "Quản lý dinh dưỡng",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ec0ed67023ee7a1303"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a1302"
       }
     }
   ],
@@ -193,7 +319,7 @@
     "$date": "2025-11-30T16:16:56.070Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T10:22:46.245Z"
+    "$date": "2025-12-02T03:03:08.419Z"
   },
   "__v": 0
 },
@@ -211,8 +337,7 @@
       "methods": [
         {
           "name": "Fujione",
-          "dosage": "Theo khuyến cáo",
-          "timing": "Phun phòng 2 lần (trước và sau khi lúa trổ)",
+          "dosage": "Phun phòng 2 lần (làm đòng và trổ lác đác).",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
@@ -223,7 +348,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d6c753a5736cf93a203f0"
+            "$oid": "692e56ec0ed67023ee7a12bf"
           }
         }
       ],
@@ -232,7 +357,94 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d6c753a5736cf93a203ef"
+        "$oid": "692e56ec0ed67023ee7a12be"
+      }
+    },
+    {
+      "type": "Hóa học",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Beam",
+          "dosage": "Phun trị bệnh đạo ôn cổ bông.",
+          "applicationMethod": "Phun",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ec0ed67023ee7a12c1"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a12c0"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 3,
+      "methods": [
+        {
+          "name": "Bón phân cân đối",
+          "dosage": "Tránh bón thừa đạm.",
+          "applicationMethod": "Quản lý dinh dưỡng",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ec0ed67023ee7a12c3"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a12c2"
+      }
+    },
+    {
+      "type": "Giống",
+      "priority": 4,
+      "methods": [
+        {
+          "name": "Chọn giống kháng",
+          "dosage": "Sử dụng các giống lúa có tính kháng.",
+          "applicationMethod": "Tuyển chọn",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ec0ed67023ee7a12c5"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a12c4"
       }
     }
   ],
@@ -254,7 +466,7 @@
     "$date": "2025-11-30T16:16:56.533Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T10:22:45.789Z"
+    "$date": "2025-12-02T03:03:08.044Z"
   },
   "__v": 0
 },
@@ -271,9 +483,8 @@
       "priority": 1,
       "methods": [
         {
-          "name": "Thuốc có hoạt chất Abamectin",
-          "dosage": "Theo khuyến cáo",
-          "timing": "Phun phòng 2 lần (trước và sau khi lúa trổ)",
+          "name": "Virtako 40WG",
+          "dosage": "Phun khi sâu non tuổi 1-2.",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
@@ -284,7 +495,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d6c773a5736cf93a20452"
+            "$oid": "692e56ec0ed67023ee7a131d"
           }
         }
       ],
@@ -293,7 +504,94 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d6c773a5736cf93a20451"
+        "$oid": "692e56ec0ed67023ee7a131c"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Thăm đồng thường xuyên",
+          "dosage": "Phát hiện ổ trứng, ngắt bỏ.",
+          "applicationMethod": "Thăm dò",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ec0ed67023ee7a131f"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a131e"
+      }
+    },
+    {
+      "type": "Sinh học",
+      "priority": 3,
+      "methods": [
+        {
+          "name": "Bảo vệ thiên địch",
+          "dosage": "Giữ lại nhện, ong ký sinh.",
+          "applicationMethod": "Quản lý",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ec0ed67023ee7a1321"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a1320"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 4,
+      "methods": [
+        {
+          "name": "Hạn chế bón đạm",
+          "dosage": "Bón đạm cân đối, tránh bón thừa.",
+          "applicationMethod": "Quản lý dinh dưỡng",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ec0ed67023ee7a1323"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a1322"
       }
     }
   ],
@@ -315,691 +613,7 @@
     "$date": "2025-11-30T16:16:56.984Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T10:22:47.180Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5290404ffd1094dd8b8c"
-  },
-  "diseaseId": {
-    "$oid": "692d528f404ffd1094dd8b74"
-  },
-  "treatments": [
-    {
-      "type": "Hóa học",
-      "priority": 1,
-      "methods": [
-        {
-          "name": "Validacin",
-          "dosage": "20-25ml/bình 16L",
-          "applicationMethod": "Phun",
-          "equipmentRequired": [],
-          "effectiveStages": [],
-          "compatibility": [],
-          "incompatibility": [],
-          "sideEffects": [],
-          "resistance": {
-            "rotation": []
-          },
-          "_id": {
-            "$oid": "692d5290404ffd1094dd8b8e"
-          }
-        }
-      ],
-      "procedure": [],
-      "bestPractices": [],
-      "commonMistakes": [],
-      "warnings": [],
-      "_id": {
-        "$oid": "692d5290404ffd1094dd8b8d"
-      }
-    }
-  ],
-  "integratedPestManagement": {
-    "actionPlan": []
-  },
-  "emergencyProtocol": {
-    "immediateActions": [],
-    "supportContacts": []
-  },
-  "postTreatmentCare": [],
-  "successIndicators": [],
-  "failureReasons": [],
-  "organicAlternatives": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:16.837Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:16.837Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5291404ffd1094dd8ba8"
-  },
-  "diseaseId": {
-    "$oid": "692d5291404ffd1094dd8b9f"
-  },
-  "treatments": [
-    {
-      "type": "Canh tác",
-      "priority": 1,
-      "methods": [
-        {
-          "name": "Nhổ bỏ cây bệnh",
-          "dosage": "N/A",
-          "applicationMethod": "Khác",
-          "equipmentRequired": [],
-          "effectiveStages": [],
-          "compatibility": [],
-          "incompatibility": [],
-          "sideEffects": [],
-          "resistance": {
-            "rotation": []
-          },
-          "_id": {
-            "$oid": "692d5291404ffd1094dd8baa"
-          }
-        }
-      ],
-      "procedure": [],
-      "bestPractices": [],
-      "commonMistakes": [],
-      "warnings": [],
-      "_id": {
-        "$oid": "692d5291404ffd1094dd8ba9"
-      }
-    }
-  ],
-  "integratedPestManagement": {
-    "actionPlan": []
-  },
-  "emergencyProtocol": {
-    "immediateActions": [],
-    "supportContacts": []
-  },
-  "postTreatmentCare": [],
-  "successIndicators": [],
-  "failureReasons": [],
-  "organicAlternatives": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:17.271Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:17.271Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5291404ffd1094dd8bc3"
-  },
-  "diseaseId": {
-    "$oid": "692d5291404ffd1094dd8bbb"
-  },
-  "treatments": [
-    {
-      "type": "Hóa học",
-      "priority": 2,
-      "methods": [
-        {
-          "name": "Diệt rầy môi giới",
-          "dosage": "Theo mật độ",
-          "applicationMethod": "Phun",
-          "equipmentRequired": [],
-          "effectiveStages": [],
-          "compatibility": [],
-          "incompatibility": [],
-          "sideEffects": [],
-          "resistance": {
-            "rotation": []
-          },
-          "_id": {
-            "$oid": "692d5291404ffd1094dd8bc5"
-          }
-        }
-      ],
-      "procedure": [],
-      "bestPractices": [],
-      "commonMistakes": [],
-      "warnings": [],
-      "_id": {
-        "$oid": "692d5291404ffd1094dd8bc4"
-      }
-    }
-  ],
-  "integratedPestManagement": {
-    "actionPlan": []
-  },
-  "emergencyProtocol": {
-    "immediateActions": [],
-    "supportContacts": []
-  },
-  "postTreatmentCare": [],
-  "successIndicators": [],
-  "failureReasons": [],
-  "organicAlternatives": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:17.681Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:17.681Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5292404ffd1094dd8bde"
-  },
-  "diseaseId": {
-    "$oid": "692d5291404ffd1094dd8bd5"
-  },
-  "treatments": [
-    {
-      "type": "Hóa học",
-      "priority": 3,
-      "methods": [
-        {
-          "name": "Tilt Super",
-          "dosage": "10-15ml/bình 16L",
-          "applicationMethod": "Phun",
-          "equipmentRequired": [],
-          "effectiveStages": [],
-          "compatibility": [],
-          "incompatibility": [],
-          "sideEffects": [],
-          "resistance": {
-            "rotation": []
-          },
-          "_id": {
-            "$oid": "692d5292404ffd1094dd8be0"
-          }
-        }
-      ],
-      "procedure": [],
-      "bestPractices": [],
-      "commonMistakes": [],
-      "warnings": [],
-      "_id": {
-        "$oid": "692d5292404ffd1094dd8bdf"
-      }
-    }
-  ],
-  "integratedPestManagement": {
-    "actionPlan": []
-  },
-  "emergencyProtocol": {
-    "immediateActions": [],
-    "supportContacts": []
-  },
-  "postTreatmentCare": [],
-  "successIndicators": [],
-  "failureReasons": [],
-  "organicAlternatives": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:18.062Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:18.062Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5292404ffd1094dd8bf8"
-  },
-  "diseaseId": {
-    "$oid": "692d5292404ffd1094dd8bf0"
-  },
-  "treatments": [
-    {
-      "type": "Canh tác",
-      "priority": 1,
-      "methods": [
-        {
-          "name": "Nhổ bỏ cây bệnh",
-          "dosage": "N/A",
-          "applicationMethod": "Khác",
-          "equipmentRequired": [],
-          "effectiveStages": [],
-          "compatibility": [],
-          "incompatibility": [],
-          "sideEffects": [],
-          "resistance": {
-            "rotation": []
-          },
-          "_id": {
-            "$oid": "692d5292404ffd1094dd8bfa"
-          }
-        }
-      ],
-      "procedure": [],
-      "bestPractices": [],
-      "commonMistakes": [],
-      "warnings": [],
-      "_id": {
-        "$oid": "692d5292404ffd1094dd8bf9"
-      }
-    }
-  ],
-  "integratedPestManagement": {
-    "actionPlan": []
-  },
-  "emergencyProtocol": {
-    "immediateActions": [],
-    "supportContacts": []
-  },
-  "postTreatmentCare": [],
-  "successIndicators": [],
-  "failureReasons": [],
-  "organicAlternatives": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:18.441Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:18.441Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5292404ffd1094dd8c12"
-  },
-  "diseaseId": {
-    "$oid": "692d5292404ffd1094dd8c0a"
-  },
-  "treatments": [
-    {
-      "type": "Hóa học",
-      "priority": 1,
-      "methods": [
-        {
-          "name": "Kasumin",
-          "dosage": "Theo hướng dẫn",
-          "applicationMethod": "Phun",
-          "equipmentRequired": [],
-          "effectiveStages": [],
-          "compatibility": [],
-          "incompatibility": [],
-          "sideEffects": [],
-          "resistance": {
-            "rotation": []
-          },
-          "_id": {
-            "$oid": "692d5292404ffd1094dd8c14"
-          }
-        }
-      ],
-      "procedure": [],
-      "bestPractices": [],
-      "commonMistakes": [],
-      "warnings": [],
-      "_id": {
-        "$oid": "692d5292404ffd1094dd8c13"
-      }
-    }
-  ],
-  "integratedPestManagement": {
-    "actionPlan": []
-  },
-  "emergencyProtocol": {
-    "immediateActions": [],
-    "supportContacts": []
-  },
-  "postTreatmentCare": [],
-  "successIndicators": [],
-  "failureReasons": [],
-  "organicAlternatives": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:18.842Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:18.842Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5293404ffd1094dd8c2c"
-  },
-  "diseaseId": {
-    "$oid": "692d5293404ffd1094dd8c24"
-  },
-  "treatments": [
-    {
-      "type": "Hóa học",
-      "priority": 2,
-      "methods": [
-        {
-          "name": "Carbendazim",
-          "dosage": "Tiêu chuẩn",
-          "applicationMethod": "Phun",
-          "equipmentRequired": [],
-          "effectiveStages": [],
-          "compatibility": [],
-          "incompatibility": [],
-          "sideEffects": [],
-          "resistance": {
-            "rotation": []
-          },
-          "_id": {
-            "$oid": "692d5293404ffd1094dd8c2e"
-          }
-        }
-      ],
-      "procedure": [],
-      "bestPractices": [],
-      "commonMistakes": [],
-      "warnings": [],
-      "_id": {
-        "$oid": "692d5293404ffd1094dd8c2d"
-      }
-    }
-  ],
-  "integratedPestManagement": {
-    "actionPlan": []
-  },
-  "emergencyProtocol": {
-    "immediateActions": [],
-    "supportContacts": []
-  },
-  "postTreatmentCare": [],
-  "successIndicators": [],
-  "failureReasons": [],
-  "organicAlternatives": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:19.244Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:19.244Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5293404ffd1094dd8c46"
-  },
-  "diseaseId": {
-    "$oid": "692d5293404ffd1094dd8c3e"
-  },
-  "treatments": [
-    {
-      "type": "Hóa học",
-      "priority": 1,
-      "methods": [
-        {
-          "name": "Antracol",
-          "dosage": "Theo bao bì",
-          "applicationMethod": "Phun",
-          "equipmentRequired": [],
-          "effectiveStages": [],
-          "compatibility": [],
-          "incompatibility": [],
-          "sideEffects": [],
-          "resistance": {
-            "rotation": []
-          },
-          "_id": {
-            "$oid": "692d5293404ffd1094dd8c48"
-          }
-        }
-      ],
-      "procedure": [],
-      "bestPractices": [],
-      "commonMistakes": [],
-      "warnings": [],
-      "_id": {
-        "$oid": "692d5293404ffd1094dd8c47"
-      }
-    }
-  ],
-  "integratedPestManagement": {
-    "actionPlan": []
-  },
-  "emergencyProtocol": {
-    "immediateActions": [],
-    "supportContacts": []
-  },
-  "postTreatmentCare": [],
-  "successIndicators": [],
-  "failureReasons": [],
-  "organicAlternatives": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:19.645Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:19.645Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5294404ffd1094dd8c60"
-  },
-  "diseaseId": {
-    "$oid": "692d5293404ffd1094dd8c58"
-  },
-  "treatments": [
-    {
-      "type": "Hóa học",
-      "priority": 2,
-      "methods": [
-        {
-          "name": "Kitazin",
-          "dosage": "Tiêu chuẩn",
-          "applicationMethod": "Rải",
-          "equipmentRequired": [],
-          "effectiveStages": [],
-          "compatibility": [],
-          "incompatibility": [],
-          "sideEffects": [],
-          "resistance": {
-            "rotation": []
-          },
-          "_id": {
-            "$oid": "692d5294404ffd1094dd8c62"
-          }
-        }
-      ],
-      "procedure": [],
-      "bestPractices": [],
-      "commonMistakes": [],
-      "warnings": [],
-      "_id": {
-        "$oid": "692d5294404ffd1094dd8c61"
-      }
-    }
-  ],
-  "integratedPestManagement": {
-    "actionPlan": []
-  },
-  "emergencyProtocol": {
-    "immediateActions": [],
-    "supportContacts": []
-  },
-  "postTreatmentCare": [],
-  "successIndicators": [],
-  "failureReasons": [],
-  "organicAlternatives": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:20.037Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:20.037Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5294404ffd1094dd8c7a"
-  },
-  "diseaseId": {
-    "$oid": "692d5294404ffd1094dd8c72"
-  },
-  "treatments": [
-    {
-      "type": "Hóa học",
-      "priority": 3,
-      "methods": [
-        {
-          "name": "Mancozeb",
-          "dosage": "Tiêu chuẩn",
-          "applicationMethod": "Phun",
-          "equipmentRequired": [],
-          "effectiveStages": [],
-          "compatibility": [],
-          "incompatibility": [],
-          "sideEffects": [],
-          "resistance": {
-            "rotation": []
-          },
-          "_id": {
-            "$oid": "692d5294404ffd1094dd8c7c"
-          }
-        }
-      ],
-      "procedure": [],
-      "bestPractices": [],
-      "commonMistakes": [],
-      "warnings": [],
-      "_id": {
-        "$oid": "692d5294404ffd1094dd8c7b"
-      }
-    }
-  ],
-  "integratedPestManagement": {
-    "actionPlan": []
-  },
-  "emergencyProtocol": {
-    "immediateActions": [],
-    "supportContacts": []
-  },
-  "postTreatmentCare": [],
-  "successIndicators": [],
-  "failureReasons": [],
-  "organicAlternatives": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:20.436Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:20.436Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5294404ffd1094dd8c94"
-  },
-  "diseaseId": {
-    "$oid": "692d5294404ffd1094dd8c8c"
-  },
-  "treatments": [
-    {
-      "type": "Hóa học",
-      "priority": 1,
-      "methods": [
-        {
-          "name": "Virtako",
-          "dosage": "Theo hướng dẫn",
-          "applicationMethod": "Phun",
-          "equipmentRequired": [],
-          "effectiveStages": [],
-          "compatibility": [],
-          "incompatibility": [],
-          "sideEffects": [],
-          "resistance": {
-            "rotation": []
-          },
-          "_id": {
-            "$oid": "692d5294404ffd1094dd8c96"
-          }
-        }
-      ],
-      "procedure": [],
-      "bestPractices": [],
-      "commonMistakes": [],
-      "warnings": [],
-      "_id": {
-        "$oid": "692d5294404ffd1094dd8c95"
-      }
-    }
-  ],
-  "integratedPestManagement": {
-    "actionPlan": []
-  },
-  "emergencyProtocol": {
-    "immediateActions": [],
-    "supportContacts": []
-  },
-  "postTreatmentCare": [],
-  "successIndicators": [],
-  "failureReasons": [],
-  "organicAlternatives": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:20.822Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:20.822Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692d5295404ffd1094dd8cb0"
-  },
-  "diseaseId": {
-    "$oid": "692d5295404ffd1094dd8ca8"
-  },
-  "treatments": [
-    {
-      "type": "Hóa học",
-      "priority": 2,
-      "methods": [
-        {
-          "name": "Regent",
-          "dosage": "Tiêu chuẩn",
-          "applicationMethod": "Phun",
-          "equipmentRequired": [],
-          "effectiveStages": [],
-          "compatibility": [],
-          "incompatibility": [],
-          "sideEffects": [],
-          "resistance": {
-            "rotation": []
-          },
-          "_id": {
-            "$oid": "692d5295404ffd1094dd8cb2"
-          }
-        }
-      ],
-      "procedure": [],
-      "bestPractices": [],
-      "commonMistakes": [],
-      "warnings": [],
-      "_id": {
-        "$oid": "692d5295404ffd1094dd8cb1"
-      }
-    }
-  ],
-  "integratedPestManagement": {
-    "actionPlan": []
-  },
-  "emergencyProtocol": {
-    "immediateActions": [],
-    "supportContacts": []
-  },
-  "postTreatmentCare": [],
-  "successIndicators": [],
-  "failureReasons": [],
-  "organicAlternatives": [],
-  "createdAt": {
-    "$date": "2025-12-01T08:32:21.199Z"
-  },
-  "updatedAt": {
-    "$date": "2025-12-01T08:32:21.199Z"
+    "$date": "2025-12-02T03:03:08.590Z"
   },
   "__v": 0
 },
@@ -1016,8 +630,8 @@
       "priority": 1,
       "methods": [
         {
-          "name": "Validacin",
-          "dosage": "20-25ml/bình 16L",
+          "name": "Validacin (Validamycin)",
+          "dosage": "Phun thẳng vào vết bệnh và gốc lúa.",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
@@ -1028,7 +642,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d54dbff3e886e39c6de04"
+            "$oid": "692e56ec0ed67023ee7a133f"
           }
         }
       ],
@@ -1037,7 +651,65 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d54dbff3e886e39c6de03"
+        "$oid": "692e56ec0ed67023ee7a133e"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Giữ nước hợp lý",
+          "dosage": "Tháo nước lúc bệnh phát, sau đó giữ nước vừa phải.",
+          "applicationMethod": "Quản lý nước",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ec0ed67023ee7a1341"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a1340"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 3,
+      "methods": [
+        {
+          "name": "Vệ sinh đồng ruộng",
+          "dosage": "Dọn sạch tàn dư rơm rạ.",
+          "applicationMethod": "Vệ sinh",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ec0ed67023ee7a1343"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a1342"
       }
     }
   ],
@@ -1056,7 +728,7 @@
     "$date": "2025-12-01T08:42:03.520Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:03.520Z"
+    "$date": "2025-12-02T03:03:08.759Z"
   },
   "__v": 0
 },
@@ -1074,8 +746,8 @@
       "methods": [
         {
           "name": "Nhổ bỏ cây bệnh",
-          "dosage": "N/A",
-          "applicationMethod": "Khác",
+          "dosage": "Nhổ và tiêu hủy cây lúa bị bệnh.",
+          "applicationMethod": "Tiêu hủy",
           "equipmentRequired": [],
           "effectiveStages": [],
           "compatibility": [],
@@ -1085,7 +757,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d54dbff3e886e39c6de20"
+            "$oid": "692e56ec0ed67023ee7a135f"
           }
         }
       ],
@@ -1094,7 +766,36 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d54dbff3e886e39c6de1f"
+        "$oid": "692e56ec0ed67023ee7a135e"
+      }
+    },
+    {
+      "type": "Hóa học",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Diệt rầy môi giới",
+          "dosage": "Phun thuốc diệt rầy nâu.",
+          "applicationMethod": "Phun",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ec0ed67023ee7a1361"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ec0ed67023ee7a1360"
       }
     }
   ],
@@ -1113,7 +814,7 @@
     "$date": "2025-12-01T08:42:03.962Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:03.962Z"
+    "$date": "2025-12-02T03:03:08.967Z"
   },
   "__v": 0
 },
@@ -1127,11 +828,11 @@
   "treatments": [
     {
       "type": "Hóa học",
-      "priority": 2,
+      "priority": 1,
       "methods": [
         {
           "name": "Diệt rầy môi giới",
-          "dosage": "Theo mật độ",
+          "dosage": "Phun thuốc diệt rầy nâu.",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
@@ -1142,7 +843,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d54dcff3e886e39c6de3b"
+            "$oid": "692e56ed0ed67023ee7a1378"
           }
         }
       ],
@@ -1151,7 +852,65 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d54dcff3e886e39c6de3a"
+        "$oid": "692e56ed0ed67023ee7a1377"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Nhổ bỏ cây bệnh",
+          "dosage": "Nhổ và tiêu hủy cây lúa bị bệnh.",
+          "applicationMethod": "Tiêu hủy",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ed0ed67023ee7a137a"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a1379"
+      }
+    },
+    {
+      "type": "Giống",
+      "priority": 3,
+      "methods": [
+        {
+          "name": "Trồng giống kháng",
+          "dosage": "Sử dụng giống lúa có tính kháng.",
+          "applicationMethod": "Tuyển chọn",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ed0ed67023ee7a137c"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a137b"
       }
     }
   ],
@@ -1170,7 +929,7 @@
     "$date": "2025-12-01T08:42:04.397Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:04.397Z"
+    "$date": "2025-12-02T03:03:09.152Z"
   },
   "__v": 0
 },
@@ -1184,11 +943,11 @@
   "treatments": [
     {
       "type": "Hóa học",
-      "priority": 3,
+      "priority": 1,
       "methods": [
         {
-          "name": "Tilt Super",
-          "dosage": "10-15ml/bình 16L",
+          "name": "Thuốc gốc Mancozeb",
+          "dosage": "Phun phòng và trị bệnh.",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
@@ -1199,7 +958,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d54dcff3e886e39c6de56"
+            "$oid": "692e56ed0ed67023ee7a1396"
           }
         }
       ],
@@ -1208,7 +967,94 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d54dcff3e886e39c6de55"
+        "$oid": "692e56ed0ed67023ee7a1395"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Bón phân cân đối",
+          "dosage": "Bổ sung Kali, Silic, bón phân hữu cơ.",
+          "applicationMethod": "Quản lý dinh dưỡng",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ed0ed67023ee7a1398"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a1397"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 3,
+      "methods": [
+        {
+          "name": "Xử lý hạt giống",
+          "dosage": "Ngâm hạt giống trong nước nóng hoặc thuốc trừ nấm.",
+          "applicationMethod": "Ngâm",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ed0ed67023ee7a139a"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a1399"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 4,
+      "methods": [
+        {
+          "name": "Quản lý nước",
+          "dosage": "Giữ mực nước thích hợp, tháo nước khi cần.",
+          "applicationMethod": "Quản lý nước",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ed0ed67023ee7a139c"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a139b"
       }
     }
   ],
@@ -1227,7 +1073,7 @@
     "$date": "2025-12-01T08:42:04.829Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:04.829Z"
+    "$date": "2025-12-02T03:03:09.324Z"
   },
   "__v": 0
 },
@@ -1244,9 +1090,9 @@
       "priority": 1,
       "methods": [
         {
-          "name": "Nhổ bỏ cây bệnh",
-          "dosage": "N/A",
-          "applicationMethod": "Khác",
+          "name": "Xử lý hạt giống",
+          "dosage": "Sử dụng thuốc trừ nấm để xử lý hạt giống.",
+          "applicationMethod": "Xử lý hạt",
           "equipmentRequired": [],
           "effectiveStages": [],
           "compatibility": [],
@@ -1256,7 +1102,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d54ddff3e886e39c6de70"
+            "$oid": "692e56ed0ed67023ee7a13ba"
           }
         }
       ],
@@ -1265,7 +1111,36 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d54ddff3e886e39c6de6f"
+        "$oid": "692e56ed0ed67023ee7a13b9"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Nhổ bỏ cây bệnh",
+          "dosage": "Nhổ và tiêu hủy cây lúa bị bệnh.",
+          "applicationMethod": "Tiêu hủy",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ed0ed67023ee7a13bc"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a13bb"
       }
     }
   ],
@@ -1284,7 +1159,7 @@
     "$date": "2025-12-01T08:42:05.249Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:05.249Z"
+    "$date": "2025-12-02T03:03:09.492Z"
   },
   "__v": 0
 },
@@ -1301,8 +1176,8 @@
       "priority": 1,
       "methods": [
         {
-          "name": "Kasumin",
-          "dosage": "Theo hướng dẫn",
+          "name": "Diệt rầy xanh",
+          "dosage": "Phun thuốc diệt rầy xanh môi giới.",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
@@ -1313,7 +1188,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d54ddff3e886e39c6de8a"
+            "$oid": "692e56ed0ed67023ee7a13d2"
           }
         }
       ],
@@ -1322,7 +1197,65 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d54ddff3e886e39c6de89"
+        "$oid": "692e56ed0ed67023ee7a13d1"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Nhổ bỏ cây bệnh",
+          "dosage": "Nhổ và tiêu hủy cây lúa bị bệnh.",
+          "applicationMethod": "Tiêu hủy",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ed0ed67023ee7a13d4"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a13d3"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 3,
+      "methods": [
+        {
+          "name": "Vệ sinh đồng ruộng",
+          "dosage": "Diệt trừ cỏ dại.",
+          "applicationMethod": "Vệ sinh",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ed0ed67023ee7a13d6"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a13d5"
       }
     }
   ],
@@ -1341,7 +1274,7 @@
     "$date": "2025-12-01T08:42:05.668Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:05.668Z"
+    "$date": "2025-12-02T03:03:09.669Z"
   },
   "__v": 0
 },
@@ -1355,11 +1288,11 @@
   "treatments": [
     {
       "type": "Hóa học",
-      "priority": 2,
+      "priority": 1,
       "methods": [
         {
-          "name": "Carbendazim",
-          "dosage": "Tiêu chuẩn",
+          "name": "Anvil 5SC",
+          "dosage": "Phun khi vết bệnh chớm xuất hiện.",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
@@ -1370,7 +1303,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d54deff3e886e39c6dea4"
+            "$oid": "692e56ed0ed67023ee7a13f0"
           }
         }
       ],
@@ -1379,7 +1312,94 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d54deff3e886e39c6dea3"
+        "$oid": "692e56ed0ed67023ee7a13ef"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Tháo cạn nước",
+          "dosage": "Tháo nước ra khỏi ruộng.",
+          "applicationMethod": "Quản lý nước",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ed0ed67023ee7a13f2"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a13f1"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 3,
+      "methods": [
+        {
+          "name": "Bón phân cân đối",
+          "dosage": "Tránh bón phân đạm muộn.",
+          "applicationMethod": "Quản lý dinh dưỡng",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ed0ed67023ee7a13f4"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a13f3"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 4,
+      "methods": [
+        {
+          "name": "Vệ sinh đồng ruộng",
+          "dosage": "Dọn cỏ và tàn dư cây trồng.",
+          "applicationMethod": "Vệ sinh",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ed0ed67023ee7a13f6"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ed0ed67023ee7a13f5"
       }
     }
   ],
@@ -1398,7 +1418,7 @@
     "$date": "2025-12-01T08:42:06.094Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:06.094Z"
+    "$date": "2025-12-02T03:03:09.851Z"
   },
   "__v": 0
 },
@@ -1411,12 +1431,12 @@
   },
   "treatments": [
     {
-      "type": "Hóa học",
+      "type": "Canh tác",
       "priority": 1,
       "methods": [
         {
-          "name": "Antracol",
-          "dosage": "Theo bao bì",
+          "name": "Bổ sung Kali/Lân",
+          "dosage": "Phun phân bón lá chứa Kali và Lân.",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
@@ -1427,7 +1447,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d54deff3e886e39c6debe"
+            "$oid": "692e56ee0ed67023ee7a1414"
           }
         }
       ],
@@ -1436,7 +1456,36 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d54deff3e886e39c6debd"
+        "$oid": "692e56ee0ed67023ee7a1413"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Tưới nước giữ ẩm",
+          "dosage": "Đảm bảo đủ nước cho lúa giai đoạn làm đòng.",
+          "applicationMethod": "Quản lý nước",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ee0ed67023ee7a1416"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a1415"
       }
     }
   ],
@@ -1455,7 +1504,7 @@
     "$date": "2025-12-01T08:42:06.529Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:06.529Z"
+    "$date": "2025-12-02T03:03:10.026Z"
   },
   "__v": 0
 },
@@ -1468,13 +1517,13 @@
   },
   "treatments": [
     {
-      "type": "Hóa học",
-      "priority": 2,
+      "type": "Canh tác",
+      "priority": 1,
       "methods": [
         {
-          "name": "Kitazin",
-          "dosage": "Tiêu chuẩn",
-          "applicationMethod": "Rải",
+          "name": "Tháo nước phơi ruộng",
+          "dosage": "Tháo nước, phơi khô mặt ruộng khi bệnh xuất hiện.",
+          "applicationMethod": "Quản lý nước",
           "equipmentRequired": [],
           "effectiveStages": [],
           "compatibility": [],
@@ -1484,7 +1533,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d54deff3e886e39c6ded8"
+            "$oid": "692e56ee0ed67023ee7a142c"
           }
         }
       ],
@@ -1493,7 +1542,65 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d54deff3e886e39c6ded7"
+        "$oid": "692e56ee0ed67023ee7a142b"
+      }
+    },
+    {
+      "type": "Hóa học",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Thuốc gốc Hexaconazole",
+          "dosage": "Phun thuốc vào gốc lúa.",
+          "applicationMethod": "Phun",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ee0ed67023ee7a142e"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a142d"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 3,
+      "methods": [
+        {
+          "name": "Bón phân cân đối",
+          "dosage": "Tăng cường Kali.",
+          "applicationMethod": "Quản lý dinh dưỡng",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ee0ed67023ee7a1430"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a142f"
       }
     }
   ],
@@ -1512,7 +1619,7 @@
     "$date": "2025-12-01T08:42:06.951Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:06.951Z"
+    "$date": "2025-12-02T03:03:10.192Z"
   },
   "__v": 0
 },
@@ -1526,11 +1633,11 @@
   "treatments": [
     {
       "type": "Hóa học",
-      "priority": 3,
+      "priority": 1,
       "methods": [
         {
-          "name": "Mancozeb",
-          "dosage": "Tiêu chuẩn",
+          "name": "Thuốc gốc Propiconazole",
+          "dosage": "Phun phòng và trị bệnh.",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
@@ -1541,7 +1648,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d54dfff3e886e39c6def2"
+            "$oid": "692e56ee0ed67023ee7a144a"
           }
         }
       ],
@@ -1550,7 +1657,36 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d54dfff3e886e39c6def1"
+        "$oid": "692e56ee0ed67023ee7a1449"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Vệ sinh đồng ruộng",
+          "dosage": "Dọn sạch lá bệnh, tàn dư.",
+          "applicationMethod": "Vệ sinh",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ee0ed67023ee7a144c"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a144b"
       }
     }
   ],
@@ -1569,7 +1705,7 @@
     "$date": "2025-12-01T08:42:07.361Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:07.361Z"
+    "$date": "2025-12-02T03:03:10.363Z"
   },
   "__v": 0
 },
@@ -1586,8 +1722,37 @@
       "priority": 1,
       "methods": [
         {
-          "name": "Virtako",
-          "dosage": "Theo hướng dẫn",
+          "name": "Thuốc gốc Cartap (dạng hạt)",
+          "dosage": "Rải thuốc vào nước ruộng trước khi nở trứng.",
+          "applicationMethod": "Rải",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ee0ed67023ee7a1464"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a1463"
+      }
+    },
+    {
+      "type": "Hóa học",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Thuốc gốc Chlorantraniliprole",
+          "dosage": "Phun khi sâu non mới nở.",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
@@ -1598,7 +1763,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d54dfff3e886e39c6df0c"
+            "$oid": "692e56ee0ed67023ee7a1466"
           }
         }
       ],
@@ -1607,7 +1772,36 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d54dfff3e886e39c6df0b"
+        "$oid": "692e56ee0ed67023ee7a1465"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 3,
+      "methods": [
+        {
+          "name": "Ngắt ổ trứng",
+          "dosage": "Ngắt và tiêu hủy ổ trứng bằng tay.",
+          "applicationMethod": "Thủ công",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ee0ed67023ee7a1468"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a1467"
       }
     }
   ],
@@ -1626,7 +1820,7 @@
     "$date": "2025-12-01T08:42:07.776Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:07.776Z"
+    "$date": "2025-12-02T03:03:10.534Z"
   },
   "__v": 0
 },
@@ -1640,11 +1834,11 @@
   "treatments": [
     {
       "type": "Hóa học",
-      "priority": 2,
+      "priority": 1,
       "methods": [
         {
-          "name": "Regent",
-          "dosage": "Tiêu chuẩn",
+          "name": "Thuốc gốc Thiamethoxam",
+          "dosage": "Phun khi mật độ bọ trĩ cao.",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
@@ -1655,7 +1849,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d54e0ff3e886e39c6df28"
+            "$oid": "692e56ee0ed67023ee7a1483"
           }
         }
       ],
@@ -1664,7 +1858,65 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d54e0ff3e886e39c6df27"
+        "$oid": "692e56ee0ed67023ee7a1482"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Tưới nước ngập",
+          "dosage": "Cho nước ngập ruộng để diệt bọ trĩ.",
+          "applicationMethod": "Quản lý nước",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ee0ed67023ee7a1485"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a1484"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 3,
+      "methods": [
+        {
+          "name": "Gieo sạ thưa",
+          "dosage": "Giảm mật độ gieo sạ.",
+          "applicationMethod": "Sạ",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ee0ed67023ee7a1487"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a1486"
       }
     }
   ],
@@ -1683,7 +1935,7 @@
     "$date": "2025-12-01T08:42:08.195Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:08.195Z"
+    "$date": "2025-12-02T03:03:10.724Z"
   },
   "__v": 0
 },
@@ -1700,8 +1952,8 @@
       "priority": 1,
       "methods": [
         {
-          "name": "Nissorun",
-          "dosage": "Theo khuyến cáo",
+          "name": "Thuốc gốc Propargite",
+          "dosage": "Phun vào bẹ lá khi nhện mới phát sinh.",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
@@ -1712,7 +1964,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d54e0ff3e886e39c6df41"
+            "$oid": "692e56ee0ed67023ee7a14a3"
           }
         }
       ],
@@ -1721,7 +1973,94 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d54e0ff3e886e39c6df40"
+        "$oid": "692e56ee0ed67023ee7a14a2"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Vệ sinh đồng ruộng",
+          "dosage": "Dọn cỏ dại, xử lý rơm rạ.",
+          "applicationMethod": "Vệ sinh",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ee0ed67023ee7a14a5"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a14a4"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 3,
+      "methods": [
+        {
+          "name": "Quản lý nước",
+          "dosage": "Giữ nước luân phiên.",
+          "applicationMethod": "Quản lý nước",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ee0ed67023ee7a14a7"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a14a6"
+      }
+    },
+    {
+      "type": "Hóa học",
+      "priority": 4,
+      "methods": [
+        {
+          "name": "Thuốc gốc Abamectin",
+          "dosage": "Phun khi mật độ nhện tăng cao.",
+          "applicationMethod": "Phun",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ee0ed67023ee7a14a9"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ee0ed67023ee7a14a8"
       }
     }
   ],
@@ -1740,7 +2079,7 @@
     "$date": "2025-12-01T08:42:08.628Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:08.628Z"
+    "$date": "2025-12-02T03:03:10.964Z"
   },
   "__v": 0
 },
@@ -1754,12 +2093,12 @@
   "treatments": [
     {
       "type": "Hóa học",
-      "priority": 2,
+      "priority": 1,
       "methods": [
         {
-          "name": "Thuốc hạt",
-          "dosage": "Rải sớm",
-          "applicationMethod": "Rải",
+          "name": "Thuốc gốc Pymetrozine",
+          "dosage": "Phun khi chớm xuất hiện muỗi hành trưởng thành.",
+          "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
           "compatibility": [],
@@ -1769,7 +2108,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d54e1ff3e886e39c6df5a"
+            "$oid": "692e56ef0ed67023ee7a14c7"
           }
         }
       ],
@@ -1778,7 +2117,65 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d54e1ff3e886e39c6df59"
+        "$oid": "692e56ef0ed67023ee7a14c6"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Gieo sạ đồng loạt",
+          "dosage": "Tránh gieo sạ rải rác.",
+          "applicationMethod": "Sạ",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ef0ed67023ee7a14c9"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ef0ed67023ee7a14c8"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 3,
+      "methods": [
+        {
+          "name": "Cày vùi rơm rạ",
+          "dosage": "Hạn chế nguồn bệnh.",
+          "applicationMethod": "Vệ sinh",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ef0ed67023ee7a14cb"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ef0ed67023ee7a14ca"
       }
     }
   ],
@@ -1797,7 +2194,7 @@
     "$date": "2025-12-01T08:42:09.066Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:09.066Z"
+    "$date": "2025-12-02T03:03:11.169Z"
   },
   "__v": 0
 },
@@ -1811,11 +2208,11 @@
   "treatments": [
     {
       "type": "Hóa học",
-      "priority": 3,
+      "priority": 1,
       "methods": [
         {
-          "name": "Permethrin",
-          "dosage": "Phun chiều mát",
+          "name": "Thuốc gốc Lambda-cyhalothrin",
+          "dosage": "Phun vào lúc sáng sớm hoặc chiều mát.",
           "applicationMethod": "Phun",
           "equipmentRequired": [],
           "effectiveStages": [],
@@ -1826,7 +2223,7 @@
             "rotation": []
           },
           "_id": {
-            "$oid": "692d54e1ff3e886e39c6df73"
+            "$oid": "692e56ef0ed67023ee7a14e3"
           }
         }
       ],
@@ -1835,7 +2232,36 @@
       "commonMistakes": [],
       "warnings": [],
       "_id": {
-        "$oid": "692d54e1ff3e886e39c6df72"
+        "$oid": "692e56ef0ed67023ee7a14e2"
+      }
+    },
+    {
+      "type": "Canh tác",
+      "priority": 2,
+      "methods": [
+        {
+          "name": "Vệ sinh đồng ruộng",
+          "dosage": "Dọn sạch cỏ dại xung quanh bờ ruộng.",
+          "applicationMethod": "Vệ sinh",
+          "equipmentRequired": [],
+          "effectiveStages": [],
+          "compatibility": [],
+          "incompatibility": [],
+          "sideEffects": [],
+          "resistance": {
+            "rotation": []
+          },
+          "_id": {
+            "$oid": "692e56ef0ed67023ee7a14e5"
+          }
+        }
+      ],
+      "procedure": [],
+      "bestPractices": [],
+      "commonMistakes": [],
+      "warnings": [],
+      "_id": {
+        "$oid": "692e56ef0ed67023ee7a14e4"
       }
     }
   ],
@@ -1854,7 +2280,7 @@
     "$date": "2025-12-01T08:42:09.494Z"
   },
   "updatedAt": {
-    "$date": "2025-12-01T08:42:09.494Z"
+    "$date": "2025-12-02T03:03:11.338Z"
   },
   "__v": 0
 }]
