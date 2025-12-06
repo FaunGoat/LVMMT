@@ -9,6 +9,7 @@ function AdminDiseaseDetail() {
   const navigate = useNavigate();
   const { token } = useAdmin();
 
+  // ✅ FIX: Chỉ khai báo activeTab một lần
   const [activeTab, setActiveTab] = useState("stages");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -41,39 +42,27 @@ function AdminDiseaseDetail() {
       ] = await Promise.all([
         fetch(
           `http://localhost:5000/api/admin/disease-details/${diseaseId}/stages`,
-          {
-            headers,
-          }
+          { headers }
         ).then((r) => r.json()),
         fetch(
           `http://localhost:5000/api/admin/disease-details/${diseaseId}/seasons`,
-          {
-            headers,
-          }
+          { headers }
         ).then((r) => r.json()),
         fetch(
           `http://localhost:5000/api/admin/disease-details/${diseaseId}/causes`,
-          {
-            headers,
-          }
+          { headers }
         ).then((r) => r.json()),
         fetch(
           `http://localhost:5000/api/admin/disease-details/${diseaseId}/symptoms`,
-          {
-            headers,
-          }
+          { headers }
         ).then((r) => r.json()),
         fetch(
           `http://localhost:5000/api/admin/disease-details/${diseaseId}/treatments`,
-          {
-            headers,
-          }
+          { headers }
         ).then((r) => r.json()),
         fetch(
           `http://localhost:5000/api/admin/disease-details/${diseaseId}/prevention`,
-          {
-            headers,
-          }
+          { headers }
         ).then((r) => r.json()),
         fetch(
           `http://localhost:5000/api/admin/disease-details/${diseaseId}/weather-correlation`,
@@ -320,7 +309,7 @@ function AdminDiseaseDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
       <div className="bg-white shadow-md sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center gap-4">
@@ -330,9 +319,7 @@ function AdminDiseaseDetail() {
           >
             <FaArrowLeft className="text-xl" />
           </button>
-          <h1 className="text-2xl font-bold text-gray-800">
-            Chi tiết Bệnh Lúa
-          </h1>
+          <h1 className="text-2xl font-bold">Chi tiết Bệnh Lúa</h1>
         </div>
       </div>
 
@@ -361,7 +348,7 @@ function AdminDiseaseDetail() {
               { id: "symptoms", label: "Triệu Chứng" },
               { id: "treatments", label: "Điều Trị" },
               { id: "prevention", label: "Phòng Ngừa" },
-              { id: "weather", label: "Thời Tiết" },
+              { id: "weather", label: "Điều kiện thời tiết" },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -369,7 +356,7 @@ function AdminDiseaseDetail() {
                 className={`px-4 py-3 font-medium transition whitespace-nowrap ${
                   activeTab === tab.id
                     ? "bg-green-500 text-white"
-                    : "hover:bg-gray-50 text-gray-700"
+                    : "hover:bg-gray-50"
                 }`}
               >
                 {tab.label}
@@ -457,11 +444,11 @@ function AdminDiseaseDetail() {
 
 const DiseaseStagesEditor = ({ data, setData, onSave, saving }) => (
   <div className="bg-white rounded-lg shadow-md p-6">
-    <h2 className="text-xl font-bold mb-4">Giai Đoạn Phát Triển Bệnh</h2>
+    <h2 className="text-2xl font-bold mb-4">Giai Đoạn Phát Triển Bệnh</h2>
 
     <div className="space-y-4 mb-6">
       <div>
-        <label className="block text-sm font-semibold mb-1">
+        <label className="block text-lg font-semibold mb-1">
           Tổng thời gian
         </label>
         <input
@@ -475,7 +462,7 @@ const DiseaseStagesEditor = ({ data, setData, onSave, saving }) => (
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-semibold mb-1">
+          <label className="block text-lg font-semibold mb-1">
             Giai đoạn nguy hiểm nhất
           </label>
           <input
@@ -489,7 +476,7 @@ const DiseaseStagesEditor = ({ data, setData, onSave, saving }) => (
           />
         </div>
         <div>
-          <label className="block text-sm font-semibold mb-1">
+          <label className="block text-lg font-semibold mb-1">
             Thời gian ủ bệnh
           </label>
           <input
@@ -505,7 +492,7 @@ const DiseaseStagesEditor = ({ data, setData, onSave, saving }) => (
       </div>
 
       <div>
-        <label className="block text-sm font-semibold mb-1">Ghi chú</label>
+        <label className="block text-lg font-semibold mb-1">Ghi chú</label>
         <textarea
           value={data?.notes || ""}
           onChange={(e) => setData({ ...data, notes: e.target.value })}
@@ -516,12 +503,12 @@ const DiseaseStagesEditor = ({ data, setData, onSave, saving }) => (
       </div>
 
       <div>
-        <label className="block text-sm font-semibold mb-2">
+        <label className="block text-lg font-semibold mb-2">
           Các giai đoạn
         </label>
         <div className="space-y-3 max-h-96 overflow-y-auto">
           {data?.stages?.map((stage, idx) => (
-            <div key={idx} className="p-4 bg-gray-50 rounded border">
+            <div key={idx} className="p-4 rounded border">
               <div className="grid grid-cols-2 gap-2 mb-2">
                 <input
                   type="number"
@@ -532,7 +519,7 @@ const DiseaseStagesEditor = ({ data, setData, onSave, saving }) => (
                     newStages[idx].order = parseInt(e.target.value);
                     setData({ ...data, stages: newStages });
                   }}
-                  className="p-1 border rounded text-sm"
+                  className="p-1 border rounded"
                 />
                 <input
                   type="text"
@@ -543,7 +530,7 @@ const DiseaseStagesEditor = ({ data, setData, onSave, saving }) => (
                     newStages[idx].name = e.target.value;
                     setData({ ...data, stages: newStages });
                   }}
-                  className="p-1 border rounded text-sm"
+                  className="p-1 border rounded"
                 />
               </div>
               <textarea
@@ -555,7 +542,7 @@ const DiseaseStagesEditor = ({ data, setData, onSave, saving }) => (
                   setData({ ...data, stages: newStages });
                 }}
                 rows="2"
-                className="w-full p-1 border rounded text-sm"
+                className="w-full p-1 border rounded"
               />
             </div>
           ))}
@@ -580,17 +567,13 @@ const DiseaseSeasonsEditor = ({ data, setData, onSave, saving }) => (
 
     {/* Seasons */}
     <div className="mb-8">
-      <h3 className="text-lg font-bold text-gray-800 mb-4 pb-2 border-b-2">
-        Mùa vụ
-      </h3>
+      <h3 className="text-lg font-semibold mb-4 pb-2 border-b-2">Mùa vụ</h3>
       <div className="space-y-4 max-h-96 overflow-y-auto">
         {data?.seasons?.map((season, idx) => (
-          <div key={idx} className="p-4 bg-gray-50 rounded border">
+          <div key={idx} className="p-4 rounded border">
             <div className="grid grid-cols-2 gap-3 mb-3">
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  Mùa vụ
-                </label>
+                <label className="block font-semibold mb-1">Mùa vụ</label>
                 <select
                   value={season.type}
                   onChange={(e) => {
@@ -598,7 +581,7 @@ const DiseaseSeasonsEditor = ({ data, setData, onSave, saving }) => (
                     newSeasons[idx].type = e.target.value;
                     setData({ ...data, seasons: newSeasons });
                   }}
-                  className="w-full p-2 border rounded text-sm"
+                  className="w-full p-2 border rounded"
                 >
                   <option>Đông Xuân</option>
                   <option>Hè Thu</option>
@@ -606,7 +589,7 @@ const DiseaseSeasonsEditor = ({ data, setData, onSave, saving }) => (
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
+                <label className="block font-semibold mb-1">
                   Mức độ rủi ro
                 </label>
                 <select
@@ -616,7 +599,7 @@ const DiseaseSeasonsEditor = ({ data, setData, onSave, saving }) => (
                     newSeasons[idx].riskLevel = e.target.value;
                     setData({ ...data, seasons: newSeasons });
                   }}
-                  className="w-full p-2 border rounded text-sm"
+                  className="w-full p-2 border rounded"
                 >
                   <option>Rất cao</option>
                   <option>Cao</option>
@@ -627,7 +610,7 @@ const DiseaseSeasonsEditor = ({ data, setData, onSave, saving }) => (
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
+                <label className="block font-semibold mb-1">
                   Tháng bắt đầu
                 </label>
                 <input
@@ -640,11 +623,11 @@ const DiseaseSeasonsEditor = ({ data, setData, onSave, saving }) => (
                     newSeasons[idx].startMonth = parseInt(e.target.value);
                     setData({ ...data, seasons: newSeasons });
                   }}
-                  className="w-full p-2 border rounded text-sm"
+                  className="w-full p-2 border rounded"
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
+                <label className="block font-semibold mb-1">
                   Tháng kết thúc
                 </label>
                 <input
@@ -657,14 +640,12 @@ const DiseaseSeasonsEditor = ({ data, setData, onSave, saving }) => (
                     newSeasons[idx].endMonth = parseInt(e.target.value);
                     setData({ ...data, seasons: newSeasons });
                   }}
-                  className="w-full p-2 border rounded text-sm"
+                  className="w-full p-2 border rounded"
                 />
               </div>
             </div>
             <div className="mt-3">
-              <label className="block text-xs font-semibold text-gray-700 mb-1">
-                Mô tả
-              </label>
+              <label className="block font-semibold mb-1">Mô tả</label>
               <textarea
                 value={season.description}
                 onChange={(e) => {
@@ -673,7 +654,7 @@ const DiseaseSeasonsEditor = ({ data, setData, onSave, saving }) => (
                   setData({ ...data, seasons: newSeasons });
                 }}
                 rows="2"
-                className="w-full p-2 border rounded text-sm"
+                className="w-full p-2 border rounded"
               />
             </div>
           </div>
@@ -683,20 +664,15 @@ const DiseaseSeasonsEditor = ({ data, setData, onSave, saving }) => (
 
     {/* Critical Periods */}
     <div className="mb-6">
-      <h3 className="text-lg font-bold text-gray-800 mb-4 pb-2 border-b-2">
+      <h3 className="text-lg font-semibold mb-4 pb-2 border-b-2">
         Giai đoạn cây trồng nhạy cảm
       </h3>
       <div className="space-y-4 max-h-96 overflow-y-auto">
         {data?.criticalPeriods?.map((period, idx) => (
-          <div
-            key={idx}
-            className="p-4 bg-blue-50 rounded border border-blue-200"
-          >
+          <div key={idx} className="p-4 rounded border">
             <div className="grid grid-cols-2 gap-3 mb-3">
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  Giai đoạn
-                </label>
+                <label className="block font-semibold mb-1">Giai đoạn</label>
                 <input
                   type="text"
                   value={period.cropStage}
@@ -705,12 +681,12 @@ const DiseaseSeasonsEditor = ({ data, setData, onSave, saving }) => (
                     newPeriods[idx].cropStage = e.target.value;
                     setData({ ...data, criticalPeriods: newPeriods });
                   }}
-                  className="w-full p-2 border rounded text-sm"
+                  className="w-full p-2 border rounded"
                   placeholder="Đẻ nhánh, Trổ bông"
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
+                <label className="block font-semibold mb-1">
                   Mức độ rủi ro
                 </label>
                 <select
@@ -720,7 +696,7 @@ const DiseaseSeasonsEditor = ({ data, setData, onSave, saving }) => (
                     newPeriods[idx].riskLevel = e.target.value;
                     setData({ ...data, criticalPeriods: newPeriods });
                   }}
-                  className="w-full p-2 border rounded text-sm"
+                  className="w-full p-2 border rounded"
                 >
                   <option>Rất cao</option>
                   <option>Cao</option>
@@ -737,7 +713,7 @@ const DiseaseSeasonsEditor = ({ data, setData, onSave, saving }) => (
                 setData({ ...data, criticalPeriods: newPeriods });
               }}
               rows="2"
-              className="w-full p-2 border rounded text-sm"
+              className="w-full p-2 border rounded"
               placeholder="Mô tả giai đoạn nhạy cảm"
             />
           </div>
@@ -762,10 +738,10 @@ const DiseaseCausesEditor = ({ data, setData, onSave, saving }) => (
 
     {/* Pathogen */}
     <div className="mb-6 p-4 bg-white rounded border">
-      <h3 className="text-lg font-bold mb-3">Mầm bệnh</h3>
+      <h3 className="text-lg font-semibold mb-3">Mầm bệnh</h3>
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="block text-xs font-semibold text-gray-700 mb-1">
+          <label className="block font-semibold mb-1">
             Loại mầm bệnh/côn trùng
           </label>
           <input
@@ -777,14 +753,12 @@ const DiseaseCausesEditor = ({ data, setData, onSave, saving }) => (
                 pathogen: { ...data.pathogen, type: e.target.value },
               })
             }
-            className="w-full p-2 border rounded text-sm"
+            className="w-full p-2 border rounded"
             placeholder="Nấm / Vi khuẩn / Virus"
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-gray-700 mb-1">
-            Tên khoa học
-          </label>
+          <label className="block font-semibold mb-1">Tên khoa học</label>
           <input
             type="text"
             value={data?.pathogen?.scientificName || ""}
@@ -794,12 +768,12 @@ const DiseaseCausesEditor = ({ data, setData, onSave, saving }) => (
                 pathogen: { ...data.pathogen, scientificName: e.target.value },
               })
             }
-            className="w-full p-2 border rounded text-sm"
+            className="w-full p-2 border rounded"
           />
         </div>
       </div>
       <div className="mt-3">
-        <label className="block text-xs font-semibold text-gray-700 mb-1">
+        <label className="block font-semibold mb-1">
           Phương thức lây lan (cách nhau bằng dấu phẩy)
         </label>
         <input
@@ -814,7 +788,7 @@ const DiseaseCausesEditor = ({ data, setData, onSave, saving }) => (
               },
             })
           }
-          className="w-full p-2 border rounded text-sm"
+          className="w-full p-2 border rounded"
           placeholder="Gió, Nước, Côn trùng"
         />
       </div>
@@ -835,15 +809,13 @@ const DiseaseSymptomsEditor = ({ data, setData, onSave, saving }) => (
     <h2 className="text-2xl font-bold mb-4">Triệu Chứng</h2>
 
     <div className="mb-6 p-4 rounded border">
-      <h3 className="text-lg font-bold mb-3">Danh sách triệu chứng</h3>
-      <div className="space-y-4 max-h-128 overflow-y-auto">
+      <h3 className="text-lg font-semibold mb-3">Danh sách triệu chứng</h3>
+      <div className="space-y-4 max-h-160 overflow-y-auto">
         {data?.symptoms?.map((symptom, idx) => (
           <div key={idx} className="p-3 bg-white rounded border">
             <div className="grid grid-cols-2 gap-3 mb-2">
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  Bộ phận
-                </label>
+                <label className="block font-semibold mb-1">Bộ phận</label>
                 <select
                   value={symptom.part}
                   onChange={(e) => {
@@ -851,7 +823,7 @@ const DiseaseSymptomsEditor = ({ data, setData, onSave, saving }) => (
                     newSymptoms[idx].part = e.target.value;
                     setData({ ...data, symptoms: newSymptoms });
                   }}
-                  className="w-full p-2 border rounded text-sm"
+                  className="w-full p-2 border rounded"
                 >
                   <option>Lá</option>
                   <option>Thân</option>
@@ -862,9 +834,7 @@ const DiseaseSymptomsEditor = ({ data, setData, onSave, saving }) => (
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  Mức độ
-                </label>
+                <label className="block font-semibold mb-1">Mức độ</label>
                 <select
                   value={symptom.severity}
                   onChange={(e) => {
@@ -872,7 +842,7 @@ const DiseaseSymptomsEditor = ({ data, setData, onSave, saving }) => (
                     newSymptoms[idx].severity = e.target.value;
                     setData({ ...data, symptoms: newSymptoms });
                   }}
-                  className="w-full p-2 border rounded text-sm"
+                  className="w-full p-2 border rounded"
                 >
                   <option>Nhẹ</option>
                   <option>Trung bình</option>
@@ -889,7 +859,7 @@ const DiseaseSymptomsEditor = ({ data, setData, onSave, saving }) => (
                 setData({ ...data, symptoms: newSymptoms });
               }}
               rows="2"
-              className="w-full p-2 border rounded text-sm"
+              className="w-full p-2 border rounded"
               placeholder="Mô tả triệu chứng"
             />
           </div>
@@ -915,7 +885,7 @@ const DiseaseTreatmentsEditor = ({ data, setData, onSave, saving }) => (
     <div className="space-y-4 mb-6">
       {data?.treatments?.map((treatment, idx) => (
         <div key={idx} className="p-4 rounded border">
-          <label className="block font-semibold text-gray-700 mb-1">
+          <label className="block text-lg font-semibold mb-1">
             Phương pháp
           </label>
           <div className="flex justify-between items-center mb-3">
@@ -927,7 +897,7 @@ const DiseaseTreatmentsEditor = ({ data, setData, onSave, saving }) => (
                 newTreatments[idx].type = parseInt(e.target.value);
                 setData({ ...data, treatments: newTreatments });
               }}
-              className="p-1 border rounded text-sm"
+              className="p-1 border rounded"
             >
               <option>Hóa học</option>
               <option>Sinh học</option>
@@ -940,7 +910,7 @@ const DiseaseTreatmentsEditor = ({ data, setData, onSave, saving }) => (
                 newTreatments[idx].priority = parseInt(e.target.value);
                 setData({ ...data, treatments: newTreatments });
               }}
-              className="p-1 border rounded text-sm"
+              className="p-1 text-sm border rounded"
             >
               <option value="1">Ưu tiên 1</option>
               <option value="2">Ưu tiên 2</option>
@@ -951,7 +921,7 @@ const DiseaseTreatmentsEditor = ({ data, setData, onSave, saving }) => (
           </div>
 
           <div className="mb-2">
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
+            <label className="block font-semibold mb-1">
               Tên thuốc/Phương pháp
             </label>
             <textarea
@@ -974,15 +944,13 @@ const DiseaseTreatmentsEditor = ({ data, setData, onSave, saving }) => (
                 setData({ ...data, treatments: newTreatments });
               }}
               rows="3"
-              className="w-full p-2 border rounded text-sm"
+              className="w-full p-2 border rounded"
               placeholder="Tên thuốc - Liều lượng"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
-              Lưu ý
-            </label>
+            <label className="block font-semibold mb-1">Lưu ý</label>
             <textarea
               value={treatment.notes || ""}
               onChange={(e) => {
@@ -991,7 +959,7 @@ const DiseaseTreatmentsEditor = ({ data, setData, onSave, saving }) => (
                 setData({ ...data, treatments: newTreatments });
               }}
               rows="2"
-              className="w-full p-2 border rounded text-sm"
+              className="w-full p-2 border rounded"
               placeholder="Ghi chú thêm về phương pháp"
             />
           </div>
@@ -1009,114 +977,574 @@ const DiseaseTreatmentsEditor = ({ data, setData, onSave, saving }) => (
   </div>
 );
 
-const DiseasePreventionEditor = ({ data, setData, onSave, saving }) => (
-  <div className="bg-white rounded-lg shadow-md p-6">
-    <h2 className="text-2xl font-bold mb-4">Biện Pháp Phòng Ngừa</h2>
+const DiseasePreventionEditor = ({ data, setData, onSave, saving }) => {
+  // State lưu loại biện pháp đang chọn
+  const [selectedType, setSelectedType] = useState("cultural");
 
-    {/* Cultural Practices */}
-    <div className="mb-6 p-4 bg-green-50 rounded border">
-      <h3 className="font-bold text-green-800 mb-3">Canh tác</h3>
-      <div className="space-y-3">
-        {data?.culturalPractices?.map((practice, idx) => (
-          <div key={idx} className="p-3 bg-white rounded border">
-            <input
-              type="text"
-              value={practice.practice}
-              onChange={(e) => {
-                const newPractices = [...data.culturalPractices];
-                newPractices[idx].practice = e.target.value;
-                setData({ ...data, culturalPractices: newPractices });
-              }}
-              className="w-full p-2 border rounded text-sm mb-2"
-              placeholder="Tên biện pháp"
-            />
-            <textarea
-              value={practice.description}
-              onChange={(e) => {
-                const newPractices = [...data.culturalPractices];
-                newPractices[idx].description = e.target.value;
-                setData({ ...data, culturalPractices: newPractices });
-              }}
-              rows="2"
-              className="w-full p-2 border rounded text-sm"
-              placeholder="Mô tả biện pháp"
-            />
-          </div>
-        ))}
+  // Danh sách các loại biện pháp để hiển thị trong Dropdown
+  const preventionOptions = [
+    {
+      id: "cultural",
+      label: "Biện pháp Canh tác",
+      key: "culturalPractices",
+    },
+    {
+      id: "variety",
+      label: "Giống lúa kháng bệnh",
+      key: "varietySelection",
+    },
+    { id: "seed", label: "Xử lý hạt giống", key: "seedTreatment" },
+    { id: "soil", label: "Quản lý đất", key: "soilManagement" },
+    { id: "water", label: "Quản lý nước", key: "waterManagement" },
+    {
+      id: "nutrition",
+      label: "Quản lý dinh dưỡng",
+      key: "nutritionManagement",
+    },
+    {
+      id: "sanitation",
+      label: "Vệ sinh đồng ruộng",
+      key: "sanitationPractices",
+    },
+    { id: "bio", label: "Kiểm soát sinh học", key: "biologicalControl" },
+    { id: "monitoring", label: "Lịch giám sát", key: "monitoringSchedule" },
+  ];
+
+  // Hàm thêm dòng mới chung cho các bảng dạng danh sách (trừ lịch trình tổng quát)
+  const addItem = (key, template) => {
+    const currentList = data[key] ? [...data[key]] : [];
+    currentList.push(template);
+    setData({ ...data, [key]: currentList });
+  };
+
+  // Hàm xóa dòng
+  const removeItem = (key, index) => {
+    const currentList = [...data[key]];
+    currentList.splice(index, 1);
+    setData({ ...data, [key]: currentList });
+  };
+
+  // Template dữ liệu mẫu cho từng loại (để khi bấm thêm mới không bị lỗi)
+  const templates = {
+    culturalPractices: {
+      practice: "",
+      timing: "",
+      description: "",
+      cost: "Trung bình",
+    },
+    varietySelection: {
+      varietyName: "",
+      resistanceLevel: "Kháng cao",
+      growthDuration: "",
+      resistanceGenes: [],
+    },
+    seedTreatment: { method: "", cost: "Thấp", materials: [] },
+    soilManagement: { practice: "", description: "" },
+    waterManagement: { practice: "", waterDepth: "", description: "" },
+    nutritionManagement: { nutrient: "", recommendation: "", timing: "" },
+    sanitationPractices: { practice: "", importance: "Quan trọng", timing: "" },
+    biologicalControl: { agent: "", cost: "Trung bình", timing: "" },
+    monitoringSchedule: {
+      frequency: "",
+      cropStage: "",
+      whatToCheck: [],
+      threshold: "",
+    },
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="flex justify-between items-center mb-6 border-b pb-4">
+        <h2 className="text-2xl font-bold">Biện pháp Phòng ngừa</h2>
+
+        {/* DROPDOWN CHỌN LOẠI BIỆN PHÁP */}
+        <div className="w-1/2">
+          <label className="block text-sm font-bold mb-1 uppercase">
+            Chọn loại biện pháp để nhập liệu:
+          </label>
+          <select
+            value={selectedType}
+            onChange={(e) => setSelectedType(e.target.value)}
+            className="w-full p-2 border-2 border-green-500 rounded font-medium focus:outline-none focus:ring-2 focus:ring-green-200"
+          >
+            {preventionOptions.map((opt) => (
+              <option key={opt.id} value={opt.id}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
+
+      <div className="min-h-[300px]">
+        {/* 1. CANH TÁC */}
+        {selectedType === "cultural" && (
+          <PreventionListSection
+            title="Chi tiết Biện pháp Canh tác"
+            items={data?.culturalPractices || []}
+            onAdd={() =>
+              addItem("culturalPractices", templates.culturalPractices)
+            }
+            onRemove={(idx) => removeItem("culturalPractices", idx)}
+            renderItem={(item, idx) => (
+              <>
+                <div className="grid grid-cols-2 gap-3 mb-2">
+                  <input
+                    placeholder="Tên biện pháp (VD: Sạ hàng)"
+                    className="input-field"
+                    value={item.practice}
+                    onChange={(e) => {
+                      const list = [...data.culturalPractices];
+                      list[idx].practice = e.target.value;
+                      setData({ ...data, culturalPractices: list });
+                    }}
+                  />
+                  <input
+                    placeholder="Thời gian (VD: Đầu vụ)"
+                    className="input-field"
+                    value={item.timing}
+                    onChange={(e) => {
+                      const list = [...data.culturalPractices];
+                      list[idx].timing = e.target.value;
+                      setData({ ...data, culturalPractices: list });
+                    }}
+                  />
+                </div>
+                <textarea
+                  placeholder="Mô tả chi tiết"
+                  className="input-field mb-2"
+                  rows={2}
+                  value={item.description}
+                  onChange={(e) => {
+                    const list = [...data.culturalPractices];
+                    list[idx].description = e.target.value;
+                    setData({ ...data, culturalPractices: list });
+                  }}
+                />
+              </>
+            )}
+          />
+        )}
+
+        {/* 2. GIỐNG LÚA */}
+        {selectedType === "variety" && (
+          <PreventionListSection
+            title="Chọn Giống Lúa Kháng Bệnh"
+            items={data?.varietySelection || []}
+            onAdd={() =>
+              addItem("varietySelection", templates.varietySelection)
+            }
+            onRemove={(idx) => removeItem("varietySelection", idx)}
+            renderItem={(item, idx) => (
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  placeholder="Tên giống (VD: OM18)"
+                  className="input-field"
+                  value={item.varietyName}
+                  onChange={(e) => {
+                    const list = [...data.varietySelection];
+                    list[idx].varietyName = e.target.value;
+                    setData({ ...data, varietySelection: list });
+                  }}
+                />
+                <select
+                  className="input-field"
+                  value={item.resistanceLevel}
+                  onChange={(e) => {
+                    const list = [...data.varietySelection];
+                    list[idx].resistanceLevel = e.target.value;
+                    setData({ ...data, varietySelection: list });
+                  }}
+                >
+                  <option>Kháng cao</option>
+                  <option>Kháng trung bình</option>
+                  <option>Nhiễm nhẹ</option>
+                </select>
+                <input
+                  placeholder="Gen kháng (cách nhau dấu phẩy)"
+                  className="input-field col-span-2"
+                  value={(item.resistanceGenes || []).join(", ")}
+                  onChange={(e) => {
+                    const list = [...data.varietySelection];
+                    list[idx].resistanceGenes = e.target.value.split(",");
+                    setData({ ...data, varietySelection: list });
+                  }}
+                />
+              </div>
+            )}
+          />
+        )}
+
+        {/* 3. XỬ LÝ HẠT */}
+        {selectedType === "seed" && (
+          <PreventionListSection
+            title="Phương pháp Xử Lý Hạt Giống"
+            items={data?.seedTreatment || []}
+            onAdd={() => addItem("seedTreatment", templates.seedTreatment)}
+            onRemove={(idx) => removeItem("seedTreatment", idx)}
+            renderItem={(item, idx) => (
+              <div className="space-y-2">
+                <input
+                  placeholder="Phương pháp (VD: Ngâm nước ấm)"
+                  className="input-field"
+                  value={item.method}
+                  onChange={(e) => {
+                    const list = [...data.seedTreatment];
+                    list[idx].method = e.target.value;
+                    setData({ ...data, seedTreatment: list });
+                  }}
+                />
+                <input
+                  placeholder="Vật liệu/Thuốc (cách nhau dấu phẩy)"
+                  className="input-field"
+                  value={(item.materials || []).join(", ")}
+                  onChange={(e) => {
+                    const list = [...data.seedTreatment];
+                    list[idx].materials = e.target.value.split(",");
+                    setData({ ...data, seedTreatment: list });
+                  }}
+                />
+              </div>
+            )}
+          />
+        )}
+
+        {/* 4. QUẢN LÝ ĐẤT */}
+        {selectedType === "soil" && (
+          <PreventionListSection
+            title="Biện pháp Quản Lý Đất"
+            items={data?.soilManagement || []}
+            onAdd={() => addItem("soilManagement", templates.soilManagement)}
+            onRemove={(idx) => removeItem("soilManagement", idx)}
+            renderItem={(item, idx) => (
+              <>
+                <input
+                  placeholder="Biện pháp (VD: Bón vôi)"
+                  className="input-field mb-2"
+                  value={item.practice}
+                  onChange={(e) => {
+                    const list = [...data.soilManagement];
+                    list[idx].practice = e.target.value;
+                    setData({ ...data, soilManagement: list });
+                  }}
+                />
+                <textarea
+                  placeholder="Mô tả chi tiết"
+                  className="input-field"
+                  rows={2}
+                  value={item.description}
+                  onChange={(e) => {
+                    const list = [...data.soilManagement];
+                    list[idx].description = e.target.value;
+                    setData({ ...data, soilManagement: list });
+                  }}
+                />
+              </>
+            )}
+          />
+        )}
+
+        {/* 5. QUẢN LÝ NƯỚC */}
+        {selectedType === "water" && (
+          <PreventionListSection
+            title="Biện pháp Quản Lý Nước"
+            items={data?.waterManagement || []}
+            onAdd={() => addItem("waterManagement", templates.waterManagement)}
+            onRemove={(idx) => removeItem("waterManagement", idx)}
+            renderItem={(item, idx) => (
+              <div className="grid grid-cols-3 gap-2">
+                <input
+                  placeholder="Biện pháp"
+                  className="input-field col-span-2"
+                  value={item.practice}
+                  onChange={(e) => {
+                    const list = [...data.waterManagement];
+                    list[idx].practice = e.target.value;
+                    setData({ ...data, waterManagement: list });
+                  }}
+                />
+                <input
+                  placeholder="Mực nước (cm)"
+                  className="input-field"
+                  value={item.waterDepth}
+                  onChange={(e) => {
+                    const list = [...data.waterManagement];
+                    list[idx].waterDepth = e.target.value;
+                    setData({ ...data, waterManagement: list });
+                  }}
+                />
+                <textarea
+                  placeholder="Mô tả"
+                  className="input-field col-span-3"
+                  rows={2}
+                  value={item.description}
+                  onChange={(e) => {
+                    const list = [...data.waterManagement];
+                    list[idx].description = e.target.value;
+                    setData({ ...data, waterManagement: list });
+                  }}
+                />
+              </div>
+            )}
+          />
+        )}
+
+        {/* 6. DINH DƯỠNG */}
+        {selectedType === "nutrition" && (
+          <PreventionListSection
+            title="Quản Lý Dinh Dưỡng & Phân Bón"
+            items={data?.nutritionManagement || []}
+            onAdd={() =>
+              addItem("nutritionManagement", templates.nutritionManagement)
+            }
+            onRemove={(idx) => removeItem("nutritionManagement", idx)}
+            renderItem={(item, idx) => (
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  placeholder="Chất dinh dưỡng (VD: Đạm)"
+                  className="input-field"
+                  value={item.nutrient}
+                  onChange={(e) => {
+                    const list = [...data.nutritionManagement];
+                    list[idx].nutrient = e.target.value;
+                    setData({ ...data, nutritionManagement: list });
+                  }}
+                />
+                <input
+                  placeholder="Thời gian bón"
+                  className="input-field"
+                  value={item.timing}
+                  onChange={(e) => {
+                    const list = [...data.nutritionManagement];
+                    list[idx].timing = e.target.value;
+                    setData({ ...data, nutritionManagement: list });
+                  }}
+                />
+                <input
+                  placeholder="Khuyến nghị (VD: Giảm 10%)"
+                  className="input-field col-span-2"
+                  value={item.recommendation}
+                  onChange={(e) => {
+                    const list = [...data.nutritionManagement];
+                    list[idx].recommendation = e.target.value;
+                    setData({ ...data, nutritionManagement: list });
+                  }}
+                />
+              </div>
+            )}
+          />
+        )}
+
+        {/* 7. VỆ SINH */}
+        {selectedType === "sanitation" && (
+          <PreventionListSection
+            title="Vệ Sinh Đồng Ruộng"
+            items={data?.sanitationPractices || []}
+            onAdd={() =>
+              addItem("sanitationPractices", templates.sanitationPractices)
+            }
+            onRemove={(idx) => removeItem("sanitationPractices", idx)}
+            renderItem={(item, idx) => (
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  placeholder="Hành động (VD: Dọn cỏ bờ)"
+                  className="input-field"
+                  value={item.practice}
+                  onChange={(e) => {
+                    const list = [...data.sanitationPractices];
+                    list[idx].practice = e.target.value;
+                    setData({ ...data, sanitationPractices: list });
+                  }}
+                />
+                <input
+                  placeholder="Thời điểm"
+                  className="input-field"
+                  value={item.timing}
+                  onChange={(e) => {
+                    const list = [...data.sanitationPractices];
+                    list[idx].timing = e.target.value;
+                    setData({ ...data, sanitationPractices: list });
+                  }}
+                />
+              </div>
+            )}
+          />
+        )}
+
+        {/* 8. SINH HỌC */}
+        {selectedType === "bio" && (
+          <PreventionListSection
+            title="Kiểm Soát Sinh Học (Thiên địch/Chế phẩm)"
+            items={data?.biologicalControl || []}
+            onAdd={() =>
+              addItem("biologicalControl", templates.biologicalControl)
+            }
+            onRemove={(idx) => removeItem("biologicalControl", idx)}
+            renderItem={(item, idx) => (
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  placeholder="Tác nhân (VD: Nấm Trichoderma)"
+                  className="input-field"
+                  value={item.agent}
+                  onChange={(e) => {
+                    const list = [...data.biologicalControl];
+                    list[idx].agent = e.target.value;
+                    setData({ ...data, biologicalControl: list });
+                  }}
+                />
+                <input
+                  placeholder="Thời gian áp dụng"
+                  className="input-field"
+                  value={item.timing}
+                  onChange={(e) => {
+                    const list = [...data.biologicalControl];
+                    list[idx].timing = e.target.value;
+                    setData({ ...data, biologicalControl: list });
+                  }}
+                />
+              </div>
+            )}
+          />
+        )}
+
+        {/* 9. GIÁM SÁT */}
+        {selectedType === "monitoring" && (
+          <PreventionListSection
+            title="Lịch Trình Giám Sát Đồng Ruộng"
+            items={data?.monitoringSchedule || []}
+            onAdd={() =>
+              addItem("monitoringSchedule", templates.monitoringSchedule)
+            }
+            onRemove={(idx) => removeItem("monitoringSchedule", idx)}
+            renderItem={(item, idx) => (
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  placeholder="Tần suất (VD: 7 ngày/lần)"
+                  className="input-field"
+                  value={item.frequency}
+                  onChange={(e) => {
+                    const list = [...data.monitoringSchedule];
+                    list[idx].frequency = e.target.value;
+                    setData({ ...data, monitoringSchedule: list });
+                  }}
+                />
+                <input
+                  placeholder="Giai đoạn lúa"
+                  className="input-field"
+                  value={item.cropStage}
+                  onChange={(e) => {
+                    const list = [...data.monitoringSchedule];
+                    list[idx].cropStage = e.target.value;
+                    setData({ ...data, monitoringSchedule: list });
+                  }}
+                />
+                <input
+                  placeholder="Kiểm tra gì? (cách nhau dấu phẩy)"
+                  className="input-field col-span-2"
+                  value={(item.whatToCheck || []).join(", ")}
+                  onChange={(e) => {
+                    const list = [...data.monitoringSchedule];
+                    list[idx].whatToCheck = e.target.value.split(",");
+                    setData({ ...data, monitoringSchedule: list });
+                  }}
+                />
+                <input
+                  placeholder="Ngưỡng cảnh báo"
+                  className="input-field col-span-2"
+                  value={item.threshold}
+                  onChange={(e) => {
+                    const list = [...data.monitoringSchedule];
+                    list[idx].threshold = e.target.value;
+                    setData({ ...data, monitoringSchedule: list });
+                  }}
+                />
+              </div>
+            )}
+          />
+        )}
+      </div>
+
+      <div className="mt-6 pt-4 border-t flex items-center">
+        <button
+          onClick={onSave}
+          disabled={saving}
+          className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded font-medium transition disabled:opacity-50 flex items-center gap-2"
+        >
+          <FaSave />
+          {saving ? "Đang lưu..." : "Lưu dữ liệu"}
+        </button>
+      </div>
+
+      {/* Styles inline nhỏ gọn cho input */}
+      <style>{`
+        .input-field {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #22c55e;
+            box-shadow: 0 0 0 1px #22c55e;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+// Component con để hiển thị danh sách item (giúp code gọn hơn)
+const PreventionListSection = ({
+  title,
+  items,
+  onAdd,
+  onRemove,
+  renderItem,
+}) => (
+  <div>
+    <div className="flex justify-between items-center mb-4">
+      <h3 className="text-lg font-semibold">{title}</h3>
+      <button
+        onClick={onAdd}
+        className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded flex items-center gap-1 transition"
+      >
+        + Thêm dòng
+      </button>
     </div>
 
-    {/* Variety Selection */}
-    <div className="mb-6 p-4 bg-blue-50 rounded border">
-      <h3 className="font-bold text-blue-800 mb-3">Giống lúa kháng bệnh</h3>
+    {items.length === 0 ? (
+      <div className="text-center p-8 rounded border border-dashed border-gray-300">
+        Chưa có dữ liệu. Bấm "Thêm dòng" để thêm dữ liệu.
+      </div>
+    ) : (
       <div className="space-y-3">
-        {data?.varietySelection?.map((variety, idx) => (
-          <div key={idx} className="p-3 bg-white rounded border">
-            <input
-              type="text"
-              value={variety.varietyName}
-              onChange={(e) => {
-                const newVarieties = [...data.varietySelection];
-                newVarieties[idx].varietyName = e.target.value;
-                setData({ ...data, varietySelection: newVarieties });
-              }}
-              className="w-full p-2 border rounded text-sm mb-2"
-              placeholder="Tên giống lúa"
-            />
-            <select
-              value={variety.resistanceLevel}
-              onChange={(e) => {
-                const newVarieties = [...data.varietySelection];
-                newVarieties[idx].resistanceLevel = e.target.value;
-                setData({ ...data, varietySelection: newVarieties });
-              }}
-              className="w-full p-2 border rounded text-sm"
+        {items.map((item, idx) => (
+          <div
+            key={idx}
+            className="p-4 rounded border relative group hover:shadow-sm transition"
+          >
+            <button
+              onClick={() => onRemove(idx)}
+              className="absolute top-2 right-2 text-red-400 hover:text-red-600 p-1 opacity-0 group-hover:opacity-100 transition"
+              title="Xóa dòng này"
             >
-              <option>Kháng cao</option>
-              <option>Kháng trung bình</option>
-              <option>Dung nạp</option>
-              <option>Nhạy cảm</option>
-            </select>
+              ✕
+            </button>
+            {renderItem(item, idx)}
           </div>
         ))}
       </div>
-    </div>
-
-    {/* Seed Treatment */}
-    <div className="mb-6 p-4 bg-purple-50 rounded border">
-      <h3 className="font-bold text-purple-800 mb-3">Xử lý hạt giống</h3>
-      <textarea
-        value={JSON.stringify(data?.seedTreatment || [], null, 2)}
-        onChange={(e) => {
-          try {
-            setData({ ...data, seedTreatment: JSON.parse(e.target.value) });
-          } catch (err) {
-            console.error(err);
-          }
-        }}
-        rows="4"
-        className="w-full p-2 border rounded text-sm font-mono"
-        placeholder="Nhập JSON format"
-      />
-    </div>
-    <button
-      onClick={onSave}
-      disabled={saving}
-      className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded font-medium transition disabled:opacity-50 flex items-center gap-2"
-    >
-      <FaSave />
-      {saving ? "Đang lưu..." : "Lưu dữ liệu"}
-    </button>
+    )}
   </div>
 );
 
 const DiseaseWeatherEditor = ({ data, setData, onSave, saving }) => (
   <div className="bg-white rounded-lg shadow-md p-6">
-    <h2 className="text-2xl font-bold mb-4">Liên Hệ Thời Tiết & Bệnh</h2>
+    <h2 className="text-2xl font-bold mb-4">Điều kiện thời tiết gây bệnh</h2>
 
     {/* Weather Triggers */}
     <div className="mb-6 p-4 rounded border">
-      <h3 className="font-bold mb-3">Điều kiện thời tiết gây bệnh</h3>
       <div className="space-y-4">
         {data?.weatherTriggers?.map((trigger, idx) => (
           <div key={idx} className="p-3 bg-white rounded border">
@@ -1128,7 +1556,7 @@ const DiseaseWeatherEditor = ({ data, setData, onSave, saving }) => (
                 newTriggers[idx].condition = e.target.value;
                 setData({ ...data, weatherTriggers: newTriggers });
               }}
-              className="w-full p-2 border rounded text-sm mb-2"
+              className="w-full p-2 border rounded mb-2"
               placeholder="Điều kiện thời tiết"
             />
             <div className="grid grid-cols-2 gap-2 mb-2">
@@ -1144,7 +1572,7 @@ const DiseaseWeatherEditor = ({ data, setData, onSave, saving }) => (
                   newTriggers[idx].threshold.temperature.min = e.target.value;
                   setData({ ...data, weatherTriggers: newTriggers });
                 }}
-                className="w-full p-2 border rounded text-sm"
+                className="w-full p-2 border rounded"
                 placeholder="Min temp"
               />
               <input
@@ -1159,7 +1587,7 @@ const DiseaseWeatherEditor = ({ data, setData, onSave, saving }) => (
                   newTriggers[idx].threshold.temperature.max = e.target.value;
                   setData({ ...data, weatherTriggers: newTriggers });
                 }}
-                className="w-full p-2 border rounded text-sm"
+                className="w-full p-2 border rounded"
                 placeholder="Max temp"
               />
             </div>
@@ -1170,7 +1598,7 @@ const DiseaseWeatherEditor = ({ data, setData, onSave, saving }) => (
                 newTriggers[idx].riskLevel = e.target.value;
                 setData({ ...data, weatherTriggers: newTriggers });
               }}
-              className="w-full p-2 border rounded text-sm"
+              className="w-full p-2 border rounded"
             >
               <option>Rất cao</option>
               <option>Cao</option>
