@@ -169,7 +169,14 @@ function SustainableMethods() {
 
       // Append params cơ bản
       if (searchQuery.trim()) params.append("query", searchQuery.trim());
-      if (filterType !== "all") params.append("type", filterType);
+      if (filterType !== "all") {
+        if (filterType === "Bệnh") {
+          // Không thêm param type, backend sẽ tìm tất cả trừ Sâu hại
+          // Hoặc có thể thêm logic riêng ở backend
+        } else if (filterType === "Sâu hại") {
+          params.append("type", "Sâu hại");
+        }
+      }
       if (filterRisk !== "all") params.append("severityRisk", filterRisk);
 
       // ✅ Append params mới
@@ -185,8 +192,20 @@ function SustainableMethods() {
       if (!response.ok) throw new Error("Không thể tìm kiếm");
       const data = await response.json();
       if (data.success) {
+        let filteredDiseases = data.data;
+
+        // ✅ LỌC CLIENT-SIDE CHO NHÓM "Bệnh"
+        if (filterType === "Bệnh") {
+          filteredDiseases = filteredDiseases.filter(
+            (disease) =>
+              disease.type === "Bệnh nấm" ||
+              disease.type === "Bệnh vi khuẩn" ||
+              disease.type === "Bệnh virus"
+          );
+        }
+
         // Map images logic...
-        const diseasesWithImages = data.data.map((disease) => ({
+        const diseasesWithImages = filteredDiseases.map((disease) => ({
           ...disease,
           images:
             disease.images?.map((img) => ({
