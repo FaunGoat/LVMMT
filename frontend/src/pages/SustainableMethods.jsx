@@ -74,17 +74,11 @@ function SustainableMethods() {
     }
   }, [location.search, diseases]);
 
-  // useEffect(() => {
-  //   if (
-  //     filterType !== "all" ||
-  //     filterRisk !== "all" ||
-  //     filterSeason !== "all" ||
-  //     filterStage !== "all" ||
-  //     filterPart !== "all"
-  //   ) {
-  //     handleSearch();
-  //   }
-  // }, [filterType, filterRisk, filterSeason, filterStage, filterPart]);
+  useEffect(() => {
+    if (diseases.length > 0) {
+      handleSearch();
+    }
+  }, [filterType]);
 
   const fetchDiseaseDetails = async (diseaseId) => {
     try {
@@ -360,6 +354,44 @@ function SustainableMethods() {
                     placeholder="Tìm kiếm bệnh (vd: dao on)..."
                     className="w-full p-3 border border-sky-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-sm"
                   />
+                </div>
+
+                <div>
+                  <label className="block font-semibold text-gray-700 mb-2">
+                    Lọc theo loại:
+                  </label>
+                  <div className="grid grid-cols-3 gap-2">
+                    <button
+                      onClick={() => setFilterType("all")}
+                      className={`py-2 px-3 rounded-lg transition font-medium text-sm ${
+                        filterType === "all"
+                          ? "bg-sky-500 text-white shadow-md"
+                          : "bg-sky-50 text-gray-700 hover:bg-sky-100 border border-sky-200"
+                      }`}
+                    >
+                      Tất cả
+                    </button>
+                    <button
+                      onClick={() => setFilterType("Sâu hại")}
+                      className={`py-2 px-3 rounded-lg transition font-medium text-sm flex items-center justify-center gap-1 ${
+                        filterType === "Sâu hại"
+                          ? "bg-yellow-500 text-white shadow-md"
+                          : "bg-yellow-50 text-gray-700 hover:bg-yellow-100 border border-yellow-200"
+                      }`}
+                    >
+                      <span>Sâu hại</span>
+                    </button>
+                    <button
+                      onClick={() => setFilterType("Bệnh")}
+                      className={`py-2 px-3 rounded-lg transition font-medium text-sm flex items-center justify-center gap-1 ${
+                        filterType === "Bệnh"
+                          ? "bg-amber-500 text-white shadow-md"
+                          : "bg-amber-50 text-gray-700 hover:bg-amber-100 border border-amber-200"
+                      }`}
+                    >
+                      <span>Bệnh</span>
+                    </button>
+                  </div>
                 </div>
 
                 {/* Nút Tìm kiếm chính và Nút mở Popup */}

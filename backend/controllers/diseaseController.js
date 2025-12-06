@@ -131,7 +131,14 @@ exports.searchDiseases = async (req, res) => {
 
     // c. Filter các thuộc tính cơ bản
     if (type && type !== "all") {
-      dbQuery.type = type;
+      if (type === "Bệnh") {
+        // Lọc tất cả bệnh trừ Sâu hại
+        dbQuery.type = {
+          $in: ["Bệnh nấm", "Bệnh vi khuẩn", "Bệnh virus"],
+        };
+      } else {
+        dbQuery.type = type;
+      }
     }
 
     if (severityRisk && severityRisk !== "all") {

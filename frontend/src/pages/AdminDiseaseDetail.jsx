@@ -85,6 +85,94 @@ function AdminDiseaseDetail() {
     }
   };
 
+  const addStage = () => {
+    const newStages = stagesData?.stages || [];
+    newStages.push({
+      name: "",
+      duration: "",
+      description: "",
+      order: newStages.length + 1,
+      severity: "Trung bình",
+    });
+    setStagesData({ ...stagesData, stages: newStages });
+  };
+
+  const addSeason = () => {
+    const newSeasons = seasonsData?.seasons || [];
+    newSeasons.push({
+      type: "Đông Xuân",
+      startMonth: 1,
+      endMonth: 12,
+      riskLevel: "Cao",
+      description: "",
+      peakMonths: [],
+    });
+    setSeasonsData({ ...seasonsData, seasons: newSeasons });
+  };
+
+  const addCriticalPeriod = () => {
+    const newPeriods = seasonsData?.criticalPeriods || [];
+    newPeriods.push({
+      cropStage: "",
+      riskLevel: "Cao",
+      description: "",
+      preventiveMeasures: [],
+      earlyWarningSigns: [],
+    });
+    setSeasonsData({ ...seasonsData, criticalPeriods: newPeriods });
+  };
+
+  const addSymptom = () => {
+    const newSymptoms = symptomsData?.symptoms || [];
+    newSymptoms.push({
+      part: "Lá",
+      description: "",
+      stage: "Sớm",
+      severity: "Trung bình",
+      visualCharacteristics: {
+        color: [],
+        shape: "",
+        size: "",
+        texture: "",
+        pattern: "",
+        location: "",
+      },
+      distinguishingFeatures: [],
+    });
+    setSymptomsData({ ...symptomsData, symptoms: newSymptoms });
+  };
+
+  const addTreatment = () => {
+    const newTreatments = treatmentsData?.treatments || [];
+    newTreatments.push({
+      type: "Hóa học",
+      priority: 1,
+      methods: [
+        { name: "", dosage: "", frequency: "", applicationMethod: "Phun" },
+      ],
+      notes: "",
+      warnings: [],
+      bestPractices: [],
+    });
+    setTreatmentsData({ ...treatmentsData, treatments: newTreatments });
+  };
+
+  const addWeatherTrigger = () => {
+    const newTriggers = weatherData?.weatherTriggers || [];
+    newTriggers.push({
+      condition: "",
+      description: "",
+      threshold: {
+        temperature: { min: 0, max: 0, optimal: 0, critical: 0, unit: "°C" },
+        humidity: { min: 0, max: 0, optimal: 0, critical: 0, unit: "%" },
+      },
+      riskLevel: "Cao",
+      riskScore: 0,
+      response: "",
+    });
+    setWeatherData({ ...weatherData, weatherTriggers: newTriggers });
+  };
+
   useEffect(() => {
     fetchAllData();
   }, [diseaseId]);
@@ -374,6 +462,7 @@ function AdminDiseaseDetail() {
             data={stagesData}
             setData={setStagesData}
             onSave={handleSaveStages}
+            addStage={addStage}
             saving={saving}
           />
         )}
@@ -384,6 +473,8 @@ function AdminDiseaseDetail() {
             data={seasonsData}
             setData={setSeasonsData}
             onSave={handleSaveSeasons}
+            addSeason={addSeason}
+            addCriticalPeriod={addCriticalPeriod}
             saving={saving}
           />
         )}
@@ -404,6 +495,7 @@ function AdminDiseaseDetail() {
             data={symptomsData}
             setData={setSymptomsData}
             onSave={handleSaveSymptoms}
+            addSymptom={addSymptom}
             saving={saving}
           />
         )}
@@ -414,6 +506,7 @@ function AdminDiseaseDetail() {
             data={treatmentsData}
             setData={setTreatmentsData}
             onSave={handleSaveTreatments}
+            addTreatment={addTreatment}
             saving={saving}
           />
         )}
@@ -434,6 +527,7 @@ function AdminDiseaseDetail() {
             data={weatherData}
             setData={setWeatherData}
             onSave={handleSaveWeather}
+            addWeather={addWeatherTrigger}
             saving={saving}
           />
         )}
@@ -442,10 +536,15 @@ function AdminDiseaseDetail() {
   );
 }
 
-const DiseaseStagesEditor = ({ data, setData, onSave, saving }) => (
+const DiseaseStagesEditor = ({ data, setData, onSave, saving, addStage }) => (
   <div className="bg-white rounded-lg shadow-md p-6">
     <h2 className="text-2xl font-bold mb-4">Giai Đoạn Phát Triển Bệnh</h2>
-
+    <button
+      onClick={addStage}
+      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition"
+    >
+      Thêm giai đoạn
+    </button>
     <div className="space-y-4 mb-6">
       <div>
         <label className="block text-lg font-semibold mb-1">
@@ -561,10 +660,30 @@ const DiseaseStagesEditor = ({ data, setData, onSave, saving }) => (
   </div>
 );
 
-const DiseaseSeasonsEditor = ({ data, setData, onSave, saving }) => (
+const DiseaseSeasonsEditor = ({
+  data,
+  setData,
+  onSave,
+  saving,
+  addSeason,
+  addCriticalPeriod,
+}) => (
   <div className="bg-white rounded-lg shadow-md p-6">
     <h2 className="text-2xl font-bold mb-4">Mùa Vụ & Giai Đoạn Cây Trồng</h2>
-
+    <div className="flex gap-2 mb-2">
+      <button
+        onClick={addSeason}
+        className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded transition"
+      >
+        Thêm mùa vụ
+      </button>
+      <button
+        onClick={addCriticalPeriod}
+        className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-2 rounded transition"
+      >
+        Thêm giai đoạn
+      </button>
+    </div>
     {/* Seasons */}
     <div className="mb-8">
       <h3 className="text-lg font-semibold mb-4 pb-2 border-b-2">Mùa vụ</h3>
@@ -804,10 +923,21 @@ const DiseaseCausesEditor = ({ data, setData, onSave, saving }) => (
   </div>
 );
 
-const DiseaseSymptomsEditor = ({ data, setData, onSave, saving }) => (
+const DiseaseSymptomsEditor = ({
+  data,
+  setData,
+  onSave,
+  saving,
+  addSymptom,
+}) => (
   <div className="bg-white rounded-lg shadow-md p-6">
     <h2 className="text-2xl font-bold mb-4">Triệu Chứng</h2>
-
+    <button
+      onClick={addSymptom}
+      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition mb-3"
+    >
+      Thêm triệu chứng
+    </button>
     <div className="mb-6 p-4 rounded border">
       <h3 className="text-lg font-semibold mb-3">Danh sách triệu chứng</h3>
       <div className="space-y-4 max-h-160 overflow-y-auto">
@@ -878,10 +1008,21 @@ const DiseaseSymptomsEditor = ({ data, setData, onSave, saving }) => (
   </div>
 );
 
-const DiseaseTreatmentsEditor = ({ data, setData, onSave, saving }) => (
+const DiseaseTreatmentsEditor = ({
+  data,
+  setData,
+  onSave,
+  saving,
+  addTreatment,
+}) => (
   <div className="bg-white rounded-lg shadow-md p-6">
     <h2 className="text-2xl font-bold mb-4">Phương Pháp Điều Trị</h2>
-
+    <button
+      onClick={addTreatment}
+      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition mb-3"
+    >
+      Thêm phương pháp
+    </button>
     <div className="space-y-4 mb-6">
       {data?.treatments?.map((treatment, idx) => (
         <div key={idx} className="p-4 rounded border">
@@ -1509,13 +1650,13 @@ const PreventionListSection = ({
         onClick={onAdd}
         className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded flex items-center gap-1 transition"
       >
-        + Thêm dòng
+        + Thêm biện pháp
       </button>
     </div>
 
     {items.length === 0 ? (
       <div className="text-center p-8 rounded border border-dashed border-gray-300">
-        Chưa có dữ liệu. Bấm "Thêm dòng" để thêm dữ liệu.
+        Chưa có dữ liệu. Bấm "Thêm biện pháp" để thêm dữ liệu.
       </div>
     ) : (
       <div className="space-y-3">
@@ -1527,7 +1668,7 @@ const PreventionListSection = ({
             <button
               onClick={() => onRemove(idx)}
               className="absolute top-2 right-2 text-red-400 hover:text-red-600 p-1 opacity-0 group-hover:opacity-100 transition"
-              title="Xóa dòng này"
+              title="Xóa biện pháp"
             >
               ✕
             </button>
@@ -1539,10 +1680,21 @@ const PreventionListSection = ({
   </div>
 );
 
-const DiseaseWeatherEditor = ({ data, setData, onSave, saving }) => (
+const DiseaseWeatherEditor = ({
+  data,
+  setData,
+  onSave,
+  saving,
+  addWeather,
+}) => (
   <div className="bg-white rounded-lg shadow-md p-6">
     <h2 className="text-2xl font-bold mb-4">Điều kiện thời tiết gây bệnh</h2>
-
+    <button
+      onClick={addWeather}
+      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition mb-3"
+    >
+      Thêm điều kiện thời tiết
+    </button>
     {/* Weather Triggers */}
     <div className="mb-6 p-4 rounded border">
       <div className="space-y-4">
