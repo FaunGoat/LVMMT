@@ -263,10 +263,90 @@ exports.handleWebhook = async (req, res) => {
             responseText += `${stage.order}. ${stage.name} (${stage.duration})\n`;
             responseText += `   ${stage.description}\n`;
             if (idx === stageDoc.peakStage) {
-              responseText += `   ⚠️ GIAI ĐOẠN NGUY HIỂM NHẤT\n`;
+              responseText += `GIAI ĐOẠN NGUY HIỂM NHẤT\n`;
             }
             responseText += `\n`;
           });
+        }
+      }
+    }
+
+    // 9. HỎI VỀ MỐI LIÊN HỆ THỜI TIẾT VÀ BỆNH
+    else if (
+      queryText.match(
+        /thời tiết|mưa|nắng|nóng|ẩm|nhiệt độ|điều kiện|khí hậu|gió|khô/i
+      ) &&
+      queryText.match(
+        /bệnh|sâu|hại|gây|ảnh hưởng|thuận lợi|phát triển|yêu thích/i
+      )
+    ) {
+      // Phân tích loại câu hỏi thời tiết
+      const weatherType = analyzeWeatherQuestion(queryText);
+
+      // Nếu hỏi chung về ảnh hưởng của thời tiết
+      if (weatherType === "general_weather_impact") {
+        responseText = await handleGeneralWeatherImpact(queryText);
+      }
+      // Nếu hỏi bệnh nào yêu thích điều kiện thời tiết cụ thể
+      else if (weatherType === "diseases_by_weather") {
+        responseText = await handleDiseasesByWeatherCondition(queryText);
+      }
+      // Nếu hỏi điều kiện thời tiết thuận lợi cho bệnh cụ thể
+      else {
+        const diseaseName =
+          getDiseaseName(diseaseEntity) ||
+          extractDiseaseNameFromQuery(queryText);
+        const searchQuery = buildSearchQuery(diseaseName);
+        const disease = await Disease.findOne(searchQuery);
+
+        if (!disease) {
+          responseText = `Tôi chưa tìm thấy thông tin về bệnh "${diseaseName}".`;
+        } else {
+          const weatherCorr = await WeatherDiseaseCorrelation.findOne({
+            diseaseId: disease._id,
+          });
+
+          if (
+            !weatherCorr ||
+            !weatherCorr.weatherTriggers ||
+            weatherCorr.weatherTriggers.length === 0
+          ) {
+            responseText =
+              `Hiện chưa có thông tin chi tiết về mối liên hệ giữa ` +
+              `thời tiết và ${disease.name}.`;
+          } else {
+            responseText = `Điều kiện thời tiết thuận lợi cho ${disease.name}:\n\n`;
+
+            weatherCorr.weatherTriggers.slice(0, 4).forEach((trigger, idx) => {
+              responseText += `${idx + 1}. ${trigger.condition}\n`;
+              responseText += `   Mức độ nguy hiểm: ${trigger.riskLevel}\n`;
+
+              if (trigger.threshold) {
+                const temp = trigger.threshold.temperature;
+                const humid = trigger.threshold.humidity;
+                const rainfall = trigger.threshold.rainfall;
+
+                if (temp && temp.min && temp.max) {
+                  responseText += `   Nhiệt độ: ${temp.min}-${temp.max}°C\n`;
+                }
+                if (humid && humid.min && humid.max) {
+                  responseText += `   Độ ẩm: ${humid.min}-${humid.max}%\n`;
+                }
+                if (rainfall && rainfall.amount) {
+                  responseText += `   Lượng mưa: ${rainfall.amount}\n`;
+                }
+              }
+
+              if (trigger.durationToOutbreak) {
+                responseText += `   Xuất hiện sau: ${trigger.durationToOutbreak}\n`;
+              }
+              if (trigger.response) {
+                responseText += `   Biện pháp: ${trigger.response}\n`;
+              }
+
+              responseText += `\n`;
+            });
+          }
         }
       }
     }
@@ -426,7 +506,7 @@ function analyzeQuestion(question) {
   if (q.match(/khi nào|lúc nào|tháng mấy|mùa|vụ|thời điểm|giai đoạn|bao lâu/)) {
     return "seasons";
   }
-  if (q.match(/điều kiện|thời tiết|mưa|nắng|nhiệt độ/)) {
+  if (q.match(/thời tiết|mưa|nắng|nóng|ẩm|nhiệt độ|khí hậu|gió|điều kiện/)) {
     return "weather";
   }
 
@@ -695,4 +775,225 @@ function generateDiseaseSummaryBySymptom(diseases, symptoms, queryText) {
   }
 
   return response;
+}
+
+// ========== HÀM XỬ LÝ THỜI TIẾT VÀ BỆNH ==========
+// Phân tích loại câu hỏi thời tiết
+function analyzeWeatherQuestion(queryText) {
+  const q = queryText.toLowerCase();
+  // Câu hỏi: "Mưa có ảnh hưởng gì" / "Nắng gây bệnh gì"
+  if (
+    q.match(/(mưa|nắng|nóng|ẩm|khô|gió)/) &&
+    q.match(/(có ảnh hưởng|gây gì|gây bệnh|tác hại|ảnh hưởng thế nào)/)
+  ) {
+    return "general_weather_impact";
+  }
+  // Câu hỏi: "Bệnh gì yêu thích mưa" / "Nắng gây bệnh gì"
+  if (
+    q.match(/(bệnh nào|gây bệnh gì|bệnh gì)/) &&
+    q.match(/(mưa|nắng|nóng|ẩm|khô|gió)/)
+  ) {
+    return "diseases_by_weather";
+  }
+  // Câu hỏi: "Thời tiết nào thuận lợi cho đạo ôn"
+  return "weather_for_disease";
+}
+// Xử lý câu hỏi chung về ảnh hưởng thời tiết
+async function handleGeneralWeatherImpact(queryText) {
+  const q = queryText.toLowerCase();
+  let impact = "";
+  if (q.match(/mưa/)) {
+    impact = `Mưa nhiều có ảnh hưởng rất lớn đến lúa:\n
+Tác hại trực tiếp:
+• Tạo điều kiện ẩm ướt cao - thuận lợi cho các bệnh nấm
+• Giảm lưu thông không khí, tăng độ ẩm lá
+• Làm cây yếu, dễ bị sâu bệnh tấn công
+• Gây ngập úng, thối bẹ nếu mưa quá lâu
+• Rụng hạt, hạt lem lép vào giai đoạn trổ bông - chín sữa
+
+Bệnh nguy hiểm nhất:
+• Bệnh đạo ôn (Rất cao) - Cần phun phòng ngay
+• Bệnh cháy bìa lá (Cao)
+• Bệnh lem lép hạt (Cao)
+• Bệnh thối bẹ (Trung bình)
+
+Biện pháp khẩn cấp:
+• Phun thuốc trước 1-2 ngày khi có dự báo mưa
+• Cắt cỏ dại, thoát nước tốt
+• Hạ mực nước sau mưa
+• Bón phân kali tăng sức đề kháng;`;
+  } else if (q.match(/nắng|nóng/)) {
+    impact = `Nắng nóng gay gắt ảnh hưởng đến lúa:\n
+Tác hại:
+• Gây stress nhiệt - cây héo, giảm năng suất
+• Tăng tốc độ phát triển sâu, côn trùng
+• Tăng tổng quần thể rầy nâu, sâu cuốn lá\n
+• Giảm bệnh nấm nhưng sâu bệnh tăng đột biến
+• Hạt chắc hơn nhưng có thể bị cháy nếu quá nóng
+
+Sâu bệnh nguy hiểm:
+• Rầy nâu (Rất cao) - Rất nhanh lây lan
+• Sâu cuốn lá (Cao) 
+• Nhện gié (Trung bình)
+• Muỗi hành (Trung bình)
+
+Biện pháp:
+• Tưới nước thường xuyên, giữ độ ẩm
+• Phun sâu bệnh sinh học (kiến, bọ ngươi)
+• Tránh bón quá nhiều đạm
+• Giữ ruộng sạch cỏ dại;`;
+  } else if (q.match(/ẩm/)) {
+    impact = `Ẩm độ cao ảnh hưởng đến lúa:\n\
+Tác hại:
+• Tạo điều kiện lý tưởng cho bệnh nấm
+• Giảm lưu thông không khí, khó khô
+• Phát triển bệnh mạnh vào sáng sớm
+• Gây hôi mốc, héo chột nếu kéo dài
+
+Bệnh nguy hiểm nhất:
+• Bệnh đạo ôn (Rất cao khi ẩm >85% & nhiệt 25-30°C)
+• Bệnh cháy bìa lá
+• Bệnh lem lép hạt
+
+Biện pháp:
+• Cải thiện thoát nước
+• Phun thuốc sáng trước 7h
+• Thường xuyên giám sát lá cây;`;
+  } else if (q.match(/khô|hạn/)) {
+    impact = `Khô hạn ảnh hưởng đến lúa:\n
+Tác hại:
+• Tăng rầy nâu, nhện gié (yêu thích khô)
+• Giảm bệnh nấm (đạo ôn giảm)
+• Hạt nhỏ, lem lép nếu khô vào giai đoạn chín sữa
+
+Sâu bệnh nguy hiểm:
+• Rầy nâu (Cao)
+• Nhện gié (Cao)
+• Muỗi hành (Trung bình)
+
+Biện pháp:
+• Tưới nước đều đặn, đặc biệt giai đoạn đẻ nhánh - trổ bông
+• Giữ lớp nước 5cm trong ruộng
+• Phun sâu bệnh sinh học;`;
+  } else if (q.match(/gió/)) {
+    impact = `Gió mạnh ảnh hưởng đến lúa:\n
+Tác hại:
+• Làm đổ ngã cây, gây vết thương cơ học
+• Tăng lây lan bệnh, sâu bệnh
+• Gây mất nước nhanh
+• Rụng hạt, rụng bông nếu gió vào lúc trổ bông
+
+Ảnh hưởng:
+• Giảm năng suất 10-30%
+• Tăng lây lan rầy nâu, sâu cuốn lá
+
+Biện pháp:
+• Bón phân cân đối tránh cây cao, mềm
+• Giữ ruộng sạch để gió lưu thông
+• Phun phòng bệnh trước gió;`;
+  }
+  return impact || "Tôi chưa có thông tin cụ thể về điều kiện thời tiết này.";
+}
+// Xử lý câu hỏi "bệnh nào yêu thích thời tiết nào"
+async function handleDiseasesByWeatherCondition(queryText) {
+  const q = queryText.toLowerCase();
+  let response = "";
+  if (q.match(/mưa/)) {
+    response = `Các bệnh yêu thích thời tiết mưa:\n
+Bệnh đạo ôn (MỨC ĐỘ CAO NHẤT)
+   - Độ ẩm: 85-100%
+   - Nhiệt độ: 25-30°C (tối ưu 28°C)
+   - Xuất hiện: 2-3 ngày sau mưa kéo dài
+   - Nguy hiểm nhất ở giai đoạn: Đẻ nhánh - Trổ bông
+Bệnh cháy bìa lá 
+   - Độ ẩm: 80-95%
+   - Nhiệt độ: 22-28°C
+   - Phát triển mạnh khi mưa liên tục 3+ ngày
+Bệnh lem lép hạt 
+   - Yêu thích ẩm ướt cao
+   - Giai đoạn nguy hiểm: Trổ bông - Chín sữa
+Bệnh thối bẹ 
+   - Nếu mưa quá lâu gây ngập úng
+
+CÁCH PHÒNG TRÁNH:
+• Theo dõi dự báo thời tiết, phun thuốc trước 1-2 ngày
+• Chọn giống kháng bệnh (VC14, VC19, VC20)
+• Cải thiện thoát nước, hạ mực nước
+• Bón phân kali tăng sức đề kháng;`;
+  } else if (q.match(/nắng|nóng/)) {
+    response = `Các sâu bệnh yêu thích thời tiết nắng nóng:\n
+Rầy nâu (MỨC ĐỘ CAO NHẤT)
+   - Yêu thích nhiệt độ: 25-32°C
+   - Phát triển nhanh nhất ở 28-30°C
+   - Vòng đời: 7-10 ngày
+   - Tăng quần thể đột biến vào hè thu
+Sâu cuốn lá 
+   - Thích nắng, nhiệt độ cao
+   - Thích ẩm độ trung bình (60-80%)
+Nhện gié 
+   - Phát triển mạnh khi nắng nóng liên tiếp
+   - Yêu thích độ ẩm thấp (40-60%)
+Muỗi hành 
+   - Thích nóng, ẩm độ thấp
+
+NGUY HIỂM:
+• Rầy nâu có thể tăng 10x quần thể trong 2-3 tuần
+• Lây lan nhanh, khó kiểm soát
+
+CÁCH PHÒNG TRÁNH:
+• Phun sâu bệnh sinh học (kiến, bọ ngươi, thiên địch)
+• Tưới nước thường xuyên giảm stress
+• Tránh bón quá nhiều đạm
+• Thường xuyên giám sát ruộng;`;
+  } else if (q.match(/ẩm/)) {
+    response = `Các bệnh yêu thích ẩm độ cao:\n
+Bệnh đạo ôn 
+   - Yêu thích ẩm: >85%
+   - Kết hợp với mưa liên tiếp
+Bệnh cháy bìa lá 
+   - Ẩm: 80-95%
+Bệnh lem lép hạt 
+   - Yêu thích ẩm ướt cao
+
+CÁCH PHÒNG TRÁNH:
+• Cải thiện thoát nước
+• Phun thuốc sáng trước 7h
+• Giữ không khí lưu thông;`;
+  } else if (q.match(/khô|hạn/)) {
+    response = `Các sâu bệnh yêu thích thời tiết khô:\n
+Rầy nâu 
+   - Thích khô, ẩm thấp
+   - Phát triển nhanh khi khô hạn
+Nhện gié 
+   - Yêu thích ẩm 40-60%
+   - Tăng mạnh khi nắng, khô
+Muỗi hành 
+   - Thích khô, ấm
+   
+CÁCH PHÒNG TRÁNH:
+• Tưới nước đều đặn
+• Phun sâu bệnh sinh học;`;
+  }
+  return response || "Tôi chưa có thông tin cụ thể về điều kiện này.";
+}
+// Trích xuất tên bệnh từ câu hỏi (hỗ trợ regex)
+function extractDiseaseNameFromQuery(queryText) {
+  const diseasePatterns = [
+    { pattern: /đạo ôn/i, name: "Bệnh đạo ôn" },
+    { pattern: /rầy nâu/i, name: "Rầy nâu" },
+    { pattern: /lem lép hạt/i, name: "Bệnh lem lép hạt" },
+    { pattern: /cháy bìa lá/i, name: "Bệnh cháy bìa lá" },
+    { pattern: /sâu cuốn lá/i, name: "Sâu cuốn lá" },
+    { pattern: /nhện gié|nhện/i, name: "Nhện gié" },
+    { pattern: /muỗi hành/i, name: "Muỗi hành" },
+    { pattern: /sâu đục thân/i, name: "Sâu đục thân" },
+    { pattern: /thối bẹ/i, name: "Bệnh thối bẹ" },
+    { pattern: /khô vằn/i, name: "Bệnh khô vằn" },
+  ];
+  for (let item of diseasePatterns) {
+    if (item.pattern.test(queryText)) {
+      return item.name;
+    }
+  }
+  return null;
 }
