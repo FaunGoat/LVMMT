@@ -11,12 +11,12 @@ function Navbar() {
         <ul className="flex space-x-6">
           <li>
             <Link to="/" className="hover:text-sky-200">
-              Trang chủ
+              Trang Chủ
             </Link>
           </li>
           <li>
             <Link to="/sustainable-methods" className="hover:text-sky-200">
-              Thông tin Bệnh Lúa
+              Thông Tin Bệnh Lúa
             </Link>
           </li>
           <li>
@@ -26,7 +26,7 @@ function Navbar() {
           </li>
           <li>
             <Link to="/weather-forecast" className="hover:text-sky-200">
-              Dự báo Thời tiết
+              Dự Báo Thời Tiết
             </Link>
           </li>
         </ul>

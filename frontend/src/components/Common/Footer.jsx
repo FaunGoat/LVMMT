@@ -56,7 +56,7 @@ function Footer() {
         </div>
         {/* Follow us */}
         <div>
-          <h3 className="text-lg mb-4">Theo dõi chúng tôi</h3>
+          <h3 className="text-lg mb-4">Theo Dõi Chúng Tôi</h3>
           <div className="flex justify-center space-x-4 mb-6">
             <a
               href="https://www.facebook.com/loi.nguyenminh.6595"
