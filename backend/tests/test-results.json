@@ -1,0 +1,568 @@
+{
+  "total": 70,
+  "correct": 65,
+  "incorrect": 5,
+  "accuracy": "92.86%",
+  "details": [
+    {
+      "id": 1,
+      "question": "Bệnh đạo ôn là gì?",
+      "expected_disease": "Bệnh đạo ôn",
+      "expected_type": "definition",
+      "answer": " Bệnh Đạo ôn (Bệnh cháy lá lúa)\n\nBệnh đạo ôn là một trong những bệnh nguy hiểm nhất đối với cây lúa, gây thiệt hại lớn về năng suất và chất lượng. Bệnh có thể tấn công ở mọi giai đoạn sinh trưởng của cây lúa.\n\nLoại: Bệnh nấm\nMức độ: Cao\nThiệt hại: Có thể giảm năng suất tới 80% nếu không phòng trị kịp thời.",
+      "correct": true
+    },
+    {
+      "id": 2,
+      "question": "Rầy nâu có tên khoa học là gì?",
+      "expected_disease": "Rầy nâu",
+      "expected_type": "definition",
+      "answer": " Rầy nâu (Rầy cám)\n\nRầy nâu là loại sâu hại nguy hiểm nhất trên lúa ở Việt Nam. Ngoài hút nhựa làm lúa chết, rầy nâu còn truyền virus gây bệnh vàng lùn và lùn xoắn lá, gây thiệt hại rất lớn.\n\nLoại: Sâu hại\nMức độ: Rất cao\nThiệt hại: Gây cháy rầy diện rộng, mất trắng năng suất.",
+      "correct": true
+    },
+    {
+      "id": 3,
+      "question": "Cho tôi biết về bệnh lem lép hạt",
+      "expected_disease": "Bệnh lem lép hạt",
+      "expected_type": "definition",
+      "answer": " Bệnh Lem lép hạt (Bệnh lép vàng)\n\nBệnh lem lép hạt làm giảm năng suất và chất lượng gạo nghiêm trọng. Đặc biệt nguy hiểm là nấm bệnh tiết ra độc tố gây hại cho người và gia súc.\n\nMức độ: Cao - Thiệt hại Giảm chất lượng gạo, năng suất và giá tiền giảm 30%.",
+      "correct": true
+    },
+    {
+      "id": 50,
+      "question": "Cho biết về muỗi hành?",
+      "expected_disease": "Muỗi hành",
+      "expected_type": "definition",
+      "answer": " Muỗi hành (Sâu năn)\n\nMuỗi hành là loài phá hại đỉnh sinh trưởng biến bẹ lá thành ống tròn như cọng hành, cây lúa bé, sinh trưởng không bình thường.\n\nMức độ: Cao - Thiệt hại Mất dảnh",
+      "correct": true
+    },
+    {
+      "id": 51,
+      "question": "Bệnh lúa von là sao?",
+      "expected_disease": "Bệnh lúa von",
+      "expected_type": "definition",
+      "answer": " Bệnh Lúa von (Bệnh mạ đực)\n\nBệnh Lúa von là loại bệnh do loài nấm gây nên do nguyên nhân truyền nhiễm hoặc lây nhiễm. Cây lúa bị bệnh cao vọt, mảnh khảnh, lá xanh nhạt.\n\nMức độ: Trung bình - Thiệt hại Thấp",
+      "correct": true
+    },
+    {
+      "id": 4,
+      "question": "Sâu cuốn lá có nguy hiểm không?",
+      "expected_disease": "Sâu cuốn lá",
+      "expected_type": "risk",
+      "answer": "Mức độ nguy hiểm của Sâu cuốn lá:\n\nĐộ nghiêm trọng: Cao\nThiệt hại kinh tế: 20-40% năng suất nếu không kiểm soát kịp thời\n\nSâu cuốn lá là loại sâu hại phổ biến, gây thiệt hại bằng cách ăn biểu bì lá và cuốn lá lại. Tuy không nguy hiểm như rầy nâu nhưng nếu không kiểm soát kịp thời sẽ gây mất mát đáng kể.",
+      "correct": true
+    },
+    {
+      "id": 5,
+      "question": "Bệnh cháy bìa lá do đâu gây ra?",
+      "expected_disease": "Bệnh cháy bìa lá",
+      "expected_type": "causes",
+      "answer": "Nguyên nhân gây Bệnh Cháy bìa lá:\n\n• Mầm bệnh: Vi khuẩn (Xanthomonas oryzae pv. oryzae)\n\n Điều kiện môi trường:\n• Gió: Gió lớn kèm mưa gây vết thương",
+      "correct": true
+    },
+    {
+      "id": 6,
+      "question": "Triệu chứng của bệnh đạo ôn?",
+      "expected_disease": "Bệnh đạo ôn",
+      "expected_type": "symptoms",
+      "answer": "Triệu chứng của Bệnh Đạo ôn:\n\n1. [Lá] Vết bệnh hình thoi (mắt én), tâm xám trắng, viền nâu đậm.\n\n2. [Cổ bông] Vết thối nâu xám làm gãy gục cổ bông, gây lép trắng (bạc bông).\n\nMức độ nguy hiểm: Cao\nThiệt hại kinh tế: Có thể giảm năng suất tới 80% nếu không phòng trị kịp thời.",
+      "correct": true
+    },
+    {
+      "id": 7,
+      "question": "Lá lúa có vết bệnh hình thoi, tâm xám trắng viền nâu",
+      "expected_disease": "Bệnh đạo ôn",
+      "expected_type": "symptoms_search",
+      "answer": "Dựa trên triệu chứng \"Lá lúa có vết bệnh hình thoi, tâm xám trắng viền nâu\", cây lúa có thể đang mắc:\n\n1. Bệnh Đạo ôn (Bệnh cháy lá lúa)\n   Triệu chứng chính:\n   • [Lá] Vết bệnh hình thoi (mắt én), tâm xám trắng, viền nâu đậm.\n   • [Cổ bông] Vết thối nâu xám làm gãy gục cổ bông, gây lép trắng (bạc bông).\n   Nguy cơ: Cao\n\n2. Bệnh Khô vằn (Ung thư lúa)\n   Triệu chứng chính:\n   • [Bẹ lá/Thân] Vết bệnh loang lổ hình bầu dục, màu xám trắng viền nâu (đốm vằn).\n   • [Thân] Nấm tấn công làm thối thân, gây đổ ngã khi bệnh nặng, vết bệnh lan lên lá.\n   Nguy cơ: Cao\n\n\n Bạn muốn biết thêm chi tiết về bệnh nào?",
+      "correct": true
+    },
+    {
+      "id": 8,
+      "question": "Cây lúa bị lùn, lá vàng xòe ngang",
+      "expected_disease": "Bệnh Vàng lùn",
+      "expected_type": "symptoms_search",
+      "answer": "Dựa trên triệu chứng \"Cây lúa bị lùn, lá vàng xòe ngang\", cây lúa có thể đang mắc:\n\n1. Bệnh Vàng lùn (Bệnh lúa cỏ)\n   Triệu chứng chính:\n   • [Toàn cây] Cây lúa thấp lùn, lá ngắn, cứng, xòe ngang (virus do Rầy nâu truyền).\n   • [Lá] Lá chuyển màu vàng cam, vàng khô từ chóp lá lan vào.\n   Nguy cơ: Rất cao\n\n2. Bệnh Lùn xoắn lá (Bệnh lúa xoăn)\n   Triệu chứng chính:\n   • [Lá] Lá xanh đậm, xoắn lại, rìa lá rách và có bướu dọc gân lá.\n   • [Toàn cây] Cây lùn, chồi non biến dạng, không có khả năng trổ bông (virus do Rầy nâu truyền).\n   Nguy cơ: Cao\n\n3. Bệnh Lúa von (Bệnh mạ đực)\n   Triệu chứng chính:\n   • [Toàn cây] Cây lúa non vươn cao bất thường (von), mảnh khảnh, lá vàng nhạt.\n   • [Gốc] Gốc thân có rễ bất định, cây chết trước hoặc sau khi trổ, có lớp phấn hồng trên lá.\n   Nguy cơ: Trung bình\n\n... và 2 bệnh khác.\n\n Bạn muốn biết thêm chi tiết về bệnh nào?",
+      "correct": true
+    },
+    {
+      "id": 9,
+      "question": "Lá lúa xoắn lại như mũi khoan",
+      "expected_disease": "Bệnh Lùn xoắn lá",
+      "expected_type": "symptoms_search",
+      "answer": "Dựa trên triệu chứng \"Lá lúa xoắn lại như mũi khoan\", cây lúa có thể đang mắc:\n\n1. Bệnh Vàng lùn (Bệnh lúa cỏ)\n   Triệu chứng chính:\n   • [Toàn cây] Cây lúa thấp lùn, lá ngắn, cứng, xòe ngang (virus do Rầy nâu truyền).\n   • [Lá] Lá chuyển màu vàng cam, vàng khô từ chóp lá lan vào.\n   Nguy cơ: Rất cao\n\n2. Bệnh Lùn xoắn lá (Bệnh lúa xoăn)\n   Triệu chứng chính:\n   • [Lá] Lá xanh đậm, xoắn lại, rìa lá rách và có bướu dọc gân lá.\n   • [Toàn cây] Cây lùn, chồi non biến dạng, không có khả năng trổ bông (virus do Rầy nâu truyền).\n   Nguy cơ: Cao\n\n3. Bệnh Sọc trong (Sọc trong vi khuẩn)\n   Triệu chứng chính:\n   • [Lá] Lá lúa có sọc vàng mờ hoặc trắng dọc theo gân lá.\n   • [Toàn cây] Lá bị xoắn lại, mép lá rách, cây lùn (virus do Rầy xanh truyền).\n   Nguy cơ: Cao\n\n\n Bạn muốn biết thêm chi tiết về bệnh nào?",
+      "correct": true
+    },
+    {
+      "id": 10,
+      "question": "Rầy nâu có biểu hiện gì?",
+      "expected_disease": "Rầy nâu",
+      "expected_type": "symptoms",
+      "answer": "Triệu chứng của Rầy nâu:\n\n1. [Gốc] Rầy tụ tập dày đặc, xuất hiện mật ngọt (honeydew).\n\n2. [Toàn cây] Lúa chuyển vàng úa, khô cháy từ ngọn xuống gốc (cháy rầy).\n\nMức độ nguy hiểm: Rất cao\nThiệt hại kinh tế: Gây cháy rầy diện rộng, mất trắng năng suất.",
+      "correct": true
+    },
+    {
+      "id": 11,
+      "question": "Hạt lúa bị đen nâu tím",
+      "expected_disease": "Bệnh lem lép hạt",
+      "expected_type": "symptoms_search",
+      "answer": "Dựa trên triệu chứng \"Hạt lúa bị đen nâu tím\", cây lúa có thể đang mắc:\n\n1. Bệnh Lem lép hạt (Bệnh lép vàng)\n   Triệu chứng chính:\n   • [Hạt] Vỏ trấu biến màu thành nâu, đen hoặc tím, hạt bên trong lép hoặc lửng.\n   • [Bông] Bông lúa không thoát ra khỏi bẹ được do nấm tấn công (nghẹt đòng).\n   Nguy cơ: Cao\n\n2. Bệnh Thối thân (Tiêm hạch)\n   Triệu chứng chính:\n   • [Thân] Vết bệnh màu đen ở bẹ lá sát mặt nước, thân bị thối mềm.\n   • [Gốc] Xuất hiện hạch nấm màu đen trong thân, cây lúa đổ ngã.\n   Nguy cơ: Trung bình\n\n3. Nhện gié (Cạo gió)\n   Triệu chứng chính:\n   • [Bẹ lá] Vết thâm đen dọc bẹ lá, như bị \"cạo gió\" (do nhện chích hút).\n   • [Hạt] Lúa trổ không thoát hoặc nghẹn, hạt bị lem lép, biến màu nâu đen.\n   Nguy cơ: Cao\n\n... và 1 bệnh khác.\n\n Bạn muốn biết thêm chi tiết về bệnh nào?",
+      "correct": true
+    },
+    {
+      "id": 12,
+      "question": "Lá có vết loang lổ như da hổ",
+      "expected_disease": "Bệnh Khô vằn",
+      "expected_type": "symptoms_search",
+      "answer": "Dựa trên triệu chứng \"Lá có vết loang lổ như da hổ\", cây lúa có thể đang mắc:\n\n1. Bệnh Khô vằn (Ung thư lúa)\n   Triệu chứng chính:\n   • [Bẹ lá/Thân] Vết bệnh loang lổ hình bầu dục, màu xám trắng viền nâu (đốm vằn).\n   • [Thân] Nấm tấn công làm thối thân, gây đổ ngã khi bệnh nặng, vết bệnh lan lên lá.\n   Nguy cơ: Cao\n\n\n Bạn muốn biết thêm chi tiết về bệnh nào?",
+      "correct": true
+    },
+    {
+      "id": 13,
+      "question": "Nguyên nhân gây bệnh đạo ôn",
+      "expected_disease": "Bệnh đạo ôn",
+      "expected_type": "causes",
+      "answer": "Nguyên nhân gây Bệnh Đạo ôn:\n\n• Mầm bệnh: Nấm (Magnaporthe oryzae)\n\n Điều kiện môi trường:\n• Nhiệt độ: Lạnh, có sương mù",
+      "correct": true
+    },
+    {
+      "id": 14,
+      "question": "Rầy nâu lây lan như thế nào?",
+      "expected_disease": "Rầy nâu",
+      "expected_type": "causes",
+      "answer": "Nguyên nhân gây Rầy nâu:\n\n• Mầm bệnh: Côn trùng (Nilaparvata lugens)\n",
+      "correct": true
+    },
+    {
+      "id": 15,
+      "question": "Điều kiện nào thuận lợi cho lem lép hạt?",
+      "expected_disease": "Bệnh lem lép hạt",
+      "expected_type": "weather_trigger",
+      "answer": "Điều kiện thời tiết thuận lợi cho Bệnh Lem lép hạt:\n\n1. Mưa kéo dài trong giai đoạn trổ bông.\n   Mức độ nguy hiểm: Rất cao\n\n2. Ẩm độ không khí cao (>90%).\n   Mức độ nguy hiểm: Cao\n\n3. Nhiệt độ thấp bất thường (dưới 20°C).\n   Mức độ nguy hiểm: Cao\n\n4. Sương đêm dày.\n   Mức độ nguy hiểm: Trung bình\n\n",
+      "correct": true
+    },
+    {
+      "id": 16,
+      "question": "Tại sao bệnh cháy bìa lá phát triển mạnh sau bão?",
+      "expected_disease": "Bệnh cháy bìa lá",
+      "expected_type": "causes",
+      "answer": "Nguyên nhân gây Bệnh Cháy bìa lá:\n\n• Mầm bệnh: Vi khuẩn (Xanthomonas oryzae pv. oryzae)\n\n Điều kiện môi trường:\n• Gió: Gió lớn kèm mưa gây vết thương",
+      "correct": true
+    },
+    {
+      "id": 17,
+      "question": "Bón thừa đạm có ảnh hưởng gì?",
+      "expected_disease": null,
+      "expected_type": "causes",
+      "answer": "Xin lỗi, tôi chưa có đủ thông tin để trả lời câu hỏi của bạn.",
+      "correct": false
+    },
+    {
+      "id": 18,
+      "question": "Cách chữa bệnh đạo ôn",
+      "expected_disease": "Bệnh đạo ôn",
+      "expected_type": "treatment",
+      "answer": "Cách chữa trị Bệnh Đạo ôn:\n\nThuốc hóa học:\n• Fujione - Phun phòng 2 lần (làm đòng và trổ lác đác).\n\n",
+      "correct": true
+    },
+    {
+      "id": 19,
+      "question": "Thuốc trị rầy nâu",
+      "expected_disease": "Rầy nâu",
+      "expected_type": "treatment",
+      "answer": "Cách chữa trị Rầy nâu:\n\nThuốc hóa học:\n• Actara 25WG - Phun vào gốc lúa.\n\nPhương pháp sinh học:\n• Bảo vệ Thiên địch - Bảo vệ nhện, bọ rùa...\n",
+      "correct": true
+    },
+    {
+      "id": 20,
+      "question": "Làm sao điều trị lem lép hạt?",
+      "expected_disease": "Bệnh lem lép hạt",
+      "expected_type": "treatment",
+      "answer": "Cách chữa trị Bệnh Lem lép hạt:\n\nThuốc hóa học:\n• Tilt Super (Propiconazole) - Phun 2 lần: trước và sau khi trổ.\n\n",
+      "correct": true
+    },
+    {
+      "id": 21,
+      "question": "Cách trị sâu cuốn lá",
+      "expected_disease": "Sâu cuốn lá",
+      "expected_type": "treatment",
+      "answer": "Cách chữa trị Sâu cuốn lá:\n\nThuốc hóa học:\n• Virtako 40WG - Phun khi sâu non tuổi 1-2.\n\nPhương pháp sinh học:\n• Bảo vệ thiên địch - Giữ lại nhện, ong ký sinh.\n",
+      "correct": true
+    },
+    {
+      "id": 22,
+      "question": "Bệnh cháy bìa lá dùng thuốc gì?",
+      "expected_disease": "Bệnh cháy bìa lá",
+      "expected_type": "treatment",
+      "answer": "Cách chữa trị Bệnh Cháy bìa lá:\n\nThuốc hóa học:\n• Kasumin/Starner - Phun thuốc kháng sinh đặc trị vi khuẩn.\n\n",
+      "correct": true
+    },
+    {
+      "id": 23,
+      "question": "Xử lý bệnh Khô vằn",
+      "expected_disease": "Bệnh Khô vằn",
+      "expected_type": "treatment",
+      "answer": "Cách chữa trị Bệnh Khô vằn:\n\nThuốc hóa học:\n• Validacin (Validamycin) - Phun thẳng vào vết bệnh và gốc lúa.\n\n",
+      "correct": true
+    },
+    {
+      "id": 24,
+      "question": "Trị sâu đục thân",
+      "expected_disease": "Sâu Đục thân",
+      "expected_type": "treatment",
+      "answer": "Cách chữa trị Sâu đục thân:\n\nThuốc hóa học:\n• Thuốc gốc Cartap (dạng hạt) - Rải thuốc vào nước ruộng trước khi nở trứng.\n\n",
+      "correct": true
+    },
+    {
+      "id": 25,
+      "question": "Cách phòng bệnh đạo ôn",
+      "expected_disease": "Bệnh đạo ôn",
+      "expected_type": "prevention",
+      "answer": "Cách phòng ngừa Bệnh Đạo ôn:\n\n Biện pháp canh tác:\n• Bón phân cân đối\n* Không bón thừa đạm, bón bổ sung Silic\n\n",
+      "correct": true
+    },
+    {
+      "id": 26,
+      "question": "Phòng rầy nâu như thế nào?",
+      "expected_disease": "Rầy nâu",
+      "expected_type": "prevention",
+      "answer": "Cách phòng ngừa Rầy nâu:\n\n Biện pháp canh tác:\n• Né rầy\n* Xuống giống tập trung, né đợt rầy di trú.\n\n Giám sát:\n• 2 lần/tuần\n  Kiểm tra: Mật độ rầy\n\n",
+      "correct": true
+    },
+    {
+      "id": 27,
+      "question": "Làm gì để tránh lem lép hạt?",
+      "expected_disease": "Bệnh lem lép hạt",
+      "expected_type": "prevention",
+      "answer": "Cách phòng ngừa Bệnh Lem lép hạt:\n\n Biện pháp canh tác:\n• Xử lý hạt giống\n* Ngâm hạt giống trong thuốc trừ nấm\n\n",
+      "correct": true
+    },
+    {
+      "id": 28,
+      "question": "Phòng bệnh cháy bìa lá",
+      "expected_disease": "Bệnh cháy bìa lá",
+      "expected_type": "prevention",
+      "answer": "Cách phòng ngừa Bệnh Cháy bìa lá:\n\n Biện pháp canh tác:\n• Rút nước phơi ruộng\n* Hạn chế lây lan qua nước\n\n",
+      "correct": true
+    },
+    {
+      "id": 29,
+      "question": "Cách phòng sâu cuốn lá",
+      "expected_disease": "Sâu cuốn lá",
+      "expected_type": "prevention",
+      "answer": "Cách phòng ngừa Sâu cuốn lá:\n\n Biện pháp canh tác:\n• Không bón thừa đạm\n* Giảm sự rậm rạp của ruộng lúa\n\n",
+      "correct": true
+    },
+    {
+      "id": 30,
+      "question": "Giống lúa kháng bệnh nào?",
+      "expected_disease": null,
+      "expected_type": "prevention",
+      "answer": "Xin lỗi, tôi chưa có đủ thông tin để trả lời câu hỏi của bạn.",
+      "correct": false
+    },
+    {
+      "id": 31,
+      "question": "Bệnh đạo ôn xuất hiện khi nào?",
+      "expected_disease": "Bệnh đạo ôn",
+      "expected_type": "season",
+      "answer": " Thời điểm Bệnh Đạo ôn phát triển mạnh:\n\n Vụ Đông Xuân: Tháng 11 - 4\n   Mức độ: Rất cao\n   Cao điểm: Tháng 1, 2, 3\n\n Vụ Hè Thu: Tháng 4 - 8\n   Mức độ: Cao\n   Cao điểm: Tháng 5, 6\n\n Giai đoạn lúa dễ bị tấn công:\n• Đẻ nhánh: Cao\n• Trổ bông: Rất cao\n",
+      "correct": true
+    },
+    {
+      "id": 32,
+      "question": "Rầy nâu hoành hành vào mùa nào?",
+      "expected_disease": "Rầy nâu",
+      "expected_type": "season",
+      "answer": " Thời điểm Rầy nâu phát triển mạnh:\n\n Vụ Cả năm: Tháng 1 - 12\n   Mức độ: Rất cao\n   Cao điểm: Tháng 3, 4, 10, 11\n\n",
+      "correct": true
+    },
+    {
+      "id": 33,
+      "question": "Lem lép hạt thường xuất hiện giai đoạn nào?",
+      "expected_disease": "Bệnh lem lép hạt",
+      "expected_type": "season",
+      "answer": " Thời điểm Bệnh Lem lép hạt phát triển mạnh:\n\n Vụ Hè Thu: Tháng 4 - 8\n   Mức độ: Rất cao\n   Cao điểm: Tháng 6, 7\n\n Giai đoạn lúa dễ bị tấn công:\n• Trổ bông: Rất cao\n• Chín sữa: Rất cao\n",
+      "correct": true
+    },
+    {
+      "id": 34,
+      "question": "Sâu cuốn lá phát triển mạnh vào lúc nào?",
+      "expected_disease": "Sâu cuốn lá",
+      "expected_type": "season",
+      "answer": " Thời điểm Sâu cuốn lá phát triển mạnh:\n\n Vụ Hè Thu: Tháng 4 - 8\n   Mức độ: Cao\n   Cao điểm: Tháng 5, 6\n\n Giai đoạn lúa dễ bị tấn công:\n• Đẻ nhánh: Cao\n• Làm đòng: Rất cao\n",
+      "correct": true
+    },
+    {
+      "id": 35,
+      "question": "Bệnh cháy bìa lá xuất hiện mùa gì?",
+      "expected_disease": "Bệnh cháy bìa lá",
+      "expected_type": "season",
+      "answer": " Thời điểm Bệnh Cháy bìa lá phát triển mạnh:\n\n Vụ Hè Thu: Tháng 4 - 8\n   Mức độ: Rất cao\n   Cao điểm: Tháng 7, 8\n\n Giai đoạn lúa dễ bị tấn công:\n• Làm đòng: Rất cao\n",
+      "correct": true
+    },
+    {
+      "id": 36,
+      "question": "Giai đoạn nào cây lúa dễ bị đạo ôn nhất?",
+      "expected_disease": "Bệnh đạo ôn",
+      "expected_type": "season",
+      "answer": " Thời điểm Bệnh Đạo ôn phát triển mạnh:\n\n Vụ Đông Xuân: Tháng 11 - 4\n   Mức độ: Rất cao\n   Cao điểm: Tháng 1, 2, 3\n\n Vụ Hè Thu: Tháng 4 - 8\n   Mức độ: Cao\n   Cao điểm: Tháng 5, 6\n\n Giai đoạn lúa dễ bị tấn công:\n• Đẻ nhánh: Cao\n• Trổ bông: Rất cao\n",
+      "correct": true
+    },
+    {
+      "id": 37,
+      "question": "Thời tiết hôm nay như thế nào?",
+      "expected_disease": null,
+      "expected_type": "weather",
+      "answer": "DỰ BÁO THỜI TIẾT - 2025-12-10\nCần Thơ\n\nNhiệt độ: 23-26°C\nĐộ ẩm: 95%\nTình hình: Mây đen u ám",
+      "correct": true
+    },
+    {
+      "id": 38,
+      "question": "Thời tiết nào thuận lợi cho đạo ôn?",
+      "expected_disease": "Bệnh đạo ôn",
+      "expected_type": "weather_trigger",
+      "answer": "Điều kiện thời tiết thuận lợi cho Bệnh Đạo ôn:\n\n1. Nhiệt độ thấp (20-25°C) và ẩm độ cao.\n   Mức độ nguy hiểm: Rất cao\n\n2. Mưa phùn, sương mù kéo dài.\n   Mức độ nguy hiểm: Cao\n\n3. Bón thừa đạm.\n   Mức độ nguy hiểm: Cao\n\n4. Chênh lệch nhiệt độ ngày và đêm lớn.\n   Mức độ nguy hiểm: Trung bình\n\n",
+      "correct": true
+    },
+    {
+      "id": 39,
+      "question": "Rầy nâu ảnh hưởng trong điều kiện thời tiết gì?",
+      "expected_disease": "Rầy nâu",
+      "expected_type": "weather_trigger",
+      "answer": "Điều kiện thời tiết thuận lợi cho Rầy nâu:\n\n1. Nhiệt độ cao (25-30°C) và khô hạn.\n   Mức độ nguy hiểm: Cao\n   Nhiệt độ: 25-30°C\n\n2. Độ ẩm cao (>80%).\n   Mức độ nguy hiểm: Trung bình\n\n3. Gió lớn (giúp rầy di chuyển).\n   Mức độ nguy hiểm: Cao\n\n",
+      "correct": true
+    },
+    {
+      "id": 40,
+      "question": "Mưa nhiều có ảnh hưởng gì đến lúa?",
+      "expected_disease": null,
+      "expected_type": "weather_trigger",
+      "answer": "Ảnh hưởng của mưa nhiều đến lúa:\n\nTác hại trực tiếp:\n• Tạo độ ẩm cao - thuận lợi cho bệnh nấm\n• Giảm lưu thông không khí\n• Làm cây yếu, dễ bị sâu bệnh\n• Gây ngập úng, thối bẹ nếu kéo dài\n• Rụng hạt, hạt lem lép\n\nBệnh nguy hiểm:\n• Đạo ôn (RẤT CAO)\n• Cháy bìa lá (Cao)\n• Lem lép hạt (Cao)\n\nBiện pháp:\n• Phun thuốc phòng trước 1-2 ngày\n• Cải thiện thoát nước\n• Bón phân kali tăng đề kháng",
+      "correct": true
+    },
+    {
+      "id": 41,
+      "question": "Thời tiết nắng nóng gây bệnh gì?",
+      "expected_disease": null,
+      "expected_type": "weather_trigger",
+      "answer": "Ảnh hưởng của nắng nóng đến lúa:\n\nTác hại:\n• Gây stress nhiệt - cây héo\n• Tăng tốc phát triển sâu hại\n• Rầy nâu, sâu cuốn lá tăng mạnh\n• Giảm bệnh nấm nhưng sâu tăng\n\nSâu bệnh nguy hiểm:\n• Rầy nâu (RẤT CAO)\n• Sâu cuốn lá (Cao)\n• Nhện gié (Trung bình)\n\nBiện pháp:\n• Tưới nước thường xuyên\n• Phun sinh học (kiến, bọ ngươi)\n• Tránh bón quá nhiều đạm",
+      "correct": true
+    },
+    {
+      "id": 42,
+      "question": "Sương mù ảnh hưởng như thế nào?",
+      "expected_disease": null,
+      "expected_type": "weather_trigger",
+      "answer": "Xin lỗi, tôi chưa có đủ thông tin để trả lời câu hỏi của bạn.",
+      "correct": false
+    },
+    {
+      "id": 43,
+      "question": "Bệnh đạo ôn phát triển qua mấy giai đoạn?",
+      "expected_disease": "Bệnh đạo ôn",
+      "expected_type": "stages",
+      "answer": "Giai đoạn phát triển của Bệnh Đạo ôn:\n\nThời gian: 7-10 ngày/vết bệnh\n\n1. Đốm nhỏ (2-3 ngày)\n   Vết bệnh chấm nhỏ màu nâu nhạt.\n\n2. Phát triển (5-7 ngày)\n   Vết bệnh hình thoi điển hình, lây lan nhanh.\n\n",
+      "correct": true
+    },
+    {
+      "id": 44,
+      "question": "Rầy nâu gây hại như thế nào?",
+      "expected_disease": "Rầy nâu",
+      "expected_type": "stages",
+      "answer": "Triệu chứng của Rầy nâu:\n\n1. [Gốc] Rầy tụ tập dày đặc, xuất hiện mật ngọt (honeydew).\n\n2. [Toàn cây] Lúa chuyển vàng úa, khô cháy từ ngọn xuống gốc (cháy rầy).\n\nMức độ nguy hiểm: Rất cao\nThiệt hại kinh tế: Gây cháy rầy diện rộng, mất trắng năng suất.",
+      "correct": true
+    },
+    {
+      "id": 45,
+      "question": "Sâu cuốn lá phát triển mất bao lâu?",
+      "expected_disease": "Sâu cuốn lá",
+      "expected_type": "stages",
+      "answer": "Giai đoạn phát triển của Sâu cuốn lá:\n\nThời gian: 25-30 ngày (sâu non)\n\n1. Ấu trùng non (7-10 ngày)\n   Sâu mới nở bắt đầu cuốn và ăn lá non.\n\n2. Ấu trùng lớn (15-20 ngày)\n   Sâu lớn ăn mạnh, làm lá bị bạc trắng.\n\n",
+      "correct": true
+    },
+    {
+      "id": 46,
+      "question": "Thời gian ủ bệnh của đạo ôn",
+      "expected_disease": "Bệnh đạo ôn",
+      "expected_type": "stages",
+      "answer": " Thời điểm Bệnh Đạo ôn phát triển mạnh:\n\n Vụ Đông Xuân: Tháng 11 - 4\n   Mức độ: Rất cao\n   Cao điểm: Tháng 1, 2, 3\n\n Vụ Hè Thu: Tháng 4 - 8\n   Mức độ: Cao\n   Cao điểm: Tháng 5, 6\n\n Giai đoạn lúa dễ bị tấn công:\n• Đẻ nhánh: Cao\n• Trổ bông: Rất cao\n",
+      "correct": true
+    },
+    {
+      "id": 47,
+      "question": "Lúa bị vàng lá và có viền nâu?",
+      "expected_disease": "Bệnh đạo ôn",
+      "expected_type": "symptoms_search",
+      "answer": "Dựa trên triệu chứng \"Lúa bị vàng lá và có viền nâu?\", cây lúa có thể đang mắc:\n\n1. Bệnh Đạo ôn (Bệnh cháy lá lúa)\n   Triệu chứng chính:\n   • [Lá] Vết bệnh hình thoi (mắt én), tâm xám trắng, viền nâu đậm.\n   • [Cổ bông] Vết thối nâu xám làm gãy gục cổ bông, gây lép trắng (bạc bông).\n   Nguy cơ: Cao\n\n2. Bệnh Khô vằn (Ung thư lúa)\n   Triệu chứng chính:\n   • [Bẹ lá/Thân] Vết bệnh loang lổ hình bầu dục, màu xám trắng viền nâu (đốm vằn).\n   • [Thân] Nấm tấn công làm thối thân, gây đổ ngã khi bệnh nặng, vết bệnh lan lên lá.\n   Nguy cơ: Cao\n\n\n Bạn muốn biết thêm chi tiết về bệnh nào?",
+      "correct": true
+    },
+    {
+      "id": 48,
+      "question": "Dùng thuốc hóa học trị bọ trĩ?",
+      "expected_disease": "Bọ trĩ",
+      "expected_type": "treatment_specific",
+      "answer": "Cách chữa Bọ trĩ bằng phương pháp Hóa học:\n\nThuốc/Biện pháp:\n1. Thuốc gốc Thiamethoxam - Phun khi mật độ bọ trĩ cao.\n",
+      "correct": true
+    },
+    {
+      "id": 49,
+      "question": "Chữa bệnh đạo ôn bằng sinh học?",
+      "expected_disease": "Bệnh đạo ôn",
+      "expected_type": "treatment_specific",
+      "answer": "Hiện chưa có thông tin về phương pháp Sinh học cho Bệnh Đạo ôn.\n\n❓ Bạn muốn xem các phương pháp khác?",
+      "correct": true
+    },
+    {
+      "id": 52,
+      "question": "Nhện gié nguy hiểm ra sao?",
+      "expected_disease": "Nhện gié",
+      "expected_type": "risk",
+      "answer": "Mức độ nguy hiểm của Nhện gié:\n\nĐộ nghiêm trọng: Cao\nThiệt hại kinh tế: Giảm năng suất\n\nChích hút bẹ lá gây vết thâm đen cạo gió.",
+      "correct": true
+    },
+    {
+      "id": 53,
+      "question": "Biểu hiện của bệnh thối bẹ?",
+      "expected_disease": "Bệnh thối bẹ",
+      "expected_type": "symptoms",
+      "answer": "Triệu chứng của Bệnh Thối bẹ:\n\n1. [Bẹ lá] Vết bệnh màu nâu không đều, có mùi hôi trên bẹ lá non bao quanh đòng lúa.\n\n2. [Bông] Bông lúa trổ không thoát, hoặc trổ ra bị lép, biến màu.\n\nMức độ nguy hiểm: Trung bình\nThiệt hại kinh tế: Ảnh hưởng phẩm chất",
+      "correct": true
+    },
+    {
+      "id": 54,
+      "question": "Dấu hiệu lúa bị bọ xít hôi tấn công?",
+      "expected_disease": "Bọ xít hôi",
+      "expected_type": "symptoms",
+      "answer": "Triệu chứng của Bọ xít hôi:\n\n1. [Hạt] Hút sữa hạt lúa, làm hạt lép lửng, trên vỏ trấu có chấm đen nhỏ (vết chích).\n\n2. [Bông] Bông lúa có mùi hôi (mùi bọ xít).\n\nMức độ nguy hiểm: Trung bình\nThiệt hại kinh tế: Hạt lép, đắng",
+      "correct": true
+    },
+    {
+      "id": 55,
+      "question": "Lá lúa xoắn, cây lùn, không trổ được",
+      "expected_disease": "Bệnh Lùn xoắn lá",
+      "expected_type": "symptoms_search",
+      "answer": "Dựa trên triệu chứng \"Lá lúa xoắn, cây lùn, không trổ được\", cây lúa có thể đang mắc:\n\n1. Bệnh Vàng lùn (Bệnh lúa cỏ)\n   Triệu chứng chính:\n   • [Toàn cây] Cây lúa thấp lùn, lá ngắn, cứng, xòe ngang (virus do Rầy nâu truyền).\n   • [Lá] Lá chuyển màu vàng cam, vàng khô từ chóp lá lan vào.\n   Nguy cơ: Rất cao\n\n2. Bệnh Lùn xoắn lá (Bệnh lúa xoăn)\n   Triệu chứng chính:\n   • [Lá] Lá xanh đậm, xoắn lại, rìa lá rách và có bướu dọc gân lá.\n   • [Toàn cây] Cây lùn, chồi non biến dạng, không có khả năng trổ bông (virus do Rầy nâu truyền).\n   Nguy cơ: Cao\n\n3. Bệnh Sọc trong (Sọc trong vi khuẩn)\n   Triệu chứng chính:\n   • [Lá] Lá lúa có sọc vàng mờ hoặc trắng dọc theo gân lá.\n   • [Toàn cây] Lá bị xoắn lại, mép lá rách, cây lùn (virus do Rầy xanh truyền).\n   Nguy cơ: Cao\n\n\n Bạn muốn biết thêm chi tiết về bệnh nào?",
+      "correct": true
+    },
+    {
+      "id": 56,
+      "question": "Sâu cuốn lá có triệu chứng như thế nào?",
+      "expected_disease": "Sâu cuốn lá",
+      "expected_type": "symptoms",
+      "answer": "Triệu chứng của Sâu cuốn lá:\n\n1. [Lá] Sâu cuốn lá thành ống, ăn nhu mô, làm lá bị bạc trắng.\n\n2. [Bụi lúa] Giảm diện tích quang hợp, cây lúa còi cọc.\n\n3. [Lá] Nhìn thấy nhộng sâu trong ống lá.\n\nMức độ nguy hiểm: Cao\nThiệt hại kinh tế: 20-40% năng suất nếu không kiểm soát kịp thời",
+      "correct": true
+    },
+    {
+      "id": 57,
+      "question": "Quá trình phát triển bệnh đạo ôn?",
+      "expected_disease": "Bệnh đạo ôn",
+      "expected_type": "stages",
+      "answer": "Giai đoạn phát triển của Bệnh Đạo ôn:\n\nThời gian: 7-10 ngày/vết bệnh\n\n1. Đốm nhỏ (2-3 ngày)\n   Vết bệnh chấm nhỏ màu nâu nhạt.\n\n2. Phát triển (5-7 ngày)\n   Vết bệnh hình thoi điển hình, lây lan nhanh.\n\n",
+      "correct": true
+    },
+    {
+      "id": 58,
+      "question": "Xin chào",
+      "expected_disease": null,
+      "expected_type": "welcome",
+      "answer": "Xin chào, Tôi là ArgiBot - hôm nay đồng ruộng của bạn thế nào.",
+      "correct": true
+    },
+    {
+      "id": 59,
+      "question": "Cảm ơn bạn",
+      "expected_disease": null,
+      "expected_type": "thanks",
+      "answer": "Rất vui được giúp bạn! \nNếu còn thắc mắc gì, cứ hỏi tôi nhé!",
+      "correct": true
+    },
+    {
+      "id": 60,
+      "question": "Tạm biệt",
+      "expected_disease": null,
+      "expected_type": "goodbye",
+      "answer": "Chúc bạn một mùa màng bội thu! \nHẹn gặp lại!",
+      "correct": true
+    },
+    {
+      "id": 61,
+      "question": "Sâu đục thân là con gì?",
+      "expected_disease": "Sâu Đục thân",
+      "expected_type": "definition",
+      "answer": "Nguyên nhân gây Sâu đục thân:\n\n• Mầm bệnh: Côn trùng (Scirpophaga incertulas)\n",
+      "correct": false
+    },
+    {
+      "id": 62,
+      "question": "Tác nhân gây bệnh cháy bìa lá lúa là gì?",
+      "expected_disease": "Bệnh cháy bìa lá",
+      "expected_type": "causes",
+      "answer": "Nguyên nhân gây Bệnh Cháy bìa lá:\n\n• Mầm bệnh: Vi khuẩn (Xanthomonas oryzae pv. oryzae)\n\n Điều kiện môi trường:\n• Gió: Gió lớn kèm mưa gây vết thương",
+      "correct": true
+    },
+    {
+      "id": 63,
+      "question": "Dấu hiệu nhận biết lúa bị Đốm vằn?",
+      "expected_disease": "Bệnh Khô vằn",
+      "expected_type": "symptoms",
+      "answer": "Triệu chứng của Bệnh Khô vằn:\n\n1. [Bẹ lá/Thân] Vết bệnh loang lổ hình bầu dục, màu xám trắng viền nâu (đốm vằn).\n\n2. [Thân] Nấm tấn công làm thối thân, gây đổ ngã khi bệnh nặng, vết bệnh lan lên lá.\n\nMức độ nguy hiểm: Cao\nThiệt hại kinh tế: 20-50% năng suất nếu bệnh nặng giai đoạn trổ",
+      "correct": true
+    },
+    {
+      "id": 64,
+      "question": "Điều trị rầy nâu bằng thiên địch?",
+      "expected_disease": "Rầy nâu",
+      "expected_type": "treatment_specific",
+      "answer": "Cách chữa Rầy nâu bằng phương pháp Sinh học:\n\nThuốc/Biện pháp:\n1. Bảo vệ Thiên địch - Bảo vệ nhện, bọ rùa...\n",
+      "correct": true
+    },
+    {
+      "id": 65,
+      "question": "Muỗi hành phát triển qua bao nhiêu tuổi ấu trùng?",
+      "expected_disease": "Muỗi hành",
+      "expected_type": "stages",
+      "answer": "Giai đoạn phát triển của Muỗi hành:\n\nThời gian: 25-30 ngày\n\n1. Sâu non (15 ngày)\n   Kích thích tạo ống hành\n\n",
+      "correct": true
+    },
+    {
+      "id": 66,
+      "question": "Bệnh lùn xoắn lá thường xảy ra vào thời điểm nào trong năm?",
+      "expected_disease": "Bệnh Lùn xoắn lá",
+      "expected_type": "season",
+      "answer": " Thời điểm Bệnh Lùn xoắn lá phát triển mạnh:\n\n Vụ Cả năm: Tháng 1 - 12\n   Mức độ: Rất cao\n   Cao điểm: Tháng 3, 7, 11\n\n Giai đoạn lúa dễ bị tấn công:\n• Đẻ nhánh: Cao\n",
+      "correct": true
+    },
+    {
+      "id": 67,
+      "question": "Sử dụng giống kháng đạo ôn để phòng bệnh?",
+      "expected_disease": "Bệnh đạo ôn",
+      "expected_type": "treatment_specific",
+      "answer": "Cách phòng ngừa Bệnh Đạo ôn:\n\n Biện pháp canh tác:\n• Bón phân cân đối\n* Không bón thừa đạm, bón bổ sung Silic\n\n",
+      "correct": true
+    },
+    {
+      "id": 68,
+      "question": "Triệu chứng của bệnh thối bẹ?",
+      "expected_disease": "Bệnh thối bẹ",
+      "expected_type": "symptoms",
+      "answer": "Triệu chứng của Bệnh Thối bẹ:\n\n1. [Bẹ lá] Vết bệnh màu nâu không đều, có mùi hôi trên bẹ lá non bao quanh đòng lúa.\n\n2. [Bông] Bông lúa trổ không thoát, hoặc trổ ra bị lép, biến màu.\n\nMức độ nguy hiểm: Trung bình\nThiệt hại kinh tế: Ảnh hưởng phẩm chất",
+      "correct": true
+    },
+    {
+      "id": 69,
+      "question": "Điều kiện nhiệt độ thích hợp cho sâu đục thân?",
+      "expected_disease": "Sâu Đục thân",
+      "expected_type": "stages",
+      "answer": "Điều kiện thời tiết thuận lợi cho Sâu đục thân:\n\n1. Nhiệt độ cao (28-32°C).\n   Mức độ nguy hiểm: Cao\n   Nhiệt độ: 28-32°C\n\n2. Ánh trăng sáng (thuận lợi cho bướm đẻ trứng).\n   Mức độ nguy hiểm: Trung bình\n\n3. Gió lặng, mưa nhỏ xen kẽ nắng.\n   Mức độ nguy hiểm: Trung bình\n\n4. Ruộng sạ dày.\n   Mức độ nguy hiểm: Cao\n\n",
+      "correct": true
+    },
+    {
+      "id": 70,
+      "question": "Vì sao lá lúa bị vàng xòe ngang?",
+      "expected_disease": "Bệnh Vàng lùn",
+      "expected_type": "causes",
+      "answer": "Xin lỗi, tôi chưa nhận diện được triệu chứng nào. Bạn có thể mô tả rõ hơn không?",
+      "correct": false
+    }
+  ]
+}

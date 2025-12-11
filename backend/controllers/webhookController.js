@@ -61,10 +61,10 @@ exports.handleWebhook = async (req, res) => {
       } else {
         let finalQuestionType = analyzeQuestion(queryText);
 
-        // ▼▼▼ THÊM ĐOẠN NÀY ĐỂ SỬA LỖI ▼▼▼
-        // Nếu Dialogflow đã bắt được Intent Mùa vụ, ép kiểu luôn
+        // Ép kiểu dựa trên Intent từ Dialogflow
         if (intent === "Ask_Disease_Season") finalQuestionType = "seasons";
         if (intent === "Ask_Disease_Cause") finalQuestionType = "causes";
+        if (intent === "Ask_Disease_Symptom") finalQuestionType = "symptoms";
 
         responseText = await generateSmartResponse(
           disease,
@@ -72,33 +72,34 @@ exports.handleWebhook = async (req, res) => {
           diseaseName
         );
 
+        // ✅ CHỈ HIỂN THỊ HÌNH ẢNH KHI HỎI VỀ ĐỊNH NGHĨA HOẶC TRIỆU CHỨNG
+        const shouldShowImages = ["definition", "symptoms"].includes(
+          finalQuestionType
+        );
+
         responseData = {
           type: "disease",
           disease: {
             _id: disease._id,
             name: disease.name,
-            images: disease.images || [],
+            images: shouldShowImages ? disease.images || [] : [], // Chỉ gửi ảnh khi hỏi định nghĩa/triệu chứng
             link: `/sustainable-methods?id=${disease._id}`,
           },
+          showImages: shouldShowImages, // Flag để frontend biết có hiển thị ảnh không
         };
       }
     }
 
-    // 2. HỎI VỀ TRIỆU CHỨNG
-    // 2. HỎI VỀ TRIỆU CHỨNG - FIXED VERSION
+    // 2. HỎI VỀ TRIỆU CHỨNG - LUÔN HIỂN THỊ ẢNH
     else if (intent === "Ask_Disease_By_Symptom") {
       if (!symptomEntity || symptomEntity.length === 0) {
         responseText =
           "Xin lỗi, tôi chưa nhận diện được triệu chứng nào. Bạn có thể mô tả rõ hơn không?";
       } else {
-        // Lấy tất cả từ khóa từ entity
         const symptomKeywords = getSymptomKeywords(symptomEntity);
-
-        // Tạo pattern RegEx cho truy vấn
         const searchPattern = symptomKeywords.map(cleanText).join("|");
         const regexQuery = new RegExp(searchPattern, "i");
 
-        // BƯỚC 1: Tìm diseaseId từ model DiseaseSymptom
         const symptomDocs = await DiseaseSymptom.find({
           "symptoms.description": { $regex: regexQuery },
         }).select("diseaseId");
@@ -108,10 +109,7 @@ exports.handleWebhook = async (req, res) => {
             ", "
           )}". Bạn có thể xem lại mô tả triệu chứng không?`;
         } else {
-          // Lấy ra danh sách các ID bệnh
           const diseaseIds = symptomDocs.map((doc) => doc.diseaseId);
-
-          // BƯỚC 2: Truy vấn Disease model bằng các ID tìm được
           const diseases = await Disease.find({ _id: { $in: diseaseIds } })
             .populate("symptoms")
             .limit(5)
@@ -120,18 +118,15 @@ exports.handleWebhook = async (req, res) => {
             );
 
           if (diseases.length > 0) {
-            // ✅ THAY ĐỔI CHÍNH Ở ĐÂY
-            // Tạo response text
             responseText = generateDiseaseSummaryBySymptom(
               diseases,
               symptomKeywords,
               queryText
             );
 
-            // ✅ FIX: Lấy bệnh đầu tiên từ mảng diseases
             const primaryDisease = diseases[0];
 
-            // ✅ FIX: Set responseData với bệnh đầu tiên
+            // ✅ LUÔN HIỂN THỊ ẢNH KHI TÌM BỆNH THEO TRIỆU CHỨNG
             responseData = {
               type: "disease",
               disease: {
@@ -140,6 +135,7 @@ exports.handleWebhook = async (req, res) => {
                 images: primaryDisease.images || [],
                 link: `/sustainable-methods?id=${primaryDisease._id}`,
               },
+              showImages: true, // Luôn hiển thị ảnh cho triệu chứng
             };
           } else {
             responseText = `Tôi không tìm thấy bệnh nào có triệu chứng liên quan đến "${symptomKeywords.join(
@@ -150,7 +146,7 @@ exports.handleWebhook = async (req, res) => {
       }
     }
 
-    // 3. HỎI VỀ CÁCH CHỮA TRỊ
+    // 3. HỎI VỀ CÁCH CHỮA TRỊ - KHÔNG HIỂN THỊ ẢNH
     else if (
       intent === "Ask_Disease_Treatment" ||
       intent === "Ask_Disease_Treatment_Specific"
@@ -163,7 +159,6 @@ exports.handleWebhook = async (req, res) => {
       if (!disease) {
         responseText = `Vui lòng cho biết bạn muốn chữa bệnh gì?\n\nVí dụ: "Cách chữa đạo ôn"`;
       } else {
-        // Lấy thông tin điều trị từ DiseaseTreatment
         const treatmentDoc = await DiseaseTreatment.findOne({
           diseaseId: disease._id,
         });
@@ -184,6 +179,18 @@ exports.handleWebhook = async (req, res) => {
             );
           }
         }
+
+        // ✅ KHÔNG GỬI ẢNH CHO CÂU HỎI VỀ ĐIỀU TRỊ
+        responseData = {
+          type: "disease",
+          disease: {
+            _id: disease._id,
+            name: disease.name,
+            images: [], // Không gửi ảnh
+            link: `/sustainable-methods?id=${disease._id}`,
+          },
+          showImages: false,
+        };
       }
     }
 
@@ -238,7 +245,7 @@ exports.handleWebhook = async (req, res) => {
       responseText = `Chúc bạn một mùa màng bội thu! \nHẹn gặp lại!`;
     }
 
-    // 8. HỎI VỀ GIAI ĐOẠN PHÁT TRIỂN BỆNH
+    // 8. HỎI VỀ GIAI ĐOẠN PHÁT TRIỂN BỆNH - KHÔNG HIỂN THỊ ẢNH
     else if (
       queryText.match(/giai đoạn|phát triển|vòng đời|chu kỳ/i) &&
       (diseaseEntity ||
@@ -263,15 +270,27 @@ exports.handleWebhook = async (req, res) => {
             responseText += `${stage.order}. ${stage.name} (${stage.duration})\n`;
             responseText += `   ${stage.description}\n`;
             if (idx === stageDoc.peakStage) {
-              responseText += `GIAI ĐOẠN NGUY HIỂM NHẤT\n`;
+              responseText += `   GIAI ĐOẠN NGUY HIỂM NHẤT\n`;
             }
             responseText += `\n`;
           });
         }
+
+        // Không hiển thị ảnh cho giai đoạn phát triển
+        responseData = {
+          type: "disease",
+          disease: {
+            _id: disease._id,
+            name: disease.name,
+            images: [],
+            link: `/sustainable-methods?id=${disease._id}`,
+          },
+          showImages: false,
+        };
       }
     }
 
-    // 9. HỎI VỀ MỐI LIÊN HỆ THỜI TIẾT VÀ BỆNH
+    // 9. HỎI VỀ MỐI LIÊN HỆ THỜI TIẾT VÀ BỆNH - KHÔNG HIỂN THỊ ẢNH
     else if (
       queryText.match(
         /thời tiết|mưa|nắng|nóng|ẩm|nhiệt độ|điều kiện|khí hậu|gió|khô/i
@@ -280,19 +299,13 @@ exports.handleWebhook = async (req, res) => {
         /bệnh|sâu|hại|gây|ảnh hưởng|thuận lợi|phát triển|yêu thích/i
       )
     ) {
-      // Phân tích loại câu hỏi thời tiết
       const weatherType = analyzeWeatherQuestion(queryText);
 
-      // Nếu hỏi chung về ảnh hưởng của thời tiết
       if (weatherType === "general_weather_impact") {
         responseText = await handleGeneralWeatherImpact(queryText);
-      }
-      // Nếu hỏi bệnh nào yêu thích điều kiện thời tiết cụ thể
-      else if (weatherType === "diseases_by_weather") {
+      } else if (weatherType === "diseases_by_weather") {
         responseText = await handleDiseasesByWeatherCondition(queryText);
-      }
-      // Nếu hỏi điều kiện thời tiết thuận lợi cho bệnh cụ thể
-      else {
+      } else {
         const diseaseName =
           getDiseaseName(diseaseEntity) ||
           extractDiseaseNameFromQuery(queryText);
@@ -347,14 +360,26 @@ exports.handleWebhook = async (req, res) => {
               responseText += `\n`;
             });
           }
+
+          // Không hiển thị ảnh cho câu hỏi về thời tiết
+          responseData = {
+            type: "disease",
+            disease: {
+              _id: disease._id,
+              name: disease.name,
+              images: [],
+              link: `/sustainable-methods?id=${disease._id}`,
+            },
+            showImages: false,
+          };
         }
       }
     }
 
-    // 10. HỎI VỀ PHÒNG NGỪA
+    // 10. HỎI VỀ PHÒNG NGỪA - KHÔNG HIỂN THỊ ẢNH
     else if (
       queryText.match(
-        /phòng ngừa|phòng trừ|phòng tránh|dự phòng|làm sao để tránh|cách phòng/i
+        /phòng|phòng ngừa|phòng trừ|phòng tránh|dự phòng|làm sao để tránh|làm gì để tránh|cách phòng/i
       ) &&
       (diseaseEntity ||
         queryText.match(/đạo ôn|rầy nâu|lem lép|cháy bìa|cuốn lá/i))
@@ -375,90 +400,94 @@ exports.handleWebhook = async (req, res) => {
         } else {
           responseText = `Cách phòng ngừa ${disease.name}:\n\n`;
 
-          // Canh tác
           if (
             preventionDoc.culturalPractices &&
             preventionDoc.culturalPractices.length > 0
           ) {
-            responseText += `Biện pháp canh tác:\n`;
+            responseText += ` Biện pháp canh tác:\n`;
             preventionDoc.culturalPractices.slice(0, 3).forEach((practice) => {
               responseText += `• ${practice.practice}\n`;
-              responseText += `  ${practice.description}\n`;
+              responseText += `* ${practice.description}\n`;
             });
+            responseText += `\n`;
           }
 
-          // Giống lúa kháng
           if (
             preventionDoc.varietySelection &&
             preventionDoc.varietySelection.length > 0
           ) {
-            responseText += `Giống lúa kháng bệnh:\n`;
+            responseText += ` Giống lúa kháng bệnh:\n`;
             preventionDoc.varietySelection.slice(0, 3).forEach((variety) => {
               responseText += `• ${variety.varietyName} - ${variety.resistanceLevel}\n`;
             });
+            responseText += `\n`;
           }
 
-          // Kiểm soát sinh học
           if (
             preventionDoc.biologicalControl &&
             preventionDoc.biologicalControl.length > 0
           ) {
-            responseText += `Kiểm soát sinh học:\n`;
+            responseText += ` Kiểm soát sinh học:\n`;
             preventionDoc.biologicalControl.slice(0, 2).forEach((bio) => {
               responseText += `• ${bio.agent}\n`;
             });
+            responseText += `\n`;
           }
 
           if (
             preventionDoc.seedTreatment &&
             preventionDoc.seedTreatment.length > 0
           ) {
-            responseText += `Xử lý hạt giống:\n`;
+            responseText += ` Xử lý hạt giống:\n`;
             preventionDoc.seedTreatment.slice(0, 2).forEach((treatment) => {
               responseText += `• ${treatment.materials}\n`;
             });
+            responseText += `\n`;
           }
 
           if (
             preventionDoc.nutritionManagement &&
             preventionDoc.nutritionManagement.length > 0
           ) {
-            responseText += `Quản lý dinh dưỡng:\n`;
+            responseText += ` Quản lý dinh dưỡng:\n`;
             preventionDoc.nutritionManagement
               .slice(0, 2)
               .forEach((management) => {
                 responseText += `• ${management.recommendation}: ${management.nutrient}\n`;
               });
+            responseText += `\n`;
           }
 
           if (
             preventionDoc.waterManagement &&
             preventionDoc.waterManagement.length > 0
           ) {
-            responseText += `Quản lý nước:\n`;
+            responseText += ` Quản lý nước:\n`;
             preventionDoc.waterManagement.slice(0, 2).forEach((treatment) => {
               responseText += `• ${treatment.description}\n`;
             });
+            responseText += `\n`;
           }
 
           if (
             preventionDoc.monitoringSchedule &&
             preventionDoc.monitoringSchedule.length > 0
           ) {
-            responseText += `Giám sát:\n`;
+            responseText += ` Giám sát:\n`;
             preventionDoc.monitoringSchedule
               .slice(0, 2)
               .forEach((treatment) => {
                 responseText += `• ${treatment.frequency}\n`;
-                responseText += `- Kiểm tra: ${treatment.whatToCheck}\n`;
+                responseText += `  Kiểm tra: ${treatment.whatToCheck}\n`;
               });
+            responseText += `\n`;
           }
 
           if (
             preventionDoc.sanitationPractices &&
             preventionDoc.sanitationPractices.length > 0
           ) {
-            responseText += `Vệ sinh đồng ruộng:\n`;
+            responseText += ` Vệ sinh đồng ruộng:\n`;
             preventionDoc.sanitationPractices
               .slice(0, 2)
               .forEach((treatment) => {
@@ -466,14 +495,25 @@ exports.handleWebhook = async (req, res) => {
               });
           }
         }
+
+        // Không hiển thị ảnh cho phòng ngừa
+        responseData = {
+          type: "disease",
+          disease: {
+            _id: disease._id,
+            name: disease.name,
+            images: [],
+            link: `/sustainable-methods?id=${disease._id}`,
+          },
+          showImages: false,
+        };
       }
     }
   } catch (error) {
-    console.error("❌ Webhook Error:", error);
+    console.error("Webhook Error:", error);
     responseText = "Hệ thống đang bận. Bạn thử lại sau vài phút nhé!";
   }
 
-  // TRẢ VỀ RESPONSE VỚI DATA
   res.json({
     fulfillmentText: responseText,
     payload: responseData
@@ -488,19 +528,21 @@ exports.handleWebhook = async (req, res) => {
 function analyzeQuestion(question) {
   const q = question.toLowerCase();
 
-  if (q.match(/là gì|định nghĩa|khái niệm|gì vậy/)) {
+  if (q.match(/là gì|định nghĩa|khái niệm|gì vậy|giới thiệu/)) {
     return "definition";
   }
-  if (q.match(/triệu chứng|dấu hiệu|biểu hiện|nhận biết|tác hại|gây hại/)) {
+  if (
+    q.match(/triệu chứng|dấu hiệu|biểu hiện|nhận biết|tác hại|gây hại|có vẻ|bị/)
+  ) {
     return "symptoms";
   }
   if (q.match(/cách chữa|điều trị|phòng|trừ|thuốc|xử lý/)) {
     return "treatment";
   }
-  if (q.match(/nguyên nhân|tại sao|do đâu|vì sao|gây/)) {
+  if (q.match(/nguyên nhân|tại sao|do đâu|vì sao|gây ra/)) {
     return "causes";
   }
-  if (q.match(/nguy hiểm|ảnh hưởng|thiệt hại|mất mát/)) {
+  if (q.match(/nguy hiểm|ảnh hưởng|thiệt hại|mất mát|tác động/)) {
     return "impact";
   }
   if (q.match(/khi nào|lúc nào|tháng mấy|mùa|vụ|thời điểm|giai đoạn|bao lâu/)) {
@@ -513,20 +555,21 @@ function analyzeQuestion(question) {
   return "general";
 }
 
-// HÀM TẠO RESPONSE THÔNG MINH (CẬP NHẬT)
+// HÀM TẠO RESPONSE THÔNG MINH
 async function generateSmartResponse(disease, finalQuestionType, searchTerm) {
   let response = "";
 
   switch (finalQuestionType) {
     case "definition":
       response =
-        `${disease.name} (${disease.commonName || "Hại lúa"})\n\n` +
+        ` ${disease.name} (${disease.commonName || "Hại lúa"})\n\n` +
         `${disease.description}\n\n` +
-        `Loại: ${disease.type}`;
+        `Loại: ${disease.type}\n` +
+        `Mức độ: ${disease.severityRisk}\n` +
+        `Thiệt hại: ${disease.economicLoss}`;
       break;
 
     case "symptoms":
-      // Lấy triệu chứng từ DiseaseSymptom
       const symptomDoc = await DiseaseSymptom.findOne({
         diseaseId: disease._id,
       });
@@ -535,10 +578,10 @@ async function generateSmartResponse(disease, finalQuestionType, searchTerm) {
           `Triệu chứng của ${disease.name}:\n\n` +
           symptomDoc.symptoms
             .slice(0, 5)
-            .map((s, i) => `${i + 1}. ${s.description} (${s.part})`)
-            .join("\n") +
-          `\n\nMức độ: ${disease.severityRisk}` +
-          `\nThiệt hại: ${disease.economicLoss}`;
+            .map((s, i) => `${i + 1}. [${s.part}] ${s.description}`)
+            .join("\n\n") +
+          `\n\nMức độ nguy hiểm: ${disease.severityRisk}` +
+          `\nThiệt hại kinh tế: ${disease.economicLoss}`;
       } else {
         response = `Hiện chưa có thông tin chi tiết về triệu chứng của ${disease.name}.`;
       }
@@ -552,7 +595,6 @@ async function generateSmartResponse(disease, finalQuestionType, searchTerm) {
       break;
 
     case "causes":
-      // Use populated causes (Logic matching your previous request)
       const causeDetailDoc = disease.causes;
 
       if (causeDetailDoc) {
@@ -568,7 +610,7 @@ async function generateSmartResponse(disease, finalQuestionType, searchTerm) {
           causeDetailDoc.environmentalFactors &&
           causeDetailDoc.environmentalFactors.length > 0
         ) {
-          response += `\nĐiều kiện môi trường:\n`;
+          response += `\n Điều kiện môi trường:\n`;
           response += causeDetailDoc.environmentalFactors
             .slice(0, 3)
             .map(
@@ -582,23 +624,22 @@ async function generateSmartResponse(disease, finalQuestionType, searchTerm) {
       break;
 
     case "seasons":
-      // Lấy dữ liệu season từ populate
       const seasonDoc = disease.seasons;
 
       if (seasonDoc && seasonDoc.seasons && seasonDoc.seasons.length > 0) {
-        response = `Thời điểm ${disease.name} phát triển mạnh:\n\n`;
+        response = ` Thời điểm ${disease.name} phát triển mạnh:\n\n`;
 
         seasonDoc.seasons.forEach((s) => {
-          response += `• Vụ ${s.type}: Tháng ${s.startMonth} - ${s.endMonth}\n`;
-          response += `  - Mức độ: ${s.riskLevel}\n`;
+          response += ` Vụ ${s.type}: Tháng ${s.startMonth} - ${s.endMonth}\n`;
+          response += `   Mức độ: ${s.riskLevel}\n`;
           if (s.peakMonths && s.peakMonths.length > 0) {
-            response += `  - Cao điểm: Tháng ${s.peakMonths.join(", ")}\n`;
+            response += `   Cao điểm: Tháng ${s.peakMonths.join(", ")}\n`;
           }
+          response += `\n`;
         });
 
-        // Thêm giai đoạn lúa nhạy cảm (Critical Periods)
         if (seasonDoc.criticalPeriods && seasonDoc.criticalPeriods.length > 0) {
-          response += `\nGiai đoạn lúa dễ bị tấn công:\n`;
+          response += ` Giai đoạn lúa dễ bị tấn công:\n`;
           seasonDoc.criticalPeriods.slice(0, 3).forEach((p) => {
             response += `• ${p.cropStage}: ${p.riskLevel}\n`;
           });
@@ -612,7 +653,8 @@ async function generateSmartResponse(disease, finalQuestionType, searchTerm) {
       response =
         `Mức độ nguy hiểm của ${disease.name}:\n\n` +
         `Độ nghiêm trọng: ${disease.severityRisk}\n` +
-        `Thiệt hại kinh tế: ${disease.economicLoss}\n\n`;
+        `Thiệt hại kinh tế: ${disease.economicLoss}\n\n` +
+        `${disease.description}`;
       break;
 
     case "weather":
@@ -621,11 +663,11 @@ async function generateSmartResponse(disease, finalQuestionType, searchTerm) {
       });
       if (weatherCorr && weatherCorr.weatherTriggers) {
         response =
-          `${disease.name} và thời tiết:\n\n` +
+          ` ${disease.name} và thời tiết:\n\n` +
           `Điều kiện phát bệnh:\n` +
           weatherCorr.weatherTriggers
             .slice(0, 3)
-            .map((w) => `• ${w.condition}`)
+            .map((w, i) => `${i + 1}. ${w.condition} - ${w.riskLevel}`)
             .join("\n");
       } else {
         response = `Hiện chưa có thông tin về mối liên hệ thời tiết với ${disease.name}.`;
@@ -634,7 +676,7 @@ async function generateSmartResponse(disease, finalQuestionType, searchTerm) {
 
     default:
       response =
-        `${disease.name} (${disease.commonName || "Hại lúa"})\n\n` +
+        ` ${disease.name} (${disease.commonName || "Hại lúa"})\n\n` +
         `${disease.description}\n\n` +
         `Mức độ: ${disease.severityRisk} - Thiệt hại ${disease.economicLoss}`;
   }
@@ -642,7 +684,7 @@ async function generateSmartResponse(disease, finalQuestionType, searchTerm) {
   return response;
 }
 
-// HÀM TẠO RESPONSE ĐIỀU TRỊ (CẬP NHẬT)
+// HÀM TẠO RESPONSE ĐIỀU TRỊ
 function generateTreatmentResponse(treatmentDoc, diseaseName) {
   if (!treatmentDoc || !treatmentDoc.treatments) {
     return `Hiện chưa có thông tin điều trị cho ${diseaseName}.`;
@@ -650,7 +692,6 @@ function generateTreatmentResponse(treatmentDoc, diseaseName) {
 
   let response = `Cách chữa trị ${diseaseName}:\n\n`;
 
-  // Tìm phương pháp Hóa học
   const chemical = treatmentDoc.treatments.find((t) => t.type === "Hóa học");
   if (chemical && chemical.methods && chemical.methods.length > 0) {
     response += `Thuốc hóa học:\n`;
@@ -659,11 +700,10 @@ function generateTreatmentResponse(treatmentDoc, diseaseName) {
       if (method.dosage) response += ` - ${method.dosage}`;
       response += "\n";
     });
-    if (chemical.notes) response += `${chemical.notes}\n`;
+    if (chemical.notes) response += `  Lưu ý: ${chemical.notes}\n`;
     response += "\n";
   }
 
-  // Tìm phương pháp Sinh học
   const bio = treatmentDoc.treatments.find((t) => t.type === "Sinh học");
   if (bio && bio.methods && bio.methods.length > 0) {
     response += `Phương pháp sinh học:\n`;
@@ -672,7 +712,7 @@ function generateTreatmentResponse(treatmentDoc, diseaseName) {
       if (method.dosage) response += ` - ${method.dosage}`;
       response += "\n";
     });
-    if (bio.notes) response += `${bio.notes}\n`;
+    if (bio.notes) response += `  Lưu ý: ${bio.notes}\n`;
   }
 
   return response;
@@ -691,13 +731,13 @@ function generateTreatmentByType(treatmentDoc, treatmentType, diseaseName) {
   );
 
   if (!treatment) {
-    return `Hiện chưa có thông tin về phương pháp ${treatmentType} cho ${diseaseName}.\n\nBạn muốn xem các phương pháp khác?`;
+    return `Hiện chưa có thông tin về phương pháp ${treatmentType} cho ${diseaseName}.\n\n❓ Bạn muốn xem các phương pháp khác?`;
   }
 
   if (treatment.methods && treatment.methods.length > 0) {
     response += `Thuốc/Biện pháp:\n`;
-    treatment.methods.slice(0, 5).forEach((method) => {
-      response += `• ${method.name}`;
+    treatment.methods.slice(0, 5).forEach((method, idx) => {
+      response += `${idx + 1}. ${method.name}`;
       if (method.dosage) response += ` - ${method.dosage}`;
       response += "\n";
     });
@@ -719,264 +759,180 @@ function generateTreatmentByType(treatmentDoc, treatmentType, diseaseName) {
 
 // HÀM TẠO TÓM TẮT BỆNH THEO TRIỆU CHỨNG
 function generateDiseaseSummaryBySymptom(diseases, symptoms, queryText) {
-  // Chuyển mảng symptoms thành chuỗi hiển thị
   const symptomText =
     queryText && queryText.trim() !== ""
-      ? queryText // Sử dụng queryText nếu có (vd: "hạt lép")
+      ? queryText
       : symptoms.filter((s) => s && s.trim() !== "").join(", ");
 
-  let response = `Dựa trên triệu chứng ${symptomText}, có thể cây lúa đang mắc phải các bệnh sau:\n\n`;
+  let response = `Dựa trên triệu chứng "${symptomText}", cây lúa có thể đang mắc:\n\n`;
 
-  // Hiển thị tối đa 3 bệnh
   diseases.slice(0, 3).forEach((disease, index) => {
-    // Sử dụng commonName hoặc scientificName nếu name không có
     const secondaryName = disease.commonName || disease.scientificName || "";
 
-    response += `${index + 1}. ${disease.name} (${secondaryName})\n`;
+    response += `${index + 1}. ${disease.name}${
+      secondaryName ? ` (${secondaryName})` : ""
+    }\n`;
 
-    const symptomsDoc = disease.symptoms; // Đây là document của DiseaseSymptom (đã được populate)
+    const symptomsDoc = disease.symptoms;
 
     if (
       symptomsDoc &&
       symptomsDoc.symptoms &&
       symptomsDoc.symptoms.length > 0
     ) {
-      response += `Triệu chứng chính:\n`;
-      // Chỉ lấy 3 triệu chứng đầu tiên để tóm tắt
+      response += `   Triệu chứng chính:\n`;
       symptomsDoc.symptoms.slice(0, 3).forEach((s) => {
-        // Ví dụ: - [Hạt] Hạt bị lem, có màu nâu đen...
         const desc = s.description.substring(0, 100);
-        response += `- [${s.part || "Không rõ"}] ${desc}${
+        response += `   • [${s.part}] ${desc}${
           s.description.length > 100 ? "..." : ""
         }\n`;
       });
       if (symptomsDoc.symptoms.length > 3) {
-        response += `- ... và ${
+        response += `   • ... và ${
           symptomsDoc.symptoms.length - 3
-        } triệu chứng khác (xem chi tiết).\n`;
+        } triệu chứng khác\n`;
       }
     } else {
-      // FALLBACK: Nếu không có data triệu chứng chi tiết, hiển thị mô tả chung
       const descriptionSnippet = disease.description.substring(0, 150);
-      response += `Mô tả chung: ${descriptionSnippet}${
+      response += `   ${descriptionSnippet}${
         disease.description.length > 150 ? "..." : ""
       }\n`;
     }
 
-    response += `Nguy cơ: ${disease.severityRisk}\n\n`;
+    response += `   Nguy cơ: ${disease.severityRisk}\n\n`;
   });
 
   if (diseases.length > 3) {
-    response += `Và ${
+    response += `... và ${
       diseases.length - 3
-    } bệnh khác. Bạn muốn tôi cung cấp chi tiết về bệnh nào?`;
+    } bệnh khác.\n\n Bạn muốn biết thêm chi tiết về bệnh nào?`;
   } else {
-    response += `Bạn muốn tôi cung cấp chi tiết về bệnh nào?`;
+    response += `\n Bạn muốn biết thêm chi tiết về bệnh nào?`;
   }
 
   return response;
 }
 
-// ========== HÀM XỬ LÝ THỜI TIẾT VÀ BỆNH ==========
-// Phân tích loại câu hỏi thời tiết
+// ========== CÁC HÀM HỖ TRỢ THỜI TIẾT ==========
 function analyzeWeatherQuestion(queryText) {
   const q = queryText.toLowerCase();
-  // Câu hỏi: "Mưa có ảnh hưởng gì" / "Nắng gây bệnh gì"
   if (
     q.match(/(mưa|nắng|nóng|ẩm|khô|gió)/) &&
-    q.match(/(có ảnh hưởng|gây gì|gây bệnh|tác hại|ảnh hưởng thế nào)/)
+    q.match(/(có ảnh hưởng|gây gì|gây bệnh|gây ra|tác hại|ảnh hưởng thế nào)/)
   ) {
     return "general_weather_impact";
   }
-  // Câu hỏi: "Bệnh gì yêu thích mưa" / "Nắng gây bệnh gì"
   if (
-    q.match(/(bệnh nào|gây bệnh gì|bệnh gì)/) &&
+    q.match(/(bệnh nào|gây bệnh gì|bệnh gì|gây ra bệnh gì)/) &&
     q.match(/(mưa|nắng|nóng|ẩm|khô|gió)/)
   ) {
     return "diseases_by_weather";
   }
-  // Câu hỏi: "Thời tiết nào thuận lợi cho đạo ôn"
   return "weather_for_disease";
 }
-// Xử lý câu hỏi chung về ảnh hưởng thời tiết
+
 async function handleGeneralWeatherImpact(queryText) {
   const q = queryText.toLowerCase();
   let impact = "";
+
   if (q.match(/mưa/)) {
-    impact = `Mưa nhiều có ảnh hưởng rất lớn đến lúa:\n
-Tác hại trực tiếp:
-• Tạo điều kiện ẩm ướt cao - thuận lợi cho các bệnh nấm
-• Giảm lưu thông không khí, tăng độ ẩm lá
-• Làm cây yếu, dễ bị sâu bệnh tấn công
-• Gây ngập úng, thối bẹ nếu mưa quá lâu
-• Rụng hạt, hạt lem lép vào giai đoạn trổ bông - chín sữa
-
-Bệnh nguy hiểm nhất:
-• Bệnh đạo ôn (Rất cao) - Cần phun phòng ngay
-• Bệnh cháy bìa lá (Cao)
-• Bệnh lem lép hạt (Cao)
-• Bệnh thối bẹ (Trung bình)
-
-Biện pháp khẩn cấp:
-• Phun thuốc trước 1-2 ngày khi có dự báo mưa
-• Cắt cỏ dại, thoát nước tốt
-• Hạ mực nước sau mưa
-• Bón phân kali tăng sức đề kháng;`;
+    impact =
+      `Ảnh hưởng của mưa nhiều đến lúa:\n\n` +
+      `Tác hại trực tiếp:\n` +
+      `• Tạo độ ẩm cao - thuận lợi cho bệnh nấm\n` +
+      `• Giảm lưu thông không khí\n` +
+      `• Làm cây yếu, dễ bị sâu bệnh\n` +
+      `• Gây ngập úng, thối bẹ nếu kéo dài\n` +
+      `• Rụng hạt, hạt lem lép\n\n` +
+      `Bệnh nguy hiểm:\n` +
+      `• Đạo ôn (RẤT CAO)\n` +
+      `• Cháy bìa lá (Cao)\n` +
+      `• Lem lép hạt (Cao)\n\n` +
+      `Biện pháp:\n` +
+      `• Phun thuốc phòng trước 1-2 ngày\n` +
+      `• Cải thiện thoát nước\n` +
+      `• Bón phân kali tăng đề kháng`;
   } else if (q.match(/nắng|nóng/)) {
-    impact = `Nắng nóng gay gắt ảnh hưởng đến lúa:\n
-Tác hại:
-• Gây stress nhiệt - cây héo, giảm năng suất
-• Tăng tốc độ phát triển sâu, côn trùng
-• Tăng tổng quần thể rầy nâu, sâu cuốn lá\n
-• Giảm bệnh nấm nhưng sâu bệnh tăng đột biến
-• Hạt chắc hơn nhưng có thể bị cháy nếu quá nóng
-
-Sâu bệnh nguy hiểm:
-• Rầy nâu (Rất cao) - Rất nhanh lây lan
-• Sâu cuốn lá (Cao) 
-• Nhện gié (Trung bình)
-• Muỗi hành (Trung bình)
-
-Biện pháp:
-• Tưới nước thường xuyên, giữ độ ẩm
-• Phun sâu bệnh sinh học (kiến, bọ ngươi)
-• Tránh bón quá nhiều đạm
-• Giữ ruộng sạch cỏ dại;`;
+    impact =
+      `Ảnh hưởng của nắng nóng đến lúa:\n\n` +
+      `Tác hại:\n` +
+      `• Gây stress nhiệt - cây héo\n` +
+      `• Tăng tốc phát triển sâu hại\n` +
+      `• Rầy nâu, sâu cuốn lá tăng mạnh\n` +
+      `• Giảm bệnh nấm nhưng sâu tăng\n\n` +
+      `Sâu bệnh nguy hiểm:\n` +
+      `• Rầy nâu (RẤT CAO)\n` +
+      `• Sâu cuốn lá (Cao)\n` +
+      `• Nhện gié (Trung bình)\n\n` +
+      `Biện pháp:\n` +
+      `• Tưới nước thường xuyên\n` +
+      `• Phun sinh học (kiến, bọ ngươi)\n` +
+      `• Tránh bón quá nhiều đạm`;
   } else if (q.match(/ẩm/)) {
-    impact = `Ẩm độ cao ảnh hưởng đến lúa:\n\
-Tác hại:
-• Tạo điều kiện lý tưởng cho bệnh nấm
-• Giảm lưu thông không khí, khó khô
-• Phát triển bệnh mạnh vào sáng sớm
-• Gây hôi mốc, héo chột nếu kéo dài
-
-Bệnh nguy hiểm nhất:
-• Bệnh đạo ôn (Rất cao khi ẩm >85% & nhiệt 25-30°C)
-• Bệnh cháy bìa lá
-• Bệnh lem lép hạt
-
-Biện pháp:
-• Cải thiện thoát nước
-• Phun thuốc sáng trước 7h
-• Thường xuyên giám sát lá cây;`;
-  } else if (q.match(/khô|hạn/)) {
-    impact = `Khô hạn ảnh hưởng đến lúa:\n
-Tác hại:
-• Tăng rầy nâu, nhện gié (yêu thích khô)
-• Giảm bệnh nấm (đạo ôn giảm)
-• Hạt nhỏ, lem lép nếu khô vào giai đoạn chín sữa
-
-Sâu bệnh nguy hiểm:
-• Rầy nâu (Cao)
-• Nhện gié (Cao)
-• Muỗi hành (Trung bình)
-
-Biện pháp:
-• Tưới nước đều đặn, đặc biệt giai đoạn đẻ nhánh - trổ bông
-• Giữ lớp nước 5cm trong ruộng
-• Phun sâu bệnh sinh học;`;
-  } else if (q.match(/gió/)) {
-    impact = `Gió mạnh ảnh hưởng đến lúa:\n
-Tác hại:
-• Làm đổ ngã cây, gây vết thương cơ học
-• Tăng lây lan bệnh, sâu bệnh
-• Gây mất nước nhanh
-• Rụng hạt, rụng bông nếu gió vào lúc trổ bông
-
-Ảnh hưởng:
-• Giảm năng suất 10-30%
-• Tăng lây lan rầy nâu, sâu cuốn lá
-
-Biện pháp:
-• Bón phân cân đối tránh cây cao, mềm
-• Giữ ruộng sạch để gió lưu thông
-• Phun phòng bệnh trước gió;`;
+    impact =
+      `Ảnh hưởng của độ ẩm cao:\n\n` +
+      `Tác hại:\n` +
+      `• Điều kiện lý tưởng cho bệnh nấm\n` +
+      `• Giảm lưu thông không khí\n` +
+      `• Phát triển bệnh mạnh vào sáng\n\n` +
+      `Bệnh nguy hiểm:\n` +
+      `• Đạo ôn (RẤT CAO khi >85%)\n` +
+      `• Cháy bìa lá\n` +
+      `• Lem lép hạt\n\n` +
+      `Biện pháp:\n` +
+      `• Cải thiện thoát nước\n` +
+      `• Phun thuốc sáng sớm (trước 7h)\n` +
+      `• Thường xuyên giám sát`;
   }
-  return impact || "Tôi chưa có thông tin cụ thể về điều kiện thời tiết này.";
+
+  return impact || "Tôi chưa có thông tin cụ thể về điều kiện này.";
 }
-// Xử lý câu hỏi "bệnh nào yêu thích thời tiết nào"
+
 async function handleDiseasesByWeatherCondition(queryText) {
   const q = queryText.toLowerCase();
   let response = "";
+
   if (q.match(/mưa/)) {
-    response = `Các bệnh yêu thích thời tiết mưa:\n
-Bệnh đạo ôn (MỨC ĐỘ CAO NHẤT)
-   - Độ ẩm: 85-100%
-   - Nhiệt độ: 25-30°C (tối ưu 28°C)
-   - Xuất hiện: 2-3 ngày sau mưa kéo dài
-   - Nguy hiểm nhất ở giai đoạn: Đẻ nhánh - Trổ bông
-Bệnh cháy bìa lá 
-   - Độ ẩm: 80-95%
-   - Nhiệt độ: 22-28°C
-   - Phát triển mạnh khi mưa liên tục 3+ ngày
-Bệnh lem lép hạt 
-   - Yêu thích ẩm ướt cao
-   - Giai đoạn nguy hiểm: Trổ bông - Chín sữa
-Bệnh thối bẹ 
-   - Nếu mưa quá lâu gây ngập úng
-
-CÁCH PHÒNG TRÁNH:
-• Theo dõi dự báo thời tiết, phun thuốc trước 1-2 ngày
-• Chọn giống kháng bệnh (VC14, VC19, VC20)
-• Cải thiện thoát nước, hạ mực nước
-• Bón phân kali tăng sức đề kháng;`;
+    response =
+      `Bệnh yêu thích thời tiết mưa:\n\n` +
+      `Bệnh đạo ôn (NGUY HIỂM NHẤT)\n` +
+      `   • Độ ẩm: 85-100%\n` +
+      `   • Nhiệt độ: 25-30°C\n` +
+      `   • Xuất hiện: 2-3 ngày sau mưa\n` +
+      `   • Nguy hiểm nhất: Đẻ nhánh - Trổ bông\n\n` +
+      `Bệnh cháy bìa lá\n` +
+      `   • Độ ẩm: 80-95%\n` +
+      `   • Nhiệt độ: 22-28°C\n\n` +
+      `Bệnh lem lép hạt\n` +
+      `   • Yêu thích ẩm ướt cao\n` +
+      `   • Nguy hiểm: Trổ bông - Chín sữa\n\n` +
+      `CÁCH PHÒNG:\n` +
+      `• Theo dõi dự báo, phun trước 1-2 ngày\n` +
+      `• Chọn giống kháng (VC14, VC19, VC20)\n` +
+      `• Cải thiện thoát nước`;
   } else if (q.match(/nắng|nóng/)) {
-    response = `Các sâu bệnh yêu thích thời tiết nắng nóng:\n
-Rầy nâu (MỨC ĐỘ CAO NHẤT)
-   - Yêu thích nhiệt độ: 25-32°C
-   - Phát triển nhanh nhất ở 28-30°C
-   - Vòng đời: 7-10 ngày
-   - Tăng quần thể đột biến vào hè thu
-Sâu cuốn lá 
-   - Thích nắng, nhiệt độ cao
-   - Thích ẩm độ trung bình (60-80%)
-Nhện gié 
-   - Phát triển mạnh khi nắng nóng liên tiếp
-   - Yêu thích độ ẩm thấp (40-60%)
-Muỗi hành 
-   - Thích nóng, ẩm độ thấp
-
-NGUY HIỂM:
-• Rầy nâu có thể tăng 10x quần thể trong 2-3 tuần
-• Lây lan nhanh, khó kiểm soát
-
-CÁCH PHÒNG TRÁNH:
-• Phun sâu bệnh sinh học (kiến, bọ ngươi, thiên địch)
-• Tưới nước thường xuyên giảm stress
-• Tránh bón quá nhiều đạm
-• Thường xuyên giám sát ruộng;`;
-  } else if (q.match(/ẩm/)) {
-    response = `Các bệnh yêu thích ẩm độ cao:\n
-Bệnh đạo ôn 
-   - Yêu thích ẩm: >85%
-   - Kết hợp với mưa liên tiếp
-Bệnh cháy bìa lá 
-   - Ẩm: 80-95%
-Bệnh lem lép hạt 
-   - Yêu thích ẩm ướt cao
-
-CÁCH PHÒNG TRÁNH:
-• Cải thiện thoát nước
-• Phun thuốc sáng trước 7h
-• Giữ không khí lưu thông;`;
-  } else if (q.match(/khô|hạn/)) {
-    response = `Các sâu bệnh yêu thích thời tiết khô:\n
-Rầy nâu 
-   - Thích khô, ẩm thấp
-   - Phát triển nhanh khi khô hạn
-Nhện gié 
-   - Yêu thích ẩm 40-60%
-   - Tăng mạnh khi nắng, khô
-Muỗi hành 
-   - Thích khô, ấm
-   
-CÁCH PHÒNG TRÁNH:
-• Tưới nước đều đặn
-• Phun sâu bệnh sinh học;`;
+    response =
+      `Sâu bệnh yêu thích nắng nóng:\n\n` +
+      `Rầy nâu (NGUY HIỂM NHẤT)\n` +
+      `   • Nhiệt độ: 25-32°C\n` +
+      `   • Tối ưu: 28-30°C\n` +
+      `   • Vòng đời: 7-10 ngày\n` +
+      `   • Tăng gấp 10 lần trong 2-3 tuần\n\n` +
+      `Sâu cuốn lá\n` +
+      `   • Thích nắng, nhiệt độ cao\n` +
+      `   • Ẩm độ: 60-80%\n\n` +
+      `Nhện gié\n` +
+      `   • Phát triển mạnh khi nắng liên tiếp\n` +
+      `   • Độ ẩm thấp: 40-60%\n\n` +
+      `CÁCH PHÒNG:\n` +
+      `• Phun sinh học (kiến, bọ ngươi)\n` +
+      `• Tưới nước thường xuyên\n` +
+      `• Tránh bón quá nhiều đạm`;
   }
-  return response || "Tôi chưa có thông tin cụ thể về điều kiện này.";
+
+  return response || "Tôi chưa có thông tin về điều kiện này.";
 }
-// Trích xuất tên bệnh từ câu hỏi (hỗ trợ regex)
+
 function extractDiseaseNameFromQuery(queryText) {
   const diseasePatterns = [
     { pattern: /đạo ôn/i, name: "Bệnh đạo ôn" },
@@ -984,12 +940,13 @@ function extractDiseaseNameFromQuery(queryText) {
     { pattern: /lem lép hạt/i, name: "Bệnh lem lép hạt" },
     { pattern: /cháy bìa lá/i, name: "Bệnh cháy bìa lá" },
     { pattern: /sâu cuốn lá/i, name: "Sâu cuốn lá" },
-    { pattern: /nhện gié|nhện/i, name: "Nhện gié" },
-    { pattern: /muỗi hành/i, name: "Muỗi hành" },
     { pattern: /sâu đục thân/i, name: "Sâu đục thân" },
-    { pattern: /thối bẹ/i, name: "Bệnh thối bẹ" },
-    { pattern: /khô vằn/i, name: "Bệnh khô vằn" },
+    { pattern: /bọ trĩ/i, name: "Bọ trĩ" },
+    { pattern: /muỗi hành/i, name: "Muỗi hành" },
+    { pattern: /nhện gié|nhện/i, name: "Nhện gié" },
+    { pattern: /bọ xít hôi/i, name: "Bọ xít hôi" },
   ];
+
   for (let item of diseasePatterns) {
     if (item.pattern.test(queryText)) {
       return item.name;

@@ -1,0 +1,17 @@
+Loại câu hỏi	Tổng số	Đúng	Sai	Độ chính xác
+Hỏi định nghĩa	6	5	1	83.33%
+Hỏi mức độ	2	2	0	100.00%
+Hỏi nguyên nhân	7	4	3	57.14%
+Hỏi triệu chứng	7	7	0	100.00%
+Tìm bệnh theo TC	7	7	0	100.00%
+Hỏi điều kiện thời tiết	6	5	1	83.33%
+Hỏi cách chữa	7	7	0	100.00%
+Hỏi phòng ngừa	6	5	1	83.33%
+Hỏi mùa vụ	7	7	0	100.00%
+Hỏi về thời tiết	1	1	0	100.00%
+Hỏi giai đoạn phát triển	7	7	0	100.00%
+Hỏi cách chữa cụ thể	4	4	0	100.00%
+Chào hỏi	1	1	0	100.00%
+Cảm ơn	1	1	0	100.00%
+Chào tạm biệt	1	1	0	100.00%
+TỔNG	70	64	6	91.43%

@@ -106,7 +106,13 @@ const symptomKeywordMap = {
     disease: "Bệnh vàng lùn",
   },
   lun_xoan_la_symptoms: {
-    keywords: ["lá xoắn", "lùn cây", "lá nhỏ hẹp", "đẻ nhánh vô hạn"],
+    keywords: [
+      "lá xoắn lại",
+      "lùn cây",
+      "lá nhỏ hẹp",
+      "đẻ nhánh vô hạn",
+      "xoắn lại",
+    ],
     disease: "Bệnh lùn xoắn lá",
   },
   vang_la_chin_som_symptoms: {

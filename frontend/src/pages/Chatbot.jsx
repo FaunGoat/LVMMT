@@ -105,7 +105,7 @@ function Chatbot() {
         hour: "2-digit",
         minute: "2-digit",
       }),
-      data: botResponse.data, // Lưu data kèm theo
+      data: botResponse.data,
     };
 
     setMessages((prev) => [...prev, botMessage]);
@@ -120,25 +120,22 @@ function Chatbot() {
     }
   };
 
-  // ✅ HÀM LẤY URL ẢNH TỪ DATABASE
+  // LẤY URL ẢNH
   const getImageUrl = (image) => {
     if (!image) return placeholderImage;
 
-    // ✅ Ưu tiên lấy từ trường 'url' (URL trực tiếp từ Cloudinary)
     if (image.url) {
       return image.url;
     }
 
-    // Fallback: nếu là đường dẫn local, tạo URL từ backend
     if (image.path) {
       return `http://localhost:5000${image.path}`;
     }
 
-    // Cuối cùng: dùng placeholder
     return placeholderImage;
   };
 
-  // RENDER MESSAGE VỚI HÌNH ẢNH VÀ LINK
+  // RENDER MESSAGE
   const renderMessage = (msg, i) => {
     if (msg.sender === "user") {
       return (
@@ -157,6 +154,13 @@ function Chatbot() {
     const hasDisease = msg.data?.type === "disease" && msg.data?.disease;
     const hasWeather = msg.data?.type === "weather";
 
+    // ✅ Kiểm tra xem có nên hiển thị ảnh không
+    const shouldShowImages =
+      msg.data?.showImages === true &&
+      hasDisease &&
+      msg.data.disease.images &&
+      msg.data.disease.images.length > 0;
+
     return (
       <div key={i} className="mb-4 text-left">
         <div className="flex items-start gap-3">
@@ -174,47 +178,61 @@ function Chatbot() {
               </span>
             </div>
 
-            {/* Disease images và link */}
-            {hasDisease && (
+            {/* ✅ CHỈ HIỂN THỊ ẢNH KHI showImages === true */}
+            {shouldShowImages && (
               <div className="mt-3 bg-white rounded-lg shadow-md overflow-hidden border-2 border-sky-200">
                 {/* Images Gallery */}
-                {msg.data.disease.images &&
-                  msg.data.disease.images.length > 0 && (
-                    <div className="grid grid-cols-2 gap-2 p-3">
-                      {msg.data.disease.images.slice(0, 2).map((image, idx) => {
-                        const imageUrl = getImageUrl(image);
+                <div className="grid grid-cols-2 gap-2 p-3">
+                  {msg.data.disease.images.slice(0, 2).map((image, idx) => {
+                    const imageUrl = getImageUrl(image);
 
-                        return (
-                          <div key={idx} className="relative group">
-                            <img
-                              src={imageUrl}
-                              alt={
-                                image.alt ||
-                                image.caption ||
-                                msg.data.disease.name
-                              }
-                              className="w-full h-64 object-cover rounded-lg"
-                              onError={(e) => {
-                                e.target.src = placeholderImage;
-                              }}
-                            />
-                            <div className="absolute inset-0 bg-opacity-0 group-hover:bg-opacity-30 transition rounded-lg"></div>
-                            {image.caption && (
-                              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white text-xs p-1 opacity-0 group-hover:opacity-100 transition">
-                                <p className="truncate">{image.caption}</p>
-                              </div>
-                            )}
+                    return (
+                      <div key={idx} className="relative group">
+                        <img
+                          src={imageUrl}
+                          alt={
+                            image.alt || image.caption || msg.data.disease.name
+                          }
+                          className="w-full h-64 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+                          onError={(e) => {
+                            e.target.src = placeholderImage;
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 rounded-lg"></div>
+                        {image.caption && (
+                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white text-xs p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p className="truncate">{image.caption}</p>
                           </div>
-                        );
-                      })}
-                    </div>
-                  )}
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
 
                 {/* Link to detail */}
                 <div className="p-3 bg-sky-50 border-t border-sky-200">
                   <Link
                     to={msg.data.disease.link}
-                    className="flex items-center justify-between text-sky-700 hover:text-sky-900 font-medium"
+                    className="flex items-center justify-between text-sky-700 hover:text-sky-900 font-medium transition-colors duration-200"
+                  >
+                    <span>
+                      📖 Xem thông tin chi tiết về {msg.data.disease.name}
+                    </span>
+                    <span className="transform group-hover:translate-x-1 transition-transform">
+                      →
+                    </span>
+                  </Link>
+                </div>
+              </div>
+            )}
+
+            {/* ✅ HIỂN THỊ LINK ĐẾN CHI TIẾT (không có ảnh) nếu là disease nhưng không hiển thị ảnh */}
+            {hasDisease && !shouldShowImages && (
+              <div className="mt-3 bg-white rounded-lg shadow-md overflow-hidden border-2 border-sky-200">
+                <div className="p-3 bg-sky-50">
+                  <Link
+                    to={msg.data.disease.link}
+                    className="flex items-center justify-between text-sky-700 hover:text-sky-900 font-medium transition-colors duration-200"
                   >
                     <span>
                       📖 Xem thông tin chi tiết về {msg.data.disease.name}
@@ -231,7 +249,7 @@ function Chatbot() {
                 <div className="p-3 bg-cyan-50">
                   <Link
                     to={msg.data.link}
-                    className="flex items-center justify-between text-cyan-700 hover:text-cyan-900 font-medium"
+                    className="flex items-center justify-between text-cyan-700 hover:text-cyan-900 font-medium transition-colors duration-200"
                   >
                     <span>🌤️ Xem dự báo thời tiết chi tiết</span>
                     <span>→</span>
@@ -254,13 +272,13 @@ function Chatbot() {
         {/* Header */}
         <div className="bg-sky-500 text-white p-2 rounded-lg mb-4 text-center relative">
           <h1 className="text-2xl font-bold">Chatbot Tư vấn</h1>
-          <p className="text-base">Hỗ trợ nông dân</p>
+          <p className="text-base">Hỗ trợ nông dân 24/7</p>
 
           {/* Nút xóa lịch sử */}
           {messages.length > 0 && (
             <button
               onClick={clearHistory}
-              className="absolute right-4 top-4 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm transition"
+              className="absolute right-4 top-4 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm transition-colors duration-200"
               title="Xóa lịch sử chat"
             >
               Xóa lịch sử
@@ -271,7 +289,7 @@ function Chatbot() {
         {/* Chat Area */}
         <div
           ref={chatContainerRef}
-          className="bg-white p-4 rounded-lg shadow-md min-h-[67vh] max-h-[67vh] overflow-y-auto mb-4"
+          className="bg-white p-4 rounded-lg shadow-md min-h-[67vh] max-h-[67vh] overflow-y-auto mb-4 scroll-smooth"
         >
           {messages.length === 0 ? (
             <div className="text-center text-gray-500 mt-10">
@@ -279,7 +297,7 @@ function Chatbot() {
                 <img
                   src={argibot}
                   alt="ArgiBot"
-                  className="w-24 h-24 mx-auto rounded-full"
+                  className="w-24 h-24 mx-auto"
                 />
               </div>
               <p className="text-lg font-semibold mb-2">
@@ -325,14 +343,14 @@ function Chatbot() {
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Nhập câu hỏi của bạn... (Enter để gửi)"
-            className="flex-1 p-3 bg-white rounded-lg border border-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-500"
+            className="flex-1 p-3 bg-white rounded-lg border border-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all duration-200"
             disabled={isLoading}
             autoFocus
           />
           <button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
           >
             {isLoading ? "Đang trả lời..." : "Gửi"}
           </button>
@@ -341,18 +359,22 @@ function Chatbot() {
         {/* Gợi ý câu hỏi */}
         {messages.length === 0 && (
           <div className="mt-4 text-center">
-            <p className="text-sm text-gray-600 mb-2">Câu hỏi gợi ý:</p>
+            <p className="text-sm text-gray-600 mb-2 font-medium">
+              Câu hỏi gợi ý:
+            </p>
             <div className="flex flex-wrap justify-center gap-2">
               {[
                 "Bệnh đạo ôn là gì?",
-                "Cách chữa rầy nâu",
+                "Triệu chứng rầy nâu",
+                "Cách chữa lem lép hạt",
                 "Thời tiết hôm nay",
-                "Triệu chứng lem lép hạt",
+                "Phòng ngừa cháy bìa lá",
+                "Đạo ôn xuất hiện khi nào?",
               ].map((suggestion, i) => (
                 <button
                   key={i}
                   onClick={() => setInput(suggestion)}
-                  className="bg-white border border-sky-300 text-sky-700 px-3 py-1 rounded-full text-sm hover:bg-sky-50 transition"
+                  className="bg-white border border-sky-300 text-sky-700 px-3 py-1 rounded-full text-sm hover:bg-sky-50 hover:border-sky-400 transition-all duration-200 shadow-sm"
                 >
                   {suggestion}
                 </button>

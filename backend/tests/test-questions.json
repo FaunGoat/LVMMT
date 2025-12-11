@@ -1,0 +1,422 @@
+[
+    {
+        "id": 1,
+        "question": "Bệnh đạo ôn là gì?",
+        "expected_disease": "Bệnh đạo ôn",
+        "expected_type": "definition"
+    },
+    {
+        "id": 2,
+        "question": "Rầy nâu có tên khoa học là gì?",
+        "expected_disease": "Rầy nâu",
+        "expected_type": "definition"
+    },
+    {
+        "id": 3,
+        "question": "Cho tôi biết về bệnh lem lép hạt",
+        "expected_disease": "Bệnh lem lép hạt",
+        "expected_type": "definition"
+    },
+    {
+        "id": 50,
+        "question": "Cho biết về muỗi hành?",
+        "expected_disease": "Muỗi hành",
+        "expected_type": "definition"
+    },
+    {
+        "id": 51,
+        "question": "Bệnh lúa von là sao?",
+        "expected_disease": "Bệnh lúa von",
+        "expected_type": "definition"
+    },
+    {
+        "id": 4,
+        "question": "Sâu cuốn lá có nguy hiểm không?",
+        "expected_disease": "Sâu cuốn lá",
+        "expected_type": "risk"
+    },
+    {
+        "id": 5,
+        "question": "Bệnh cháy bìa lá do đâu gây ra?",
+        "expected_disease": "Bệnh cháy bìa lá",
+        "expected_type": "causes"
+    },
+    {
+        "id": 6,
+        "question": "Triệu chứng của bệnh đạo ôn?",
+        "expected_disease": "Bệnh đạo ôn",
+        "expected_type": "symptoms"
+    },
+    {
+        "id": 7,
+        "question": "Lá lúa có vết bệnh hình thoi, tâm xám trắng viền nâu",
+        "expected_disease": "Bệnh đạo ôn",
+        "expected_type": "symptoms_search"
+    },
+    {
+        "id": 8,
+        "question": "Cây lúa bị lùn, lá vàng xòe ngang",
+        "expected_disease": "Bệnh Vàng lùn",
+        "expected_type": "symptoms_search"
+    },
+    {
+        "id": 9,
+        "question": "Lá lúa xoắn lại như mũi khoan",
+        "expected_disease": "Bệnh Lùn xoắn lá",
+        "expected_type": "symptoms_search"
+    },
+    {
+        "id": 10,
+        "question": "Rầy nâu có biểu hiện gì?",
+        "expected_disease": "Rầy nâu",
+        "expected_type": "symptoms"
+    },
+    {
+        "id": 11,
+        "question": "Hạt lúa bị đen nâu tím",
+        "expected_disease": "Bệnh lem lép hạt",
+        "expected_type": "symptoms_search"
+    },
+    {
+        "id": 12,
+        "question": "Lá có vết loang lổ như da hổ",
+        "expected_disease": "Bệnh Khô vằn",
+        "expected_type": "symptoms_search"
+    },
+    {
+        "id": 13,
+        "question": "Nguyên nhân gây bệnh đạo ôn",
+        "expected_disease": "Bệnh đạo ôn",
+        "expected_type": "causes"
+    },
+    {
+        "id": 14,
+        "question": "Rầy nâu lây lan như thế nào?",
+        "expected_disease": "Rầy nâu",
+        "expected_type": "causes"
+    },
+    {
+        "id": 15,
+        "question": "Điều kiện nào thuận lợi cho lem lép hạt?",
+        "expected_disease": "Bệnh lem lép hạt",
+        "expected_type": "weather_trigger"
+    },
+    {
+        "id": 16,
+        "question": "Tại sao bệnh cháy bìa lá phát triển mạnh sau bão?",
+        "expected_disease": "Bệnh cháy bìa lá",
+        "expected_type": "causes"
+    },
+    {
+        "id": 17,
+        "question": "Bón thừa đạm có ảnh hưởng gì?",
+        "expected_disease": null,
+        "expected_type": "causes"
+    },
+    {
+        "id": 18,
+        "question": "Cách chữa bệnh đạo ôn",
+        "expected_disease": "Bệnh đạo ôn",
+        "expected_type": "treatment"
+    },
+    {
+        "id": 19,
+        "question": "Thuốc trị rầy nâu",
+        "expected_disease": "Rầy nâu",
+        "expected_type": "treatment"
+    },
+    {
+        "id": 20,
+        "question": "Làm sao điều trị lem lép hạt?",
+        "expected_disease": "Bệnh lem lép hạt",
+        "expected_type": "treatment"
+    },
+    {
+        "id": 21,
+        "question": "Cách trị sâu cuốn lá",
+        "expected_disease": "Sâu cuốn lá",
+        "expected_type": "treatment"
+    },
+    {
+        "id": 22,
+        "question": "Bệnh cháy bìa lá dùng thuốc gì?",
+        "expected_disease": "Bệnh cháy bìa lá",
+        "expected_type": "treatment"
+    },
+    {
+        "id": 23,
+        "question": "Xử lý bệnh Khô vằn",
+        "expected_disease": "Bệnh Khô vằn",
+        "expected_type": "treatment"
+    },
+    {
+        "id": 24,
+        "question": "Trị sâu đục thân",
+        "expected_disease": "Sâu Đục thân",
+        "expected_type": "treatment"
+    },
+    {
+        "id": 25,
+        "question": "Cách phòng bệnh đạo ôn",
+        "expected_disease": "Bệnh đạo ôn",
+        "expected_type": "prevention"
+    },
+    {
+        "id": 26,
+        "question": "Phòng rầy nâu như thế nào?",
+        "expected_disease": "Rầy nâu",
+        "expected_type": "prevention"
+    },
+    {
+        "id": 27,
+        "question": "Làm gì để tránh lem lép hạt?",
+        "expected_disease": "Bệnh lem lép hạt",
+        "expected_type": "prevention"
+    },
+    {
+        "id": 28,
+        "question": "Phòng bệnh cháy bìa lá",
+        "expected_disease": "Bệnh cháy bìa lá",
+        "expected_type": "prevention"
+    },
+    {
+        "id": 29,
+        "question": "Cách phòng sâu cuốn lá",
+        "expected_disease": "Sâu cuốn lá",
+        "expected_type": "prevention"
+    },
+    {
+        "id": 30,
+        "question": "Giống lúa kháng bệnh nào?",
+        "expected_disease": null,
+        "expected_type": "prevention"
+    },
+    {
+        "id": 31,
+        "question": "Bệnh đạo ôn xuất hiện khi nào?",
+        "expected_disease": "Bệnh đạo ôn",
+        "expected_type": "season"
+    },
+    {
+        "id": 32,
+        "question": "Rầy nâu hoành hành vào mùa nào?",
+        "expected_disease": "Rầy nâu",
+        "expected_type": "season"
+    },
+    {
+        "id": 33,
+        "question": "Lem lép hạt thường xuất hiện giai đoạn nào?",
+        "expected_disease": "Bệnh lem lép hạt",
+        "expected_type": "season"
+    },
+    {
+        "id": 34,
+        "question": "Sâu cuốn lá phát triển mạnh vào lúc nào?",
+        "expected_disease": "Sâu cuốn lá",
+        "expected_type": "season"
+    },
+    {
+        "id": 35,
+        "question": "Bệnh cháy bìa lá xuất hiện mùa gì?",
+        "expected_disease": "Bệnh cháy bìa lá",
+        "expected_type": "season"
+    },
+    {
+        "id": 36,
+        "question": "Giai đoạn nào cây lúa dễ bị đạo ôn nhất?",
+        "expected_disease": "Bệnh đạo ôn",
+        "expected_type": "season"
+    },
+    {
+        "id": 37,
+        "question": "Thời tiết hôm nay như thế nào?",
+        "expected_disease": null,
+        "expected_type": "weather"
+    },
+    {
+        "id": 38,
+        "question": "Thời tiết nào thuận lợi cho đạo ôn?",
+        "expected_disease": "Bệnh đạo ôn",
+        "expected_type": "weather_trigger"
+    },
+    {
+        "id": 39,
+        "question": "Rầy nâu ảnh hưởng trong điều kiện thời tiết gì?",
+        "expected_disease": "Rầy nâu",
+        "expected_type": "weather_trigger"
+    },
+    {
+        "id": 40,
+        "question": "Mưa nhiều có ảnh hưởng gì đến lúa?",
+        "expected_disease": null,
+        "expected_type": "weather_trigger"
+    },
+    {
+        "id": 41,
+        "question": "Thời tiết nắng nóng gây bệnh gì?",
+        "expected_disease": null,
+        "expected_type": "weather_trigger"
+    },
+    {
+        "id": 42,
+        "question": "Sương mù ảnh hưởng như thế nào?",
+        "expected_disease": null,
+        "expected_type": "weather_trigger"
+    },
+    {
+        "id": 43,
+        "question": "Bệnh đạo ôn phát triển qua mấy giai đoạn?",
+        "expected_disease": "Bệnh đạo ôn",
+        "expected_type": "stages"
+    },
+    {
+        "id": 44,
+        "question": "Rầy nâu gây hại như thế nào?",
+        "expected_disease": "Rầy nâu",
+        "expected_type": "stages"
+    },
+    {
+        "id": 45,
+        "question": "Sâu cuốn lá phát triển mất bao lâu?",
+        "expected_disease": "Sâu cuốn lá",
+        "expected_type": "stages"
+    },
+    {
+        "id": 46,
+        "question": "Thời gian ủ bệnh của đạo ôn",
+        "expected_disease": "Bệnh đạo ôn",
+        "expected_type": "stages"
+    },
+    {
+        "id": 47,
+        "question": "Lúa bị vàng lá và có viền nâu?",
+        "expected_disease": "Bệnh đạo ôn",
+        "expected_type": "symptoms_search"
+    },
+    {
+        "id": 48,
+        "question": "Dùng thuốc hóa học trị bọ trĩ?",
+        "expected_disease": "Bọ trĩ",
+        "expected_type": "treatment_specific"
+    },
+    {
+        "id": 49,
+        "question": "Chữa bệnh đạo ôn bằng sinh học?",
+        "expected_disease": "Bệnh đạo ôn",
+        "expected_type": "treatment_specific"
+    },
+    {
+        "id": 52,
+        "question": "Nhện gié nguy hiểm ra sao?",
+        "expected_disease": "Nhện gié",
+        "expected_type": "risk"
+    },
+    {
+        "id": 53,
+        "question": "Biểu hiện của bệnh thối bẹ?",
+        "expected_disease": "Bệnh thối bẹ",
+        "expected_type": "symptoms"
+    },
+    {
+        "id": 54,
+        "question": "Dấu hiệu lúa bị bọ xít hôi tấn công?",
+        "expected_disease": "Bọ xít hôi",
+        "expected_type": "symptoms"
+    },
+    {
+        "id": 55,
+        "question": "Lá lúa xoắn, cây lùn, không trổ được",
+        "expected_disease": "Bệnh Lùn xoắn lá",
+        "expected_type": "symptoms_search"
+    },
+    {
+        "id": 56,
+        "question": "Sâu cuốn lá có triệu chứng như thế nào?",
+        "expected_disease": "Sâu cuốn lá",
+        "expected_type": "symptoms"
+    },
+    {
+        "id": 57,
+        "question": "Quá trình phát triển bệnh đạo ôn?",
+        "expected_disease": "Bệnh đạo ôn",
+        "expected_type": "stages"
+    },
+    {
+        "id": 58,
+        "question": "Xin chào",
+        "expected_disease": null,
+        "expected_type": "welcome"
+    },
+    {
+        "id": 59,
+        "question": "Cảm ơn bạn",
+        "expected_disease": null,
+        "expected_type": "thanks"
+    },
+    {
+        "id": 60,
+        "question": "Tạm biệt",
+        "expected_disease": null,
+        "expected_type": "goodbye"
+    },
+    {
+        "id": 61,
+        "question": "Sâu đục thân là con gì?",
+        "expected_disease": "Sâu Đục thân",
+        "expected_type": "definition"
+    },
+    {
+        "id": 62,
+        "question": "Tác nhân gây bệnh cháy bìa lá lúa là gì?",
+        "expected_disease": "Bệnh cháy bìa lá",
+        "expected_type": "causes"
+    },
+    {
+        "id": 63,
+        "question": "Dấu hiệu nhận biết lúa bị Đốm vằn?",
+        "expected_disease": "Bệnh Khô vằn",
+        "expected_type": "symptoms"
+    },
+    {
+        "id": 64,
+        "question": "Điều trị rầy nâu bằng thiên địch?",
+        "expected_disease": "Rầy nâu",
+        "expected_type": "treatment_specific"
+    },
+    {
+        "id": 65,
+        "question": "Muỗi hành phát triển qua bao nhiêu tuổi ấu trùng?",
+        "expected_disease": "Muỗi hành",
+        "expected_type": "stages"
+    },
+    {
+        "id": 66,
+        "question": "Bệnh lùn xoắn lá thường xảy ra vào thời điểm nào trong năm?",
+        "expected_disease": "Bệnh Lùn xoắn lá",
+        "expected_type": "season"
+    },
+    {
+        "id": 67,
+        "question": "Sử dụng giống kháng đạo ôn để phòng bệnh?",
+        "expected_disease": "Bệnh đạo ôn",
+        "expected_type": "treatment_specific"
+    },
+    {
+        "id": 68,
+        "question": "Triệu chứng của bệnh thối bẹ?",
+        "expected_disease": "Bệnh thối bẹ",
+        "expected_type": "symptoms"
+    },
+    {
+        "id": 69,
+        "question": "Điều kiện nhiệt độ thích hợp cho sâu đục thân?",
+        "expected_disease": "Sâu Đục thân",
+        "expected_type": "stages"
+    },
+    {
+        "id": 70,
+        "question": "Vì sao lá lúa bị vàng xòe ngang?",
+        "expected_disease": "Bệnh Vàng lùn",
+        "expected_type": "causes"
+    }
+]
