@@ -1,4 +1,4 @@
-// frontend/src/pages/AdminDiseaseManagement.jsx
+// frontend/src/pages/AdminDisease.jsx
 import React, { useState, useEffect } from "react";
 import { useAdmin } from "./AdminLogin";
 import {
@@ -28,6 +28,7 @@ function AdminDisease() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -87,6 +88,173 @@ function AdminDisease() {
     setNewImages(files);
   };
 
+  // ✅ TẠO CÁC DISEASE DETAIL MẶC ĐỊNH
+  // ✅ TẠO CÁC DISEASE DETAIL MẶC ĐỊNH - CÓ VALIDATION
+  const createDefaultDiseaseDetails = async (diseaseId) => {
+    try {
+      const defaultData = {
+        stages: {
+          stages: [],
+          totalDuration: "Chưa cập nhật",
+          peakStage: 1,
+          incubationPeriod: "Chưa cập nhật",
+          notes: "",
+        },
+        seasons: {
+          seasons: [],
+          criticalPeriods: [],
+          regionalVariations: [],
+          climateImpact: "Chưa cập nhật",
+        },
+        causes: {
+          pathogen: {
+            type: "Nấm", // ✅ KHÔNG ĐƯỢC RỖNG - BẮT BUỘC
+            scientificName: "Chưa cập nhật",
+            commonName: "",
+            spreadMethod: [],
+          },
+          environmentalFactors: [],
+          cropFactors: [],
+          soilFactors: [],
+          managementFactors: [],
+          predisposingFactors: [],
+          resistanceFactors: [],
+        },
+        symptoms: {
+          symptoms: [],
+          diagnosticChecklist: [],
+          similarDiseases: [],
+          laboratoryTests: [],
+          notes: "",
+        },
+        treatments: {
+          treatments: [],
+          integratedPestManagement: {
+            strategy: "Chưa cập nhật",
+            decisionThreshold: "",
+            monitoringSchedule: "",
+            actionPlan: [],
+          },
+          organicAlternatives: [],
+          emergencyProtocol: {
+            immediateActions: [],
+            supportContacts: [],
+            reportingProcedure: "",
+          },
+          resistanceManagement: "Chưa cập nhật",
+          postTreatmentCare: [],
+          successIndicators: [],
+          failureReasons: [],
+          costBenefitAnalysis: {
+            treatmentCost: "",
+            expectedYieldLoss: "",
+            netBenefit: "",
+          },
+        },
+        prevention: {
+          culturalPractices: [],
+          varietySelection: [],
+          seedTreatment: [],
+          soilManagement: [],
+          waterManagement: [],
+          nutritionManagement: [],
+          sanitationPractices: [],
+          cropRotation: {
+            recommendedCrops: [],
+            rotationCycle: "Chưa cập nhật",
+            benefits: [],
+            considerations: [],
+          },
+          biologicalControl: [],
+          monitoringSchedule: [],
+          earlyWarningSystem: {
+            indicators: [],
+            monitoringTools: [],
+            alertThresholds: "Chưa cập nhật",
+            responseProtocol: [],
+          },
+          quarantineMeasures: [],
+          farmHygiene: [],
+          preventiveSchedule: {
+            preSeasonPreparation: [],
+            earlySeasonActions: [],
+            midSeasonActions: [],
+            lateSeasonActions: [],
+            postHarvestActions: [],
+          },
+          costEffectiveness: {
+            totalPreventionCost: "Chưa cập nhật",
+            potentialLossPrevented: "Chưa cập nhật",
+            returnOnInvestment: "Chưa cập nhật",
+          },
+        },
+        weatherCorrelation: {
+          weatherTriggers: [],
+          forecastAlerts: [],
+          weatherPatterns: [],
+          microclimateFactors: [],
+          climateChangeProjections: {
+            shortTerm: "Chưa cập nhật",
+            longTerm: "Chưa cập nhật",
+            adaptationStrategies: [],
+          },
+          historicalOutbreaks: [],
+          regionalWeatherImpact: [],
+          realTimeMonitoring: {
+            dataSource: [],
+            updateFrequency: "Chưa cập nhật",
+            alertSystem: "Chưa cập nhật",
+            decisionSupport: "Chưa cập nhật",
+          },
+        },
+      };
+
+      const endpoints = [
+        { key: "stages", url: `/stages` },
+        { key: "seasons", url: `/seasons` },
+        { key: "causes", url: `/causes` },
+        { key: "symptoms", url: `/symptoms` },
+        { key: "treatments", url: `/treatments` },
+        { key: "prevention", url: `/prevention` },
+        { key: "weatherCorrelation", url: `/weather-correlation` },
+      ];
+
+      // Gửi request tạo tất cả disease details song song
+      const createPromises = endpoints.map((endpoint) =>
+        fetch(
+          `http://localhost:5000/api/admin/disease-details/${diseaseId}${endpoint.url}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(defaultData[endpoint.key]),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            if (!data.success) {
+              console.warn(`Lỗi tạo ${endpoint.key}:`, data.error);
+            }
+            return data;
+          })
+          .catch((err) => {
+            console.error(`Error creating ${endpoint.key}:`, err);
+            return { success: false, error: err.message };
+          })
+      );
+
+      const results = await Promise.all(createPromises);
+      const allSuccess = results.every((r) => r.success === true);
+
+      return allSuccess;
+    } catch (err) {
+      console.error("Error creating disease details:", err);
+      return false;
+    }
+  };
+
   // Handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,6 +266,8 @@ function AdminDisease() {
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
       const formDataToSend = new FormData();
       Object.keys(formData).forEach((key) => {
@@ -108,6 +278,7 @@ function AdminDisease() {
         formDataToSend.append("images", img);
       });
 
+      const isCreating = !editingId;
       const url = editingId
         ? `http://localhost:5000/api/admin/diseases/${editingId}`
         : "http://localhost:5000/api/admin/diseases";
@@ -125,27 +296,36 @@ function AdminDisease() {
       const data = await response.json();
 
       if (data.success) {
-        setSuccess(data.message);
-        setShowForm(false);
-        setEditingId(null);
-        setFormData({
-          name: "",
-          scientificName: "",
-          commonName: "",
-          description: "",
-          type: "Bệnh nấm",
-          severityRisk: "Cao",
-          economicLoss: "",
-        });
-        setNewImages([]);
-        setImages([]);
-        fetchDiseases();
+        // ✅ NẾU TẠO MỚI -> TẠO DEFAULT DISEASE DETAILS
+        if (isCreating) {
+          const detailsCreated = await createDefaultDiseaseDetails(
+            data.data._id
+          );
+
+          if (detailsCreated) {
+            setSuccess(`Tạo bệnh thành công!`);
+          } else {
+            setSuccess(
+              `Tạo bệnh thành công nhưng lỗi khi khởi tạo chi tiết.`
+            );
+          }
+        } else {
+          setSuccess("Cập nhật bệnh thành công");
+        }
+
+        // Tắt form sau 1.5 giây
+        setTimeout(() => {
+          closeForm();
+          fetchDiseases();
+        }, 1500);
       } else {
-        setError(data.error);
+        setError(data.error || "Lỗi không xác định");
       }
     } catch (err) {
       console.error("Error:", err);
       setError("Lỗi khi lưu dữ liệu");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -232,6 +412,7 @@ function AdminDisease() {
     });
     setNewImages([]);
     setImages([]);
+    setError("");
   };
 
   return (
@@ -263,13 +444,13 @@ function AdminDisease() {
       {/* Messages */}
       {error && (
         <div className="p-5 bg-red-50 border-l-4 border-red-500 rounded-xl">
-          <p className="text-red-700 font-bold text-lg">❌ {error}</p>
+          <p className="text-red-700 font-bold text-lg">{error}</p>
         </div>
       )}
 
       {success && (
         <div className="p-5 bg-green-50 border-l-4 border-green-500 rounded-xl">
-          <p className="text-green-700 font-bold text-lg">✅ {success}</p>
+          <p className="text-green-700 font-bold text-lg">{success}</p>
         </div>
       )}
 
@@ -431,7 +612,8 @@ function AdminDisease() {
               </h2>
               <button
                 onClick={closeForm}
-                className="hover:bg-white hover:bg-opacity-20 p-2 rounded transition text-3xl"
+                disabled={isSubmitting}
+                className="hover:bg-white hover:bg-opacity-20 p-2 rounded transition text-3xl disabled:opacity-50"
               >
                 <FaTimes />
               </button>
@@ -452,6 +634,7 @@ function AdminDisease() {
                   placeholder="VD: Bệnh đạo ôn"
                   className="w-full p-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-green-500 text-lg"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -468,6 +651,7 @@ function AdminDisease() {
                   placeholder="VD: Pyricularia oryzae"
                   className="w-full p-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-green-500 text-lg"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -483,6 +667,7 @@ function AdminDisease() {
                   onChange={handleChange}
                   placeholder="VD: Bệnh cháy lá"
                   className="w-full p-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-green-500 text-lg"
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -498,6 +683,7 @@ function AdminDisease() {
                     onChange={handleChange}
                     className="w-full p-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-green-500 text-lg"
                     required
+                    disabled={isSubmitting}
                   >
                     <option>Bệnh nấm</option>
                     <option>Sâu hại</option>
@@ -516,6 +702,7 @@ function AdminDisease() {
                     onChange={handleChange}
                     className="w-full p-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-green-500 text-lg"
                     required
+                    disabled={isSubmitting}
                   >
                     <option>Rất cao</option>
                     <option>Cao</option>
@@ -537,6 +724,7 @@ function AdminDisease() {
                   placeholder="Nhập mô tả về bệnh..."
                   rows="4"
                   className="w-full p-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-green-500 text-lg"
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -552,6 +740,7 @@ function AdminDisease() {
                   onChange={handleChange}
                   placeholder="VD: 20-50% năng suất"
                   className="w-full p-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-green-500 text-lg"
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -580,7 +769,8 @@ function AdminDisease() {
                             onClick={() =>
                               handleDeleteImage(editingId, img.url)
                             }
-                            className="absolute top-2 right-2 bg-red-500 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition text-xl"
+                            disabled={isSubmitting}
+                            className="absolute top-2 right-2 bg-red-500 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition text-xl disabled:opacity-50"
                           >
                             <FaTimes />
                           </button>
@@ -598,6 +788,7 @@ function AdminDisease() {
                     onChange={handleImageChange}
                     className="hidden"
                     id="imageInput"
+                    disabled={isSubmitting}
                   />
                   <label
                     htmlFor="imageInput"
@@ -620,14 +811,25 @@ function AdminDisease() {
               <div className="flex gap-4 pt-6 border-t-2">
                 <button
                   type="submit"
-                  className="flex-1 bg-green-500 hover:bg-green-600 text-white py-4 rounded-xl font-bold text-xl transition hover:shadow-lg active:scale-95"
+                  disabled={isSubmitting}
+                  className="flex-1 bg-green-500 hover:bg-green-600 text-white py-4 rounded-xl font-bold text-xl transition hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                  {editingId ? "Cập Nhật" : "Thêm Mới"}
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      <span>Đang lưu...</span>
+                    </>
+                  ) : editingId ? (
+                    "Cập Nhật"
+                  ) : (
+                    "Thêm Mới"
+                  )}
                 </button>
                 <button
                   type="button"
                   onClick={closeForm}
-                  className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-900 py-4 rounded-xl font-bold text-xl transition"
+                  disabled={isSubmitting}
+                  className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-900 py-4 rounded-xl font-bold text-xl transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Hủy
                 </button>

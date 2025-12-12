@@ -1,11 +1,24 @@
 const express = require("express");
 const connectDB = require("./config/db");
+const cloudinary = require("./config/cloudinary");
 const cors = require("cors");
 const { setupWeatherCron } = require("./config/cron");
 require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+const cloudConfig = {
+  cloud_name: cloudinary.config().cloud_name,
+  api_key: cloudinary.config().api_key,
+  api_secret: cloudinary.config().api_secret,
+};
+
+console.log("✅ Cloudinary Config Object:", {
+  cloud_name: cloudConfig.cloud_name || "❌ NOT SET",
+  api_key: cloudConfig.api_key ? "✓ SET" : "❌ NOT SET",
+  api_secret: cloudConfig.api_secret ? "✓ SET" : "❌ NOT SET",
+});
 
 // Middleware
 app.use(
