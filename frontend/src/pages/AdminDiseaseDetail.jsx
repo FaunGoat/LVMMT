@@ -607,7 +607,28 @@ const DiseaseStagesEditor = ({ data, setData, onSave, saving, addStage }) => (
         </label>
         <div className="space-y-3 max-h-96 overflow-y-auto">
           {data?.stages?.map((stage, idx) => (
-            <div key={idx} className="p-4 rounded border">
+            <div key={idx} className="p-4 rounded border relative group">
+              {data.stages.length > 1 && (
+                <button
+                  onClick={() => {
+                    const newStages = data.stages.filter((_, i) => i !== idx);
+                    setData({ ...data, stages: newStages });
+                  }}
+                  className="absolute top-2 right-2 text-red-400 hover:text-red-600 hover:bg-red-50 p-2 rounded opacity-0 group-hover:opacity-100 transition"
+                  title="Xóa giai đoạn"
+                >
+                  ✕
+                </button>
+              )}
+
+              {data.stages.length === 1 && (
+                <div
+                  className="absolute top-2 right-2 text-gray-400 p-2 rounded"
+                  title="Phải có ít nhất 1 giai đoạn"
+                >
+                  ✕
+                </div>
+              )}
               <div className="grid grid-cols-2 gap-2 mb-2">
                 <input
                   type="number"
@@ -689,7 +710,28 @@ const DiseaseSeasonsEditor = ({
       <h3 className="text-lg font-semibold mb-4 pb-2 border-b-2">Mùa vụ</h3>
       <div className="space-y-4 max-h-96 overflow-y-auto">
         {data?.seasons?.map((season, idx) => (
-          <div key={idx} className="p-4 rounded border">
+          <div key={idx} className="p-4 rounded border relative group">
+            {data.seasons.length > 1 && (
+              <button
+                onClick={() => {
+                  const newSeasons = data.seasons.filter((_, i) => i !== idx);
+                  setData({ ...data, seasons: newSeasons });
+                }}
+                className="absolute top-2 right-2 text-red-400 hover:text-red-600 hover:bg-red-50 p-2 rounded opacity-0 group-hover:opacity-100 transition"
+                title="Xóa mùa vụ"
+              >
+                ✕
+              </button>
+            )}
+
+            {data.seasons.length === 1 && (
+              <div
+                className="absolute top-2 right-2 text-gray-400 p-2 rounded"
+                title="Phải có ít nhất 1 mùa vụ"
+              >
+                ✕
+              </div>
+            )}
             <div className="grid grid-cols-2 gap-3 mb-3">
               <div>
                 <label className="block font-semibold mb-1">Mùa vụ</label>
@@ -788,7 +830,31 @@ const DiseaseSeasonsEditor = ({
       </h3>
       <div className="space-y-4 max-h-96 overflow-y-auto">
         {data?.criticalPeriods?.map((period, idx) => (
-          <div key={idx} className="p-4 rounded border">
+          <div key={idx} className="p-4 rounded border relative group">
+            {/* ✅ NÚT XÓA GIAI ĐOẠN TỚI HẠN */}
+            {data.criticalPeriods.length > 1 && (
+              <button
+                onClick={() => {
+                  const newPeriods = data.criticalPeriods.filter(
+                    (_, i) => i !== idx
+                  );
+                  setData({ ...data, criticalPeriods: newPeriods });
+                }}
+                className="absolute top-2 right-2 text-red-400 hover:text-red-600 hover:bg-red-50 p-2 rounded opacity-0 group-hover:opacity-100 transition"
+                title="Xóa giai đoạn"
+              >
+                ✕
+              </button>
+            )}
+
+            {data.criticalPeriods.length === 1 && (
+              <div
+                className="absolute top-2 right-2 text-gray-400 p-2 rounded"
+                title="Phải có ít nhất 1 giai đoạn"
+              >
+                ✕
+              </div>
+            )}
             <div className="grid grid-cols-2 gap-3 mb-3">
               <div>
                 <label className="block font-semibold mb-1">Giai đoạn</label>
@@ -942,7 +1008,29 @@ const DiseaseSymptomsEditor = ({
       <h3 className="text-lg font-semibold mb-3">Danh sách triệu chứng</h3>
       <div className="space-y-4 max-h-160 overflow-y-auto">
         {data?.symptoms?.map((symptom, idx) => (
-          <div key={idx} className="p-3 bg-white rounded border">
+          <div key={idx} className="p-3 bg-white rounded border relative group">
+            {/* ✅ NÚT XÓA TRIỆU CHỨNG */}
+            {data.symptoms.length > 1 && (
+              <button
+                onClick={() => {
+                  const newSymptoms = data.symptoms.filter((_, i) => i !== idx);
+                  setData({ ...data, symptoms: newSymptoms });
+                }}
+                className="absolute top-2 right-2 text-red-400 hover:text-red-600 hover:bg-red-50 p-2 rounded opacity-0 group-hover:opacity-100 transition"
+                title="Xóa triệu chứng"
+              >
+                ✕
+              </button>
+            )}
+
+            {data.symptoms.length === 1 && (
+              <div
+                className="absolute top-2 right-2 text-gray-400 p-2 rounded"
+                title="Phải có ít nhất 1 triệu chứng"
+              >
+                ✕
+              </div>
+            )}
             <div className="grid grid-cols-2 gap-3 mb-2">
               <div>
                 <label className="block font-semibold mb-1">Bộ phận</label>
@@ -1025,7 +1113,31 @@ const DiseaseTreatmentsEditor = ({
     </button>
     <div className="space-y-4 mb-6">
       {data?.treatments?.map((treatment, idx) => (
-        <div key={idx} className="p-4 rounded border">
+        <div key={idx} className="p-4 rounded border relative group">
+          {/* ✅ NÚT XÓA PHƯƠNG PHÁP ĐIỀU TRỊ */}
+          {data.treatments.length > 1 && (
+            <button
+              onClick={() => {
+                const newTreatments = data.treatments.filter(
+                  (_, i) => i !== idx
+                );
+                setData({ ...data, treatments: newTreatments });
+              }}
+              className="absolute top-2 right-2 text-red-400 hover:text-red-600 hover:bg-red-50 p-2 rounded opacity-0 group-hover:opacity-100 transition"
+              title="Xóa phương pháp"
+            >
+              ✕
+            </button>
+          )}
+
+          {data.treatments.length === 1 && (
+            <div
+              className="absolute top-2 right-2 text-gray-400 p-2 rounded"
+              title="Phải có ít nhất 1 phương pháp"
+            >
+              ✕
+            </div>
+          )}
           <label className="block text-lg font-semibold mb-1">
             Phương pháp
           </label>
@@ -1161,6 +1273,11 @@ const DiseasePreventionEditor = ({ data, setData, onSave, saving }) => {
   // Hàm xóa dòng
   const removeItem = (key, index) => {
     const currentList = [...data[key]];
+    if (currentList.length <= 1) {
+      alert("Phải có ít nhất 1 mục trong danh sách này");
+      return;
+    }
+
     currentList.splice(index, 1);
     setData({ ...data, [key]: currentList });
   };
@@ -1665,13 +1782,25 @@ const PreventionListSection = ({
             key={idx}
             className="p-4 rounded border relative group hover:shadow-sm transition"
           >
-            <button
-              onClick={() => onRemove(idx)}
-              className="absolute top-2 right-2 text-red-400 hover:text-red-600 p-1 opacity-0 group-hover:opacity-100 transition"
-              title="Xóa biện pháp"
-            >
-              ✕
-            </button>
+            {items.length > 1 && (
+              <button
+                onClick={() => onRemove(idx)}
+                className="absolute top-2 right-2 text-red-400 hover:text-red-600 hover:bg-red-50 p-2 rounded opacity-0 group-hover:opacity-100 transition"
+                title="Xóa biện pháp"
+              >
+                ✕
+              </button>
+            )}
+
+            {/* ✅ LOCK ICON NẾU CHỈ CÓ 1 ITEM */}
+            {items.length === 1 && (
+              <div
+                className="absolute top-2 right-2 text-gray-400 p-2 rounded"
+                title="Phải có ít nhất 1 biện pháp"
+              >
+                ✕
+              </div>
+            )}
             {renderItem(item, idx)}
           </div>
         ))}
@@ -1686,90 +1815,121 @@ const DiseaseWeatherEditor = ({
   onSave,
   saving,
   addWeather,
-}) => (
-  <div className="bg-white rounded-lg shadow-md p-6">
-    <h2 className="text-2xl font-bold mb-4">Điều kiện thời tiết gây bệnh</h2>
-    <button
-      onClick={addWeather}
-      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition mb-3"
-    >
-      Thêm điều kiện thời tiết
-    </button>
-    {/* Weather Triggers */}
-    <div className="mb-6 p-4 rounded border">
-      <div className="space-y-4">
-        {data?.weatherTriggers?.map((trigger, idx) => (
-          <div key={idx} className="p-3 bg-white rounded border">
-            <input
-              type="text"
-              value={trigger.condition}
-              onChange={(e) => {
-                const newTriggers = [...data.weatherTriggers];
-                newTriggers[idx].condition = e.target.value;
-                setData({ ...data, weatherTriggers: newTriggers });
-              }}
-              className="w-full p-2 border rounded mb-2"
-              placeholder="Điều kiện thời tiết"
-            />
-            <div className="grid grid-cols-2 gap-2 mb-2">
-              <input
-                type="text"
-                value={trigger.threshold?.temperature?.min || ""}
-                onChange={(e) => {
-                  const newTriggers = [...data.weatherTriggers];
-                  if (!newTriggers[idx].threshold)
-                    newTriggers[idx].threshold = {};
-                  if (!newTriggers[idx].threshold.temperature)
-                    newTriggers[idx].threshold.temperature = {};
-                  newTriggers[idx].threshold.temperature.min = e.target.value;
-                  setData({ ...data, weatherTriggers: newTriggers });
-                }}
-                className="w-full p-2 border rounded"
-                placeholder="Min temp"
-              />
-              <input
-                type="text"
-                value={trigger.threshold?.temperature?.max || ""}
-                onChange={(e) => {
-                  const newTriggers = [...data.weatherTriggers];
-                  if (!newTriggers[idx].threshold)
-                    newTriggers[idx].threshold = {};
-                  if (!newTriggers[idx].threshold.temperature)
-                    newTriggers[idx].threshold.temperature = {};
-                  newTriggers[idx].threshold.temperature.max = e.target.value;
-                  setData({ ...data, weatherTriggers: newTriggers });
-                }}
-                className="w-full p-2 border rounded"
-                placeholder="Max temp"
-              />
-            </div>
-            <select
-              value={trigger.riskLevel}
-              onChange={(e) => {
-                const newTriggers = [...data.weatherTriggers];
-                newTriggers[idx].riskLevel = e.target.value;
-                setData({ ...data, weatherTriggers: newTriggers });
-              }}
-              className="w-full p-2 border rounded"
+}) => {
+  const removeWeatherTrigger = (idx) => {
+    // Kiểm tra nếu chỉ có 1 item, không cho phép xóa
+    if (!data.weatherTriggers || data.weatherTriggers.length <= 1) {
+      alert("Phải có ít nhất 1 điều kiện thời tiết");
+      return;
+    }
+    const newTriggers = data.weatherTriggers.filter((_, i) => i !== idx);
+    setData({ ...data, weatherTriggers: newTriggers });
+  };
+  return (
+    <div className="bg-white rounded-lg shadow-md p-6">
+      <h2 className="text-2xl font-bold mb-4">Điều kiện thời tiết gây bệnh</h2>
+      <button
+        onClick={addWeather}
+        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition mb-3"
+      >
+        Thêm điều kiện thời tiết
+      </button>
+      {/* Weather Triggers */}
+      <div className="mb-6 p-4 rounded border">
+        <div className="space-y-4">
+          {data?.weatherTriggers?.map((trigger, idx) => (
+            <div
+              key={idx}
+              className="p-3 bg-white rounded border relative group"
             >
-              <option>Rất cao</option>
-              <option>Cao</option>
-              <option>Trung bình</option>
-              <option>Thấp</option>
-            </select>
-          </div>
-        ))}
+              {data.weatherTriggers.length > 1 && (
+                <button
+                  onClick={() => removeWeatherTrigger(idx)}
+                  className="absolute top-2 right-2 text-red-400 hover:text-red-600 hover:bg-red-50 p-2 rounded opacity-0 group-hover:opacity-100 transition"
+                  title="Xóa điều kiện"
+                >
+                  ✕
+                </button>
+              )}
+              {data.weatherTriggers.length === 1 && (
+                <div
+                  className="absolute top-2 right-2 text-gray-400 p-2 rounded"
+                  title="Phải có ít nhất 1 điều kiện"
+                >
+                  ✕
+                </div>
+              )}
+              <input
+                type="text"
+                value={trigger.condition}
+                onChange={(e) => {
+                  const newTriggers = [...data.weatherTriggers];
+                  newTriggers[idx].condition = e.target.value;
+                  setData({ ...data, weatherTriggers: newTriggers });
+                }}
+                className="w-full p-2 border rounded mb-2"
+                placeholder="Điều kiện thời tiết"
+              />
+              <div className="grid grid-cols-2 gap-2 mb-2">
+                <input
+                  type="text"
+                  value={trigger.threshold?.temperature?.min || ""}
+                  onChange={(e) => {
+                    const newTriggers = [...data.weatherTriggers];
+                    if (!newTriggers[idx].threshold)
+                      newTriggers[idx].threshold = {};
+                    if (!newTriggers[idx].threshold.temperature)
+                      newTriggers[idx].threshold.temperature = {};
+                    newTriggers[idx].threshold.temperature.min = e.target.value;
+                    setData({ ...data, weatherTriggers: newTriggers });
+                  }}
+                  className="w-full p-2 border rounded"
+                  placeholder="Min temp"
+                />
+                <input
+                  type="text"
+                  value={trigger.threshold?.temperature?.max || ""}
+                  onChange={(e) => {
+                    const newTriggers = [...data.weatherTriggers];
+                    if (!newTriggers[idx].threshold)
+                      newTriggers[idx].threshold = {};
+                    if (!newTriggers[idx].threshold.temperature)
+                      newTriggers[idx].threshold.temperature = {};
+                    newTriggers[idx].threshold.temperature.max = e.target.value;
+                    setData({ ...data, weatherTriggers: newTriggers });
+                  }}
+                  className="w-full p-2 border rounded"
+                  placeholder="Max temp"
+                />
+              </div>
+              <select
+                value={trigger.riskLevel}
+                onChange={(e) => {
+                  const newTriggers = [...data.weatherTriggers];
+                  newTriggers[idx].riskLevel = e.target.value;
+                  setData({ ...data, weatherTriggers: newTriggers });
+                }}
+                className="w-full p-2 border rounded"
+              >
+                <option>Rất cao</option>
+                <option>Cao</option>
+                <option>Trung bình</option>
+                <option>Thấp</option>
+              </select>
+            </div>
+          ))}
+        </div>
       </div>
+      <button
+        onClick={onSave}
+        disabled={saving}
+        className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded font-medium transition disabled:opacity-50 flex items-center gap-2"
+      >
+        <FaSave />
+        {saving ? "Đang lưu..." : "Lưu dữ liệu"}
+      </button>
     </div>
-    <button
-      onClick={onSave}
-      disabled={saving}
-      className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded font-medium transition disabled:opacity-50 flex items-center gap-2"
-    >
-      <FaSave />
-      {saving ? "Đang lưu..." : "Lưu dữ liệu"}
-    </button>
-  </div>
-);
+  );
+};
 
 export default AdminDiseaseDetail;

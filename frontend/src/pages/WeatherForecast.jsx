@@ -527,7 +527,7 @@ function WeatherForecast() {
                       Ngày có cảnh báo
                     </p>
                     <p className="text-3xl font-bold text-red-700">
-                      {weatherStats.highRiskDays}
+                      {weatherStats.hasRealAlerts}
                     </p>
                   </div>
                   <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 shadow-md text-center md:col-span-2">

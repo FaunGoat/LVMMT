@@ -161,7 +161,7 @@ function analyzeDiseaseRisk(
     alerts.push({
       level: "warning",
       disease: "Đạo Ôn",
-      message: "Điều kiện thuận lợi",
+      message: "Thuận lợi phát triển",
       action: "Giảm nước, kiểm tra lá hàng ngày.",
     });
   }

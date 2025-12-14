@@ -239,7 +239,14 @@ const WeatherPopupV2 = () => {
                     </h3>
                     <ul className="space-y-2">
                       {weatherData
-                        .flatMap((d) => d.diseaseAlerts || [])
+                        // Thay đổi logic flatMap để kèm theo ngày
+                        .flatMap((d, dIndex) =>
+                          (d.diseaseAlerts || []).map((alert) => ({
+                            ...alert,
+                            date: d.date,
+                            isToday: dIndex === 0, // Đánh dấu nếu là hôm nay
+                          }))
+                        )
                         .filter(
                           (a) => a.level === "danger" || a.level === "warning"
                         )
@@ -247,14 +254,23 @@ const WeatherPopupV2 = () => {
                         .map((alert, idx) => (
                           <li
                             key={idx}
-                            className="text-sm text-gray-700 flex items-start gap-2"
+                            className="text-base text-gray-700 flex items-start gap-2"
                           >
                             <span className="text-orange-600 font-bold mt-0.5">
                               •
                             </span>
-                            <span>
-                              <strong>{alert.disease}:</strong> {alert.message}
-                            </span>
+                            <div>
+                              {/* Hiển thị ngày dạng badge nhỏ */}
+                              <span className="inline-block text-sm font-semibold bg-gray-100 border border-gray-200 px-1.5 py-0.5 rounded mr-1.5 mb-1">
+                                {alert.isToday
+                                  ? "Hôm nay"
+                                  : formatDate(alert.date)}
+                              </span>
+                              <span>
+                                <strong>{alert.disease}:</strong>{" "}
+                                {alert.message}
+                              </span>
+                            </div>
                           </li>
                         ))}
                     </ul>
@@ -286,9 +302,9 @@ const WeatherPopupV2 = () => {
                 </div>
 
                 {/* Footer Note */}
-                <p className="text-xs text-gray-500 text-center mt-4">
+                {/* <p className="text-xs text-gray-500 text-center mt-4">
                   Popup này sẽ tự động hiển thị một lần mỗi ngày
-                </p>
+                </p> */}
               </>
             ) : (
               <div className="text-center py-10">
