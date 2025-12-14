@@ -18,14 +18,14 @@ function setupWeatherCron() {
   console.log("✅ Weather cron job đã được thiết lập (chạy mỗi 6h)");
 
   // Chạy ngay lần đầu khi khởi động server
-  // setTimeout(async () => {
-  //   console.log("🚀 Chạy cập nhật thời tiết lần đầu...");
-  //   try {
-  //     await updateWeatherData();
-  //   } catch (error) {
-  //     console.error("❌ Lỗi cập nhật ban đầu:", error.message);
-  //   }
-  // }, 5000); // Đợi 5s sau khi server start
+  setTimeout(async () => {
+    console.log("🚀 Chạy cập nhật thời tiết lần đầu...");
+    try {
+      await updateWeatherData();
+    } catch (error) {
+      console.error("❌ Lỗi cập nhật ban đầu:", error.message);
+    }
+  }, 5000); // Đợi 5s sau khi server start
 }
 
 module.exports = { setupWeatherCron };

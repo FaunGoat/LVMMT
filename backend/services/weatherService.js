@@ -76,6 +76,7 @@ function processForecastData(data, location, maxDays) {
         : "0";
 
     const condition = getMostFrequent(d.conditions);
+    // TRUYỀN dateString cho analyzeDiseaseRisk
     const diseaseAlerts = analyzeDiseaseRisk(
       avgTemp,
       minTemp,
@@ -83,7 +84,8 @@ function processForecastData(data, location, maxDays) {
       avgHumidity,
       condition,
       d.rain,
-      parseFloat(avgWind)
+      parseFloat(avgWind),
+      date // <-- THÊM date
     );
 
     return {
@@ -98,7 +100,6 @@ function processForecastData(data, location, maxDays) {
     };
   });
 
-  // Bổ sung ngày thiếu (nếu cần) - dùng cấu trúc object hợp lệ
   if (forecasts.length < maxDays && forecasts.length > 0) {
     const last = forecasts[forecasts.length - 1];
     const lastDate = new Date(last.date);
@@ -139,12 +140,17 @@ function analyzeDiseaseRisk(
   humidity,
   condition,
   rain,
-  windSpeed
+  windSpeed,
+  dateString
 ) {
   const alerts = [];
   const cond = condition.toLowerCase();
+  const date = new Date(dateString);
+  const month = date.getMonth() + 1; // 1-12
 
-  // Đạo ôn
+  // ===== BỆNH NẤM =====
+
+  // 1. ĐẠO ÔN (Năm nay)
   if (
     (cond.includes("mưa") || rain > 5) &&
     humidity > 80 &&
@@ -166,26 +172,268 @@ function analyzeDiseaseRisk(
     });
   }
 
-  // Rầy nâu
+  // 2. LEM LÉP HẠT (Tháng 7-10)
+  if (month >= 7 && month <= 10) {
+    if ((cond.includes("mưa") || rain > 3) && humidity > 75 && avgTemp >= 26) {
+      alerts.push({
+        level: "warning",
+        disease: "Lem Lép Hạt",
+        message: "Điều kiện thuận lợi cho nấm gây bệnh",
+        action:
+          "Phun Propiconazole, Tebuconazole. Thoát nước tốt khi nước ngập.",
+      });
+    }
+  }
+
+  // 3. KHỒ VĂN (Tháng 8-10)
+  if (month >= 8 && month <= 10) {
+    if (humidity > 80 && avgTemp >= 24 && avgTemp <= 28) {
+      alerts.push({
+        level: "warning",
+        disease: "Khồ Vằn",
+        message: "Nguy cơ trên bẹ lá tại giai đoạn trổ",
+        action: "Phun Isoprothiolane, Thiram. Kiểm tra định kỳ.",
+      });
+    }
+  }
+
+  // 4. VÀNG LÁ CHÍN SỚM (Tháng 6-9)
+  if (month >= 6 && month <= 9) {
+    if (
+      humidity > 85 &&
+      avgTemp >= 25 &&
+      avgTemp <= 30 &&
+      cond.includes("mưa")
+    ) {
+      alerts.push({
+        level: "info",
+        disease: "Vàng Lá Chín Sớm",
+        message: "Phát triển từ từ trong điều kiện mưa ẩm",
+        action: "Giảm nitrogen, thoát nước tốt. Xử lý lá bệnh nếu nhẹ.",
+      });
+    }
+  }
+
+  // 5. THỐI BẸ (Tháng 7-10, giai đoạn trổ)
+  if (month >= 7 && month <= 10) {
+    if (humidity > 80 && avgTemp >= 25 && avgTemp <= 28) {
+      alerts.push({
+        level: "info",
+        disease: "Thối Bẹ",
+        message: "Nguy cơ tại giai đoạn trổ, gây hạt lửng",
+        action: "Phun Kasugamycin hoặc Iprodione. Thoát nước tốt.",
+      });
+    }
+  }
+
+  // 6. ĐỐM NÂUM (Tháng 5-9)
+  if (month >= 5 && month <= 9) {
+    if (humidity > 75 && avgTemp >= 22 && avgTemp <= 28) {
+      alerts.push({
+        level: "info",
+        disease: "Đốm Nâu",
+        message: "Tấn công lá non, lá thấp",
+        action: "Phun Mancozeb, Propiconazole. Vệ sinh ruộng.",
+      });
+    }
+  }
+
+  // 7. LÚAI VỠN (Tháng 6-8, mạ non)
+  if (month >= 6 && month <= 8) {
+    if (humidity > 80 && avgTemp >= 26 && avgTemp <= 30) {
+      alerts.push({
+        level: "info",
+        disease: "Lúa Vợn",
+        message: "Cây cao vọt, mảnh khảnh tại giai đoạn mạ",
+        action: "Chọn giống, điều chỉnh lượng N. Không phun được.",
+      });
+    }
+  }
+
+  // 8. ĐỐM VÒNG (Tháng 5-7, đầu mùa)
+  if (month >= 5 && month <= 7) {
+    if (
+      humidity > 75 &&
+      avgTemp >= 20 &&
+      avgTemp <= 26 &&
+      cond.includes("mưa")
+    ) {
+      alerts.push({
+        level: "info",
+        disease: "Đốm Vòng",
+        message: "Đốm mắt cua hình bầu dục trên lá",
+        action: "Phun Mancozeb. Vệ sinh đất, hạt giống.",
+      });
+    }
+  }
+
+  // 9. THỐI THÂN (Tháng 9-10, giai đoạn chín)
+  if (month >= 9 && month <= 10) {
+    if (humidity > 80 && avgTemp >= 25 && rain > 5) {
+      alerts.push({
+        level: "warning",
+        disease: "Thối Thân",
+        message: "Giai đoạn chín, gốc thân bị hoại tử",
+        action: "Giảm nước, thoát nước tốt. Không cứu được nếu nặng.",
+      });
+    }
+  }
+
+  // ===== BỆNH VI KHUẨN =====
+
+  // 10. CHÁY BÌA LÁ (Năm nay, nhất là khi mưa bão)
+  if ((cond.includes("mưa") || rain > 5) && humidity > 85) {
+    alerts.push({
+      level: "danger",
+      disease: "Cháy Bìa Lá",
+      message: "Bệnh vi khuẩn lây lan nhanh qua nước mưa",
+      action: "Phun streptomycin + Copper. Thoát nước mạnh, cắt lá bệnh.",
+    });
+  } else if (humidity > 85 && windSpeed > 3) {
+    alerts.push({
+      level: "warning",
+      disease: "Cháy Bìa Lá",
+      message: "Điều kiện lây lan qua gió",
+      action: "Theo dõi sát sao, chuẩn bị thuốc phun.",
+    });
+  }
+
+  // 11. SỌC TRONG (Tháng 6-9)
+  if (month >= 6 && month <= 9) {
+    if (humidity > 80 && avgTemp >= 25 && cond.includes("mưa")) {
+      alerts.push({
+        level: "info",
+        disease: "Sọc Trong",
+        message: "Sọc vàng dọc gân lá",
+        action: "Phun Streptomycin hoặc Kasugamycin. Thoát nước.",
+      });
+    }
+  }
+
+  // ===== BỆNH VIRUS =====
+
+  // 12. VÀNG LÙN (Tháng 5-8, do rầy nâu truyền)
+  if (month >= 5 && month <= 8) {
+    if (maxTemp > 28 && humidity < 70) {
+      alerts.push({
+        level: "danger",
+        disease: "Vàng Lùn",
+        message: "Do rầy nâu truyền virus, lúa lùn xòi",
+        action:
+          "Kiểm soát rầy nâu ngay. Cách ly cây bệnh. Loại bỏ cây lành từ.",
+      });
+    }
+  }
+
+  // 13. LÙIN XOẮN LÁ (Tháng 5-8, do rầy nâu)
+  if (month >= 5 && month <= 8) {
+    if (maxTemp > 30 && humidity < 75) {
+      alerts.push({
+        level: "warning",
+        disease: "Lùn Xoắn Lá",
+        message: "Lá xoắn như mũi khoan, mép lá rách",
+        action: "Phòng rầy nâu. Loại bỏ cây bệnh sớm. Gieo lúa đúng lịch.",
+      });
+    }
+  }
+
+  // ===== SÂU HẠI =====
+
+  // 14. RẦY NÂU (Năm nay, nhất là nóng khô)
   if (maxTemp > 32 && humidity < 70 && !cond.includes("mưa") && windSpeed < 3) {
     alerts.push({
       level: "danger",
       disease: "Rầy Nâu",
       message: "Phát triển mạnh do nóng khô",
-      action: "Tưới nước 5-7cm, đặt bẫy dính vàng.",
+      action: "Tưới nước 5-7cm, đặt bẫy dính vàng. Phun Imidacloprid.",
     });
   } else if (maxTemp > 30 && humidity < 75) {
     alerts.push({
       level: "warning",
       disease: "Rầy Nâu",
       message: "Nguy cơ tăng",
-      action: "Theo dõi gốc lúa, tưới đều.",
+      action: "Theo dõi gốc lúa, tưới đều. Kiểm tra lá non.",
     });
   }
 
-  // Lem lép hạt, cháy bìa lá, sâu cuốn lá... (giữ nguyên)
+  // 15. SÂU CUỐN LÁ (Tháng 6-9, nóng ẩm)
+  if (month >= 6 && month <= 9) {
+    if (humidity > 75 && avgTemp >= 25 && cond.includes("mưa")) {
+      alerts.push({
+        level: "warning",
+        disease: "Sâu Cuốn Lá",
+        message: "Ăn biểu bì lá, cuốn lá lại",
+        action: "Phun Chlorantraniliprole, Spinosad. Xua sâu bằng âm thanh.",
+      });
+    }
+  }
 
-  if (alerts.length === 0) {
+  // 16. SÂU ĐỤC THÂN 2 CHẤM (Tháng 5-8, dảnh héo)
+  if (month >= 5 && month <= 8) {
+    if (humidity > 75 && avgTemp >= 24 && cond.includes("mưa")) {
+      alerts.push({
+        level: "danger",
+        disease: "Sâu Đục Thân 2 Chấm",
+        message: "Sâu non đục thân, gây dảnh héo hoặc bông bạc",
+        action: "Phun Cartap 50%, Profenofos. Kiểm tra và đốt sâu non trên lá.",
+      });
+    }
+  }
+
+  // 17. BỌ TRĨ (Tháng 6-7, mạ non)
+  if (month >= 6 && month <= 7) {
+    if (humidity > 70 && avgTemp >= 22 && avgTemp <= 28) {
+      alerts.push({
+        level: "info",
+        disease: "Bọ Trĩ",
+        message: "Hại mạ non, lá cuốn khô vàng",
+        action: "Phun Dimethoate hoặc Cypermethrin. Kiểm soát ở mạ.",
+      });
+    }
+  }
+
+  // 18. NHỆN GIÉ (Tháng 7-9, khô nóng)
+  if (month >= 7 && month <= 9) {
+    if (humidity < 70 && maxTemp > 30) {
+      alerts.push({
+        level: "warning",
+        disease: "Nhện Gié",
+        message: "Chích hút bẹ lá gây vết thâm đen (cạo gió)",
+        action: "Phun nước liên tục. Phun Phenthoate, Dicofol.",
+      });
+    }
+  }
+
+  // 19. MUỖI HÀNH (Tháng 5-7)
+  if (month >= 5 && month <= 7) {
+    if (humidity > 75 && avgTemp >= 24 && cond.includes("mưa")) {
+      alerts.push({
+        level: "info",
+        disease: "Muỗi Hành",
+        message: "Biến bẹ lá thành ống tròn như cọng hành",
+        action: "Phun Dimethoate, Cypermethrin. Loại bỏ cây bệnh.",
+      });
+    }
+  }
+
+  // 20. BỌ XÍT HÔI (Tháng 8-10, giai đoạn ngậm sữa)
+  if (month >= 8 && month <= 10) {
+    if (humidity > 70 && avgTemp >= 25) {
+      alerts.push({
+        level: "info",
+        disease: "Bọ Xít Hôi",
+        message: "Chích hút hạt giai đoạn ngậm sữa, hạt lép đắng",
+        action: "Phun Cypermethrin, Imidacloprid. Kiểm tra hàng ngày.",
+      });
+    }
+  }
+
+  // Nếu không có cảnh báo nguy hiểm/cảnh báo, thêm success
+  const hasRealAlert = alerts.some(
+    (a) => a.level === "danger" || a.level === "warning"
+  );
+
+  if (!hasRealAlert) {
     alerts.push({
       level: "success",
       disease: "Tình hình tốt",

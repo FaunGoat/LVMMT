@@ -44,6 +44,13 @@ function WeatherForecast() {
     }
   };
 
+  const hasRealAlert = (alerts) => {
+    return (
+      alerts &&
+      alerts.some((a) => a.level === "danger" || a.level === "warning")
+    );
+  };
+
   const fetchWeatherData = async () => {
     try {
       setLoading(true);
@@ -87,7 +94,18 @@ function WeatherForecast() {
       const data = await response.json();
 
       if (data.success) {
-        setWeatherStats(data.data);
+        const realAlertDays = data.weatherData.filter((w) =>
+          hasRealAlert(w.diseaseAlerts)
+        ).length;
+
+        const stats = {
+          totalDays: data.data.totalDays,
+          rainyDays: data.data.rainyDays,
+          sunnyDays: data.data.sunnyDays,
+          avgHumidity: data.data.avgHumidity,
+          highRiskDays: realAlertDays, // <-- CẬP NHẬT
+        };
+        setWeatherStats(stats);
       }
     } catch (err) {
       console.error("Error fetching stats:", err);
@@ -493,7 +511,7 @@ function WeatherForecast() {
 
               {/* Stats Tab */}
               {activeTab === "stats" && weatherStats && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   <div className="bg-gradient-to-br from-blue-50 to-sky-50 rounded-xl p-6 shadow-md text-center">
                     <div className="text-4xl mb-3">📅</div>
                     <p className="text-gray-600 text-sm font-medium mb-2">
@@ -512,7 +530,7 @@ function WeatherForecast() {
                       {weatherStats.rainyDays}
                     </p>
                   </div>
-                  <div className="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-xl p-6 shadow-md text-center">
+                  {/* <div className="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-xl p-6 shadow-md text-center">
                     <div className="text-4xl mb-3">☀️</div>
                     <p className="text-gray-600 text-sm font-medium mb-2">
                       Ngày nắng
@@ -520,17 +538,17 @@ function WeatherForecast() {
                     <p className="text-3xl font-bold text-amber-700">
                       {weatherStats.sunnyDays}
                     </p>
-                  </div>
+                  </div> */}
                   <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-6 shadow-md text-center">
                     <div className="text-4xl mb-3">⚠️</div>
                     <p className="text-gray-600 text-sm font-medium mb-2">
                       Ngày có cảnh báo
                     </p>
                     <p className="text-3xl font-bold text-red-700">
-                      {weatherStats.hasRealAlerts}
+                      {weatherStats.highRiskDays}
                     </p>
                   </div>
-                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 shadow-md text-center md:col-span-2">
+                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 shadow-md text-center md:col-span-1">
                     <div className="text-4xl mb-3">💧</div>
                     <p className="text-gray-600 text-sm font-medium mb-2">
                       Độ ẩm trung bình

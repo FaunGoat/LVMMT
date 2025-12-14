@@ -276,6 +276,23 @@ const WeatherPopupV2 = () => {
                     </ul>
                   </div>
                 )}
+                {!weatherData.some(
+                  (d) =>
+                    d.diseaseAlerts &&
+                    d.diseaseAlerts.some(
+                      (a) => a.level === "danger" || a.level === "warning"
+                    )
+                ) && (
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-500 rounded-lg p-5 mb-6">
+                    <h3 className="font-bold text-green-800 mb-2 flex items-center gap-2 text-lg">
+                      <span>Thời tiết thuận lợi</span>
+                    </h3>
+                    <p>
+                      Trong 3 ngày tới không có cảnh báo bệnh hại đáng lo ngại.
+                      Tiếp tục chăm sóc cây trồng theo phương pháp thông thường.
+                    </p>
+                  </div>
+                )}
 
                 {/* Actions */}
                 <div className="flex flex-col sm:flex-row gap-3">
