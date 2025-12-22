@@ -64,13 +64,19 @@ async function groupDiseasesByType() {
 }
 
 // ========== HÀM HELPER EXTRACT CONTEXT ==========
-function extractContextParameter(contexts, contextName, parameterName) {
-  if (!contexts || contexts.length === 0) return null;
+function getContextParameter(outputContexts, contextName, paramName) {
+  if (!outputContexts || outputContexts.length === 0) return null;
 
-  const context = contexts.find((c) => c.name.includes(contextName));
+  const context = outputContexts.find(
+    (c) => c.name && c.name.includes(contextName)
+  );
   if (!context || !context.parameters) return null;
 
-  return context.parameters[parameterName];
+  const value =
+    context.parameters.fields?.[paramName]?.stringValue ||
+    context.parameters[paramName];
+
+  return value;
 }
 
 exports.handleWebhook = async (req, res) => {
@@ -78,6 +84,22 @@ exports.handleWebhook = async (req, res) => {
   const intent = req.body.queryResult.intent.displayName;
   const parameters = req.body.queryResult.parameters || {};
   const queryText = req.body.queryResult.queryText || "";
+
+  let outputContextsToSend = [];
+
+  const outputContexts_all = req.body.queryResult.outputContexts || [];
+  const selectedDiseaseContext = outputContexts_all.find((c) =>
+    c.name.includes("selected-disease")
+  );
+
+  let contextDiseaseId = null;
+  let contextDiseaseName = null;
+
+  if (selectedDiseaseContext && selectedDiseaseContext.parameters) {
+    contextDiseaseId = selectedDiseaseContext.parameters.diseaseId;
+    contextDiseaseName = selectedDiseaseContext.parameters.diseaseName;
+    console.log("✅ Found context disease:", contextDiseaseName);
+  }
 
   // Extract entities
   const diseaseEntity = extractEntity(parameters, "disease");
@@ -104,14 +126,44 @@ exports.handleWebhook = async (req, res) => {
       intent === "Ask_Disease_Season"
     ) {
       const diseaseName = getDiseaseName(diseaseEntity) || cleanText(queryText);
-      const searchQuery = buildSearchQuery(diseaseName);
-      const disease = await Disease.findOne(searchQuery)
-        .populate("causes")
-        .populate("seasons");
+      // const searchQuery = buildSearchQuery(diseaseName);
+      // const disease = await Disease.findOne(searchQuery)
+      //   .populate("causes")
+      //   .populate("seasons");
+
+      let disease = null;
+
+      // 1. ƯU TIÊN SỐ 1: Nếu người dùng nhắc tên bệnh mới trong câu hỏi (Entity)
+      if (diseaseEntity) {
+        const searchQuery = buildSearchQuery(diseaseName);
+        disease = await Disease.findOne(searchQuery)
+          .populate("causes")
+          .populate("seasons");
+        console.log("📌 Tìm thấy bệnh mới từ Entity:", disease?.name);
+      }
+
+      // 2. ƯU TIÊN SỐ 2: Nếu không nhắc tên bệnh, mới lấy từ Context (Hỏi nối tiếp)
+      if (!disease && contextDiseaseId) {
+        disease = await Disease.findById(contextDiseaseId)
+          .populate("causes")
+          .populate("seasons");
+        console.log("📌 Sử dụng lại bệnh cũ từ Context:", disease?.name);
+      }
+
+      // 3. FALLBACK: Tìm theo text tự do
+      if (!disease) {
+        const diseaseName = cleanText(queryText);
+        disease = await Disease.findOne({
+          $or: [
+            { name: { $regex: diseaseName, $options: "i" } },
+            { commonName: { $regex: diseaseName, $options: "i" } },
+          ],
+        });
+      }
 
       if (!disease) {
         responseText =
-          `Tôi chưa tìm thấy thông tin về "${diseaseName || queryText}".\n\n` +
+          `Tôi chưa tìm thấy thông tin về "${disease || queryText}".\n\n` +
           `Bạn có thể hỏi về:\n` +
           `• Đạo ôn\n• Rầy nâu\n• Lem lép hạt\n• Cháy bìa lá\n• Sâu cuốn lá`;
       } else {
@@ -125,11 +177,21 @@ exports.handleWebhook = async (req, res) => {
         responseText = await generateSmartResponse(
           disease,
           finalQuestionType,
-          diseaseName
+          disease
         );
 
+        outputContextsToSend.push({
+          name: `${sessionPath}/contexts/selected-disease`,
+          lifespanCount: 10,
+          parameters: {
+            diseaseId: disease._id.toString(),
+            diseaseName: disease.name,
+            lastQuestionType: finalQuestionType,
+          },
+        });
+
         // ✅ CHỈ HIỂN THỊ HÌNH ẢNH KHI HỎI VỀ ĐỊNH NGHĨA HOẶC TRIỆU CHỨNG
-        const shouldShowImages = ["definition", "symptoms"].includes(
+        const shouldShowImages = ["definition", "general", "symptoms"].includes(
           finalQuestionType
         );
 
@@ -174,13 +236,22 @@ exports.handleWebhook = async (req, res) => {
             );
 
           if (diseases.length > 0) {
+            const primaryDisease = diseases[0];
+
             responseText = generateDiseaseSummaryBySymptom(
               diseases,
               symptomKeywords,
               queryText
             );
 
-            const primaryDisease = diseases[0];
+            outputContextsToSend.push({
+              name: `${sessionPath}/contexts/selected-disease`,
+              lifespanCount: 10,
+              parameters: {
+                diseaseId: primaryDisease._id.toString(),
+                diseaseName: primaryDisease.name,
+              },
+            });
 
             // ✅ LUÔN HIỂN THỊ ẢNH KHI TÌM BỆNH THEO TRIỆU CHỨNG
             responseData = {
@@ -207,10 +278,43 @@ exports.handleWebhook = async (req, res) => {
       intent === "Ask_Disease_Treatment" ||
       intent === "Ask_Disease_Treatment_Specific"
     ) {
+      console.log("→ Handling Ask_Disease_Treatment");
+
       const diseaseName = getDiseaseName(diseaseEntity) || cleanText(queryText);
+
+      let disease = null;
+
+      // 1. ƯU TIÊN SỐ 1: Nếu người dùng nhắc tên bệnh mới trong câu hỏi (Entity)
+      if (diseaseEntity) {
+        const searchQuery = buildSearchQuery(diseaseName);
+        disease = await Disease.findOne(searchQuery)
+          .populate("causes")
+          .populate("seasons");
+        console.log("📌 Tìm thấy bệnh mới từ Entity:", disease?.name);
+      }
+
+      // 2. ƯU TIÊN SỐ 2: Nếu không nhắc tên bệnh, mới lấy từ Context (Hỏi nối tiếp)
+      if (!disease && contextDiseaseId) {
+        disease = await Disease.findById(contextDiseaseId)
+          .populate("causes")
+          .populate("seasons");
+        console.log("📌 Sử dụng lại bệnh cũ từ Context:", disease?.name);
+      }
+
+      // 3. FALLBACK: Tìm theo text tự do
+      if (!disease) {
+        const diseaseName = cleanText(queryText);
+        disease = await Disease.findOne({
+          $or: [
+            { name: { $regex: diseaseName, $options: "i" } },
+            { commonName: { $regex: diseaseName, $options: "i" } },
+          ],
+        });
+      }
+
       const treatmentType = getTreatmentType(treatmentEntity);
-      const searchQuery = buildSearchQuery(diseaseName);
-      const disease = await Disease.findOne(searchQuery);
+      // const searchQuery = buildSearchQuery(diseaseName);
+      // const disease = await Disease.findOne(searchQuery);
 
       if (!disease) {
         responseText = `Vui lòng cho biết bạn muốn chữa bệnh gì?\n\nVí dụ: "Cách chữa đạo ôn"`;
@@ -248,7 +352,10 @@ exports.handleWebhook = async (req, res) => {
           showImages: false,
         };
       }
-    } else if (intent === "Ask_All_Diseases") {
+    }
+
+    // ========== INTENT: ASK_ALL_DISEASES ==========
+    else if (intent === "Ask_All_Diseases") {
       console.log("→ Handling Ask_All_Diseases");
 
       const { grouped, indexMap } = await groupDiseasesByType();
@@ -282,7 +389,7 @@ exports.handleWebhook = async (req, res) => {
           `• Ví dụ: "1" hoặc "Đạo ôn"`;
 
         // Set Output Context: disease-list
-        outputContexts = [
+        outputContextsToSend = [
           {
             name: `${sessionPath}/contexts/disease-list`,
             lifespanCount: 5,
@@ -321,66 +428,32 @@ exports.handleWebhook = async (req, res) => {
       let selectedDisease = null;
       let indexMap = {};
 
-      // Lấy tất cả contexts
-      const inputContexts = req.body.queryResult.inputContexts || [];
-      const outputContexts_temp = req.body.queryResult.outputContexts || [];
-
+      // ✅ LẤY indexMap TỪ OUTPUT CONTEXTS
       console.log(
-        "📥 Input Contexts names:",
-        inputContexts.map((c) => c.name.split("/contexts/")[1])
-      );
-      console.log(
-        "📤 Output Contexts names:",
-        outputContexts_temp.map((c) => c.name.split("/contexts/")[1])
+        "📤 Available contexts:",
+        outputContextsToSend.map((c) => c.name)
       );
 
-      // TÌM disease-list context từ outputContexts (context từ response trước)
-      let diseaseListContext = outputContexts_temp.find((c) =>
-        c.name.includes("disease-list")
+      const indexMapStr = getContextParameter(
+        outputContexts_all,
+        "disease-list",
+        "indexMap"
       );
 
-      // Nếu không có, tìm từ inputContexts
-      if (!diseaseListContext) {
-        diseaseListContext = inputContexts.find((c) =>
-          c.name.includes("disease-list")
-        );
-      }
-
-      // Parse indexMap từ context
-      if (diseaseListContext && diseaseListContext.parameters) {
+      if (indexMapStr) {
         try {
-          const indexMapStr = diseaseListContext.parameters.indexMap;
-          console.log("🔍 IndexMap string length:", indexMapStr?.length || 0);
-
-          if (indexMapStr) {
-            indexMap = JSON.parse(indexMapStr);
-            console.log(
-              "✅ IndexMap loaded:",
-              Object.keys(indexMap).length,
-              "entries"
-            );
-            console.log(
-              "📊 IndexMap preview:",
-              Object.entries(indexMap).slice(0, 3)
-            );
-          } else {
-            console.warn("⚠️ IndexMap string is empty");
-          }
+          indexMap = JSON.parse(indexMapStr);
+          console.log(
+            "✅ IndexMap loaded:",
+            Object.keys(indexMap).length,
+            "entries"
+          );
         } catch (e) {
           console.error("❌ Error parsing indexMap:", e.message);
-          console.error("Raw parameters:", diseaseListContext.parameters);
         }
       } else {
-        console.warn(
-          "⚠️ disease-list context not found in output or input contexts"
-        );
-        console.log(
-          "Available contexts:",
-          outputContexts_temp.map((c) => c.name)
-        );
+        console.warn("⚠️ IndexMap not found in contexts");
       }
-
-      console.log("IndexMap:", indexMap);
 
       // ========== CASE 1: INPUT LÀ SỐ ==========
       const numberMatch = queryText.match(/^\d+$/);
@@ -388,7 +461,6 @@ exports.handleWebhook = async (req, res) => {
         const selectedIndex = parseInt(numberMatch[0]);
         console.log(`🔢 Nhập số: ${selectedIndex}`);
 
-        // Tìm trong indexMap
         const diseaseInfo = indexMap[selectedIndex];
 
         if (diseaseInfo) {
@@ -396,17 +468,10 @@ exports.handleWebhook = async (req, res) => {
           selectedDisease = await Disease.findById(diseaseInfo.diseaseId)
             .populate("causes")
             .populate("seasons");
-
-          if (selectedDisease) {
-            console.log(`✅ Disease loaded: ${selectedDisease.name}`);
-          } else {
-            console.warn(
-              `⚠️ Disease không tìm thấy trong DB: ${diseaseInfo.diseaseId}`
-            );
-          }
         } else {
           console.warn(`⚠️ Số ${selectedIndex} không có trong indexMap`);
-          // Fallback: tất cả các diseases từ DB
+
+          // Fallback: tìm trong tất cả diseases
           const allDiseases = await Disease.find()
             .select("_id name commonName type")
             .lean();
@@ -422,10 +487,14 @@ exports.handleWebhook = async (req, res) => {
       }
       // ========== CASE 2: INPUT LÀ TÊN BỆNH ==========
       else {
-        const searchTerm = diseaseEntity || cleanText(queryText);
-        console.log(`📝 Tìm bệnh theo tên: "${searchTerm}"`);
+        // ✅ MAP ENTITY SANG TÊN BỆNH TRONG DB
+        let searchTerm = diseaseEntity
+          ? getDiseaseName(diseaseEntity)
+          : cleanText(queryText);
+        console.log(
+          `📝 Tìm bệnh theo tên: "${searchTerm}" (entity: ${diseaseEntity})`
+        );
 
-        // CÁCH 1: Tìm trực tiếp theo tên (không dùng buildSearchQuery)
         selectedDisease = await Disease.findOne({
           $or: [
             { name: { $regex: searchTerm, $options: "i" } },
@@ -441,26 +510,16 @@ exports.handleWebhook = async (req, res) => {
         } else {
           console.warn(`⚠️ Không tìm thấy bệnh: "${searchTerm}"`);
 
-          // FALLBACK: Tìm bằng cách khác (tokenize từ)
-          console.log(`🔍 Thử fallback search...`);
-          const tokens = searchTerm.split(/\s+/);
-          const regexPatterns = tokens
-            .filter((t) => t.length > 2)
-            .map((t) => new RegExp(t, "i"));
+          // Fallback: Tìm trong indexMap
+          const diseaseFromMap = Object.values(indexMap).find((d) =>
+            d.name.toLowerCase().includes(searchTerm.toLowerCase())
+          );
 
-          if (regexPatterns.length > 0) {
-            selectedDisease = await Disease.findOne({
-              $or: [
-                { name: { $in: regexPatterns } },
-                { commonName: { $in: regexPatterns } },
-              ],
-            })
+          if (diseaseFromMap) {
+            console.log(`✅ Tìm thấy trong indexMap:`, diseaseFromMap.name);
+            selectedDisease = await Disease.findById(diseaseFromMap.diseaseId)
               .populate("causes")
               .populate("seasons");
-
-            if (selectedDisease) {
-              console.log(`✅ Fallback tìm thấy:`, selectedDisease.name);
-            }
           }
         }
       }
@@ -473,8 +532,6 @@ exports.handleWebhook = async (req, res) => {
           `• Hỏi "Có bệnh nào?" để xem danh sách\n` +
           `• Nhập số từ danh sách (1, 2, 3...)\n` +
           `• Mô tả triệu chứng để tôi nhận biết`;
-
-        console.log("⚠️ Disease not found - returning error message");
       } else {
         const questionType = analyzeQuestion(queryText);
         console.log(`📋 Question type: ${questionType}`);
@@ -485,8 +542,8 @@ exports.handleWebhook = async (req, res) => {
           selectedDisease.name
         );
 
-        // ✅ Set Output Context: selected-disease
-        outputContexts = [
+        // ✅ SET OUTPUT CONTEXT: selected-disease
+        outputContextsToSend = [
           {
             name: `${sessionPath}/contexts/selected-disease`,
             lifespanCount: 10,
@@ -513,12 +570,6 @@ exports.handleWebhook = async (req, res) => {
           showImages: shouldShowImages,
           questionType,
         };
-
-        console.log(`✅ Response ready:`, {
-          diseaseName: selectedDisease.name,
-          questionType,
-          hasImages: shouldShowImages,
-        });
       }
     }
 
@@ -574,14 +625,40 @@ exports.handleWebhook = async (req, res) => {
     }
 
     // 8. HỎI VỀ GIAI ĐOẠN PHÁT TRIỂN BỆNH - KHÔNG HIỂN THỊ ẢNH
-    else if (
-      queryText.match(/giai đoạn|phát triển|vòng đời|chu kỳ/i) &&
-      (diseaseEntity ||
-        queryText.match(/đạo ôn|rầy nâu|lem lép|cháy bìa|cuốn lá/i))
-    ) {
+    else if (queryText.match(/giai đoạn|phát triển|vòng đời|chu kỳ/i)) {
+      console.log("→ Handling Ask_Disease_Prevention");
+
       const diseaseName = getDiseaseName(diseaseEntity) || cleanText(queryText);
-      const searchQuery = buildSearchQuery(diseaseName);
-      const disease = await Disease.findOne(searchQuery);
+
+      let disease = null;
+
+      // 1. ƯU TIÊN SỐ 1: Nếu người dùng nhắc tên bệnh mới trong câu hỏi (Entity)
+      if (diseaseEntity) {
+        const searchQuery = buildSearchQuery(diseaseName);
+        disease = await Disease.findOne(searchQuery)
+          .populate("causes")
+          .populate("seasons");
+        console.log("📌 Tìm thấy bệnh mới từ Entity:", disease?.name);
+      }
+
+      // 2. ƯU TIÊN SỐ 2: Nếu không nhắc tên bệnh, mới lấy từ Context (Hỏi nối tiếp)
+      if (!disease && contextDiseaseId) {
+        disease = await Disease.findById(contextDiseaseId)
+          .populate("causes")
+          .populate("seasons");
+        console.log("📌 Sử dụng lại bệnh cũ từ Context:", disease?.name);
+      }
+
+      // 3. FALLBACK: Tìm theo text tự do
+      if (!disease) {
+        const diseaseName = cleanText(queryText);
+        disease = await Disease.findOne({
+          $or: [
+            { name: { $regex: diseaseName, $options: "i" } },
+            { commonName: { $regex: diseaseName, $options: "i" } },
+          ],
+        });
+      }
 
       if (!disease) {
         responseText = `Tôi chưa tìm thấy thông tin về bệnh "${diseaseName}".`;
@@ -616,18 +693,28 @@ exports.handleWebhook = async (req, res) => {
           showImages: false,
         };
       }
+      if (disease) {
+        outputContextsToSend.push({
+          name: `${sessionPath}/contexts/selected-disease`,
+          lifespanCount: 10, // Refresh lại 10 lượt mới
+          parameters: {
+            diseaseId: disease._id.toString(),
+            diseaseName: disease.name,
+          },
+        });
+      }
     }
 
     // 9. HỎI VỀ MỐI LIÊN HỆ THỜI TIẾT VÀ BỆNH - KHÔNG HIỂN THỊ ẢNH
     else if (
       queryText.match(
         /thời tiết|mưa|nắng|nóng|ẩm|nhiệt độ|điều kiện|khí hậu|gió|khô/i
-      ) &&
-      queryText.match(
-        /bệnh|sâu|hại|gây|ảnh hưởng|thuận lợi|phát triển|yêu thích/i
       )
     ) {
+      console.log("→ Handling Ask_Disease_Weather");
+
       const weatherType = analyzeWeatherQuestion(queryText);
+      let disease = null;
 
       if (weatherType === "general_weather_impact") {
         responseText = await handleGeneralWeatherImpact(queryText);
@@ -635,10 +722,35 @@ exports.handleWebhook = async (req, res) => {
         responseText = await handleDiseasesByWeatherCondition(queryText);
       } else {
         const diseaseName =
-          getDiseaseName(diseaseEntity) ||
-          extractDiseaseNameFromQuery(queryText);
-        const searchQuery = buildSearchQuery(diseaseName);
-        const disease = await Disease.findOne(searchQuery);
+          getDiseaseName(diseaseEntity) || cleanText(queryText);
+
+        // 1. ƯU TIÊN SỐ 1: Nếu người dùng nhắc tên bệnh mới trong câu hỏi (Entity)
+        if (diseaseEntity) {
+          const searchQuery = buildSearchQuery(diseaseName);
+          disease = await Disease.findOne(searchQuery)
+            .populate("causes")
+            .populate("seasons");
+          console.log("📌 Tìm thấy bệnh mới từ Entity:", disease?.name);
+        }
+
+        // 2. ƯU TIÊN SỐ 2: Nếu không nhắc tên bệnh, mới lấy từ Context (Hỏi nối tiếp)
+        if (!disease && contextDiseaseId) {
+          disease = await Disease.findById(contextDiseaseId)
+            .populate("causes")
+            .populate("seasons");
+          console.log("📌 Sử dụng lại bệnh cũ từ Context:", disease?.name);
+        }
+
+        // 3. FALLBACK: Tìm theo text tự do
+        if (!disease) {
+          const diseaseName = cleanText(queryText);
+          disease = await Disease.findOne({
+            $or: [
+              { name: { $regex: diseaseName, $options: "i" } },
+              { commonName: { $regex: diseaseName, $options: "i" } },
+            ],
+          });
+        }
 
         if (!disease) {
           responseText = `Tôi chưa tìm thấy thông tin về bệnh "${diseaseName}".`;
@@ -702,22 +814,62 @@ exports.handleWebhook = async (req, res) => {
           };
         }
       }
+      if (disease) {
+        outputContextsToSend.push({
+          name: `${sessionPath}/contexts/selected-disease`,
+          lifespanCount: 10, // Refresh lại 10 lượt mới
+          parameters: {
+            diseaseId: disease._id.toString(),
+            diseaseName: disease.name,
+          },
+        });
+      }
     }
 
     // 10. HỎI VỀ PHÒNG NGỪA - KHÔNG HIỂN THỊ ẢNH
     else if (
       queryText.match(
         /phòng|phòng ngừa|phòng trừ|phòng tránh|dự phòng|làm sao để tránh|làm gì để tránh|cách phòng/i
-      ) &&
-      (diseaseEntity ||
-        queryText.match(/đạo ôn|rầy nâu|lem lép|cháy bìa|cuốn lá/i))
+      )
     ) {
-      const diseaseName = getDiseaseName(diseaseEntity) || cleanText(queryText);
-      const searchQuery = buildSearchQuery(diseaseName);
-      const disease = await Disease.findOne(searchQuery);
+      console.log("→ Handling Ask_Disease_Prevention");
+
+      let disease = null;
+
+      // 1. ƯU TIÊN SỐ 1: Nếu người dùng nhắc tên bệnh mới trong câu hỏi (Entity)
+      if (diseaseEntity) {
+        const searchQuery = buildSearchQuery(diseaseEntity);
+        disease = await Disease.findOne(searchQuery)
+          .populate("causes")
+          .populate("seasons");
+        console.log("📌 Tìm thấy bệnh mới từ Entity:", disease?.name);
+      }
+
+      // 2. ƯU TIÊN SỐ 2: Nếu không nhắc tên bệnh, mới lấy từ Context (Hỏi nối tiếp)
+      if (!disease && contextDiseaseId) {
+        disease = await Disease.findById(contextDiseaseId)
+          .populate("causes")
+          .populate("seasons");
+        console.log("📌 Sử dụng lại bệnh cũ từ Context:", disease?.name);
+      }
+
+      // 3. FALLBACK: Tìm theo text tự do
+      if (!disease) {
+        const diseaseName = cleanText(queryText);
+        disease = await Disease.findOne({
+          $or: [
+            { name: { $regex: diseaseName, $options: "i" } },
+            { commonName: { $regex: diseaseName, $options: "i" } },
+          ],
+        });
+      }
 
       if (!disease) {
-        responseText = `Tôi chưa tìm thấy thông tin về bệnh "${diseaseName}".`;
+        responseText =
+          `Tôi chưa biết bạn đang hỏi về bệnh nào.\n\n` +
+          `Bạn có thể:\n` +
+          `• Chọn bệnh từ danh sách\n` +
+          `• Hoặc hỏi "Có bệnh nào?" để xem danh sách`;
       } else {
         const preventionDoc = await DiseasePrevention.findOne({
           diseaseId: disease._id,
@@ -836,6 +988,16 @@ exports.handleWebhook = async (req, res) => {
           showImages: false,
         };
       }
+      if (disease) {
+        outputContextsToSend.push({
+          name: `${sessionPath}/contexts/selected-disease`,
+          lifespanCount: 10, // Refresh lại 10 lượt mới
+          parameters: {
+            diseaseId: disease._id.toString(),
+            diseaseName: disease.name,
+          },
+        });
+      }
     }
   } catch (error) {
     console.error("Webhook Error:", error);
@@ -844,11 +1006,8 @@ exports.handleWebhook = async (req, res) => {
 
   res.json({
     fulfillmentText: responseText,
-    payload: responseData
-      ? {
-          data: responseData,
-        }
-      : undefined,
+    outputContexts: outputContextsToSend, // Gửi toàn bộ mảng context đã thu thập
+    payload: responseData ? { data: responseData } : undefined,
   });
 };
 
@@ -1263,16 +1422,26 @@ async function handleDiseasesByWeatherCondition(queryText) {
 
 function extractDiseaseNameFromQuery(queryText) {
   const diseasePatterns = [
-    { pattern: /đạo ôn/i, name: "Bệnh đạo ôn" },
-    { pattern: /rầy nâu/i, name: "Rầy nâu" },
-    { pattern: /lem lép hạt/i, name: "Bệnh lem lép hạt" },
-    { pattern: /cháy bìa lá/i, name: "Bệnh cháy bìa lá" },
-    { pattern: /sâu cuốn lá/i, name: "Sâu cuốn lá" },
-    { pattern: /sâu đục thân/i, name: "Sâu đục thân" },
-    { pattern: /bọ trĩ/i, name: "Bọ trĩ" },
-    { pattern: /muỗi hành/i, name: "Muỗi hành" },
-    { pattern: /nhện gié|nhện/i, name: "Nhện gié" },
-    { pattern: /bọ xít hôi/i, name: "Bọ xít hôi" },
+    { pattern: /đạo ôn|cháy lá|thối cổ bông/i, name: "Bệnh đạo ôn" },
+    { pattern: /rầy nâu|rầy cám/i, name: "Rầy nâu" },
+    { pattern: /lem lép hạt|lửng hạt|lép hạt/i, name: "Bệnh lem lép hạt" },
+    { pattern: /cháy bìa lá|bạc lá lúa/i, name: "Bệnh cháy bìa lá" },
+    { pattern: /sâu cuốn lá|sâu gấp lá/i, name: "Sâu cuốn lá" },
+    { pattern: /sâu đục thân|bướm hai chấm/i, name: "Sâu đục thân" },
+    { pattern: /bọ trĩ|bù lạch/i, name: "Bọ trĩ" },
+    { pattern: /muỗi hành|sâu năng/i, name: "Muỗi hành" },
+    { pattern: /nhện gié|nhện|cạo gió/i, name: "Nhện gié" },
+    { pattern: /bọ xít hôi|bọ xít dài|bọ xít kim/i, name: "Bọ xít hôi" },
+    { pattern: /khô vằn|đốm vằn|ung thư lúa/i, name: "Bệnh khô vằn" },
+    { pattern: /lùn xoắn lá|lúa xoăn/i, name: "Bệnh lùn xoắn lá" },
+    { pattern: /lúa von|mạ đực/i, name: "Bệnh lúa von" },
+    { pattern: /sọc trong/i, name: "Bệnh sọc trong" },
+    { pattern: /thối bẹ|thối bẹ cờ/i, name: "Bệnh thối bẹ" },
+    { pattern: /thối thân|tiêm hạch nấm/i, name: "Bệnh thối thân" },
+    { pattern: /vàng lá chín sớm|vàng lá nấm/i, name: "Bệnh vàng lá chín sớm" },
+    { pattern: /vàng lùn|lúa cỏ/i, name: "Bệnh vàng lùn" },
+    { pattern: /đốm nâu|tiêm lửa|tiêm hạch/i, name: "Bệnh đốm nâu" },
+    { pattern: /đốm vòng|đốm mắt cua/i, name: "Bệnh đốm vòng" },
   ];
 
   for (let item of diseasePatterns) {
