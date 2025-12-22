@@ -18,7 +18,63 @@ const {
   cleanText,
 } = require("../utils/entityMapper");
 
+async function groupDiseasesByType() {
+  try {
+    const diseases = await Disease.find()
+      .select("_id name commonName type")
+      .lean();
+
+    const grouped = {};
+
+    // Nhóm bệnh theo type
+    diseases.forEach((disease) => {
+      const type = disease.type || "Khác";
+      if (!grouped[type]) {
+        grouped[type] = [];
+      }
+      grouped[type].push(disease);
+    });
+
+    // Giới hạn mỗi loại 3-4 bệnh
+    const result = {};
+    let globalIndex = 1;
+    const indexMap = {};
+
+    Object.keys(grouped)
+      .sort()
+      .forEach((type) => {
+        result[type] = grouped[type].slice(0, 4);
+
+        // Tạo mapping: globalIndex -> { diseaseId, name, type }
+        result[type].forEach((disease) => {
+          indexMap[globalIndex] = {
+            diseaseId: disease._id.toString(),
+            name: disease.name,
+            type: type,
+          };
+          globalIndex++;
+        });
+      });
+
+    return { grouped: result, indexMap };
+  } catch (error) {
+    console.error("Error in groupDiseasesByType:", error);
+    return { grouped: {}, indexMap: {} };
+  }
+}
+
+// ========== HÀM HELPER EXTRACT CONTEXT ==========
+function extractContextParameter(contexts, contextName, parameterName) {
+  if (!contexts || contexts.length === 0) return null;
+
+  const context = contexts.find((c) => c.name.includes(contextName));
+  if (!context || !context.parameters) return null;
+
+  return context.parameters[parameterName];
+}
+
 exports.handleWebhook = async (req, res) => {
+  const sessionPath = req.body.session || "unknown-session";
   const intent = req.body.queryResult.intent.displayName;
   const parameters = req.body.queryResult.parameters || {};
   const queryText = req.body.queryResult.queryText || "";
@@ -191,6 +247,278 @@ exports.handleWebhook = async (req, res) => {
           },
           showImages: false,
         };
+      }
+    } else if (intent === "Ask_All_Diseases") {
+      console.log("→ Handling Ask_All_Diseases");
+
+      const { grouped, indexMap } = await groupDiseasesByType();
+
+      if (Object.keys(grouped).length === 0) {
+        responseText = "Hiện chưa có dữ liệu bệnh trong hệ thống.";
+      } else {
+        responseText = "DANH SÁCH BỆNH LÚA (Theo loại)\n\n";
+
+        Object.keys(grouped).forEach((type) => {
+          responseText += `🔹 ${type.toUpperCase()}\n`;
+
+          grouped[type].forEach((disease) => {
+            const idx = Object.keys(indexMap).find(
+              (k) => indexMap[k].diseaseId === disease._id.toString()
+            );
+            responseText += `  ${idx}. ${disease.name}`;
+            if (disease.commonName) {
+              responseText += ` (${disease.commonName})`;
+            }
+            responseText += `\n`;
+          });
+
+          responseText += `\n`;
+        });
+
+        responseText +=
+          `Gợi ý:\n` +
+          `• Nhập số (1, 2, 3...)\n` +
+          `• Hoặc gõ tên bệnh\n` +
+          `• Ví dụ: "1" hoặc "Đạo ôn"`;
+
+        // Set Output Context: disease-list
+        outputContexts = [
+          {
+            name: `${sessionPath}/contexts/disease-list`,
+            lifespanCount: 5,
+            parameters: {
+              indexMap: JSON.stringify(indexMap),
+              diseasesByType: JSON.stringify(grouped),
+            },
+          },
+        ];
+
+        // Gửi danh sách cho frontend
+        responseData = {
+          type: "disease_list_grouped",
+          diseasesByType: Object.keys(grouped).map((type) => ({
+            type: type,
+            diseases: grouped[type].map((d) => {
+              const globalIdx = Object.keys(indexMap).find(
+                (k) => indexMap[k].diseaseId === d._id.toString()
+              );
+              return {
+                id: d._id,
+                name: d.name,
+                commonName: d.commonName,
+                index: globalIdx ? parseInt(globalIdx) : 0,
+              };
+            }),
+          })),
+        };
+      }
+    }
+
+    // ========== INTENT 2: SELECT_DISEASE - Chọn bệnh từ danh sách ==========
+    else if (intent === "Select_Disease") {
+      console.log("\n→ Handling Select_Disease");
+
+      let selectedDisease = null;
+      let indexMap = {};
+
+      // Lấy tất cả contexts
+      const inputContexts = req.body.queryResult.inputContexts || [];
+      const outputContexts_temp = req.body.queryResult.outputContexts || [];
+
+      console.log(
+        "📥 Input Contexts names:",
+        inputContexts.map((c) => c.name.split("/contexts/")[1])
+      );
+      console.log(
+        "📤 Output Contexts names:",
+        outputContexts_temp.map((c) => c.name.split("/contexts/")[1])
+      );
+
+      // TÌM disease-list context từ outputContexts (context từ response trước)
+      let diseaseListContext = outputContexts_temp.find((c) =>
+        c.name.includes("disease-list")
+      );
+
+      // Nếu không có, tìm từ inputContexts
+      if (!diseaseListContext) {
+        diseaseListContext = inputContexts.find((c) =>
+          c.name.includes("disease-list")
+        );
+      }
+
+      // Parse indexMap từ context
+      if (diseaseListContext && diseaseListContext.parameters) {
+        try {
+          const indexMapStr = diseaseListContext.parameters.indexMap;
+          console.log("🔍 IndexMap string length:", indexMapStr?.length || 0);
+
+          if (indexMapStr) {
+            indexMap = JSON.parse(indexMapStr);
+            console.log(
+              "✅ IndexMap loaded:",
+              Object.keys(indexMap).length,
+              "entries"
+            );
+            console.log(
+              "📊 IndexMap preview:",
+              Object.entries(indexMap).slice(0, 3)
+            );
+          } else {
+            console.warn("⚠️ IndexMap string is empty");
+          }
+        } catch (e) {
+          console.error("❌ Error parsing indexMap:", e.message);
+          console.error("Raw parameters:", diseaseListContext.parameters);
+        }
+      } else {
+        console.warn(
+          "⚠️ disease-list context not found in output or input contexts"
+        );
+        console.log(
+          "Available contexts:",
+          outputContexts_temp.map((c) => c.name)
+        );
+      }
+
+      console.log("IndexMap:", indexMap);
+
+      // ========== CASE 1: INPUT LÀ SỐ ==========
+      const numberMatch = queryText.match(/^\d+$/);
+      if (numberMatch) {
+        const selectedIndex = parseInt(numberMatch[0]);
+        console.log(`🔢 Nhập số: ${selectedIndex}`);
+
+        // Tìm trong indexMap
+        const diseaseInfo = indexMap[selectedIndex];
+
+        if (diseaseInfo) {
+          console.log(`✅ Tìm thấy bệnh từ số ${selectedIndex}:`, diseaseInfo);
+          selectedDisease = await Disease.findById(diseaseInfo.diseaseId)
+            .populate("causes")
+            .populate("seasons");
+
+          if (selectedDisease) {
+            console.log(`✅ Disease loaded: ${selectedDisease.name}`);
+          } else {
+            console.warn(
+              `⚠️ Disease không tìm thấy trong DB: ${diseaseInfo.diseaseId}`
+            );
+          }
+        } else {
+          console.warn(`⚠️ Số ${selectedIndex} không có trong indexMap`);
+          // Fallback: tất cả các diseases từ DB
+          const allDiseases = await Disease.find()
+            .select("_id name commonName type")
+            .lean();
+
+          if (selectedIndex > 0 && selectedIndex <= allDiseases.length) {
+            const disease = allDiseases[selectedIndex - 1];
+            console.log(`✅ Fallback: Tìm thấy bệnh:`, disease.name);
+            selectedDisease = await Disease.findById(disease._id)
+              .populate("causes")
+              .populate("seasons");
+          }
+        }
+      }
+      // ========== CASE 2: INPUT LÀ TÊN BỆNH ==========
+      else {
+        const searchTerm = diseaseEntity || cleanText(queryText);
+        console.log(`📝 Tìm bệnh theo tên: "${searchTerm}"`);
+
+        // CÁCH 1: Tìm trực tiếp theo tên (không dùng buildSearchQuery)
+        selectedDisease = await Disease.findOne({
+          $or: [
+            { name: { $regex: searchTerm, $options: "i" } },
+            { commonName: { $regex: searchTerm, $options: "i" } },
+            { scientificName: { $regex: searchTerm, $options: "i" } },
+          ],
+        })
+          .populate("causes")
+          .populate("seasons");
+
+        if (selectedDisease) {
+          console.log(`✅ Tìm thấy bệnh:`, selectedDisease.name);
+        } else {
+          console.warn(`⚠️ Không tìm thấy bệnh: "${searchTerm}"`);
+
+          // FALLBACK: Tìm bằng cách khác (tokenize từ)
+          console.log(`🔍 Thử fallback search...`);
+          const tokens = searchTerm.split(/\s+/);
+          const regexPatterns = tokens
+            .filter((t) => t.length > 2)
+            .map((t) => new RegExp(t, "i"));
+
+          if (regexPatterns.length > 0) {
+            selectedDisease = await Disease.findOne({
+              $or: [
+                { name: { $in: regexPatterns } },
+                { commonName: { $in: regexPatterns } },
+              ],
+            })
+              .populate("causes")
+              .populate("seasons");
+
+            if (selectedDisease) {
+              console.log(`✅ Fallback tìm thấy:`, selectedDisease.name);
+            }
+          }
+        }
+      }
+
+      // ========== RESPONSE ==========
+      if (!selectedDisease) {
+        responseText =
+          `Tôi chưa tìm thấy bệnh này.\n\n` +
+          `Bạn có thể:\n` +
+          `• Hỏi "Có bệnh nào?" để xem danh sách\n` +
+          `• Nhập số từ danh sách (1, 2, 3...)\n` +
+          `• Mô tả triệu chứng để tôi nhận biết`;
+
+        console.log("⚠️ Disease not found - returning error message");
+      } else {
+        const questionType = analyzeQuestion(queryText);
+        console.log(`📋 Question type: ${questionType}`);
+
+        responseText = await generateSmartResponse(
+          selectedDisease,
+          questionType,
+          selectedDisease.name
+        );
+
+        // ✅ Set Output Context: selected-disease
+        outputContexts = [
+          {
+            name: `${sessionPath}/contexts/selected-disease`,
+            lifespanCount: 10,
+            parameters: {
+              diseaseId: selectedDisease._id.toString(),
+              diseaseName: selectedDisease.name,
+              lastQuestionType: questionType,
+            },
+          },
+        ];
+
+        const shouldShowImages = ["definition", "symptoms"].includes(
+          questionType
+        );
+
+        responseData = {
+          type: "disease",
+          disease: {
+            _id: selectedDisease._id,
+            name: selectedDisease.name,
+            images: shouldShowImages ? selectedDisease.images || [] : [],
+            link: `/sustainable-methods?id=${selectedDisease._id}`,
+          },
+          showImages: shouldShowImages,
+          questionType,
+        };
+
+        console.log(`✅ Response ready:`, {
+          diseaseName: selectedDisease.name,
+          questionType,
+          hasImages: shouldShowImages,
+        });
       }
     }
 

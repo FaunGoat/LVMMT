@@ -231,7 +231,11 @@ const WeatherPopupV2 = () => {
 
                 {/* Key Alerts Summary */}
                 {weatherData.some(
-                  (d) => d.diseaseAlerts && d.diseaseAlerts.length > 0
+                  (d) =>
+                    d.diseaseAlerts &&
+                    d.diseaseAlerts.some(
+                      (a) => a.level === "danger" || a.level === "warning"
+                    )
                 ) && (
                   <div className="bg-gradient-to-r from-orange-50 to-red-50 border-l-4 border-orange-500 rounded-lg p-5 mb-6">
                     <h3 className="font-bold text-orange-800 mb-3 flex items-center gap-2 text-lg">
@@ -289,7 +293,7 @@ const WeatherPopupV2 = () => {
                     </h3>
                     <p>
                       Trong 3 ngày tới không có cảnh báo bệnh hại đáng lo ngại.
-                      Tiếp tục chăm sóc cây trồng theo phương pháp thông thường.
+                      Hãy tiếp tục chăm sóc cây trồng của bạn.
                     </p>
                   </div>
                 )}
