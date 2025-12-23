@@ -38,6 +38,16 @@ const treatmentTypeMap = {
 };
 
 /**
+ * Map disease type entity sang Vietnamese
+ */
+const diseaseTypeMap = {
+  benh_nam: "Bệnh nấm",
+  sau_hai: "Sâu hại",
+  benh_vi_khuan: "Bệnh vi khuẩn",
+  benh_virus: "Bệnh virus",
+};
+
+/**
  * Map season entity sang Vietnamese (Mới: @season)
  */
 const seasonMap = {
@@ -269,6 +279,13 @@ function getSymptomKeywords(entityValue) {
   return Array.from(keywords);
 }
 
+/**
+ * Hàm mới: Get Disease Type
+ */
+function getDiseaseType(entityValue) {
+  return diseaseTypeMap[entityValue] || entityValue;
+}
+
 // Hàm mới: Get Season
 function getSeason(entityValue) {
   return seasonMap[entityValue] || entityValue;
@@ -308,8 +325,10 @@ module.exports = {
   getTreatmentType,
   getSymptomKeywords,
   getSeason,
+  getDiseaseType,
   buildSearchQuery,
   formatLocation,
   cleanText,
+  diseaseEntityMap,
   symptomKeywordMap, // Export thêm để dùng trong webhookController
 };

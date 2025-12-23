@@ -16,6 +16,7 @@ const {
   getSymptomKeywords,
   buildSearchQuery,
   cleanText,
+  getDiseaseType,
 } = require("../utils/entityMapper");
 
 async function groupDiseasesByType() {
@@ -106,12 +107,14 @@ exports.handleWebhook = async (req, res) => {
   const treatmentEntity = extractEntity(parameters, "treatment_type");
   const symptomEntity = extractEntity(parameters, "symptom-keyword");
   const seasonEntity = extractEntity(parameters, "season");
+  const diseaseTypeEntity = extractEntity(parameters, "disease_type");
 
   console.log("Entities extracted:");
   console.log("  - Disease:", diseaseEntity);
   console.log("  - Treatment:", treatmentEntity);
   console.log("  - Symptom:", symptomEntity);
   console.log("  - Season:", seasonEntity);
+  console.log("  - Disease Type:", diseaseTypeEntity);
 
   let responseText =
     "Xin lỗi, tôi chưa có đủ thông tin để trả lời câu hỏi của bạn.";
@@ -190,7 +193,7 @@ exports.handleWebhook = async (req, res) => {
           },
         });
 
-        // ✅ CHỈ HIỂN THỊ HÌNH ẢNH KHI HỎI VỀ ĐỊNH NGHĨA HOẶC TRIỆU CHỨNG
+        // CHỈ HIỂN THỊ HÌNH ẢNH KHI HỎI VỀ ĐỊNH NGHĨA HOẶC TRIỆU CHỨNG
         const shouldShowImages = ["definition", "general", "symptoms"].includes(
           finalQuestionType
         );
@@ -358,66 +361,156 @@ exports.handleWebhook = async (req, res) => {
     else if (intent === "Ask_All_Diseases") {
       console.log("→ Handling Ask_All_Diseases");
 
-      const { grouped, indexMap } = await groupDiseasesByType();
+      const diseaseTypeEntity = extractEntity(parameters, "disease_type");
+      console.log("  - Disease Type:", diseaseTypeEntity);
 
-      if (Object.keys(grouped).length === 0) {
-        responseText = "Hiện chưa có dữ liệu bệnh trong hệ thống.";
-      } else {
-        responseText = "DANH SÁCH BỆNH LÚA (Theo loại)\n\n";
+      // Map entity sang tên loại trong DB
+      const typeMap = {
+        benh_nam: "Bệnh nấm",
+        sau_hai: "Sâu hại",
+        benh_vi_khuan: "Bệnh vi khuẩn",
+        benh_virus: "Bệnh virus",
+        sau_benh_khac: "Sâu bệnh khác",
+      };
 
-        Object.keys(grouped).forEach((type) => {
-          responseText += `🔹 ${type.toUpperCase()}\n`;
+      let diseaseType = typeMap[diseaseTypeEntity] || diseaseTypeEntity;
 
-          grouped[type].forEach((disease) => {
-            const idx = Object.keys(indexMap).find(
-              (k) => indexMap[k].diseaseId === disease._id.toString()
-            );
-            responseText += `  ${idx}. ${disease.name}`;
+      // Nếu không có entity, tìm trong query text
+      if (!diseaseType) {
+        const queryLower = queryText.toLowerCase();
+        if (queryLower.match(/bệnh nấm|nấm/)) diseaseType = "Bệnh nấm";
+        else if (queryLower.match(/sâu hại|sâu/)) diseaseType = "Sâu hại";
+        else if (queryLower.match(/vi khuẩn|vi-khuẩn/))
+          diseaseType = "Bệnh vi khuẩn";
+        else if (queryLower.match(/virus/)) diseaseType = "Bệnh virus";
+      }
+
+      // ========== CASE 1: HỎI VỀ LOẠI CỤ THỂ ==========
+      if (diseaseType && diseaseType !== queryText) {
+        console.log(`→ Showing diseases of type: ${diseaseType}`);
+
+        const diseases = await Disease.find({ type: diseaseType })
+          .select("_id name commonName severityRisk economicLoss")
+          .lean();
+
+        if (diseases.length === 0) {
+          responseText = `Hiện chưa có dữ liệu về ${diseaseType}.`;
+        } else {
+          responseText = `🔹 ${diseaseType.toUpperCase()}\n\n`;
+
+          // Tạo indexMap riêng cho loại bệnh này
+          const indexMap = {};
+          diseases.forEach((disease, idx) => {
+            const globalIdx = idx + 1;
+            indexMap[globalIdx] = {
+              diseaseId: disease._id.toString(),
+              name: disease.name,
+              type: diseaseType,
+            };
+
+            responseText += `${globalIdx}. ${disease.name}`;
             if (disease.commonName) {
               responseText += ` (${disease.commonName})`;
             }
+            responseText += `\n   Nguy cơ: ${disease.severityRisk} | Thiệt hại: ${disease.economicLoss}\n\n`;
+          });
+
+          responseText +=
+            `Gợi ý:\n` +
+            `• Nhập số để xem chi tiết (1, 2, 3...)\n` +
+            `• Hoặc gõ tên bệnh\n` +
+            `• Hỏi "Có bệnh nào?" để xem tất cả\n` +
+            `• Ví dụ: "1" hoặc "Đạo ôn"`;
+
+          // Lưu context
+          outputContextsToSend = [
+            {
+              name: `${sessionPath}/contexts/disease-list`,
+              lifespanCount: 5,
+              parameters: {
+                indexMap: JSON.stringify(indexMap),
+                diseaseType: diseaseType,
+              },
+            },
+          ];
+
+          responseData = {
+            type: "disease_list_by_type",
+            diseaseType: diseaseType,
+            diseases: diseases.map((d, idx) => ({
+              id: d._id,
+              name: d.name,
+              commonName: d.commonName,
+              severityRisk: d.severityRisk,
+              economicLoss: d.economicLoss,
+              index: idx + 1,
+            })),
+          };
+        }
+      }
+      // ========== CASE 2: HỎI DANH SÁCH TỔNG ==========
+      else {
+        console.log("→ Showing all diseases grouped by type");
+
+        const { grouped, indexMap } = await groupDiseasesByType();
+
+        if (Object.keys(grouped).length === 0) {
+          responseText = "Hiện chưa có dữ liệu bệnh trong hệ thống.";
+        } else {
+          responseText = "DANH SÁCH BỆNH LÚA (Theo loại)\n\n";
+
+          Object.keys(grouped).forEach((type) => {
+            responseText += `🔹 ${type.toUpperCase()}\n`;
+            grouped[type].forEach((disease) => {
+              const idx = Object.keys(indexMap).find(
+                (k) => indexMap[k].diseaseId === disease._id.toString()
+              );
+              responseText += `  ${idx}. ${disease.name}`;
+              if (disease.commonName) {
+                responseText += ` (${disease.commonName})`;
+              }
+              responseText += `\n`;
+            });
             responseText += `\n`;
           });
 
-          responseText += `\n`;
-        });
+          responseText +=
+            `Gợi ý:\n` +
+            `• Nhập số (1, 2, 3...)\n` +
+            `• Hoặc gõ tên bệnh\n` +
+            `• Hỏi về loại bệnh: "Bệnh nấm có gì?"\n` +
+            `• Ví dụ: "1" hoặc "Đạo ôn"`;
 
-        responseText +=
-          `Gợi ý:\n` +
-          `• Nhập số (1, 2, 3...)\n` +
-          `• Hoặc gõ tên bệnh\n` +
-          `• Ví dụ: "1" hoặc "Đạo ôn"`;
-
-        // Set Output Context: disease-list
-        outputContextsToSend = [
-          {
-            name: `${sessionPath}/contexts/disease-list`,
-            lifespanCount: 5,
-            parameters: {
-              indexMap: JSON.stringify(indexMap),
-              diseasesByType: JSON.stringify(grouped),
+          // ✅ LƯU CONTEXT ĐỂ DIALOGFLOW XỬ LÝ
+          outputContextsToSend = [
+            {
+              name: `${sessionPath}/contexts/disease-list`,
+              lifespanCount: 5,
+              parameters: {
+                indexMap: JSON.stringify(indexMap),
+                diseasesByType: JSON.stringify(grouped),
+              },
             },
-          },
-        ];
+          ];
 
-        // Gửi danh sách cho frontend
-        responseData = {
-          type: "disease_list_grouped",
-          diseasesByType: Object.keys(grouped).map((type) => ({
-            type: type,
-            diseases: grouped[type].map((d) => {
-              const globalIdx = Object.keys(indexMap).find(
-                (k) => indexMap[k].diseaseId === d._id.toString()
-              );
-              return {
-                id: d._id,
-                name: d.name,
-                commonName: d.commonName,
-                index: globalIdx ? parseInt(globalIdx) : 0,
-              };
-            }),
-          })),
-        };
+          responseData = {
+            type: "disease_list_grouped",
+            diseasesByType: Object.keys(grouped).map((type) => ({
+              type: type,
+              diseases: grouped[type].map((d) => {
+                const globalIdx = Object.keys(indexMap).find(
+                  (k) => indexMap[k].diseaseId === d._id.toString()
+                );
+                return {
+                  id: d._id,
+                  name: d.name,
+                  commonName: d.commonName,
+                  index: globalIdx ? parseInt(globalIdx) : 0,
+                };
+              }),
+            })),
+          };
+        }
       }
     }
 
@@ -428,9 +521,9 @@ exports.handleWebhook = async (req, res) => {
       let selectedDisease = null;
       let indexMap = {};
 
-      // ✅ LẤY indexMap TỪ OUTPUT CONTEXTS
+      // LẤY indexMap TỪ OUTPUT CONTEXTS
       console.log(
-        "📤 Available contexts:",
+        "Available contexts:",
         outputContextsToSend.map((c) => c.name)
       );
 
@@ -444,7 +537,7 @@ exports.handleWebhook = async (req, res) => {
         try {
           indexMap = JSON.parse(indexMapStr);
           console.log(
-            "✅ IndexMap loaded:",
+            "IndexMap loaded:",
             Object.keys(indexMap).length,
             "entries"
           );
@@ -487,7 +580,7 @@ exports.handleWebhook = async (req, res) => {
       }
       // ========== CASE 2: INPUT LÀ TÊN BỆNH ==========
       else {
-        // ✅ MAP ENTITY SANG TÊN BỆNH TRONG DB
+        // MAP ENTITY SANG TÊN BỆNH TRONG DB
         let searchTerm = diseaseEntity
           ? getDiseaseName(diseaseEntity)
           : cleanText(queryText);
@@ -542,7 +635,7 @@ exports.handleWebhook = async (req, res) => {
           selectedDisease.name
         );
 
-        // ✅ SET OUTPUT CONTEXT: selected-disease
+        // SET OUTPUT CONTEXT: selected-disease
         outputContextsToSend = [
           {
             name: `${sessionPath}/contexts/selected-disease`,
@@ -555,7 +648,7 @@ exports.handleWebhook = async (req, res) => {
           },
         ];
 
-        const shouldShowImages = ["definition", "symptoms"].includes(
+        const shouldShowImages = ["definition", "general", "symptoms"].includes(
           questionType
         );
 
